@@ -29,6 +29,10 @@ public class LoginViewModel extends BaseViewModel {
     //封装一个界面发生改变的观察者
     public UIChangeObservable uc = new UIChangeObservable();
 
+    public BindingCommand pSwitchEvent = new BindingCommand(() -> {
+        uc.pSwitchEvent.setValue(uc.pSwitchEvent.getValue() == null || !uc.pSwitchEvent.getValue());
+    });
+
     public BindingCommand setIpClick = new BindingCommand(() -> {
         uc.setIpEvent.setValue(this);
     });
