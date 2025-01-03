@@ -1,0 +1,6 @@
+rootProject.name = "warehouse"
+include ':app'
+include ':module-main'
+include ':library-base'
+include ':library-res'
+include ':mvvmhabit'

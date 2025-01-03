@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        rxhttp_rxjava : '2.2.3',
+                        rxhttp_package: 'rxhttp',  //指定RxHttp类包名，可随意指定
+                ]
+            }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            if (isBuildModule.toBoolean()) {
+            } else {
+                resources {
+                    //正式版本时，排除debug文件夹下所有调试文件
+                    exclude 'src/debug/*'
+                }
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+
+    testImplementation rootProject.ext.support['junit']
+    androidTestImplementation rootProject.ext.support['junit-ext']
+    androidTestImplementation rootProject.ext.support['junit-espresso']
+
+    api rootProject.ext.support["androidx-appcompat"]
+//    api rootProject.ext.dependencies["MVVMHabit"]
+    //公用资源在base中依赖
+    api project(':mvvmhabit')
+    api project(':library-res')
+    api rootProject.ext.dependencies["arouter-api"]
+}

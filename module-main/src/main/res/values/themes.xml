@@ -1,0 +1,10 @@
+<resources>
+    <!--StartActivity Style 冷启动效果-->
+    <style name="AppTheme.Start">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+    <style name="AppTheme.Translucent">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+</resources>
