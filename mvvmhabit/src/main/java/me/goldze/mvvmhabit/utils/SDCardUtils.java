@@ -130,4 +130,21 @@ public final class SDCardUtils {
                     "\navailableBytes=" + availableBytes;
         }
     }
+
+    /**
+     * 获取SD卡data路径
+     *
+     * @return SD卡data路径
+     */
+    public static String getFileDataPath() {
+        String filePath = null;
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+                || !Environment.isExternalStorageRemovable()) {
+            filePath = Utils.getContext().getExternalFilesDir(null).getPath();
+        } else {
+            filePath = Utils.getContext().getFilesDir().getPath();
+        }
+        KLog.i(filePath);
+        return filePath;
+    }
 }

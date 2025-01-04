@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">library-res</string>
+    <string name="login_top_text">智慧仓储系统</string>
+    <string name="login_top_text_en">Intelligent storage system</string>
     <string name="login_button_text">登录</string>
     <string name="login_setting_text">设置</string>
     <string name="login_setting_internet_text">是否单机</string>
-    <string name="login_setting_ip_text">请输入IP</string>
-    <string name="login_setting_port_text">请输入端口</string>
+    <string name="login_setting_ip_text">请输入IP地址</string>
+    <string name="login_setting_port_text">请输入端口号</string>
+    <string name="login_username_hint_text">请输入用户名</string>
+    <string name="login_password_hint_text">请输入用户名</string>
 </resources>

@@ -16,6 +16,8 @@ import com.afollestad.materialdialogs.Theme;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ViewDataBinding;
+
 import me.goldze.mvvmhabit.R;
 
 
@@ -309,20 +311,19 @@ public class MaterialDialogUtils {
      * @param
      * @return MaterialDialog.Builder
      */
-    public static void showCustomDialog(final Context context, String title, int
-            content) {
+    public static MaterialDialog showCustomDialog(final Context context, String title, ViewDataBinding
+            dataBinding, MaterialDialog.SingleButtonCallback callback) {
 
         MaterialDialog dialog = new MaterialDialog.Builder(context)
                 .title(title)
-                .customView(content, true)
+                .customView(dataBinding.getRoot(), true)
                 .positiveText("确定")
                 .negativeText(android.R.string.cancel)
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-                    }
-                }).build();
+                .onPositive(callback)
+                .titleColorRes(R.color.colorPrimary)
+                .build();
+        dialog.show();
+        return dialog;
 
 //        positiveAction = dialog.getActionButton(DialogAction.POSITIVE);
 //        //noinspection ConstantConditions

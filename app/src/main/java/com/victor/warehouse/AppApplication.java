@@ -1,4 +1,4 @@
-package com.victor.dualscreen;
+package com.victor.warehouse;
 
 import android.app.Activity;
 

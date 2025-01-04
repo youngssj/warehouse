@@ -53,4 +53,5 @@ dependencies {
     api project(':mvvmhabit')
     api project(':library-res')
     api rootProject.ext.dependencies["arouter-api"]
+    api files('libs\\BaiduLBS_Android.jar')
 }

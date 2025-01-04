@@ -82,6 +82,10 @@ ext {
             "lifecycle-compiler"                   : "androidx.lifecycle:lifecycle-compiler:2.0.0",
             "greendao"                             : "org.greenrobot:greendao:3.3.0",
             "pager-bottom-tab"                     : "me.majiajie:pager-bottom-tab-strip:2.4.0",
+
+            "room-runtime"                         : "androidx.room:room-runtime:2.3.0",           //room数据库工具
+            "room-compiler"                        : "androidx.room:room-compiler:2.3.0",
+            "room-rxjava2"                         : "androidx.room:room-rxjava2:2.3.0",
     ]
 }
 

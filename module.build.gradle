@@ -6,6 +6,12 @@ if (isBuildModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
+//    def API_HOST_INQ_TEST = "\"http://192.168.1.25:7002\""
+def API_HOST_INQ_TEST = "\"http://192.168.1.22:7100\""
+//    def API_HOST_INQ_OFFICIAL = "\"http://120.224.45.119:7103\""
+def API_HOST_INQ_OFFICIAL = "\"http://192.168.1.127:9091\""
+//    def API_HOST_INQ_OFFICIAL = "\"http://192.168.1.122:9091\""
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -25,6 +31,8 @@ android {
             abiFilters "armeabi",  "armeabi-v7a" , "arm64-v8a" , "x86"
 //            abiFilters "armeabi-v7a" ,"arm64-v8a"
         }
+
+        buildConfigField("String", "API_INQ_HOST", "${API_HOST_INQ_OFFICIAL}")
     }
 
     buildTypes {

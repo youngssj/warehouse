@@ -16,4 +16,12 @@ dependencies {
     api project(':library-base')
     //组件中依赖阿里路由编译框架
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+
+    implementation project(':c72')
+    implementation project(':pda')
+    implementation project(':hiu_961')
+
+    implementation rootProject.ext.dependencies["room-runtime"]           //room数据库工具
+    annotationProcessor rootProject.ext.dependencies["room-compiler"]
+    implementation rootProject.ext.dependencies["room-rxjava2"]
 }

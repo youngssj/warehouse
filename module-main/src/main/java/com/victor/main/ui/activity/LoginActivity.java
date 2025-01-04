@@ -8,16 +8,21 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.victor.base.router.RouterActivityPath;
 import com.victor.main.BR;
 import com.victor.main.R;
+import com.victor.main.app.AppViewModelFactory;
 import com.victor.main.databinding.ActivityLoginBinding;
 import com.victor.main.databinding.ViewSetIpBinding;
 import com.victor.main.ui.viewmodel.LoginViewModel;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 
-public class LoginActivity  extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
+@Route(path = RouterActivityPath.Sign.PAGER_LOGIN)
+public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
@@ -27,6 +32,12 @@ public class LoginActivity  extends BaseActivity<ActivityLoginBinding, LoginView
     @Override
     public int initVariableId() {
         return BR.viewModel;
+    }
+
+    @Override
+    public LoginViewModel initViewModel() {
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        return new ViewModelProvider(this, factory).get(LoginViewModel.class);
     }
 
     @Override
@@ -50,9 +61,9 @@ public class LoginActivity  extends BaseActivity<ActivityLoginBinding, LoginView
         viewModel.uc.setIpEvent.observe(this, loginViewModel -> {
             ViewSetIpBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.view_set_ip, null, false);
             binding.setViewModel(loginViewModel);
-//            showCustomDialog("设置", binding, (dialog, which) -> {
-//                viewModel.saveIpAndPort();
-//            });
+            showCustomDialog(getString(R.string.login_setting_text), binding, (dialog, which) -> {
+                viewModel.saveIpAndPort();
+            });
         });
     }
 }
