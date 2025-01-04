@@ -1,0 +1,6 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hiultra.c72">
+
+    <uses-sdk tools:overrideLibrary="com.rscja.deviceapi" />
+</manifest>
