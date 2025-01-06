@@ -19,19 +19,10 @@ public class RouterFragmentPath {
     /**
      * 工作组件
      */
-    public static class Work {
-        private static final String WORK = "/work";
+    public static class WorkBench {
+        private static final String WorkBench = "/WorkBench";
         /*工作*/
-        public static final String PAGER_WORK = WORK + "/Work";
-    }
-
-    /**
-     * 消息组件
-     */
-    public static class Msg {
-        private static final String MSG = "/msg";
-        /*消息*/
-        public static final String PAGER_MSG = MSG + "/msg/Msg";
+        public static final String PAGER_WorkBench = WorkBench + "/WorkBench";
     }
 
     /**
@@ -40,6 +31,6 @@ public class RouterFragmentPath {
     public static class User {
         private static final String USER = "/user";
         /*我的*/
-        public static final String PAGER_ME = USER + "/Me";
+        public static final String PAGER_MINE = USER + "/Mine";
     }
 }

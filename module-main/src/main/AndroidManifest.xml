@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.victor.main">
 
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
     <application>
         <activity
             android:name=".ui.activity.LoginActivity"
@@ -23,7 +21,9 @@
             android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" >
+
+        </activity>
     </application>
 
 </manifest>

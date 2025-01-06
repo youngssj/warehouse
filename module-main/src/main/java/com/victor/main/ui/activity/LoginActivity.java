@@ -11,22 +11,22 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.main.BR;
 import com.victor.main.R;
-import com.victor.main.app.AppViewModelFactory;
-import com.victor.main.databinding.ActivityLoginBinding;
-import com.victor.main.databinding.ViewSetIpBinding;
+import com.victor.main.databinding.MainActivityLoginBinding;
+import com.victor.main.databinding.MainViewSetIpBinding;
 import com.victor.main.ui.viewmodel.LoginViewModel;
 
 import me.goldze.mvvmhabit.base.BaseActivity;
 
 @Route(path = RouterActivityPath.Sign.PAGER_LOGIN)
-public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
+public class LoginActivity extends BaseActivity<MainActivityLoginBinding, LoginViewModel> {
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.activity_login;
+        return R.layout.main_activity_login;
     }
 
     @Override
@@ -59,9 +59,9 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
 
         viewModel.uc.setIpEvent.observe(this, loginViewModel -> {
-            ViewSetIpBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.view_set_ip, null, false);
+            MainViewSetIpBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.main_view_set_ip, null, false);
             binding.setViewModel(loginViewModel);
-            showCustomDialog(getString(R.string.login_setting_text), binding, (dialog, which) -> {
+            showCustomDialog(getResources().getString(R.string.login_setting_text), binding, (dialog, which) -> {
                 viewModel.saveIpAndPort();
             });
         });

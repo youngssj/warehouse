@@ -9,11 +9,11 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.main.R;
-import com.victor.main.data.Repository.AppRepository;
-import com.victor.main.data.entity.TokenBean;
-import com.victor.main.data.http.ApiDisposableObserver;
 import com.victor.main.utils.Constants;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -95,11 +95,11 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     private void login() {
         if (TextUtils.isEmpty(userName.get())) {
-            ToastUtils.showShort(getApplication().getString(R.string.login_username_hint_text));
+            ToastUtils.showShort(getApplication().getResources().getString(R.string.login_username_hint_text));
             return;
         }
         if (TextUtils.isEmpty(password.get())) {
-            ToastUtils.showShort(getApplication().getString(R.string.login_password_hint_text));
+            ToastUtils.showShort(getApplication().getResources().getString(R.string.login_password_hint_text));
             return;
         }
         model.login(userName.get(), password.get())

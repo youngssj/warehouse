@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.main.BuildConfig;
+import com.victor.main.R;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
@@ -15,6 +16,6 @@ public class MainViewModel extends BaseViewModel {
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        appVersion.set(BuildConfig.VERSIONNAME);
+        appVersion.set(getApplication().getResources().getString(R.string.main_version_text) + BuildConfig.VERSIONNAME);
     }
 }

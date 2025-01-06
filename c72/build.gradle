@@ -29,7 +29,10 @@ android {
 dependencies {
     api project(':library-base')
 
-    implementation files('libs\\DeviceAPI_ver20231229.aar')
+//    implementation files('libs\\DeviceAPI_ver20231229.aar')
+//    implementation project(path: ':DeviceAPI_ver20210618_aar')
+////    implementation project(path: ':DeviceAPI_ver20231208_release_aar')
+    implementation project(path: ':DeviceAPI_ver20231229_aar')
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
