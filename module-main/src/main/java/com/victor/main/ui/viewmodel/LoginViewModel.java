@@ -60,7 +60,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     public BindingCommand<String> onTextChangeCommand = new BindingCommand<>(new BindingConsumer<String>() {
         @Override
-        public void call(String hasFocus) {
+        public void call(String text) {
             if (TextUtils.isEmpty(userName.get())) {
                 clearBtnVisibility.set(View.INVISIBLE);
             } else {

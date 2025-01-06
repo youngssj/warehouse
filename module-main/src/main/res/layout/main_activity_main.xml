@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -72,11 +73,13 @@
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="28dp"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            binding:onCheckedChangedCommand="@{viewModel.onCheckedChangedCommand}">
 
             <RadioButton
                 android:id="@+id/rbHome"
                 style="@style/radioStyle"
+                android:checked="true"
                 android:text="@string/main_tab_home_text" />
 
             <RadioButton

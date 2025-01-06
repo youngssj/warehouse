@@ -9,8 +9,8 @@
     <string name="login_setting_port_text">请输入端口号</string>
     <string name="login_username_hint_text">请输入用户名</string>
     <string name="login_password_hint_text">请输入密码</string>
-    <string name="main_tab_home_text">首页</string>
     <string name="main_version_text">版本号：</string>
+    <string name="main_tab_home_text">首页</string>
     <string name="main_tab_workbench_text">工作台</string>
     <string name="main_tab_mine_text">个人中心</string>
 </resources>
