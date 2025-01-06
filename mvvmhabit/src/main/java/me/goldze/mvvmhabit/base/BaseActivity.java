@@ -165,13 +165,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     public void showDialog(String title) {
-        if (dialog != null) {
-            dialog = dialog.getBuilder().title(title).build();
-            dialog.show();
-        } else {
+//        if (dialog != null) {
+//            dialog = dialog.getBuilder().title(title).build();
+//            dialog.show();
+//        } else {
             MaterialDialog.Builder builder = MaterialDialogUtils.showIndeterminateProgressDialog(this, title, true);
             dialog = builder.show();
-        }
+//        }
     }
 
     public void dismissDialog() {

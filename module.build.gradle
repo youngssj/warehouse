@@ -6,12 +6,6 @@ if (isBuildModule.toBoolean()) {
     apply plugin: 'com.android.library'
 }
 
-//    def API_HOST_INQ_TEST = "\"http://192.168.1.25:7002\""
-def API_HOST_INQ_TEST = "\"http://192.168.1.22:7100\""
-//    def API_HOST_INQ_OFFICIAL = "\"http://120.224.45.119:7103\""
-def API_HOST_INQ_OFFICIAL = "\"http://192.168.1.127:9091\""
-//    def API_HOST_INQ_OFFICIAL = "\"http://192.168.1.122:9091\""
-
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -32,7 +26,7 @@ android {
 //            abiFilters "armeabi-v7a" ,"arm64-v8a"
         }
 
-        buildConfigField("String", "API_INQ_HOST", "${API_HOST_INQ_OFFICIAL}")
+        buildConfigField("String", "VERSIONNAME", "\"${rootProject.ext.android.versionName}\"")
     }
 
     buildTypes {
@@ -40,10 +34,14 @@ android {
             minifyEnabled true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_IP", "\"${rootProject.ext.api.API_IP_OFFICIAL}\"")
+            buildConfigField("String", "API_PORT", "\"${rootProject.ext.api.API_PORT_OFFICIAL}\"")
         }
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_IP", "\"${rootProject.ext.api.API_IP_TEST}\"")
+            buildConfigField("String", "API_PORT", "\"${rootProject.ext.api.API_PORT_TEST}\"")
         }
     }
     sourceSets {

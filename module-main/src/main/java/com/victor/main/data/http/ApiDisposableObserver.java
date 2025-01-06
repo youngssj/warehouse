@@ -1,6 +1,8 @@
 package com.victor.main.data.http;
 
 import android.content.Intent;
+import android.text.TextUtils;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.router.RouterActivityPath;
 
@@ -56,6 +58,12 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
     public void onNext(T o) {
         if(o instanceof BaseResponse) {
             BaseResponse baseResponse = (BaseResponse) o;
+            String msg = "";
+            if(TextUtils.isEmpty(baseResponse.getMsg())){
+                msg = "错误代码:" + baseResponse.getCode();
+            }else{
+                msg = baseResponse.getMsg();
+            }
             switch (baseResponse.getCode()) {
                 case CodeRule.CODE_0:
                     //请求成功, 正确的操作方式
@@ -63,7 +71,7 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     break;
                 case CodeRule.CODE_1:
                     //请求错误, 正确的操作方式
-                    ToastUtils.showShort(baseResponse.getMsg());
+                    ToastUtils.showShort(msg);
                     break;
                 case CodeRule.CODE_10:
                     //                onResult((T) baseResponse.getData());
@@ -76,15 +84,15 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                 case CodeRule.CODE_300:
                     //请求失败，不打印Message
                     KLog.e("请求失败");
-                    ToastUtils.showShort("错误代码:", baseResponse.getCode());
+                    ToastUtils.showShort(msg);
                     break;
                 case CodeRule.CODE_330:
                     //请求失败，打印Message
-                    ToastUtils.showShort(baseResponse.getMsg());
+                    ToastUtils.showShort(msg);
                     break;
                 case CodeRule.CODE_500:
                     //服务器内部异常
-                    ToastUtils.showShort("错误代码:", baseResponse.getCode());
+                    ToastUtils.showShort(msg);
                     break;
                 case CodeRule.CODE_503:
                     //参数为空
@@ -107,10 +115,10 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     ToastUtils.showShort("请先登录");
                     break;
                 case CodeRule.CODE_551:
-                    ToastUtils.showShort("错误代码:", baseResponse.getCode());
+                    ToastUtils.showShort(msg);
                     break;
                 default:
-                    ToastUtils.showShort("错误代码:", baseResponse.getCode());
+                    ToastUtils.showShort(msg);
                     break;
             }
         }

@@ -103,6 +103,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
             return;
         }
         model.login(userName.get(), password.get())
+                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.exceptionTransformer())
                 .doOnSubscribe(disposable -> showDialog("正在登录..."))
@@ -112,7 +113,6 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                         model.saveUserName2Local(userName.get());
                         model.savePassword2Local(password.get());
                         model.saveToken2Local(userToken.getToken());
-                        System.out.println("返回的token是：" + userToken.getToken());
                         saveIpAndPort();
                         ARouter.getInstance().build(RouterActivityPath.Main.PAGER_MAIN).navigation();
                         finish();
@@ -121,11 +121,6 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                     @Override
                     public void onComplete() {
                         dismissDialog();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
                     }
                 });
 

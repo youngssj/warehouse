@@ -1,5 +1,6 @@
 package com.victor.main.data.source;
 
+import com.victor.main.BuildConfig;
 import com.victor.main.app.AppDatabase;
 import com.victor.main.data.entity.AssetCheckData;
 import com.victor.main.data.entity.AssetCheckOdd;
@@ -93,7 +94,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     @Override
     public String _getIp() {
-        return SPUtils.getInstance().getString(SP.IP, CONFIG.DEFAULT_IP);
+        return SPUtils.getInstance().getString(SP.IP, BuildConfig.API_IP);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     @Override
     public String _getPort() {
-        return SPUtils.getInstance().getString(SP.PORT, CONFIG.DEFAULT_PORT);
+        return SPUtils.getInstance().getString(SP.PORT, BuildConfig.API_PORT);
     }
 
     @Override

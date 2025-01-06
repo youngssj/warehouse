@@ -1,5 +1,7 @@
 package com.victor.main.utils;
 
+import com.victor.main.BuildConfig;
+
 /**
  * 版权：heihei
  *
@@ -17,8 +19,8 @@ public class Constants {
 //        public static String DEFAULT_IP = "120.224.45.119";  //默认已填写ip，登录设置可修改
 //        public static String DEFAULT_PORT = "7103";
 
-        public static String DEFAULT_IP = "192.168.1.127";  //默认已填写ip，登录设置可修改
-        public static String DEFAULT_PORT = "9091";
+        public static String DEFAULT_IP = BuildConfig.API_IP;  //默认已填写ip，登录设置可修改
+        public static String DEFAULT_PORT = BuildConfig.API_PORT;
     }
 
     public static class SP {

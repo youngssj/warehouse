@@ -8,5 +8,5 @@
     <string name="login_setting_ip_text">请输入IP地址</string>
     <string name="login_setting_port_text">请输入端口号</string>
     <string name="login_username_hint_text">请输入用户名</string>
-    <string name="login_password_hint_text">请输入用户名</string>
+    <string name="login_password_hint_text">请输入密码</string>
 </resources>

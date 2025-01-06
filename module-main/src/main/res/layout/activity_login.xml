@@ -148,8 +148,7 @@
                         android:textColor="@color/color_333333"
                         android:textColorHint="@color/color_9C9C9C"
                         android:textCursorDrawable="@drawable/shape_edittext_cursor"
-                        android:textSize="18sp"
-                        binding:onClickCommand="@{viewModel.passwordShowSwitchOnClickCommand}" />
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:id="@+id/ivPwd"
@@ -160,7 +159,8 @@
                         android:paddingEnd="4dp"
                         android:paddingBottom="10dp"
                         android:src="@mipmap/login_close"
-                        android:visibility="visible" />
+                        android:visibility="visible"
+                        binding:onClickCommand="@{viewModel.passwordShowSwitchOnClickCommand}" />
                 </LinearLayout>
             </LinearLayout>
 
