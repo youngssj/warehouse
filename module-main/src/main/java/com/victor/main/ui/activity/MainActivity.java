@@ -1,5 +1,7 @@
 package com.victor.main.ui.activity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
@@ -39,6 +41,10 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, MainView
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        binding.rbHome.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+        binding.rbWorkBench.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+        binding.rbMine.setButtonDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         mFragments = new ArrayList<>();
         if (savedInstanceState == null) {
             mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Home.PAGER_HOME).navigation());
