@@ -15,6 +15,7 @@ import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.HttpService;
 import com.victor.base.data.http.ListResponse;
 
@@ -62,6 +63,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
         map.put("username", username);
         map.put("password", pwd);
         return apiService.login(map);
+    }
+
+    @Override
+    public Observable<BaseResponse<UserInfoBean>> userInfo() {
+        return apiService.userInfo();
     }
 
     @Override

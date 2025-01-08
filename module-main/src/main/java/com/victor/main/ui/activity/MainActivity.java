@@ -8,14 +8,17 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.databinding.MainActivityMainBinding;
+import com.victor.main.ui.viewmodel.LoginViewModel;
 import com.victor.main.ui.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -37,6 +40,12 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, MainView
     @Override
     public int initVariableId() {
         return BR.viewModel;
+    }
+
+    @Override
+    public MainViewModel initViewModel() {
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
+        return new ViewModelProvider(this, factory).get(MainViewModel.class);
     }
 
     @Override

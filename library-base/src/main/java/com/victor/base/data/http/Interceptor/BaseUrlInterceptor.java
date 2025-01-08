@@ -1,11 +1,14 @@
 package com.victor.base.data.http.Interceptor;
 
+import android.text.TextUtils;
+
 import com.victor.base.utils.Constants;
 
 import java.io.IOException;
 import java.util.List;
 
 import me.goldze.mvvmhabit.utils.KLog;
+import me.goldze.mvvmhabit.utils.SPUtils;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -29,6 +32,11 @@ public class BaseUrlInterceptor implements Interceptor {
         //获取request的创建者builder
         Request.Builder builder = request.newBuilder();
         HttpUrl newBaseUrl = oldHttpUrl;
+
+        String token = SPUtils.getInstance().getString("token");
+        if (!TextUtils.isEmpty(token)) {
+            builder.addHeader("Authorization", "Bearer " + token);
+        }
 
         List<String> loginHeaders = request.headers("login");
         HttpUrl.Builder urlBuilder = oldHttpUrl

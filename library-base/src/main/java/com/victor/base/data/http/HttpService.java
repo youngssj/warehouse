@@ -14,6 +14,7 @@ import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.entity.UserInfoBean;
 
 import java.util.List;
 import java.util.Map;
@@ -46,6 +47,9 @@ public interface HttpService {
 //    @POST("/sysAs/login")
     @POST("/dev-api/mobile/login")
     Observable<BaseResponse<TokenBean>> login(@Body  Map<String, String> params);
+
+    @GET("/dev-api/system/user/profile")
+    Observable<BaseResponse<UserInfoBean>> userInfo();
 
     /**
      * 盘点单

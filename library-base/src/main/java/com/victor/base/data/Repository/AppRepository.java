@@ -18,6 +18,7 @@ import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.ListResponse;
 import com.victor.base.data.source.HttpDataSource;
 import com.victor.base.data.source.LocalDataSource;
@@ -72,6 +73,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<BaseResponse<TokenBean>> login(String username, String pwd) {
         return mHttpDataSource.login(username, pwd);
+    }
+
+    @Override
+    public Observable<BaseResponse<UserInfoBean>> userInfo() {
+        return mHttpDataSource.userInfo();
     }
 
     @Override

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">library-res</string>
+    <string name="app_loading_text">加载中，请稍后...</string>
     <string name="login_top_text">智慧仓储系统</string>
     <string name="login_top_text_en">Intelligent storage system</string>
     <string name="login_button_text">登录</string>
@@ -10,11 +11,27 @@
     <string name="login_username_hint_text">请输入用户名</string>
     <string name="login_password_hint_text">请输入密码</string>
     <string name="main_version_text">版本号：</string>
+    <string name="main_hello_text">你好，</string>
     <string name="main_tab_home_text">首页</string>
     <string name="main_tab_workbench_text">工作台</string>
     <string name="main_tab_mine_text">个人中心</string>
     <string name="home_title1_text">实时数据统计</string>
     <string name="home_title2_text">业务提醒</string>
-    <string name="home_title3_text">库存统计</string>
-    <string name="home_title4_text">出库状态</string>
+    <string name="home_title4_text">库存统计</string>
+    <string name="home_title5_text">出库状态</string>
+    <string name="home_title6_text">入库状态</string>
+    <string name="home_title1_content1_text">今日已入库单数：</string>
+    <string name="home_title1_content2_text">本周已入库单数：</string>
+    <string name="home_title1_content3_text">今日待入库单数：</string>
+    <string name="home_title1_content4_text">物料待上架单数：</string>
+    <string name="home_title1_content5_text">物料待移库单数：</string>
+    <string name="home_title1_content6_text">今日已出库单数：</string>
+    <string name="home_title1_content7_text">本周已出库单数：</string>
+    <string name="home_title1_content8_text">今日待出库单数：</string>
+    <string name="home_title1_content9_text">物料待上架总数：</string>
+    <string name="home_title1_content10_text">物料待移库总数：</string>
+    <string name="home_title1_content2_name_text">名称</string>
+    <string name="home_title1_content2_status_text">状态</string>
+    <string name="home_title1_content5_time_text">时间</string>
+    <string name="home_title1_content5_operator_text">操作人</string>
 </resources>

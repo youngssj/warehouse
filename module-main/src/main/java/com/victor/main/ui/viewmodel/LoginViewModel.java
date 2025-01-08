@@ -13,8 +13,8 @@ import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.base.utils.Constants;
 import com.victor.main.R;
-import com.victor.main.utils.Constants;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.binding.command.BindingAction;
@@ -106,7 +106,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.exceptionTransformer())
-                .doOnSubscribe(disposable -> showDialog("正在登录..."))
+                .doOnSubscribe(disposable -> showDialog(getApplication().getResources().getString(R.string.app_loading_text)))
                 .subscribe(new ApiDisposableObserver<TokenBean>() {
                     @Override
                     public void onResult(TokenBean userToken) {

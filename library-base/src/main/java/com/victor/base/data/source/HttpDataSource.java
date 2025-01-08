@@ -14,6 +14,7 @@ import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.ListResponse;
 
 import java.util.List;
@@ -32,6 +33,8 @@ import me.goldze.mvvmhabit.http.BaseResponse;
 public interface HttpDataSource {
     //登录
     Observable<BaseResponse<TokenBean>> login(String username, String pwd);
+
+    Observable<BaseResponse<UserInfoBean>> userInfo();
 
     Observable<BaseResponse<List<AssetCheckOdd>>> listCheck(int page);
 

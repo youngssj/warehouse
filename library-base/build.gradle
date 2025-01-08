@@ -53,6 +53,7 @@ dependencies {
     //公用资源在base中依赖
     api project(':mvvmhabit')
     api project(':library-res')
+    api project(':MPChartLib')
     api rootProject.ext.dependencies["arouter-api"]
     api files('libs\\BaiduLBS_Android.jar')
 
@@ -60,4 +61,6 @@ dependencies {
     api rootProject.ext.dependencies["room-rxjava2"]
 
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
+
+//    api rootProject.ext.dependencies["MPAndroidChart"]
 }

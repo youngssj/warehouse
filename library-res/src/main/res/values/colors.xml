@@ -11,4 +11,11 @@
     <color name="color_F2F2F2">#F2F2F2</color>
     <color name="color_333333">#333333</color>
     <color name="color_FFAA00">#FFAA00</color>
+    <color name="color_565656">#565656</color>
+    <color name="color_FF3366">#FF3366</color>
+    <color name="color_9187FF">#9187FF</color>
+    <color name="color_017BFF">#017BFF</color>
+    <color name="color_15CBDF">#15CBDF</color>
+    <color name="color_DF15B7">#DF15B7</color>
+    <color name="color_258DFF">#258DFF</color>
 </resources>
