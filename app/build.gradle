@@ -137,6 +137,7 @@ dependencies {
     } else {
         //主业务模块
         implementation project(':module-main')
+        implementation project(':module-workbench')
     }
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 }

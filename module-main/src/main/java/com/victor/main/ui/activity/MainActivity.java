@@ -18,7 +18,6 @@ import com.victor.base.router.RouterFragmentPath;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.databinding.MainActivityMainBinding;
-import com.victor.main.ui.viewmodel.LoginViewModel;
 import com.victor.main.ui.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -66,7 +65,7 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, MainView
         }
 
         vpFragmentAdapter = new VPFragmentAdapter(getSupportFragmentManager(), mFragments);
-        binding.mViewPager.setEnableScroll(false);
+        binding.mViewPager.setEnableScroll(true);
         binding.mViewPager.setOffscreenPageLimit(mFragments.size());
         binding.mViewPager.setAdapter(vpFragmentAdapter);
     }
@@ -81,7 +80,7 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, MainView
             } else if (index == R.id.rbMine) {
                 currentIndex = 2;
             }
-            selectPager(currentIndex, false);
+            selectPager(currentIndex, true);
         });
     }
 
@@ -118,6 +117,20 @@ public class MainActivity extends BaseActivity<MainActivityMainBinding, MainView
         @Override
         public void setPrimaryItem(ViewGroup container, int position, Object object) {
             mCurrentFragment = (Fragment) object;
+
+            if (position == 0) {
+                binding.rbHome.setBackgroundColor(getResources().getColor(R.color.color_FFAA00));
+                binding.rbWorkBench.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.rbMine.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            } else if (position == 1) {
+                binding.rbHome.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.rbWorkBench.setBackgroundColor(getResources().getColor(R.color.color_FFAA00));
+                binding.rbMine.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            } else if (position == 2) {
+                binding.rbHome.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.rbWorkBench.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                binding.rbMine.setBackgroundColor(getResources().getColor(R.color.color_FFAA00));
+            }
             super.setPrimaryItem(container, position, object);
         }
 

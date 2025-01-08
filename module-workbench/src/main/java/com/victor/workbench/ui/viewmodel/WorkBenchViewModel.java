@@ -1,4 +1,4 @@
-package com.victor.main.ui.viewmodel;
+package com.victor.workbench.ui.viewmodel;
 
 import android.app.Application;
 

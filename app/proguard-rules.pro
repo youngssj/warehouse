@@ -32,9 +32,10 @@
 
 -keep class me.goldze.mvvmhabit.http.BaseResponse { *; }
 -keep class com.victor.main.data.entity.**
--keep class com.victor.main.data.Repository.AppRepository { *; }
+-keep class com.victor.base.data.Repository.AppRepository { *; }
 -keep class com.victor.base.base.BaseModuleInit { *; }
 -keep class com.victor.main.MainModuleInit { *; }
+-keep class com.victor.workbench.WorkBenchModuleInit { *; }
 -keep class com.victor.base.config.ModuleLifecycleConfig { *; }
 -keep class com.victor.base.config.ModuleLifecycleReflexs { *; }
 #-keep class com.victor.base.router.RouterActivityPath { *; }

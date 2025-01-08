@@ -1,4 +1,4 @@
-package com.victor.main.ui.fragment;
+package com.victor.workbench.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,10 +8,10 @@ import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.router.RouterFragmentPath;
-import com.victor.main.BR;
-import com.victor.main.R;
-import com.victor.main.databinding.MainFragmentWordbenchBinding;
-import com.victor.main.ui.viewmodel.WorkBenchViewModel;
+import com.victor.workbench.BR;
+import com.victor.workbench.R;
+import com.victor.workbench.databinding.MainFragmentWordbenchBinding;
+import com.victor.workbench.ui.viewmodel.WorkBenchViewModel;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
 

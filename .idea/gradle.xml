@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/library-base" />
             <option value="$PROJECT_DIR$/library-res" />
             <option value="$PROJECT_DIR$/module-main" />
+            <option value="$PROJECT_DIR$/module-workbench" />
             <option value="$PROJECT_DIR$/mvvmhabit" />
             <option value="$PROJECT_DIR$/pda" />
           </set>

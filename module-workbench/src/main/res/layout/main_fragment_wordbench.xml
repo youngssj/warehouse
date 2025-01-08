@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.main.ui.viewmodel.WorkBenchViewModel" />
+            type="com.victor.workbench.ui.viewmodel.WorkBenchViewModel" />
     </data>
 
     <LinearLayout

@@ -10,5 +10,6 @@ public class ModuleLifecycleReflexs {
     private static final String BaseInit = "com.victor.base.base.BaseModuleInit";
     //主业务模块
     private static final String MainInit = "com.victor.main.MainModuleInit";
-    public static String[] initModuleNames = {BaseInit, MainInit};
+    private static final String WorkBenchInit = "com.victor.workbench.WorkBenchModuleInit";
+    public static String[] initModuleNames = {BaseInit, MainInit, WorkBenchInit};
 }

@@ -3,11 +3,11 @@ android{
     defaultConfig {
         //如果是独立模块，则使用当前组件的包名
         if (isBuildModule.toBoolean()) {
-            applicationId "com.victor.main"
+            applicationId "com.victor.workbench"
         }
     }
     //统一资源前缀，规范资源引用
-    resourcePrefix "main_"
+    resourcePrefix "workbench_"
 }
 
 dependencies {
@@ -17,4 +17,8 @@ dependencies {
     //组件中依赖阿里路由编译框架
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["room-compiler"]
+
+    api project(':c72')
+    api project(':pda')
+    api project(':hiu_961')
 }
