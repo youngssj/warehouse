@@ -25,10 +25,11 @@ public class AppManager {
      * @return AppManager
      */
     public static AppManager getAppManager() {
-        if (instance == null) {
-            instance = new AppManager();
-        }
-        return instance;
+        return AppManager.Holder.instance;
+    }
+
+    private static class Holder {
+        private static final AppManager instance = new AppManager();
     }
 
     public static Stack<Activity> getActivityStack() {

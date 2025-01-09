@@ -203,6 +203,7 @@
                 android:text="@string/login_button_text"
                 android:textColor="@color/white"
                 android:textSize="18sp"
+                android:textStyle="bold"
                 binding:onClickCommand="@{viewModel.loginOnClickCommand}" />
         </LinearLayout>
     </RelativeLayout>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.victor.mine.ui.viewmodel.MineViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/viewBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_mine_background"
+            android:orientation="vertical" />
+
+        <ImageView
+            android:id="@+id/ivAvater"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignStart="@id/viewBackground"
+            android:layout_alignTop="@id/viewBackground"
+            android:layout_marginStart="20dp"
+            binding:url_round="@{viewModel.avatar}"
+            android:layout_marginTop="-48dp"
+            android:background="@drawable/shape_avater_background"
+            android:scaleType="fitXY"
+            android:src="@mipmap/avater_default" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/viewBackground"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/ivAvater"
+            android:text="admin"
+            android:textColor="@color/color_333333"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvBase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvName"
+            android:layout_alignStart="@id/tvName"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="6dp"
+            android:text="男 研发部 管理员"
+            android:textColor="@color/color_333333"
+            android:textSize="12sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvBase"
+            android:layout_alignStart="@id/viewBackground"
+            android:layout_alignEnd="@id/viewBackground"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_login_edit"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_mine_message_title"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/mine_title1_text"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@{viewModel.phoneNumber}"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_login_edit"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_mine_message_title"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/mine_title2_text"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@{viewModel.email}"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llDepartment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_login_edit"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_mine_message_title"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/mine_title3_text"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@{viewModel.department}"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llRole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/shape_login_edit"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shape_mine_message_title"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@string/mine_title4_text"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingStart="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:text="@{viewModel.role}"
+                        android:textColor="@color/color_333333"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/selector_exit_btn"
+                    android:gravity="center"
+                    android:paddingStart="40dp"
+                    android:paddingEnd="40dp"
+                    android:text="@string/mine_exit_text"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    binding:onClickCommand="@{viewModel.exitOnClickCommand}" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</layout>

@@ -591,4 +591,35 @@ public class UserInfoBean {
             this.admin = admin;
         }
     }
+
+    @Override
+    public String toString() {
+        return "UserInfoBean{" +
+                "createBy='" + createBy + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", updateBy=" + updateBy +
+                ", updateTime=" + updateTime +
+                ", remark='" + remark + '\'' +
+                ", params=" + params +
+                ", userId=" + userId +
+                ", deptId=" + deptId +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", phonenumber='" + phonenumber + '\'' +
+                ", sex='" + sex + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", password='" + password + '\'' +
+                ", status='" + status + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                ", loginIp='" + loginIp + '\'' +
+                ", loginDate='" + loginDate + '\'' +
+                ", dept=" + dept +
+                ", roles=" + roles +
+                ", roleIds=" + roleIds +
+                ", postIds=" + postIds +
+                ", roleId=" + roleId +
+                ", admin=" + admin +
+                '}';
+    }
 }

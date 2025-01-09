@@ -12,7 +12,7 @@ ext {
 //              API_IP_TEST       : "192.168.1.25",
 //                API_IP_TEST       : "192.168.1.22",
 //                API_IP_TEST       : "192.168.1.122",
-                API_IP_TEST       : "192.168.1.30",
+                API_IP_TEST       : "192.168.1.130",
 //                API_PORT_TEST     : "7100",
 //                API_PORT_TEST     : "9091",
                 API_PORT_TEST     : "6750",
@@ -31,7 +31,7 @@ ext {
     //support配置
     support = [
             "constraint-layout"       : "androidx.constraintlayout:constraintlayout:2.1.0",
-            "android-material"        : "com.google.android.material:material:1.4.0",
+            "android-material"        : "com.google.android.material:material:1.6.1",
             'androidx-appcompat'      : "androidx.appcompat:appcompat:${versions["androidx-version"]}",
             'support-v4'              : "androidx.legacy:legacy-support-v4:${versions["support-version"]}",
             'appcompat-v7'            : "androidx.appcompat:appcompat:${versions["support-version"]}",
@@ -43,6 +43,7 @@ ext {
             'junit'                   : "junit:junit:${versions["junit-version"]}",
             'junit-ext'               : 'androidx.test.ext:junit:1.1.2',
             'junit-espresso'          : 'androidx.test.espresso:espresso-core:3.3.0',
+            'design'                  : 'com.android.support:design:28.0.0',
     ]
     //依赖第三方配置
     dependencies = [

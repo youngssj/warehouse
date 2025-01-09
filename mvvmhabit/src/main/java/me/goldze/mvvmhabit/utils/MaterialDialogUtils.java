@@ -318,7 +318,7 @@ public class MaterialDialogUtils {
                 .title(title)
                 .customView(dataBinding.getRoot(), true)
                 .positiveText("确定")
-                .negativeText(android.R.string.cancel)
+                .negativeText("取消")
                 .onPositive(callback)
                 .titleColorRes(R.color.colorPrimary)
                 .build();

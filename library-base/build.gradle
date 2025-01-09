@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation rootProject.ext.support['junit-espresso']
 
     api rootProject.ext.support["androidx-appcompat"]
-    api rootProject.ext.support["constraint-layout"]
+    api rootProject.ext.support["android-material"]
 //    api rootProject.ext.dependencies["MVVMHabit"]
     //公用资源在base中依赖
     api project(':mvvmhabit')

@@ -10,6 +10,7 @@
     <string name="login_setting_port_text">请输入端口号</string>
     <string name="login_username_hint_text">请输入用户名</string>
     <string name="login_password_hint_text">请输入密码</string>
+    <string name="main_exit_hint">再按一次退出程序</string>
     <string name="main_version_text">版本号：</string>
     <string name="main_hello_text">你好，</string>
     <string name="main_tab_home_text">首页</string>
@@ -40,4 +41,10 @@
     <string name="workbench_title4_text">移库管理</string>
     <string name="workbench_title5_text">调拨管理</string>
     <string name="workbench_title6_text">盘点管理</string>
+    <string name="mine_title1_text">手机号</string>
+    <string name="mine_title2_text">邮箱</string>
+    <string name="mine_title3_text">所属部门</string>
+    <string name="mine_title4_text">所属角色</string>
+    <string name="mine_exit_text">退出</string>
+    <string name="mine_exit_hint_text">确认退出登录吗？</string>
 </resources>
