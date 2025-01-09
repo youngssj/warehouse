@@ -34,4 +34,10 @@
     <string name="home_title1_content2_status_text">状态</string>
     <string name="home_title1_content5_time_text">时间</string>
     <string name="home_title1_content5_operator_text">操作人</string>
+    <string name="workbench_title1_text">物资查询</string>
+    <string name="workbench_title2_text">入库管理</string>
+    <string name="workbench_title3_text">出库管理</string>
+    <string name="workbench_title4_text">移库管理</string>
+    <string name="workbench_title5_text">调拨管理</string>
+    <string name="workbench_title6_text">盘点管理</string>
 </resources>

@@ -80,6 +80,7 @@
         <attr name="onSuccessCommand" format="reference" />
         <!--require BindingCommand<CloseableReference<CloseableImage>> See {@link com.kelin.mvvmlight.command.BindingCommand} -->
         <attr name="onFailureCommand" format="reference" />
+        <attr name="src" format="reference" />
 
     </declare-styleable>
 
@@ -166,5 +167,8 @@
     <!-- 自定义控制事件分发的LinearLayout -->
     <declare-styleable name="ControlDistributeLinearLayout">
         <attr name="distribute_event" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="LinearLayout">
+        <attr name="background" />
     </declare-styleable>
 </resources>

@@ -48,7 +48,6 @@ public class MainViewModel extends BaseViewModel<AppRepository> {
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.exceptionTransformer())
-                .doOnSubscribe(disposable -> showDialog(getApplication().getResources().getString(R.string.app_loading_text)))
                 .subscribe(new ApiDisposableObserver<UserInfoBean>() {
                     @Override
                     public void onResult(UserInfoBean userInfoBean) {
