@@ -32,21 +32,23 @@
             android:layout_alignStart="@id/viewBackground"
             android:layout_alignTop="@id/viewBackground"
             android:layout_marginStart="20dp"
-            binding:url_round="@{viewModel.avatar}"
             android:layout_marginTop="-48dp"
             android:background="@drawable/shape_avater_background"
             android:scaleType="fitXY"
-            android:src="@mipmap/avater_default" />
+            android:src="@mipmap/avater_default"
+            binding:url_round="@{viewModel.avatar}" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/viewBackground"
+            android:layout_alignEnd="@id/viewBackground"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
             android:layout_toEndOf="@id/ivAvater"
-            android:text="admin"
+            android:text="@{viewModel.name}"
             android:textColor="@color/color_333333"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -57,9 +59,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvName"
             android:layout_alignStart="@id/tvName"
-            android:layout_marginStart="24dp"
+            android:layout_alignEnd="@id/viewBackground"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="6dp"
-            android:text="男 研发部 管理员"
+            android:layout_marginEnd="30dp"
+            android:text="@{viewModel.sex}"
             android:textColor="@color/color_333333"
             android:textSize="12sp" />
 

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
@@ -26,9 +27,9 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class LoginViewModel extends BaseViewModel<AppRepository> {
 
-    public ObservableField<String> ipObFiled = new ObservableField<>("");
-    public ObservableField<String> portObFiled = new ObservableField<>("");
-    public boolean isInternet;
+    public ObservableField<String> ipObField = new ObservableField<>("");
+    public ObservableField<String> portObField = new ObservableField<>("");
+    public ObservableBoolean offlineField = new ObservableBoolean(false);
 
     public ObservableField<String> userName = new ObservableField<>("");
     public ObservableField<String> password = new ObservableField<>("");
@@ -39,9 +40,9 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
         userName.set(model.getUserName());
         password.set(model.getPassword());
 
-        ipObFiled.set(model._getIp());
-        portObFiled.set(model._getPort());
-        isInternet = model._getConfig();
+        ipObField.set(model._getIp());
+        portObField.set(model._getPort());
+        offlineField.set(model._getConfig());
         saveIpAndPort();
     }
 
@@ -83,8 +84,8 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     public BindingCommand<Boolean> isInternetCommand = new BindingCommand<Boolean>(new BindingConsumer<Boolean>() {
         @Override
-        public void call(Boolean internet) {
-            isInternet = internet;
+        public void call(Boolean isOffline) {
+            offlineField.set(isOffline);
         }
     });
 
@@ -114,7 +115,11 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                         model.savePassword2Local(password.get());
                         model.saveToken2Local(userToken.getToken());
                         saveIpAndPort();
-                        ARouter.getInstance().build(RouterActivityPath.Main.PAGER_MAIN).navigation();
+                        if(offlineField.get()) {
+                            ARouter.getInstance().build(RouterActivityPath.Main.PAGER_OFFLINE_MAIN).navigation();
+                        }else{
+                            ARouter.getInstance().build(RouterActivityPath.Main.PAGER_ONLINE_MAIN).navigation();
+                        }
                         finish();
                     }
 
@@ -127,11 +132,11 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     }
 
     public void saveIpAndPort() {
-        model._savePort(portObFiled.get());
-        model._saveIp(ipObFiled.get());
-        model._saveConfig(isInternet);
-        Constants.CONFIG.DEFAULT_IP = ipObFiled.get();
-        Constants.CONFIG.DEFAULT_PORT = portObFiled.get();
-        Constants.CONFIG.IS_OFFLINE = isInternet;
+        model._savePort(portObField.get());
+        model._saveIp(ipObField.get());
+        model._saveConfig(offlineField.get());
+        Constants.CONFIG.DEFAULT_IP = ipObField.get();
+        Constants.CONFIG.DEFAULT_PORT = portObField.get();
+        Constants.CONFIG.IS_OFFLINE = offlineField.get();
     }
 }

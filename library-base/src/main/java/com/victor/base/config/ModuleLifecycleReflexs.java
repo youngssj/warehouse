@@ -12,5 +12,6 @@ public class ModuleLifecycleReflexs {
     private static final String MainInit = "com.victor.main.MainModuleInit";
     private static final String WorkBenchInit = "com.victor.workbench.WorkBenchModuleInit";
     private static final String MineInit = "com.victor.mine.MineModuleInit";
-    public static String[] initModuleNames = {BaseInit, MainInit, WorkBenchInit, MineInit};
+    private static final String SyncInit = "com.victor.sync.SyncModuleInit";
+    public static String[] initModuleNames = {BaseInit, MainInit, WorkBenchInit, MineInit, SyncInit};
 }

@@ -22,6 +22,8 @@ import me.goldze.mvvmhabit.utils.RxUtils;
 public class MineViewModel extends BaseViewModel<AppRepository> {
 
     public ObservableField<String> avatar = new ObservableField<>("");
+    public ObservableField<String> name = new ObservableField<>("");
+    public ObservableField<String> sex = new ObservableField<>("");
     public ObservableField<String> phoneNumber = new ObservableField<>("");
     public ObservableField<String> email = new ObservableField<>("");
     public ObservableField<String> department = new ObservableField<>("");
@@ -63,25 +65,37 @@ public class MineViewModel extends BaseViewModel<AppRepository> {
                         KLog.i(userInfoBean.toString());
                         RxBus.getDefault().post(userInfoBean);
 
+                        StringBuilder sexSb = new StringBuilder("1".equals(userInfoBean.getSex()) ? "女" : "男");
+                        sexSb.append(" ");
+                        name.set(TextUtils.isEmpty(userInfoBean.getNickName()) ? userInfoBean.getUserName() : userInfoBean.getNickName());
                         avatar.set("http://" + Constants.CONFIG.DEFAULT_IP + ":" + Constants.CONFIG.DEFAULT_PORT + "/dev-api" + userInfoBean.getAvatar());
                         phoneNumber.set(userInfoBean.getPhonenumber());
                         email.set(userInfoBean.getEmail());
 
                         if (userInfoBean.getDept() != null && !TextUtils.isEmpty(userInfoBean.getDept().getDeptName())) {
                             department.set(userInfoBean.getDept().getDeptName());
+                            sexSb.append(userInfoBean.getDept().getDeptName());
+                            sexSb.append(" ");
                         }
 
-                        StringBuilder sb = new StringBuilder();
+                        StringBuilder roleSb = new StringBuilder();
                         if (userInfoBean.getRoles() != null) {
                             for (UserInfoBean.Roles role : userInfoBean.getRoles()) {
-                                sb.append(role.getRoleName());
-                                sb.append("\n");
+                                roleSb.append(role.getRoleName());
+                                roleSb.append("\n");
+                                sexSb.append(role.getRoleName());
+                                sexSb.append(" ");
                             }
-                            if (sb.indexOf("\n") != -1) {
-                                sb = sb.delete(sb.length() - 1, sb.length());
+                            if (roleSb.indexOf("\n") != -1) {
+                                roleSb = roleSb.delete(roleSb.length() - 1, roleSb.length());
                             }
                         }
-                        role.set(sb.toString());
+                        role.set(roleSb.toString());
+
+                        if (sexSb.indexOf(" ") != -1) {
+                            sexSb = sexSb.delete(sexSb.length() - 1, sexSb.length());
+                        }
+                        sex.set(sexSb.toString());
                     }
 
                     @Override

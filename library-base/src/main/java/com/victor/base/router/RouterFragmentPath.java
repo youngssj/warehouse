@@ -33,4 +33,13 @@ public class RouterFragmentPath {
         /*我的*/
         public static final String PAGER_MINE = USER + "/Mine";
     }
+
+    /**
+     * 用户组件
+     */
+    public static class Sync {
+        private static final String SYNC = "/sync";
+        /*我的*/
+        public static final String PAGER_SYNC = SYNC + "/Sync";
+    }
 }
