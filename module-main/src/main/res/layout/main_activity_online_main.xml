@@ -65,6 +65,6 @@
             android:layout_above="@id/rgTabbar"
             android:layout_below="@id/rlTitle"
             android:layout_marginBottom="10dp"
-            binding:onPageSelectedCommand="@{viewModel.onPageSelectedCommand}" />
+            binding:onPage2SelectedCommand="@{viewModel.onPageSelectedCommand}" />
     </RelativeLayout>
 </layout>

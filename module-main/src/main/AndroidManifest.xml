@@ -28,7 +28,7 @@
             android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
         </activity>
     </application>
 

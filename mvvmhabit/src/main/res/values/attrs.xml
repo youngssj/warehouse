@@ -140,6 +140,16 @@
 
     </declare-styleable>
 
+    <declare-styleable name="ViewPager2">
+        <!--require BindingCommand<ViewPagerDataWrapper> -->
+        <attr name="onPage2ScrolledCommand" format="reference" />
+        <!--require BindingCommand<Integer> -->
+        <attr name="onPage2SelectedCommand" format="reference" />
+        <!--require BindingCommand<Integer> -->
+        <attr name="onPage2ScrollStateChangedCommand" format="reference" />
+
+    </declare-styleable>
+
     <declare-styleable name="NestedScrollView">
         <!-- require BindingCommand<NestScrollDataWrapper> -->
         <attr name="onScrollChangeCommand" />

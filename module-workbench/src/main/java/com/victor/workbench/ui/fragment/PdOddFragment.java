@@ -1,0 +1,77 @@
+package com.victor.workbench.ui.fragment;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.victor.base.app.AppViewModelFactory;
+import com.victor.workbench.BR;
+import com.victor.workbench.R;
+import com.victor.workbench.databinding.WorkbenchFragmentPdOddBinding;
+import com.victor.workbench.ui.viewmodel.PdOddViewModel;
+
+import me.goldze.mvvmhabit.base.BaseFragment;
+
+/**
+ * 版权：heihei
+ *
+ * @author JiangFB
+ * 版本：1.0
+ * 创建日期：2020/9/16
+ * 邮箱：jxfengmtx@gmail.com
+ */
+public class PdOddFragment extends BaseFragment<WorkbenchFragmentPdOddBinding, PdOddViewModel> {
+    @Override
+    public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return R.layout.workbench_fragment_pd_odd;
+    }
+
+    @Override
+    public int initVariableId() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        viewModel.setBackVisibleObservable(View.VISIBLE);
+        viewModel.setTitleText("盘点单");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.loadData(1);
+    }
+
+    @Override
+    public void initViewObservable() {
+        //监听下拉刷新完成
+        viewModel.uc.finishRefreshing.observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                //结束刷新
+                binding.include.bgaRefresh.endRefreshing();
+            }
+        });
+        //监听上拉加载完成
+        viewModel.uc.finishLoadmore.observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                //结束刷新
+                binding.include.bgaRefresh.endLoadingMore();
+            }
+        });
+    }
+
+    @Override
+    public PdOddViewModel initViewModel() {
+        //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用NetWorkViewModel(@NonNull Application application)构造方法
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
+        return new ViewModelProvider(this, factory).get(PdOddViewModel.class);
+    }
+}

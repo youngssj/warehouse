@@ -6,6 +6,10 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import androidx.fragment.app.Fragment;
+
+import io.reactivex.Maybe;
+import io.reactivex.MaybeSource;
+import io.reactivex.MaybeTransformer;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
@@ -54,6 +58,19 @@ public class RxUtils {
      */
     public static LifecycleTransformer bindToLifecycle(@NonNull LifecycleProvider lifecycle) {
         return lifecycle.bindToLifecycle();
+    }
+
+    /**
+     * 本地数据库线程调度器
+     */
+    public static MaybeTransformer MaybeSchTransformer() {
+        return new MaybeTransformer() {
+            @Override
+            public MaybeSource apply(Maybe upstream) {
+                return upstream.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
     }
 
     /**

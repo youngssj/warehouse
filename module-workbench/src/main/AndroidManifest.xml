@@ -4,6 +4,12 @@
 
     <application>
 
+        <activity
+            android:name=".ui.activity.ZcpdActivity"
+            android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

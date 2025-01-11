@@ -34,4 +34,10 @@ public class RouterActivityPath {
         /*用户详情*/
         public static final String PAGER_USERDETAIL = USER + "/UserDetail";
     }
+
+    public static class WorkBench {
+        private static final String WorkBench = "/WorkBench";
+        /*工作*/
+        public static final String PAGER_WorkBench_CHECK = WorkBench + "/WorkBenchCheck";
+    }
 }

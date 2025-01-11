@@ -21,4 +21,7 @@ dependencies {
     api project(':c72')
     api project(':pda')
     api project(':hiu_961')
+
+    api rootProject.ext.dependencies["refreshlayout"]
+    api rootProject.ext.dependencies["ShadowLayout"]
 }
