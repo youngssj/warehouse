@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import cn.pda.serialport.Tools;
+import me.goldze.mvvmhabit.utils.KLog;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**
@@ -65,7 +66,6 @@ public class Uhf961Utils {
             stopInventory();
         }
     }
-
 
     public void readTag(final ReadCallback readCallback) {
         if (mEpcDataAsyncTask == null)

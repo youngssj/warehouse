@@ -105,7 +105,7 @@ public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, 
             binding.tabs.getTabAt(pageIndex).select();
         });
         viewModel.uc.scanFinishEvent.observe(this, aBoolean -> {
-            isReadFinish = aBoolean;
+            setReadFinish(aBoolean);
         });
 
         viewModel.uc.showCustomEvent.observe(this, vpRvItemViewModel -> {

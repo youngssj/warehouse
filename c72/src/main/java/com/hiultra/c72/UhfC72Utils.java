@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.rscja.deviceapi.RFIDWithUHFUART;
 import com.rscja.deviceapi.entity.UHFTAGInfo;
 import com.rscja.deviceapi.exception.ConfigurationException;
@@ -19,7 +18,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.KLog;
 import me.goldze.mvvmhabit.utils.ProgressDialogManager;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
@@ -67,14 +66,14 @@ public class UhfC72Utils {
             executorService.submit(() -> {
 
                 //监听uhf连接状态
-                mReader.setConnectionStatusCallback(new ConnectionStatusCallback(){
+                mReader.setConnectionStatusCallback(new ConnectionStatusCallback() {
                     @Override
                     public void getStatus(ConnectionStatus status, Object device) {
-                        if(status==ConnectionStatus.CONNECTED){
+                        if (status == ConnectionStatus.CONNECTED) {
                             //UHF已经连接
                             Log.e("123", "UHF已经连接");
                             mReader.setEPCAndTIDMode();
-                        }else if(status==ConnectionStatus.DISCONNECTED){
+                        } else if (status == ConnectionStatus.DISCONNECTED) {
                             //UHF连接断开
                             Log.e("123", "UHF连接断开");
                         }
@@ -108,7 +107,7 @@ public class UhfC72Utils {
         }
     }
 
-    public void startRead(Context context,ReadCallback readCallback) {
+    public void startRead(Context context, ReadCallback readCallback) {
         if (mReader == null) {
             initUHF(context);
         }
@@ -124,11 +123,13 @@ public class UhfC72Utils {
         } else {
             stopInventory();
         }
-
     }
+
+    private long time;
 
     public void readTag(final ReadCallback readCallback) {
         executorService.submit(() -> {
+            time = System.currentTimeMillis();
             String strTid;
             String strResult;
             UHFTAGInfo res = null;
@@ -157,12 +158,29 @@ public class UhfC72Utils {
                     if (!"".equals(epc))
                         mEpcSet.add(epc);  //解码后加入set集合
                     SoundUtil.play(1, 0);
+
+                    if ((System.currentTimeMillis() - time) > 1000) {
+                        KLog.i("一秒钟---");
+                        time = System.currentTimeMillis();
+
+                        synchronized (mEpcSet) {
+                            if (mEpcSet != null && mEpcSet.size() != 0) {
+                                Set<String> epcSet = new HashSet<>(mEpcSet);
+                                mEpcSet.clear();
+                                uiThread.post(() -> {
+                                    if (epcSet != null && epcSet.size() != 0) {
+                                        readCallback.callback(epcSet);
+                                    }
+                                });
+                            }
+                        }
+                    }
                 }
             }
-            uiThread.post(() -> {
+            uiThread.postDelayed(() -> {
                 if (mEpcSet != null && mEpcSet.size() != 0)
                     readCallback.callback(mEpcSet);
-            });
+            }, 500);
         });
     }
 
@@ -193,7 +211,7 @@ public class UhfC72Utils {
                 mReader.free();
                 mReader = null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         executorService.shutdownNow();

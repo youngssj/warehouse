@@ -52,7 +52,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
 
     protected abstract void scanBarCodeCallback(String barCode);
 
-    protected boolean isReadFinish = false;
+    private boolean isReadFinish = false;
     protected boolean isRead = false;
     private boolean keyUpFlag = true;
     private long startTime = 0;
@@ -92,6 +92,12 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
         }
     };
 
+    public void setReadFinish(boolean readFinish) {
+        isReadFinish = readFinish;
+        if (mUhfC72Utils != null) {//close uhf module.
+            mUhfC72Utils.closeUhf();
+        }
+    }
 
     @Override
     public void initViewObservable() {
