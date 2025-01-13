@@ -1,6 +1,5 @@
 package com.victor.warehouse;
 
-import android.app.Activity;
 import android.content.Context;
 
 import androidx.multidex.MultiDex;
@@ -15,6 +14,8 @@ import me.goldze.mvvmhabit.BuildConfig;
 import me.goldze.mvvmhabit.base.BaseApplication;
 import me.goldze.mvvmhabit.crash.CaocConfig;
 import me.goldze.mvvmhabit.utils.KLog;
+import me.jessyan.autosize.AutoSizeConfig;
+import me.jessyan.autosize.unit.Subunits;
 
 /**
  * Created by goldze on 2018/6/21 0021.
@@ -55,6 +56,11 @@ public class AppApplication extends BaseApplication {
 //                .errorActivity(YourCustomErrorActivity.class) //崩溃后的错误activity
 //                .eventListener(new YourCustomEventListener()) //崩溃后的错误监听
                 .apply();
+
+        AutoSizeConfig.getInstance().getUnitsManager()
+                .setSupportDP(false)
+                .setSupportSP(false)
+                .setSupportSubunits(Subunits.MM);
     }
 
     @Override

@@ -1,11 +1,18 @@
 package me.goldze.mvvmhabit.base;
 
-import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.Display;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
@@ -19,15 +26,15 @@ import androidx.lifecycle.ViewModelProviders;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import me.goldze.mvvmhabit.R;
 import me.goldze.mvvmhabit.base.BaseViewModel.ParameterField;
 import me.goldze.mvvmhabit.bus.Messenger;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
-import me.goldze.mvvmhabit.utils.systembar.StatusBarUtil;
+import me.jessyan.autosize.AutoSizeCompat;
 
 
 /**
@@ -59,15 +66,18 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
         //设置状态栏透明
 //        StatusBarUtil.setTranslucentStatus(this);
+
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        // 设置使用刘海屏区域
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }
         this.getWindow().setAttributes(lp);
-        // 防止页面被导航栏遮盖
+
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
 //        getWindow().getDecorView().setSystemUiVisibility(
 //                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 //                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -78,6 +88,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         //设置状态栏和导航栏颜色为透明
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
+
         //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
         //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
 //        if (!StatusBarUtil.setStatusBarDarkTheme(this, true)) {
@@ -85,6 +96,50 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 //            //这样半透明+白=灰, 状态栏的文字能看得清
 //            StatusBarUtil.setStatusBarColor(this, 0x55000000);
 //        }
+    }
+
+    public static boolean[] isSystemUiVisible(Window window) {
+        boolean[] result = new boolean[]{false, false};
+        if (window == null) {
+            return result;
+        }
+        WindowManager.LayoutParams attributes = window.getAttributes();
+        if (attributes != null) {
+            result[0] = (attributes.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) != WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            //
+            ViewGroup decorView = (ViewGroup) window.getDecorView();
+            result[1] = (((attributes.systemUiVisibility | decorView.getWindowSystemUiVisibility()) &
+                    View.SYSTEM_UI_FLAG_HIDE_NAVIGATION) == 0) && (attributes.flags & WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS) != 0;
+        }
+        //
+        Object decorViewObj = window.getDecorView();
+        Class<?> clazz = decorViewObj.getClass();
+        int mLastBottomInset = 0, mLastRightInset = 0, mLastLeftInset = 0;
+        try {
+            Field mLastBottomInsetField = clazz.getDeclaredField("mLastBottomInset");
+            mLastBottomInsetField.setAccessible(true);
+            mLastBottomInset = mLastBottomInsetField.getInt(decorViewObj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Field mLastRightInsetField = clazz.getDeclaredField("mLastRightInset");
+            mLastRightInsetField.setAccessible(true);
+            mLastRightInset = mLastRightInsetField.getInt(decorViewObj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Field mLastLeftInsetField = clazz.getDeclaredField("mLastLeftInset");
+            mLastLeftInsetField.setAccessible(true);
+            mLastLeftInset = mLastLeftInsetField.getInt(decorViewObj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        boolean isNavBarToRightEdge = mLastBottomInset == 0 && mLastRightInset > 0;
+        int size = isNavBarToRightEdge ? mLastRightInset : (mLastBottomInset == 0 && mLastLeftInset > 0 ? mLastLeftInset : mLastBottomInset);
+        result[1] = result[1] && size > 0;
+        return result;
     }
 
     @Override
@@ -312,5 +367,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 
     public String makeFragmentName(int viewId, long id) {
         return "android:switcher:" + viewId + ":" + id;
+    }
+
+    @Override
+    public Resources getResources() {
+        //需要升级到 v1.1.2 及以上版本才能使用 AutoSizeCompat
+        AutoSizeCompat.autoConvertDensityOfGlobal(super.getResources());//如果没有自定义需求用这个方法
+//        AutoSizeCompat.autoConvertDensity(super.getResources(), 667, false);//如果有自定义需求就用这个方法
+        return super.getResources();
     }
 }

@@ -17,9 +17,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="68mm"
+            android:layout_marginTop="60mm"
+            android:layout_marginEnd="68mm"
             android:orientation="vertical">
 
             <LinearLayout
@@ -30,25 +30,25 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="104mm"
                     android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp">
+                    android:paddingStart="48mm">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="28dp"
+                        android:layout_width="58mm"
+                        android:layout_height="50mm"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/home_icon1" />
+                        android:background="@mipmap/home_icon1" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="30mm"
                         android:text="@string/home_title1_text"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="36mm"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -60,31 +60,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="62mm"
                 android:background="@drawable/shape_login_edit"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="104mm"
                     android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp">
+                    android:paddingStart="48mm">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="28dp"
+                        android:layout_width="58mm"
+                        android:layout_height="50mm"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/home_icon2" />
+                        android:background="@mipmap/home_icon2" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="30mm"
                         android:text="@string/home_title2_text"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="36mm"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -106,25 +106,25 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="104mm"
                     android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp">
+                    android:paddingStart="48mm">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="28dp"
+                        android:layout_width="58mm"
+                        android:layout_height="50mm"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/home_icon3" />
+                        android:background="@mipmap/home_icon3" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="30mm"
                         android:text="@string/home_title4_text"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="36mm"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -137,31 +137,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="62mm"
                 android:background="@drawable/shape_login_edit"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="104mm"
                     android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp">
+                    android:paddingStart="48mm">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="28dp"
+                        android:layout_width="58mm"
+                        android:layout_height="50mm"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/home_icon4" />
+                        android:background="@mipmap/home_icon4" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="30mm"
                         android:text="@string/home_title5_text"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="36mm"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -173,31 +173,31 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="62mm"
                 android:background="@drawable/shape_login_edit"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="104mm"
                     android:background="@color/color_FFAA00"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:paddingStart="16dp">
+                    android:paddingStart="48mm">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="28dp"
+                        android:layout_width="58mm"
+                        android:layout_height="50mm"
                         android:scaleType="centerInside"
                         android:src="@mipmap/home_icon3" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:layout_marginStart="30mm"
                         android:text="@string/home_title6_text"
                         android:textColor="@color/white"
-                        android:textSize="18sp"
+                        android:textSize="36mm"
                         android:textStyle="bold" />
                 </LinearLayout>
 

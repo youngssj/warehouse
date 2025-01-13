@@ -12,11 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingTop="32mm"
+        android:paddingBottom="32mm">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -37,20 +37,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content1_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -58,20 +58,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content2_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -79,20 +79,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content3_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -100,20 +100,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content4_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -121,20 +121,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content5_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_horizontal"
@@ -155,20 +155,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content6_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -176,20 +176,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content7_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -197,20 +197,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content8_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -218,20 +218,20 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content9_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20mm"
                     android:orientation="horizontal">
 
                     <TextView
@@ -239,14 +239,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/home_title1_content10_text"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{viewModel.statisticsInfo.test}"
                         android:textColor="@color/color_565656"
-                        android:textSize="13sp" />
+                        android:textSize="36mm" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

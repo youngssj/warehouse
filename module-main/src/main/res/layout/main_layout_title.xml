@@ -10,18 +10,18 @@
     <RelativeLayout
         android:id="@+id/rlTitle"
         android:layout_width="match_parent"
-        android:layout_height="118dp"
+        android:layout_height="236mm"
         android:background="@mipmap/main_top_bg"
-        android:paddingStart="10dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="16dp">
+        android:paddingStart="39mm"
+        android:paddingTop="34mm"
+        android:paddingEnd="39mm">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{viewModel.appVersion}'
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="30mm" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
             android:layout_alignParentEnd="true"
             android:text="@{viewModel.hello}"
             android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textSize="30mm" />
 
         <TextView
             android:id="@+id/tvAppNameEN"
@@ -37,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="48mm"
             android:text="@string/login_top_text_en"
             android:textColor="@color/white"
-            android:textSize="12sp" />
+            android:textSize="25mm" />
 
         <TextView
             android:id="@+id/tvAppName"
@@ -50,6 +50,6 @@
             android:layout_centerHorizontal="true"
             android:text="@string/login_top_text"
             android:textColor="@color/white"
-            android:textSize="24sp" />
+            android:textSize="48mm" />
     </RelativeLayout>
 </layout>

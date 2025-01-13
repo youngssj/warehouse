@@ -22,20 +22,20 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="288dp"
+            android:layout_height="766mm"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="40mm"
             android:scaleType="fitXY"
             android:src="@mipmap/login_bottom_bg" />
 
         <RadioGroup
             android:id="@+id/rgTabbar"
             android:layout_width="match_parent"
-            android:layout_height="38dp"
+            android:layout_height="86mm"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="28dp"
+            android:layout_marginStart="68mm"
+            android:layout_marginEnd="68mm"
+            android:layout_marginBottom="52mm"
             android:orientation="horizontal"
             binding:onCheckedChangedCommand="@{viewModel.onCheckedChangedCommand}">
 
@@ -48,23 +48,23 @@
             <RadioButton
                 android:id="@+id/rbWorkBench"
                 style="@style/radioStyle"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="12mm"
                 android:text="@string/main_tab_workbench_text" />
 
             <RadioButton
                 android:id="@+id/rbMine"
                 style="@style/radioStyle"
-                android:layout_marginStart="6dp"
+                android:layout_marginStart="12mm"
                 android:text="@string/main_tab_mine_text" />
         </RadioGroup>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/mViewPager"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="0mm"
             android:layout_above="@id/rgTabbar"
             android:layout_below="@id/rlTitle"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20mm"
             binding:onPage2SelectedCommand="@{viewModel.onPageSelectedCommand}" />
     </RelativeLayout>
 </layout>

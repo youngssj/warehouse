@@ -14,24 +14,25 @@
     <me.goldze.mvvmhabit.widget.SquareLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="70mm"
+        android:layout_marginTop="80mm"
+        android:layout_marginEnd="70mm"
         android:gravity="center"
-        binding:onClickCommand="@{viewModel.onClickCommand}"
         android:orientation="vertical"
-        binding:background="@{viewModel.background.intValue()}">
+        binding:background="@{viewModel.background.intValue()}"
+        binding:onClickCommand="@{viewModel.onClickCommand}">
 
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="100mm"
+            android:layout_height="100mm"
             binding:src="@{viewModel.icon}" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20mm"
             android:text="@{viewModel.name}"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="36mm" />
     </me.goldze.mvvmhabit.widget.SquareLinearLayout>
 </layout>

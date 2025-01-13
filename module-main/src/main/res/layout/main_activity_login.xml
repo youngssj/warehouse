@@ -16,60 +16,61 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="1021mm"
             android:scaleType="fitXY"
             android:src="@mipmap/login_top_bg" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="288dp"
+            android:layout_height="767mm"
             android:layout_alignParentBottom="true"
             android:scaleType="fitXY"
             android:src="@mipmap/login_bottom_bg" />
 
         <TextView
+            android:id="@+id/tvAppName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="338mm"
             android:text="@string/login_top_text"
             android:textColor="@color/colorPrimary"
-            android:textSize="28sp" />
+            android:textSize="80mm" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvAppName"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="180dp"
             android:text="@string/login_top_text_en"
             android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
+            android:textSize="42mm" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical"
-            android:paddingStart="60dp"
-            android:paddingEnd="60dp">
+            android:paddingStart="200mm"
+            android:paddingEnd="200mm">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="110mm"
                 android:background="@drawable/shape_login_edit"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="20dp">
+                android:paddingStart="32mm">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="44mm"
+                    android:layout_height="44mm"
                     android:src="@mipmap/login_icon_username" />
 
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="1mm"
+                    android:layout_height="44mm"
+                    android:layout_marginStart="34mm"
                     android:background="@color/color_F2F2F2" />
 
                 <LinearLayout
@@ -78,7 +79,7 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="0dp"
+                        android:layout_width="0mm"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@null"
@@ -87,19 +88,18 @@
                         android:inputType=""
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+                        android:paddingStart="34mm"
                         android:text="@={viewModel.userName}"
                         android:textColor="@color/color_333333"
                         android:textColorHint="@color/color_9C9C9C"
                         android:textCursorDrawable="@drawable/shape_edittext_cursor"
-                        android:textSize="18sp"
+                        android:textSize="40mm"
                         binding:textChanged="@{viewModel.onTextChangeCommand}" />
 
                     <ImageView
-                        android:layout_width="36dp"
+                        android:layout_width="80mm"
                         android:layout_height="match_parent"
-                        android:padding="9dp"
+                        android:padding="20mm"
                         android:src="@mipmap/clean_edit"
                         android:visibility="@{viewModel.clearBtnVisibility}"
                         binding:onClickCommand="@{viewModel.clearUserNameOnClickCommand}" />
@@ -108,22 +108,22 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="110mm"
+                android:layout_marginTop="66mm"
                 android:background="@drawable/shape_login_edit"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="20dp">
+                android:paddingStart="32mm">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
+                    android:layout_width="44mm"
+                    android:layout_height="44mm"
                     android:src="@mipmap/login_icon_password" />
 
                 <View
-                    android:layout_width="1dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="1mm"
+                    android:layout_height="44mm"
+                    android:layout_marginStart="34mm"
                     android:background="@color/color_F2F2F2" />
 
                 <LinearLayout
@@ -134,7 +134,7 @@
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/etPassword"
-                        android:layout_width="0dp"
+                        android:layout_width="0mm"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@null"
@@ -143,21 +143,18 @@
                         android:inputType="textPassword"
                         android:maxLength="20"
                         android:maxLines="1"
-                        android:paddingStart="10dp"
+                        android:paddingStart="34mm"
                         android:text="@={viewModel.password}"
                         android:textColor="@color/color_333333"
                         android:textColorHint="@color/color_9C9C9C"
                         android:textCursorDrawable="@drawable/shape_edittext_cursor"
-                        android:textSize="18sp" />
+                        android:textSize="40mm" />
 
                     <ImageView
                         android:id="@+id/ivPwd"
-                        android:layout_width="wrap_content"
+                        android:layout_width="80mm"
                         android:layout_height="match_parent"
-                        android:paddingStart="10dp"
-                        android:paddingTop="10dp"
-                        android:paddingEnd="4dp"
-                        android:paddingBottom="10dp"
+                        android:padding="20mm"
                         android:src="@mipmap/login_close"
                         android:visibility="visible"
                         binding:onClickCommand="@{viewModel.passwordShowSwitchOnClickCommand}" />
@@ -165,17 +162,20 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_gravity="end"
                 android:gravity="center_vertical|end"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="30mm"
+                android:paddingTop="30mm"
+                android:paddingBottom="30mm">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="40mm"
+                    android:layout_height="40mm"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="10mm"
                     android:background="@mipmap/login_icon_setting"
                     binding:onClickCommand="@{viewModel.setIpClick}" />
 
@@ -186,23 +186,23 @@
                     android:layout_gravity="center_vertical"
                     android:gravity="center"
                     android:text="@string/login_setting_text"
-                    android:textSize="16dp"
+                    android:textSize="40mm"
                     binding:onClickCommand="@{viewModel.setIpClick}" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/tvLogin"
                 android:layout_width="wrap_content"
-                android:layout_height="43dp"
+                android:layout_height="94mm"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30mm"
                 android:background="@drawable/selector_login_btn"
                 android:gravity="center"
-                android:paddingStart="60dp"
-                android:paddingEnd="60dp"
+                android:paddingStart="120mm"
+                android:paddingEnd="120mm"
                 android:text="@string/login_button_text"
                 android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textSize="38mm"
                 android:textStyle="bold"
                 binding:onClickCommand="@{viewModel.loginOnClickCommand}" />
         </LinearLayout>

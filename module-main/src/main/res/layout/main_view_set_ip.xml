@@ -15,50 +15,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingStart="34mm"
+        android:paddingEnd="34mm">
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="110mm"
             android:background="@drawable/shape_login_edit"
             android:hint="@string/login_setting_ip_text"
             android:inputType=""
             android:maxLength="20"
             android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="34mm"
+            android:paddingEnd="34mm"
             android:text="@={viewModel.ipObField}"
             android:textColor="@color/color_333333"
             android:textColorHint="@color/color_9C9C9C"
             android:textCursorDrawable="@drawable/shape_edittext_cursor"
-            android:textSize="16sp" />
+            android:textSize="40mm" />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="110mm"
+            android:layout_marginTop="20mm"
             android:background="@drawable/shape_login_edit"
             android:hint="@string/login_setting_port_text"
             android:inputType="number"
             android:maxLength="20"
             android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingStart="34mm"
+            android:paddingEnd="34mm"
             android:text="@={viewModel.portObField}"
             android:textColor="@color/color_333333"
             android:textColorHint="@color/color_9C9C9C"
             android:textCursorDrawable="@drawable/shape_edittext_cursor"
-            android:textSize="16sp" />
+            android:textSize="40mm" />
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="20mm"
             android:checked="@{viewModel.offlineField}"
             android:text="@string/login_setting_internet_text"
             android:textColor="@color/color_333333"
+            android:textSize="40mm"
             android:theme="@style/CheckBox"
             binding:onCheckedChangedCommand="@{viewModel.isInternetCommand}" />
     </LinearLayout>
