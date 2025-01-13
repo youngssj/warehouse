@@ -39,7 +39,7 @@ public class PdOddFragment extends BaseFragment<WorkbenchFragmentPdOddBinding, P
     @Override
     public void initData(Bundle savedInstanceState) {
         viewModel.setBackVisibleObservable(View.VISIBLE);
-        viewModel.setTitleText("盘点单");
+        viewModel.setTitleText(getResources().getString(R.string.workbench_check_list_title_text));
     }
 
     @Override

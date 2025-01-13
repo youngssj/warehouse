@@ -14,107 +14,105 @@
     <com.lihang.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        binding:hl_cornerRadius="8dp"
+        android:layout_marginStart="34mm"
+        android:layout_marginEnd="34mm"
+        android:layout_marginTop="20mm"
+        binding:hl_cornerRadius="8mm"
         binding:hl_shadowColor="@color/color_797979"
-        binding:hl_shadowLimit="3dp">
+        binding:hl_shadowLimit="6mm">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="8dp"
+            android:padding="30mm"
             binding:onClickCommand="@{viewModel.itemClick}">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:padding="5dp">
+                android:padding="16mm">
 
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="34mm"
+                    android:layout_height="34mm"
+                    android:layout_marginEnd="12mm"
                     android:src="@mipmap/ic_pd_odd" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="盘点单号："
+                    android:text="@string/workbench_check_list_content_title1_text"
                     android:textColor="@color/color_797979"
-                    android:textSize="15sp" />
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.entity.batchNumber}"
                     android:textColor="@color/color_797979"
-                    android:textSize="15sp"
-                    app:text="资产管理" />
+                    android:textSize="38mm" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:padding="5dp">
+                android:padding="16mm">
 
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="34mm"
+                    android:layout_height="34mm"
+                    android:layout_marginEnd="12mm"
                     android:src="@mipmap/ic_pd_theme" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="盘点主题："
+                    android:text="@string/workbench_check_list_content_title2_text"
                     android:textColor="@color/color_797979"
-                    android:textSize="15sp" />
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.entity.checkTheme}"
                     android:textColor="@color/color_797979"
-                    android:textSize="15sp"
-                    app:text="鸡蛋季度盘点" />
+                    android:textSize="38mm"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:padding="5dp">
+                android:padding="16mm">
 
                 <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="34mm"
+                    android:layout_height="34mm"
+                    android:layout_marginEnd="12mm"
                     android:src="@mipmap/ic_pd_date" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="盘点时间："
+                    android:text="@string/workbench_check_list_content_title3_text"
                     android:textColor="@color/color_797979"
-                    android:textSize="15sp" />
+                    android:textSize="38mm" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="0mm"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@{viewModel.entity.planCheckDate}"
                     android:textColor="@color/color_797979"
-                    android:textSize="15sp"
-                    app:text="2019-01-01" />
+                    android:textSize="38mm" />
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="46mm"
+                    android:layout_height="46mm"
                     android:src="@mipmap/ic_click_right" />
             </LinearLayout>
         </LinearLayout>

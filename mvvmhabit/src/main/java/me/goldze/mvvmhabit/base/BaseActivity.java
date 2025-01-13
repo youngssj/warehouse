@@ -1,15 +1,10 @@
 package me.goldze.mvvmhabit.base;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -34,6 +29,7 @@ import java.util.Map;
 import me.goldze.mvvmhabit.base.BaseViewModel.ParameterField;
 import me.goldze.mvvmhabit.bus.Messenger;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.ProgressDialogManager;
 import me.jessyan.autosize.AutoSizeCompat;
 
 
@@ -47,6 +43,7 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     protected VM viewModel;
     private int viewModelId;
     private MaterialDialog dialog;
+    private ProgressDialogManager mProgressDialogManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,6 +201,18 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
                 showDialog(title);
             }
         });
+        viewModel.getUC().getShowProgressEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(@Nullable Void v) {
+                showProgress();
+            }
+        });
+        viewModel.getUC().getDismissProgressEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(@Nullable Void v) {
+                dismissProgress();
+            }
+        });
         //加载对话框消失
         viewModel.getUC().getDismissDialogEvent().observe(this, new Observer<Void>() {
             @Override
@@ -262,8 +271,26 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     }
 
     public void showCustomDialog(String title, ViewDataBinding vdb, MaterialDialog.SingleButtonCallback callback) {
+        dismissDialog();
         vdb.setLifecycleOwner(this);
         dialog = MaterialDialogUtils.showCustomDialog(this, title, vdb, callback);
+    }
+
+    public void showProgress() {
+        if (mProgressDialogManager == null) {
+            mProgressDialogManager = new ProgressDialogManager(this);
+        }
+        if (!mProgressDialogManager.isShow()) {
+            mProgressDialogManager.setCanceledOnTouchOutside(false);
+            mProgressDialogManager.setCancelable(true);
+            mProgressDialogManager.showWaiteDialog();
+        }
+    }
+
+    public void dismissProgress() {
+        if (mProgressDialogManager != null) {
+            mProgressDialogManager.cancelWaiteDialog();
+        }
     }
 
     /**

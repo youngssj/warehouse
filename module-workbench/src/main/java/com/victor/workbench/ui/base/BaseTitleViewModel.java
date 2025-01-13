@@ -31,7 +31,8 @@ import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
  */
 public class BaseTitleViewModel<M extends BaseModel> extends BaseViewModel<M> {
 
-    public ObservableField<String> titleText = new ObservableField<>("标题");
+    public ObservableField<String> titleText = new ObservableField<>("");
+    public ObservableField<String> power = new ObservableField<>("");
     //返回按钮的观察者
     public ObservableInt backVisibleObservable = new ObservableInt(View.GONE);
     public ObservableInt powerVisibleObservable = new ObservableInt(View.GONE);
@@ -46,7 +47,6 @@ public class BaseTitleViewModel<M extends BaseModel> extends BaseViewModel<M> {
     private Disposable mShowSetDialogSubscription;
 
     public class UIChangeObservable {
-        public String power;
         public SingleLiveEvent<Integer> showSetDialogEvent = new SingleLiveEvent<>();
     }
 
@@ -65,7 +65,7 @@ public class BaseTitleViewModel<M extends BaseModel> extends BaseViewModel<M> {
         mBaseTitleViewModel = this;
     }
 
-    public BindingCommand<IKeyAndValue> onPowerSelectorCommand = new BindingCommand<>(iKeyAndValue -> uc.power = iKeyAndValue.getValue());
+    public BindingCommand<IKeyAndValue> onPowerSelectorCommand = new BindingCommand<>(iKeyAndValue -> power.set(iKeyAndValue.getValue()));
 
     public BindingCommand<Void> backOnClick = new BindingCommand<>(() -> finish());
 

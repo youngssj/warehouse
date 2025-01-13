@@ -19,32 +19,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="输出功率："
-            android:textColor="@color/black" />
+            android:text="@string/workbench_check_power_content_title_text"
+            android:textColor="@color/black"
+            android:textSize="38mm" />
 
         <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center">
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="80mm"
                 android:gravity="center_horizontal"
                 android:textAlignment="center"
+                android:textSize="38mm"
                 binding:itemDatas="@{viewModel.powerItemDatas}"
                 binding:onItemSelectedCommand="@{viewModel.onPowerSelectorCommand}"
-                binding:valueReply="@{viewModel.uc.power}" />
-
+                binding:valueReply="@{viewModel.power}" />
         </FrameLayout>
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="dbm"
-            android:textColor="@color/black" />
+            android:text="@string/workbench_check_power_content_unit_text"
+            android:textColor="@color/black"
+            android:textSize="38mm" />
     </LinearLayout>
 </layout>

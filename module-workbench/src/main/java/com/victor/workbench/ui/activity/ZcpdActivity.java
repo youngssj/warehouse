@@ -65,7 +65,7 @@ public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, 
             }
         }
         if (set.size() == 0) {
-            ToastUtils.showShort("无此资产");
+            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
             return;
         }
         viewModel.updatePDItemModel(set);
@@ -85,7 +85,7 @@ public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, 
     public void initData(Bundle savedInstanceState) {
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setPowerVisibleObservable(View.VISIBLE);
-        viewModel.setTitleText("资产盘点");
+        viewModel.setTitleText(getResources().getString(R.string.workbench_check_title_text));
         viewModel.getNetData(checkId);
         setRead(true);
         //设置Adapter
@@ -112,13 +112,9 @@ public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, 
             WorkbenchViewZcpdDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.workbench_view_zcpd_detail, null, false);
             binding.setViewModel(vpRvItemViewModel);
             TakeStockDetail.ElecMaterialListDTO dataListBean = vpRvItemViewModel.entity.get();
-            showCustomDialog("盘点详情", binding, (dialog, which) -> {
+            showCustomDialog(getResources().getString(R.string.workbench_check_detail_text), binding, (dialog, which) -> {
             });
         });
-/*
-        super.uc.showSetDialogEvent.observe(,integer -> {
-            ToastUtils.showShort("opppppp");
-        });*/
     }
 
     @Override

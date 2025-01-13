@@ -23,8 +23,12 @@ import com.victor.workbench.databinding.WorkbenchViewTopSetPowerBinding;
 
 import java.util.Set;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**
@@ -95,7 +99,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
 
         viewModel.uc.showSetDialogEvent.observe(this, i -> {
 
-            showCustomDialog("设置功率", (dialog, which) -> {
+            showCustomDialog(getResources().getString(R.string.workbench_check_power_title_text), (dialog, which) -> {
                 switch (SystemUtil.getSystemModel()) {
                     case Constants.DEVICE.C72_AND11:
                     case Constants.DEVICE.C72_AND11_1:
@@ -104,14 +108,14 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                         if (mUhfC72Utils == null) {
                             mUhfC72Utils = new UhfC72Utils(this);
                         }
-                        mUhfC72Utils.setPower(Integer.parseInt(viewModel.uc.power));
+                        mUhfC72Utils.setPower(Integer.parseInt((String) viewModel.power.get()));
                         break;
 
                     case Constants.DEVICE.K71V1_64_BSP:
                         if (mUhf961Utils == null) {
                             mUhf961Utils = new Uhf961Utils(BaseUhfActivity.this);
                         }
-                        mUhf961Utils.setPower(Integer.parseInt(viewModel.uc.power));
+                        mUhf961Utils.setPower(Integer.parseInt((String) viewModel.power.get()));
                         break;
 
                 }
@@ -271,12 +275,33 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
         return super.onKeyDown(keyCode, event);
     }
 
-
     public void showCustomDialog(String title, MaterialDialog.SingleButtonCallback callback) {
-        viewModel.uc.power = String.valueOf(mUhfC72Utils.getPower());
-        WorkbenchViewTopSetPowerBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.workbench_view_top_set_power, null, false);
-        binding.setViewModel(viewModel);
-        binding.setLifecycleOwner(this);
-        MaterialDialogUtils.showCustomDialog(this, title, binding, callback);
+        showProgress();
+        Observable.create((ObservableOnSubscribe<String>) emitter -> {
+                    emitter.onNext(String.valueOf(mUhfC72Utils.getPower()));
+                })
+                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
+                .compose(RxUtils.schedulersTransformer())
+                .subscribe(new DefaultObserver<String>() {
+                    @Override
+                    public void onNext(String power) {
+                        viewModel.power.set(power);
+                        dismissProgress();
+                        WorkbenchViewTopSetPowerBinding binding = DataBindingUtil.inflate(LayoutInflater.from(BaseUhfActivity.this), R.layout.workbench_view_top_set_power, null, false);
+                        binding.setViewModel(viewModel);
+                        binding.setLifecycleOwner(BaseUhfActivity.this);
+                        MaterialDialogUtils.showCustomDialog(BaseUhfActivity.this, title, binding, callback);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }

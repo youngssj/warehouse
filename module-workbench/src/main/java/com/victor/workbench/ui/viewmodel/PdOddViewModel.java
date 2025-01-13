@@ -45,7 +45,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
     public void loadData(int page) {
         if (page == 1) {
             mMorePageNumber = 1;
-            showDialog();
+            showProgress();
             observableList.clear();
         }
         if (Constants.CONFIG.IS_OFFLINE)
@@ -53,13 +53,13 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                     .compose(RxUtils.MaybeSchTransformer())
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .subscribe((Consumer<List<AssetCheckOdd>>) assetCheckOdds -> {
-                        dismissDialog();
+
                         uc.finishRefreshing.call();
                         uc.finishLoadmore.call();
                         if (assetCheckOdds == null || assetCheckOdds.size() == 0) {
                             if (page == 1)
                                 noDataVisibleObservable.set(View.VISIBLE);
-                            else ToastUtils.showShort("不要拉了呀，到底了");
+                            else ToastUtils.showShort(R.string.app_no_more_data_text);
                             return;
                         }
 //                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
@@ -80,12 +80,8 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                             }else if (listData != null) {
                                 if (observableList.size() == listData.getTotal()) {
                                     // 数据全部返回了
-//                                    if (page == 1) {
-//                                        noDataVisibleObservable.set(View.VISIBLE);
-//                                    } else {
                                     canloadmore = false;
-                                    ToastUtils.showShort("不要拉了呀，到底了");
-//                                    }
+                                    ToastUtils.showShort(R.string.app_no_more_data_text);
                                 } else {
                                     for (TakeStockData takeStockData : listData.getList()) {
                                         PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, takeStockData);
@@ -100,7 +96,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                         public void onComplete() {
                             uc.finishRefreshing.call();
                             uc.finishLoadmore.call();
-                            dismissDialog();
+                            dismissProgress();
                         }
                     });
         }

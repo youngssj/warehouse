@@ -1,12 +1,13 @@
-package com.hiultra.assetmanager.utils;
+package com.hiultra.pda;
 
+import static android.content.ContentValues.TAG;
+
+import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.hiultra.pda.EncodeUtil;
 import com.supoin.rfidservice.sdk.DataUtils;
 import com.supoin.rfidservice.sdk.ModuleController;
 
@@ -14,10 +15,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.ProgressDialogManager;
 import me.goldze.mvvmhabit.utils.ToastUtils;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * 版权：heihei
@@ -30,23 +29,23 @@ import static android.content.ContentValues.TAG;
 public class UhfPdaUtils {
 
     public static ModuleController moduleController;
-    private Context mContext;
+    private Activity activity;
 
     public Set<String> mEpcSet = new HashSet<>(); //epc set ,epc list
     private static AsyncTask<Void, Void, Set<String>> mEpcDataAsyncTask;
     private static AsyncTask<Integer, Void, Void> mPowerAsyncTask;
-    private MaterialDialog mDialog;
+    private ProgressDialogManager mProgressDialogManager;
     private boolean isInventory;
 
-    public UhfPdaUtils(Context context) {
-        this.mContext = context;
-        getReaderInstance(context);
+    public UhfPdaUtils(Activity activity) {
+        this.activity = activity;
+        getReaderInstance(activity);
     }
 
     private void getReaderInstance(Context context) {
         try {
             if (moduleController == null) {
-                showDialog();
+                showProgress();
                 moduleController = ModuleController.getInstance(context, new ModuleController.DataListener() {
                     public void onError() {
                         Toast.makeText(context, "模块不存在", Toast.LENGTH_SHORT).show();
@@ -55,7 +54,7 @@ public class UhfPdaUtils {
                     @Override
                     public void onConnect(boolean isSuccess) {
                         super.onConnect(isSuccess);
-                        dismissDialog();
+                        dismissProgress();
                         if (isSuccess) {
                             Toast.makeText(context, "连接成功", Toast.LENGTH_SHORT).show();
                         }
@@ -78,18 +77,26 @@ public class UhfPdaUtils {
     public void initUHF() {
     }
 
-    private void showDialog() {
-        mDialog = MaterialDialogUtils.showIndeterminateProgressDialog(mContext, "加载中", true).show();
+    public void showProgress() {
+        if (mProgressDialogManager == null) {
+            mProgressDialogManager = new ProgressDialogManager(activity);
+            if (!mProgressDialogManager.isShow()) {
+                mProgressDialogManager.setCanceledOnTouchOutside(false);
+                mProgressDialogManager.setCancelable(true);
+                mProgressDialogManager.showWaiteDialog();
+            }
+        }
     }
 
-    private void dismissDialog() {
-        if (mDialog != null && mDialog.isShowing())
-            mDialog.dismiss();
+    public void dismissProgress() {
+        if (mProgressDialogManager != null) {
+            mProgressDialogManager.cancelWaiteDialog();
+        }
     }
 
     public void startRead(ReadCallback readCallback) {
         if (moduleController == null)
-            getReaderInstance(mContext);
+            getReaderInstance(activity);
 
         isInventory = !isInventory;
         if (isInventory) {

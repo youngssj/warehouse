@@ -81,13 +81,13 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         String title = "";
         switch (position) {
             case 0:
-                title = "全部";
+                title = getApplication().getResources().getString(R.string.workbench_check_tab1_text);
                 break;
             case 1:
-                title = "盘点到";
+                title = getApplication().getResources().getString(R.string.workbench_check_tab2_text);
                 break;
             case 2:
-                title = "未盘点到";
+                title = getApplication().getResources().getString(R.string.workbench_check_tab3_text);
                 break;
 
         }
@@ -137,7 +137,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             @Override
                             public void onNext(Boolean b) {
                                 btnVisiable.set(false);
-                                ToastUtils.showShort("提交成功");
+                                ToastUtils.showShort(R.string.workbench_check_submit_success_text);
                                 finish();
                             }
 
@@ -156,18 +156,18 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                         .compose(RxUtils.schedulersTransformer())
                         .compose(RxUtils.exceptionTransformer())
                         .doOnSubscribe(disposable -> {
-                            showDialog();
+                            showProgress();
                         }).subscribe(new ApiDisposableObserver() {
                             @Override
                             public void onResult(Object o) {
                                 btnVisiable.set(false);
-                                ToastUtils.showShort("提交成功");
+                                ToastUtils.showShort(R.string.workbench_check_submit_success_text);
                                 finish();
                             }
 
                             @Override
                             public void onComplete() {
-                                dismissDialog();
+                                dismissProgress();
                             }
                         });
 //        } else
@@ -228,7 +228,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                     .doOnSubscribe(new Consumer<Disposable>() {
                         @Override
                         public void accept(Disposable disposable) throws Exception {
-                            showDialog("正在加载...");
+                            showProgress();
                         }
                     })
                     .subscribe(new ApiDisposableObserver<TakeStockDetail>() {
@@ -251,7 +251,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
                         @Override
                         public void onComplete() {
-                            dismissDialog();
+                            dismissProgress();
                         }
                     });
     }
@@ -266,12 +266,12 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
             if (sets.contains(bean.getRfidCode())) {
                 bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
                 bean.setCheckResult(1);
-                bean.setCheckResultMessage("已盘点");
+                bean.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_success_text));
                 sets.remove(bean.getRfidCode());
                 rvSet.add(viewModel);  //防止添加的数据重复
             } else {
                 bean.setCheckResult(2);
-                bean.setCheckResultMessage("未盘点");
+                bean.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_failure_text));
                 bean.setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
             }
             viewModel.entity.notifyChange();

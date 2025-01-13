@@ -107,7 +107,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                 .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.exceptionTransformer())
-                .doOnSubscribe(disposable -> showDialog(getApplication().getResources().getString(R.string.app_loading_text)))
+                .doOnSubscribe(disposable -> showProgress())
                 .subscribe(new ApiDisposableObserver<TokenBean>() {
                     @Override
                     public void onResult(TokenBean userToken) {

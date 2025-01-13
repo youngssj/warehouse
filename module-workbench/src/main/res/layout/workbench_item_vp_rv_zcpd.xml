@@ -14,30 +14,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp"
         android:background="@{viewModel.entity.bgColor}"
         android:orientation="vertical"
+        android:paddingStart="30mm"
+        android:paddingTop="10mm"
+        android:paddingEnd="30mm"
+        android:paddingBottom="10mm"
         binding:onClickCommand="@{viewModel.itemClick}">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="14mm">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="资产编码："
-                    android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:text="@string/workbench_check_result_title1_text"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -46,20 +47,20 @@
                     android:singleLine="true"
                     android:text="@{viewModel.entity.materialCode}"
                     android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:textSize="38mm" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="资产名称："
-                    android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:text="@string/workbench_check_result_title2_text"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -68,26 +69,26 @@
                     android:singleLine="true"
                     android:text="@{viewModel.entity.materialName}"
                     android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:textSize="38mm" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="14mm">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="资产规格："
-                    android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:text="@string/workbench_check_result_title3_text"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,20 +97,20 @@
                     android:singleLine="true"
                     android:text="@{viewModel.entity.specifications}"
                     android:textColor="@color/color_333333"
-                    android:textSize="14sp"/>
+                    android:textSize="38mm" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="使用部门："
-                    android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:text="@string/workbench_check_result_title4_text"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -118,26 +119,26 @@
                     android:singleLine="true"
                     android:text="@{viewModel.entity.deptName}"
                     android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:textSize="38mm" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="14mm">
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="存放地点："
-                    android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:text="@string/workbench_check_result_title5_text"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -146,20 +147,20 @@
                     android:singleLine="true"
                     android:text="@{viewModel.entity.warehouseName}"
                     android:textColor="@color/color_333333"
-                    android:textSize="14sp"/>
+                    android:textSize="38mm" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="盘点结果："
-                    android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:text="@string/workbench_check_result_title6_text"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -168,9 +169,8 @@
                     android:singleLine="true"
                     android:text='@{viewModel.entity.checkResultMessage}'
                     android:textColor="@color/color_333333"
-                    android:textSize="14sp" />
+                    android:textSize="38mm" />
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </layout>

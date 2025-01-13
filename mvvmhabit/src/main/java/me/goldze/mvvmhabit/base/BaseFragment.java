@@ -6,13 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.trello.rxlifecycle2.components.support.RxFragment;
-
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Map;
-
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
@@ -20,9 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.trello.rxlifecycle2.components.support.RxFragment;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Map;
+
 import me.goldze.mvvmhabit.base.BaseViewModel.ParameterField;
 import me.goldze.mvvmhabit.bus.Messenger;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.ProgressDialogManager;
 
 /**
  * Created by goldze on 2017/6/15.
@@ -32,6 +34,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     protected VM viewModel;
     private int viewModelId;
     private MaterialDialog dialog;
+    private ProgressDialogManager mProgressDialogManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +120,18 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
                 showDialog(title);
             }
         });
+        viewModel.getUC().getShowProgressEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(@Nullable Void v) {
+                showProgress();
+            }
+        });
+        viewModel.getUC().getDismissProgressEvent().observe(this, new Observer<Void>() {
+            @Override
+            public void onChanged(@Nullable Void v) {
+                dismissProgress();
+            }
+        });
         //加载对话框消失
         viewModel.getUC().getDismissDialogEvent().observe(this, new Observer<Void>() {
             @Override
@@ -163,8 +178,8 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
 //            dialog = dialog.getBuilder().title(title).build();
 //            dialog.show();
 //        } else {
-            MaterialDialog.Builder builder = MaterialDialogUtils.showIndeterminateProgressDialog(getActivity(), title, true);
-            dialog = builder.show();
+        MaterialDialog.Builder builder = MaterialDialogUtils.showIndeterminateProgressDialog(getActivity(), title, true);
+        dialog = builder.show();
 //        }
     }
 
@@ -177,6 +192,23 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     public void showCustomDialog(String title, ViewDataBinding vdb, MaterialDialog.SingleButtonCallback callback) {
         vdb.setLifecycleOwner(this);
         dialog = MaterialDialogUtils.showCustomDialog(getActivity(), title, vdb, callback);
+    }
+
+    public void showProgress() {
+        if (mProgressDialogManager == null) {
+            mProgressDialogManager = new ProgressDialogManager(getActivity());
+        }
+        if (!mProgressDialogManager.isShow()) {
+            mProgressDialogManager.setCanceledOnTouchOutside(false);
+            mProgressDialogManager.setCancelable(true);
+            mProgressDialogManager.showWaiteDialog();
+        }
+    }
+
+    public void dismissProgress() {
+        if (mProgressDialogManager != null) {
+            mProgressDialogManager.cancelWaiteDialog();
+        }
     }
 
     /**

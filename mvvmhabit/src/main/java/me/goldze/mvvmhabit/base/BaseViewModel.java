@@ -79,6 +79,14 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         uc.dismissDialogEvent.call();
     }
 
+    public void showProgress(){
+        uc.showProgressEvent.call();
+    }
+
+    public void dismissProgress(){
+        uc.dismissProgressEvent.call();
+    }
+
     /**
      * 跳转页面
      *
@@ -196,7 +204,9 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
 
     public final class UIChangeLiveData extends SingleLiveEvent {
         private SingleLiveEvent<String> showDialogEvent;
+        private SingleLiveEvent<Void> showProgressEvent;
         private SingleLiveEvent<Void> dismissDialogEvent;
+        private SingleLiveEvent<Void> dismissProgressEvent;
         private SingleLiveEvent<Map<String, Object>> startActivityEvent;
         private SingleLiveEvent<Map<String, Object>> startContainerActivityEvent;
         private SingleLiveEvent<Void> finishEvent;
@@ -205,9 +215,15 @@ public class BaseViewModel<M extends BaseModel> extends AndroidViewModel impleme
         public SingleLiveEvent<String> getShowDialogEvent() {
             return showDialogEvent = createLiveData(showDialogEvent);
         }
+        public SingleLiveEvent<Void> getShowProgressEvent() {
+            return showProgressEvent = createLiveData(showProgressEvent);
+        }
 
         public SingleLiveEvent<Void> getDismissDialogEvent() {
             return dismissDialogEvent = createLiveData(dismissDialogEvent);
+        }
+        public SingleLiveEvent<Void> getDismissProgressEvent() {
+            return dismissProgressEvent = createLiveData(dismissProgressEvent);
         }
 
         public SingleLiveEvent<Map<String, Object>> getStartActivityEvent() {

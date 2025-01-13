@@ -1,6 +1,7 @@
 package com.hiultra.c72;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,6 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.ProgressDialogManager;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**
@@ -32,16 +34,16 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 public class UhfC72Utils {
 
     public static RFIDWithUHFUART mReader;
-    private Context mContext;
+    private Activity activity;
     public Set<String> mEpcSet = new HashSet<>(); //epc set ,epc list
     public static boolean loopFlag;
-    private MaterialDialog mDialog;
+    private ProgressDialogManager mProgressDialogManager;
     private ExecutorService executorService;
     Handler uiThread = new Handler(Looper.getMainLooper());
 
 
-    public UhfC72Utils(Context context) {
-        this.mContext = context;
+    public UhfC72Utils(Activity activity) {
+        this.activity = activity;
         getReaderInstance();
     }
 
@@ -60,7 +62,7 @@ public class UhfC72Utils {
 
     public void initUHF(Context context) {
         getReaderInstance();
-        showDialog();
+        showProgress();
         if (mReader != null) {
             executorService.submit(() -> {
 
@@ -81,7 +83,7 @@ public class UhfC72Utils {
                 boolean b = mReader.init(context);
 
                 uiThread.post(() -> {
-                    dismissDialog();
+                    dismissProgress();
                     ToastUtils.showShort(b ? "初始化成功" : "初始化失败");
                 });
             });
@@ -89,13 +91,21 @@ public class UhfC72Utils {
         }
     }
 
-    private void showDialog() {
-        mDialog = MaterialDialogUtils.showIndeterminateProgressDialog(mContext, "加载中", true).show();
+    public void showProgress() {
+        if (mProgressDialogManager == null) {
+            mProgressDialogManager = new ProgressDialogManager(activity);
+            if (!mProgressDialogManager.isShow()) {
+                mProgressDialogManager.setCanceledOnTouchOutside(false);
+                mProgressDialogManager.setCancelable(true);
+                mProgressDialogManager.showWaiteDialog();
+            }
+        }
     }
 
-    private void dismissDialog() {
-        if (mDialog != null && mDialog.isShowing())
-            mDialog.dismiss();
+    public void dismissProgress() {
+        if (mProgressDialogManager != null) {
+            mProgressDialogManager.cancelWaiteDialog();
+        }
     }
 
     public void startRead(Context context,ReadCallback readCallback) {
@@ -158,12 +168,12 @@ public class UhfC72Utils {
 
     @SuppressLint("StaticFieldLeak")
     public void setPower(int power) {
-        showDialog();
+        showProgress();
         executorService.submit(() -> {
             stopInventory();
             boolean b = mReader.setPower(power);
             uiThread.post(() -> {
-                dismissDialog();
+                dismissProgress();
                 ToastUtils.showShort(b ? "设置成功" : "设置失败");
             });
         });
