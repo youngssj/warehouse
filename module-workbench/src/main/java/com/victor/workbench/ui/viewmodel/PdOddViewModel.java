@@ -45,7 +45,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
     public void loadData(int page) {
         if (page == 1) {
             mMorePageNumber = 1;
-            showProgress();
+//            showProgress();
             observableList.clear();
         }
         if (Constants.CONFIG.IS_OFFLINE)
@@ -96,7 +96,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                         public void onComplete() {
                             uc.finishRefreshing.call();
                             uc.finishLoadmore.call();
-                            dismissProgress();
+//                            dismissProgress();
                         }
                     });
         }

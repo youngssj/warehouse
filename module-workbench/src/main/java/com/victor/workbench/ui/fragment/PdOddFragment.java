@@ -43,12 +43,6 @@ public class PdOddFragment extends BaseFragment<WorkbenchFragmentPdOddBinding, P
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        viewModel.loadData(1);
-    }
-
-    @Override
     public void initViewObservable() {
         //监听下拉刷新完成
         viewModel.uc.finishRefreshing.observe(this, new Observer() {

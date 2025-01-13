@@ -80,6 +80,8 @@ public abstract class BaseOddViewModel<T extends BaseRecycleItemViewModel> exten
 //            ToastUtils.showShort("下拉刷新");
         loadData(1);
     });
+
+    public BindingCommand autoRefreshCommand = new BindingCommand(() -> {});
     //上拉加载
     public BindingCommand onLoadMoreCommand = new BindingCommand(() -> {
 //        if (observableList.size() > 50) {
