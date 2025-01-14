@@ -1,21 +1,20 @@
-package com.victor.workbench.ui.fragment;
+package com.victor.workbench.ui.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.base.MBaseActivity;
+import com.victor.base.router.RouterActivityPath;
 import com.victor.workbench.BR;
 import com.victor.workbench.R;
 import com.victor.workbench.databinding.WorkbenchFragmentPdOddBinding;
 import com.victor.workbench.ui.viewmodel.PdOddViewModel;
-
-import me.goldze.mvvmhabit.base.BaseFragment;
 
 /**
  * 版权：heihei
@@ -25,9 +24,11 @@ import me.goldze.mvvmhabit.base.BaseFragment;
  * 创建日期：2020/9/16
  * 邮箱：jxfengmtx@gmail.com
  */
-public class PdOddFragment extends BaseFragment<WorkbenchFragmentPdOddBinding, PdOddViewModel> {
+@Route(path = RouterActivityPath.WorkBench.PAGER_WorkBench_CHECK_LIST)
+public class PdOddActivity extends MBaseActivity<WorkbenchFragmentPdOddBinding, PdOddViewModel> {
+
     @Override
-    public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public int initContentView(Bundle savedInstanceState) {
         return R.layout.workbench_fragment_pd_odd;
     }
 
@@ -65,7 +66,7 @@ public class PdOddFragment extends BaseFragment<WorkbenchFragmentPdOddBinding, P
     @Override
     public PdOddViewModel initViewModel() {
         //使用自定义的ViewModelFactory来创建ViewModel，如果不重写该方法，则默认会调用NetWorkViewModel(@NonNull Application application)构造方法
-        AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getApplication());
         return new ViewModelProvider(this, factory).get(PdOddViewModel.class);
     }
 }

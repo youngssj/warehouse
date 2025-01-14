@@ -6,7 +6,6 @@ import androidx.databinding.ObservableInt;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.workbench.R;
-import com.victor.workbench.ui.fragment.PdOddFragment;
 import com.victor.workbench.ui.viewmodel.WorkBenchViewModel;
 
 import me.goldze.mvvmhabit.base.ItemViewModel;
@@ -37,8 +36,7 @@ public class AbilityItemViewModel extends ItemViewModel<WorkBenchViewModel> {
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title5_text).equals(name.get())) {
 
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title6_text).equals(name.get())) {
-//                ARouter.getInstance().build(RouterActivityPath.WorkBench.PAGER_WorkBench_CHECK).navigation();
-                viewModel.startContainerActivity(PdOddFragment.class.getCanonicalName());
+                ARouter.getInstance().build(RouterActivityPath.WorkBench.PAGER_WorkBench_CHECK_LIST).navigation();
             }
         }
     });

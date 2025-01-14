@@ -1,5 +1,6 @@
 package com.victor.main.ui.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
@@ -11,6 +12,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.victor.base.base.MBaseActivity;
+import com.victor.base.router.RouterActivityPath;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.ui.viewmodel.MainViewModel;
@@ -18,12 +22,30 @@ import com.victor.main.ui.viewmodel.MainViewModel;
 import java.util.List;
 
 import me.goldze.mvvmhabit.base.AppManager;
-import me.goldze.mvvmhabit.base.BaseActivity;
+import me.goldze.mvvmhabit.base.AppStatusManager;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
-public abstract class MainActivity<V extends ViewDataBinding, VM extends MainViewModel> extends BaseActivity<V, VM> {
+public abstract class MainActivity<V extends ViewDataBinding, VM extends MainViewModel> extends MBaseActivity<V, VM> {
 
     private static boolean isExit;//标示是否退出
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        int action = intent.getIntExtra(AppStatusManager.AppStatusConstant.KEY_HOME_ACTION, AppStatusManager.AppStatusConstant.ACTION_BACK_TO_HOME);
+        switch (action) {
+            case AppStatusManager.AppStatusConstant.ACTION_RESTART_APP:
+                restartApplication();
+                break;
+        }
+    }
+
+    public void restartApplication() {
+        ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                .navigation();
+        finish();
+    }
 
     @Override
     public int initVariableId() {

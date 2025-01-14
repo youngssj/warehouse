@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.hiultra.c72.BarCodeHelper;
 import com.hiultra.c72.UhfC72Utils;
 import com.hiultra.hiu_961.Uhf961Utils;
+import com.victor.base.base.MBaseActivity;
 import com.victor.base.utils.Constants;
 import com.victor.base.utils.SystemUtil;
 import com.victor.workbench.BR;
@@ -26,7 +27,6 @@ import java.util.Set;
 import io.reactivex.Observable;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.observers.DefaultObserver;
-import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
@@ -41,7 +41,7 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
  * <p>
  * 所有rfitd扫描页面的基类
  */
-public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends BaseTitleViewModel> extends BaseActivity<V, VM> {
+public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends BaseTitleViewModel> extends MBaseActivity<V, VM> {
 
 
     protected UhfC72Utils mUhfC72Utils;

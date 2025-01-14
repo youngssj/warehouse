@@ -5,7 +5,10 @@
     <application>
         <activity
             android:name=".base.ContainerActivity"
-            android:configChanges="orientation|keyboardHidden"></activity>
+            android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".crash.DefaultErrorActivity"
             android:process=":error_activity" />

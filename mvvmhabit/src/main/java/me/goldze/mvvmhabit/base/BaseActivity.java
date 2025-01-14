@@ -48,6 +48,11 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (restartApp()) {
+            return;
+        }
+
         //页面接受的参数方法
         initParam();
         //私有的初始化Databinding和ViewModel方法
@@ -94,6 +99,13 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
 //            StatusBarUtil.setStatusBarColor(this, 0x55000000);
 //        }
     }
+
+    /**
+     * 处理系统被后台回收，被回收后重走启动流程
+     *
+     * @return
+     */
+    public abstract boolean restartApp();
 
     public static boolean[] isSystemUiVisible(Window window) {
         boolean[] result = new boolean[]{false, false};

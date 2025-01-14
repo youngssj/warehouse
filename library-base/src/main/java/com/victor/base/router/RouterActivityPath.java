@@ -38,6 +38,7 @@ public class RouterActivityPath {
     public static class WorkBench {
         private static final String WorkBench = "/WorkBench";
         /*工作*/
+        public static final String PAGER_WorkBench_CHECK_LIST = WorkBench + "/WorkBenchCheckList";
         public static final String PAGER_WorkBench_CHECK = WorkBench + "/WorkBenchCheck";
     }
 }

@@ -14,6 +14,7 @@ android {
                 arguments = [
                         rxhttp_rxjava : '2.2.3',
                         rxhttp_package: 'rxhttp',  //指定RxHttp类包名，可随意指定
+                        AROUTER_MODULE_NAME: project.getName(),
                 ]
             }
         }
@@ -56,6 +57,7 @@ dependencies {
     api project(':library-res')
     api project(':MPChartLib')
     api rootProject.ext.dependencies["arouter-api"]
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     api files('libs\\BaiduLBS_Android.jar')
 
     api rootProject.ext.dependencies["room-runtime"]           //room数据库工具

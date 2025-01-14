@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.base.MBaseActivity;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.main.BR;
 import com.victor.main.R;
@@ -19,10 +20,8 @@ import com.victor.main.databinding.MainActivityLoginBinding;
 import com.victor.main.databinding.MainViewSetIpBinding;
 import com.victor.main.ui.viewmodel.LoginViewModel;
 
-import me.goldze.mvvmhabit.base.BaseActivity;
-
 @Route(path = RouterActivityPath.Sign.PAGER_LOGIN)
-public class LoginActivity extends BaseActivity<MainActivityLoginBinding, LoginViewModel> {
+public class LoginActivity extends MBaseActivity<MainActivityLoginBinding, LoginViewModel> {
 
     @Override
     public int initContentView(Bundle savedInstanceState) {

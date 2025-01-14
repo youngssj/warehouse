@@ -125,7 +125,7 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
                     @Override
                     public void onComplete() {
-                        dismissDialog();
+                        dismissProgress();
                     }
                 });
 
