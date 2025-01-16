@@ -23,16 +23,18 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 public class ZcpdVpRvItemViewModel extends ItemViewModel<ZcpdViewModel> {
 
-    public ObservableField<TakeStockDetail.ElecMaterialListDTO> entity = new ObservableField<>();
+    public ObservableField<String> batchNumber = new ObservableField<>();
 
+    public ObservableField<TakeStockDetail.ElecMaterialListDTO> entity = new ObservableField<>();
 
     public BindingCommand itemClick = new BindingCommand(() -> {
         viewModel.uc.showCustomEvent.setValue(this);
     });
 
-    public ZcpdVpRvItemViewModel(@NonNull ZcpdViewModel viewModel, TakeStockDetail.ElecMaterialListDTO data) {
+    public ZcpdVpRvItemViewModel(@NonNull ZcpdViewModel viewModel, String batchNumber, TakeStockDetail.ElecMaterialListDTO data) {
         super(viewModel);
         entity.set(data);
+        this.batchNumber.set(batchNumber);
     }
 
     @Override

@@ -243,7 +243,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                                 entity.set(data);
                                 checkDataNum.set("0/" + data.getElecMaterialList().size());
                                 for (int i = 0; i < TAB_NUM; i++) {
-                                    ZcpdVpItemViewModel itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, entity.get().getElecMaterialList());
+                                    ZcpdVpItemViewModel itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, entity.get().getBatchNumber(), entity.get().getElecMaterialList());
                                     items.add(itemViewModel);
                                 }
                             }
@@ -324,7 +324,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 //                        dataListBean.setSortName(bean.getSortName());
 //                        dataListBean.setUseDepmName(bean.getUseDepmName());
 //                        dataListBean.setLocationName(bean.getLocationName());
-                                mPddList.add(new ZcpdVpRvItemViewModel(ZcpdViewModel.this, dataListBean));
+                                mPddList.add(new ZcpdVpRvItemViewModel(ZcpdViewModel.this, null, dataListBean));
                             }
                         }
                     }

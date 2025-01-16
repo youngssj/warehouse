@@ -29,13 +29,13 @@ public class ZcpdVpItemViewModel extends ItemViewModel<ZcpdViewModel> {
 
     public ItemBinding<ZcpdVpRvItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.workbench_item_vp_rv_zcpd);
 
-    public ZcpdVpItemViewModel(@NonNull ZcpdViewModel viewModel, int pagerIndex, List<TakeStockDetail.ElecMaterialListDTO> data) {
+    public ZcpdVpItemViewModel(@NonNull ZcpdViewModel viewModel, int pagerIndex, String batchNumber, List<TakeStockDetail.ElecMaterialListDTO> data) {
         super(viewModel);
         switch (pagerIndex) {
             case 0:
             case 2:
                 for (TakeStockDetail.ElecMaterialListDTO bean : data) {
-                    observableList.add(new ZcpdVpRvItemViewModel(viewModel, bean));
+                    observableList.add(new ZcpdVpRvItemViewModel(viewModel, batchNumber, bean));
                 }
                 break;
             case 1:
