@@ -1,4 +1,4 @@
-package com.victor.workbench.ui.viewmodel;
+package com.victor.inventory.ui.viewmodel;
 
 import android.app.Application;
 import android.view.View;
@@ -11,9 +11,9 @@ import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
-import com.victor.workbench.R;
+import com.victor.inventory.ui.viewmodel.itemViewmodel.PdOddItemViewModel;
+import com.victor.inventory.R;
 import com.victor.workbench.ui.base.BaseOddViewModel;
-import com.victor.workbench.ui.viewmodel.itemViewmodel.PdOddItemViewModel;
 
 import java.util.List;
 
@@ -31,15 +31,13 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
  */
 public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
 
-
     public PdOddViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
     }
 
-
     @Override
     protected int initItemLayout() {
-        return R.layout.workbench_item_pd_odd;
+        return R.layout.inventory_item_pd_odd;
     }
 
     public void loadData(int page) {

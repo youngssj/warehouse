@@ -1,4 +1,4 @@
-package com.victor.workbench.ui.viewmodel;
+package com.victor.inventory.ui.viewmodel;
 
 import android.app.Application;
 import android.view.View;
@@ -13,11 +13,11 @@ import com.victor.base.data.entity.AssetData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
-import com.victor.workbench.BR;
-import com.victor.workbench.R;
+import com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpItemViewModel;
+import com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel;
+import com.victor.inventory.BR;
+import com.victor.inventory.R;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
-import com.victor.workbench.ui.viewmodel.itemViewmodel.ZcpdVpItemViewModel;
-import com.victor.workbench.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -75,7 +75,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
     public ObservableList<ZcpdVpItemViewModel> items = new ObservableArrayList<>();
     //给ViewPager添加ItemBinding
-    public ItemBinding<ZcpdVpItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.workbench_item_vp_zcpd);
+    public ItemBinding<ZcpdVpItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.inventory_item_vp_zcpd);
     //给ViewPager添加PageTitle
     public final BindingViewPagerAdapter.PageTitles<ZcpdVpItemViewModel> pageTitles = (position, item) -> {
         String title = "";

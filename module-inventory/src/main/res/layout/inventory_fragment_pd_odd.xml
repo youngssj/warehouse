@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.workbench.ui.viewmodel.PdOddViewModel" />
+            type="com.victor.inventory.ui.viewmodel.PdOddViewModel" />
 
     </data>
 
@@ -18,6 +18,6 @@
         <include
             android:id="@+id/include"
             binding:viewModel="@{viewModel.mOddViewModel}"
-            layout="@layout/workbench_layout_odd_list" />
+            layout="@layout/inventory_layout_odd_list" />
     </LinearLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.victor.workbench.ui.activity;
+package com.victor.inventory.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +11,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.base.MBaseActivity;
 import com.victor.base.router.RouterActivityPath;
-import com.victor.workbench.BR;
-import com.victor.workbench.R;
-import com.victor.workbench.databinding.WorkbenchFragmentPdOddBinding;
-import com.victor.workbench.ui.viewmodel.PdOddViewModel;
+import com.victor.inventory.BR;
+import com.victor.inventory.R;
+import com.victor.inventory.databinding.InventoryFragmentPdOddBinding;
+import com.victor.inventory.ui.viewmodel.PdOddViewModel;
 
 /**
  * 版权：heihei
@@ -24,12 +24,12 @@ import com.victor.workbench.ui.viewmodel.PdOddViewModel;
  * 创建日期：2020/9/16
  * 邮箱：jxfengmtx@gmail.com
  */
-@Route(path = RouterActivityPath.WorkBench.PAGER_WorkBench_CHECK_LIST)
-public class PdOddActivity extends MBaseActivity<WorkbenchFragmentPdOddBinding, PdOddViewModel> {
+@Route(path = RouterActivityPath.Inventory.PAGER_INVENTORY_CHECK_LIST)
+public class PdOddActivity extends MBaseActivity<InventoryFragmentPdOddBinding, PdOddViewModel> {
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.workbench_fragment_pd_odd;
+        return R.layout.inventory_fragment_pd_odd;
     }
 
     @Override

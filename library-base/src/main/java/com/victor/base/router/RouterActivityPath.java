@@ -41,4 +41,11 @@ public class RouterActivityPath {
         public static final String PAGER_WorkBench_CHECK_LIST = WorkBench + "/WorkBenchCheckList";
         public static final String PAGER_WorkBench_CHECK = WorkBench + "/WorkBenchCheck";
     }
+
+    public static class Inventory {
+        private static final String Inventory = "/Inventory";
+        /*工作*/
+        public static final String PAGER_INVENTORY_CHECK_LIST = Inventory + "/InventoryCheckList";
+        public static final String PAGER_INVENTORY_CHECK = Inventory + "/InventoryCheck";
+    }
 }

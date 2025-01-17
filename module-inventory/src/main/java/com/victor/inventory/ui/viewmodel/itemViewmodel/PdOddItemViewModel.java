@@ -1,14 +1,13 @@
-package com.victor.workbench.ui.viewmodel.itemViewmodel;
-
-import android.os.Bundle;
+package com.victor.inventory.ui.viewmodel.itemViewmodel;
 
 import androidx.annotation.NonNull;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.data.entity.TakeStockData;
+import com.victor.base.router.RouterActivityPath;
 import com.victor.base.utils.Constants;
-import com.victor.workbench.ui.activity.ZcpdActivity;
+import com.victor.inventory.ui.viewmodel.PdOddViewModel;
 import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
-import com.victor.workbench.ui.viewmodel.PdOddViewModel;
 
 /**
  * 版权：heihei
@@ -27,9 +26,9 @@ public class PdOddItemViewModel extends BaseRecycleItemViewModel<PdOddViewModel,
 
     @Override
     protected void itemClickCallback() {
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constants.BUNDLE.KEY, entity.get().getCheckId());
-        viewModel.startActivity(ZcpdActivity.class, bundle);
+        ARouter.getInstance().build(RouterActivityPath.Inventory.PAGER_INVENTORY_CHECK)
+                .withInt(Constants.BUNDLE.KEY, entity.get().getCheckId())
+                .navigation();
     }
 
 }

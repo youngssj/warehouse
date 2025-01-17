@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.workbench.ui.viewmodel.itemViewmodel.PdOddItemViewModel" />
+            type="com.victor.inventory.ui.viewmodel.itemViewmodel.PdOddItemViewModel" />
     </data>
 
     <com.lihang.ShadowLayout

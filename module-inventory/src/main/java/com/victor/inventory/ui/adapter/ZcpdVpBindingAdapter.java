@@ -1,11 +1,11 @@
-package com.victor.workbench.ui.adapter;
+package com.victor.inventory.ui.adapter;
 
 import android.view.ViewGroup;
 
 import androidx.databinding.ViewDataBinding;
 
-import com.victor.workbench.databinding.WorkbenchItemVpZcpdBinding;
-import com.victor.workbench.ui.viewmodel.itemViewmodel.ZcpdVpItemViewModel;
+import com.victor.inventory.databinding.InventoryItemVpZcpdBinding;
+import com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpItemViewModel;
 
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter;
 
@@ -25,7 +25,7 @@ public class ZcpdVpBindingAdapter extends BindingViewPagerAdapter<ZcpdVpItemView
     public void onBindBinding(final ViewDataBinding binding, int variableId, int layoutRes, final int position, ZcpdVpItemViewModel item) {
         super.onBindBinding(binding, variableId, layoutRes, position, item);
         //这里可以强转成ViewPagerItemViewModel对应的ViewDataBinding，
-        WorkbenchItemVpZcpdBinding _binding = (WorkbenchItemVpZcpdBinding) binding;
+        InventoryItemVpZcpdBinding _binding = (InventoryItemVpZcpdBinding) binding;
     }
 
     @Override

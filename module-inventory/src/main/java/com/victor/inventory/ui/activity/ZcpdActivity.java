@@ -1,4 +1,4 @@
-package com.victor.workbench.ui.activity;
+package com.victor.inventory.ui.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,14 +14,14 @@ import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.utils.Constants;
-import com.victor.workbench.BR;
-import com.victor.workbench.R;
-import com.victor.workbench.databinding.WorkbenchActivityZcpdBinding;
-import com.victor.workbench.databinding.WorkbenchViewZcpdDetailBinding;
-import com.victor.workbench.ui.adapter.ZcpdVpBindingAdapter;
+import com.victor.inventory.BR;
+import com.victor.inventory.R;
+import com.victor.inventory.databinding.InventoryActivityZcpdBinding;
+import com.victor.inventory.databinding.InventoryViewZcpdDetailBinding;
+import com.victor.inventory.ui.adapter.ZcpdVpBindingAdapter;
+import com.victor.inventory.ui.viewmodel.ZcpdViewModel;
+import com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel;
 import com.victor.workbench.ui.base.BaseUhfActivity;
-import com.victor.workbench.ui.viewmodel.ZcpdViewModel;
-import com.victor.workbench.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,8 +36,8 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
  * 创建日期：2020/9/16
  * 邮箱：jxfengmtx@gmail.com
  */
-@Route(path = RouterActivityPath.WorkBench.PAGER_WorkBench_CHECK)
-public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, ZcpdViewModel> {
+@Route(path = RouterActivityPath.Inventory.PAGER_INVENTORY_CHECK)
+public class ZcpdActivity extends BaseUhfActivity<InventoryActivityZcpdBinding, ZcpdViewModel> {
 
     private int checkId;
 
@@ -73,7 +73,7 @@ public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, 
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.workbench_activity_zcpd;
+        return R.layout.inventory_activity_zcpd;
     }
 
     @Override
@@ -109,7 +109,7 @@ public class ZcpdActivity extends BaseUhfActivity<WorkbenchActivityZcpdBinding, 
         });
 
         viewModel.uc.showCustomEvent.observe(this, vpRvItemViewModel -> {
-            WorkbenchViewZcpdDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.workbench_view_zcpd_detail, null, false);
+            InventoryViewZcpdDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.inventory_view_zcpd_detail, null, false);
             binding.setViewModel(vpRvItemViewModel);
             TakeStockDetail.ElecMaterialListDTO dataListBean = vpRvItemViewModel.entity.get();
             showCustomDialog(getResources().getString(R.string.workbench_check_detail_text), binding, (dialog, which) -> {

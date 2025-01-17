@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.workbench.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel" />
+            type="com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel" />
     </data>
 
     <LinearLayout

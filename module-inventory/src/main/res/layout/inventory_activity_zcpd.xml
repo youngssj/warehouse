@@ -9,11 +9,11 @@
 
         <variable
             name="viewModel"
-            type="com.victor.workbench.ui.viewmodel.ZcpdViewModel" />
+            type="com.victor.inventory.ui.viewmodel.ZcpdViewModel" />
 
         <variable
             name="adapter"
-            type="com.victor.workbench.ui.adapter.ZcpdVpBindingAdapter" />
+            type="com.victor.inventory.ui.adapter.ZcpdVpBindingAdapter" />
 
     </data>
 

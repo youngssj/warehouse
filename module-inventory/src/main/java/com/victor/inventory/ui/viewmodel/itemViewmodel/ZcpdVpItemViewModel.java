@@ -1,13 +1,13 @@
-package com.victor.workbench.ui.viewmodel.itemViewmodel;
+package com.victor.inventory.ui.viewmodel.itemViewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 
 import com.victor.base.data.entity.TakeStockDetail;
-import com.victor.workbench.BR;
-import com.victor.workbench.R;
-import com.victor.workbench.ui.viewmodel.ZcpdViewModel;
+import com.victor.inventory.BR;
+import com.victor.inventory.R;
+import com.victor.inventory.ui.viewmodel.ZcpdViewModel;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class ZcpdVpItemViewModel extends ItemViewModel<ZcpdViewModel> {
 
     public ObservableList<ZcpdVpRvItemViewModel> observableList = new ObservableArrayList<>();
 
-    public ItemBinding<ZcpdVpRvItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.workbench_item_vp_rv_zcpd);
+    public ItemBinding<ZcpdVpRvItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.inventory_item_vp_rv_zcpd);
 
     public ZcpdVpItemViewModel(@NonNull ZcpdViewModel viewModel, int pagerIndex, String batchNumber, List<TakeStockDetail.ElecMaterialListDTO> data) {
         super(viewModel);

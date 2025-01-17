@@ -1,11 +1,11 @@
-package com.victor.workbench.ui.viewmodel.itemViewmodel;
+package com.victor.inventory.ui.viewmodel.itemViewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.entity.TakeStockDetail;
-import com.victor.workbench.ui.viewmodel.ZcpdViewModel;
+import com.victor.inventory.ui.viewmodel.ZcpdViewModel;
 
 import java.util.Objects;
 
