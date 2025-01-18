@@ -3,6 +3,11 @@
     package="com.victor.materials">
 
     <application>
+        <activity android:name=".ui.activity.MaterialsQueryActivity"
+            android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
     </application>
 
 </manifest>

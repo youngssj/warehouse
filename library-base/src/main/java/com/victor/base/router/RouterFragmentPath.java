@@ -42,4 +42,10 @@ public class RouterFragmentPath {
         /*我的*/
         public static final String PAGER_SYNC = SYNC + "/Sync";
     }
+
+    public static class Materials {
+        private static final String Materials = "/Materials";
+        /*工作*/
+        public static final String PAGER_MATERIALS_LIST = Materials + "/Materials_List";
+    }
 }

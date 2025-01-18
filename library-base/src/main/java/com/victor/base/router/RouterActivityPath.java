@@ -48,4 +48,10 @@ public class RouterActivityPath {
         public static final String PAGER_INVENTORY_CHECK_LIST = Inventory + "/InventoryCheckList";
         public static final String PAGER_INVENTORY_CHECK = Inventory + "/InventoryCheck";
     }
+
+    public static class Materials {
+        private static final String Materials = "/Materials";
+        /*工作*/
+        public static final String PAGER_MATERIALS_QUERY = Materials + "/Materials_Query";
+    }
 }

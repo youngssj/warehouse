@@ -1,4 +1,4 @@
-package com.example.materials;
+package com.victor.materials;
 
 import android.app.Application;
 
