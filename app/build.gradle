@@ -139,6 +139,7 @@ dependencies {
         implementation project(':module-main')
         implementation project(':module-workbench')
         implementation project(':module-inventory')
+        implementation project(':module-materials')
         implementation project(':module-mine')
         implementation project(':module-sync')
     }
