@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel" />
+            type="com.victor.materials.ui.viewmodel.itemviewmodel.MaterialsItemViewModel" />
     </data>
 
     <LinearLayout
@@ -21,14 +21,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title1"
+                android:text="@string/workbench_materials_detail_title1"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.materialCode}" />
+                android:text="@{viewModel.materialsCode}" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,14 +39,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title2"
+                android:text="@string/workbench_materials_detail_title2"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.batchNumber}" />
+                android:text="@{viewModel.materialsName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,14 +57,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title3"
+                android:text="@string/workbench_materials_detail_title3"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.materialName}" />
+                android:text="@{viewModel.materialsStatus}" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,14 +75,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title4"
+                android:text="@string/workbench_materials_detail_title4"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.specifications}" />
+                android:text="@{viewModel.materialsName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -93,14 +93,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title5"
+                android:text="@string/workbench_materials_detail_title5"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.deptName}" />
+                android:text="@{viewModel.materialsName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,14 +111,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title6"
+                android:text="@string/workbench_materials_detail_title6"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.warehouseName}" />
+                android:text="@{viewModel.materialsName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -129,14 +129,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_check_detail_title7"
+                android:text="@string/workbench_materials_detail_title7"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.checkResultMessage}" />
+                android:text="@{viewModel.rfid}" />
         </LinearLayout>
     </LinearLayout>
 </layout>

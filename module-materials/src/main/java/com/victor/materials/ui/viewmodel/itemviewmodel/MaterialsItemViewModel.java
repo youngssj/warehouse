@@ -6,6 +6,7 @@ import androidx.databinding.ObservableField;
 import com.victor.materials.ui.viewmodel.MaterialsViewModel;
 
 import me.goldze.mvvmhabit.base.ItemViewModel;
+import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 public class MaterialsItemViewModel extends ItemViewModel<MaterialsViewModel> {
 
@@ -13,6 +14,10 @@ public class MaterialsItemViewModel extends ItemViewModel<MaterialsViewModel> {
     public ObservableField<String> materialsName = new ObservableField<>();
     public ObservableField<String> materialsStatus = new ObservableField<>();
     public ObservableField<String> rfid = new ObservableField<>();
+
+    public BindingCommand itemClick = new BindingCommand(() -> {
+        viewModel.uc.showCustomEvent.setValue(this);
+    });
 
     public MaterialsItemViewModel(@NonNull MaterialsViewModel viewModel, String materialsCode, String materialsName, String materialsStatus, String rfid) {
         super(viewModel);
