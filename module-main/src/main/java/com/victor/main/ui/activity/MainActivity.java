@@ -5,11 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -18,8 +14,6 @@ import com.victor.base.router.RouterActivityPath;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.ui.viewmodel.MainViewModel;
-
-import java.util.List;
 
 import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.AppStatusManager;
@@ -55,31 +49,6 @@ public abstract class MainActivity<V extends ViewDataBinding, VM extends MainVie
     public void selectPager(ViewPager2 viewPager, int position, boolean smoothScroll) {
         if (position >= 0 && position <= viewPager.getAdapter().getItemCount()) {
             viewPager.setCurrentItem(position, smoothScroll);
-        }
-    }
-
-    static class VPFragmentAdapter extends FragmentStateAdapter {
-
-        private List<Fragment> mListFragments = null;
-
-        public VPFragmentAdapter(FragmentActivity fm, List<Fragment> fragments) {
-            super(fm);
-            mListFragments = fragments;
-        }
-
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            if (mListFragments != null && position > -1 && position < mListFragments.size()) {
-                return mListFragments.get(position);
-            } else {
-                return null;
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return null != mListFragments ? mListFragments.size() : 0;
         }
     }
 

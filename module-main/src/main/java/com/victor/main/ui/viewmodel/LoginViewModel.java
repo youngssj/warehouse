@@ -33,7 +33,6 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
 
     public ObservableField<String> userName = new ObservableField<>("");
     public ObservableField<String> password = new ObservableField<>("");
-    public ObservableInt clearBtnVisibility = new ObservableInt(View.INVISIBLE);
 
     public LoginViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
@@ -47,36 +46,11 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
     }
 
     public class UIChangeObservable {
-        //密码开关观察者
-        public SingleLiveEvent<Boolean> pSwitchEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<LoginViewModel> setIpEvent = new SingleLiveEvent<>();
     }
 
     //封装一个界面发生改变的观察者
     public UIChangeObservable uc = new UIChangeObservable();
-
-    public BindingCommand passwordShowSwitchOnClickCommand = new BindingCommand(() -> {
-        uc.pSwitchEvent.setValue(uc.pSwitchEvent.getValue() == null || !uc.pSwitchEvent.getValue());
-    });
-
-    public BindingCommand<String> onTextChangeCommand = new BindingCommand<>(new BindingConsumer<String>() {
-        @Override
-        public void call(String text) {
-            if (TextUtils.isEmpty(userName.get())) {
-                clearBtnVisibility.set(View.INVISIBLE);
-            } else {
-                clearBtnVisibility.set(View.VISIBLE);
-            }
-        }
-    });
-
-    //清除用户名的点击事件, 逻辑从View层转换到ViewModel层
-    public BindingCommand clearUserNameOnClickCommand = new BindingCommand(new BindingAction() {
-        @Override
-        public void call() {
-            userName.set("");
-        }
-    });
 
     public BindingCommand setIpClick = new BindingCommand(() -> {
         uc.setIpEvent.setValue(this);

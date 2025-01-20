@@ -39,7 +39,7 @@ public class UhfC72Utils {
     private ProgressDialogManager mProgressDialogManager;
     private ExecutorService executorService;
     Handler uiThread = new Handler(Looper.getMainLooper());
-
+    private int power;
 
     public UhfC72Utils(Activity activity) {
         this.activity = activity;
@@ -57,6 +57,12 @@ public class UhfC72Utils {
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void initUHF(Context context, int power) {
+        this.power = power;
+        initUHF(context);
     }
 
     public void initUHF(Context context) {
@@ -80,6 +86,10 @@ public class UhfC72Utils {
                     }
                 });
                 boolean b = mReader.init(context);
+
+                if(power > 0){
+                    mReader.setPower(power);
+                }
 
                 uiThread.post(() -> {
                     dismissProgress();

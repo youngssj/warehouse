@@ -138,5 +138,4 @@ public class Uhf961Utils {
             mEpcDataAsyncTask.cancel(true);
         mEpcDataAsyncTask = null;
     }
-
 }

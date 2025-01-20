@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.base.VPFragmentAdapter;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.main.R;

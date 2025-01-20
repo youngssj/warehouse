@@ -407,12 +407,4 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
     public String makeFragmentName(int viewId, long id) {
         return "android:switcher:" + viewId + ":" + id;
     }
-
-    @Override
-    public Resources getResources() {
-        //需要升级到 v1.1.2 及以上版本才能使用 AutoSizeCompat
-        AutoSizeCompat.autoConvertDensityOfGlobal(super.getResources());//如果没有自定义需求用这个方法
-//        AutoSizeCompat.autoConvertDensity(super.getResources(), 667, false);//如果有自定义需求就用这个方法
-        return super.getResources();
-    }
 }

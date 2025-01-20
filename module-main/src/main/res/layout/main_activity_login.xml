@@ -54,112 +54,24 @@
             android:paddingStart="200mm"
             android:paddingEnd="200mm">
 
-            <LinearLayout
+            <com.victor.base.widget.ClearableEditText
                 android:layout_width="match_parent"
                 android:layout_height="110mm"
-                android:background="@drawable/shape_login_edit"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="32mm">
+                binding:hint="@string/login_username_hint_text"
+                binding:inputType=""
+                binding:maxLength="20"
+                binding:maxLines="1"
+                binding:startIcon="@mipmap/login_icon_username"
+                binding:text="@={viewModel.userName}" />
 
-                <ImageView
-                    android:layout_width="44mm"
-                    android:layout_height="44mm"
-                    android:src="@mipmap/login_icon_username" />
-
-                <View
-                    android:layout_width="1mm"
-                    android:layout_height="44mm"
-                    android:layout_marginStart="34mm"
-                    android:background="@color/color_F2F2F2" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:layout_width="0mm"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:gravity="center_vertical"
-                        android:hint="@string/login_username_hint_text"
-                        android:inputType=""
-                        android:maxLength="20"
-                        android:maxLines="1"
-                        android:paddingStart="34mm"
-                        android:text="@={viewModel.userName}"
-                        android:textColor="@color/color_333333"
-                        android:textColorHint="@color/color_9C9C9C"
-                        android:textCursorDrawable="@drawable/shape_edittext_cursor"
-                        android:textSize="40mm"
-                        binding:textChanged="@{viewModel.onTextChangeCommand}" />
-
-                    <ImageView
-                        android:layout_width="80mm"
-                        android:layout_height="match_parent"
-                        android:padding="20mm"
-                        android:src="@mipmap/clean_edit"
-                        android:visibility="@{viewModel.clearBtnVisibility}"
-                        binding:onClickCommand="@{viewModel.clearUserNameOnClickCommand}" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
+            <com.victor.base.widget.ClearableEditText
                 android:layout_width="match_parent"
                 android:layout_height="110mm"
-                android:layout_marginTop="66mm"
-                android:background="@drawable/shape_login_edit"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="32mm">
-
-                <ImageView
-                    android:layout_width="44mm"
-                    android:layout_height="44mm"
-                    android:src="@mipmap/login_icon_password" />
-
-                <View
-                    android:layout_width="1mm"
-                    android:layout_height="44mm"
-                    android:layout_marginStart="34mm"
-                    android:background="@color/color_F2F2F2" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/etPassword"
-                        android:layout_width="0mm"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:gravity="center_vertical"
-                        android:hint="@string/login_password_hint_text"
-                        android:inputType="textPassword"
-                        android:maxLength="20"
-                        android:maxLines="1"
-                        android:paddingStart="34mm"
-                        android:text="@={viewModel.password}"
-                        android:textColor="@color/color_333333"
-                        android:textColorHint="@color/color_9C9C9C"
-                        android:textCursorDrawable="@drawable/shape_edittext_cursor"
-                        android:textSize="40mm" />
-
-                    <ImageView
-                        android:id="@+id/ivPwd"
-                        android:layout_width="80mm"
-                        android:layout_height="match_parent"
-                        android:padding="20mm"
-                        android:src="@mipmap/login_close"
-                        android:visibility="visible"
-                        binding:onClickCommand="@{viewModel.passwordShowSwitchOnClickCommand}" />
-                </LinearLayout>
-            </LinearLayout>
+                binding:inputType="textPassword"
+                binding:maxLength="20"
+                binding:maxLines="1"
+                binding:startIcon="@mipmap/login_icon_password"
+                binding:text="@={viewModel.password}" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.victor.materials.ui.viewmodel.itemviewmodel.MaterialsItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="40mm"
+        android:paddingTop="12mm"
+        android:paddingEnd="40mm">
+
+        <TextView
+            android:layout_width="0mm"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{viewModel.materialsCode}"
+            android:textColor="@color/color_9C9C9C"
+            android:textSize="36mm" />
+
+        <TextView
+            android:layout_width="0mm"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{viewModel.materialsName}"
+            android:textColor="@color/color_9C9C9C"
+            android:textSize="36mm" />
+
+        <TextView
+            android:layout_width="0mm"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{viewModel.materialsStatus}"
+            android:textColor="@color/color_9C9C9C"
+            android:textSize="36mm" />
+
+        <TextView
+            android:layout_width="0mm"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{viewModel.rfid}"
+            android:textColor="@color/color_9C9C9C"
+            android:textSize="36mm" />
+    </LinearLayout>
+</layout>
