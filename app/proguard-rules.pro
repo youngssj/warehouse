@@ -38,6 +38,7 @@
 -keep class com.victor.workbench.WorkBenchModuleInit { *; }
 -keep class com.victor.inventory.InventoryModuleInit { *; }
 -keep class com.victor.materials.MaterialsModuleInit { *; }
+-keep class com.victor.inbound.InboundModuleInit { *; }
 -keep class com.victor.mine.MineModuleInit { *; }
 -keep class com.victor.sync.SyncModuleInit { *; }
 -keep class com.victor.base.config.ModuleLifecycleConfig { *; }

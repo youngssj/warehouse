@@ -142,6 +142,7 @@ dependencies {
         implementation project(':module-materials')
         implementation project(':module-mine')
         implementation project(':module-sync')
+        implementation project(':module-inbound')
     }
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 }
