@@ -15,22 +15,26 @@
             name="adapter"
             type="com.victor.inventory.ui.adapter.ZcpdVpBindingAdapter" />
 
+        <import type="android.view.View" />
+
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <include
+            android:id="@+id/title"
             layout="@layout/workbench_view_top_title"
             binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/title"
             android:background="@color/color_F8F9F9"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="@{viewModel.noDataVisibleObservable == View.GONE ? View.VISIBLE : View.GONE}">
 
             <com.lihang.ShadowLayout
                 android:layout_width="match_parent"
@@ -220,5 +224,26 @@
             </com.lihang.ShadowLayout>
         </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.noDataVisibleObservable}">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bga_refresh_mt_change_to_release_refresh_04" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10mm"
+                android:text="@string/app_no_data_text"
+                android:textColor="@color/color_9C9C9C"
+                android:textSize="36mm" />
+        </LinearLayout>
+    </RelativeLayout>
 </layout>

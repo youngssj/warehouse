@@ -12,84 +12,62 @@
 
     </data>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="236mm"
+        binding:contentInsetStart="0mm">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="236mm"
-            binding:contentInsetStart="0mm">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@mipmap/main_top_bg">
-
-                <ImageView
-                    android:id="@+id/iv_top_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:paddingLeft="30mm"
-                    android:paddingTop="44mm"
-                    android:paddingEnd="30mm"
-                    android:src="@mipmap/ic_back_white"
-                    android:visibility="@{baseTitleViewModel.backVisibleObservable}"
-                    binding:onClickCommand="@{baseTitleViewModel.backOnClick}" />
-
-                <TextView
-                    android:id="@+id/iv_top_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:ellipsize="end"
-                    android:maxLength="10"
-                    android:paddingTop="40mm"
-                    android:singleLine="true"
-                    android:text="@{baseTitleViewModel.titleText}"
-                    android:textColor="@color/white"
-                    android:textSize="44mm"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/iv_top_set_power"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical"
-                    android:paddingStart="30mm"
-                    android:paddingTop="40mm"
-                    android:paddingEnd="30mm"
-                    android:text="@string/workbench_check_power_text"
-                    android:textColor="@color/white"
-                    android:textSize="40mm"
-                    android:textStyle="normal"
-                    android:visibility="@{baseTitleViewModel.powerVisibleObservable}"
-                    binding:onClickCommand="@{baseTitleViewModel.setPowerOnClick}" />
-            </RelativeLayout>
-        </androidx.appcompat.widget.Toolbar>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="@{baseTitleViewModel.noDataVisibleObservable}">
+            android:background="@mipmap/main_top_bg">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/bga_refresh_mt_change_to_release_refresh_04" />
+                android:id="@+id/iv_top_back"
+                android:layout_width="120mm"
+                android:layout_height="150mm"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="20mm"
+                android:paddingTop="50mm"
+                android:paddingEnd="20mm"
+                android:paddingBottom="60mm"
+                android:src="@mipmap/ic_back_white"
+                android:visibility="@{baseTitleViewModel.backVisibleObservable}"
+                binding:onClickCommand="@{baseTitleViewModel.backOnClick}" />
 
             <TextView
+                android:id="@+id/iv_top_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10mm"
-                android:text="@string/app_no_data_text"
-                android:textColor="@color/color_9C9C9C"
-                android:textSize="36mm" />
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:ellipsize="end"
+                android:maxLength="10"
+                android:paddingTop="50mm"
+                android:paddingBottom="60mm"
+                android:singleLine="true"
+                android:text="@{baseTitleViewModel.titleText}"
+                android:textColor="@color/white"
+                android:textSize="44mm"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/iv_top_set_power"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:paddingStart="30mm"
+                android:paddingTop="50mm"
+                android:paddingEnd="30mm"
+                android:paddingBottom="60mm"
+                android:text="@string/workbench_check_power_text"
+                android:textColor="@color/white"
+                android:textSize="40mm"
+                android:textStyle="normal"
+                android:visibility="@{baseTitleViewModel.powerVisibleObservable}"
+                binding:onClickCommand="@{baseTitleViewModel.setPowerOnClick}" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
 </layout>

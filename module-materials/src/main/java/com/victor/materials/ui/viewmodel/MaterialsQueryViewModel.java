@@ -4,10 +4,11 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import me.goldze.mvvmhabit.base.BaseViewModel;
+import com.victor.base.data.Repository.AppRepository;
+import com.victor.workbench.ui.base.BaseTitleViewModel;
 
-public class MaterialsQueryViewModel extends BaseViewModel {
-    public MaterialsQueryViewModel(@NonNull Application application) {
-        super(application);
+public class MaterialsQueryViewModel extends BaseTitleViewModel<AppRepository> {
+    public MaterialsQueryViewModel(@NonNull Application application, AppRepository model) {
+        super(application, model);
     }
 }

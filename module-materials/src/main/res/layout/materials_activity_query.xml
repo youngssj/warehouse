@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.victor.materials.ui.viewmodel.MaterialsQueryViewModel" />
     </data>
 
@@ -13,5 +14,8 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <include
+            layout="@layout/workbench_view_top_title"
+            binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
     </LinearLayout>
 </layout>

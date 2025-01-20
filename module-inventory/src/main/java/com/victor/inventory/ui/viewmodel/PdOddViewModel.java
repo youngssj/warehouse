@@ -55,7 +55,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                         uc.finishLoadmore.call();
                         if (assetCheckOdds == null || assetCheckOdds.size() == 0) {
                             if (page == 1)
-                                noDataVisibleObservable.set(View.VISIBLE);
+                                setNoDataVisibleObservable(View.VISIBLE);
                             else ToastUtils.showShort(R.string.app_no_more_data_text);
                             return;
                         }
@@ -73,7 +73,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                         @Override
                         public void onResult(ListData<List<TakeStockData>> listData) {
                             if(listData == null || listData.getTotal() == 0){
-                                noDataVisibleObservable.set(View.VISIBLE);
+                                setNoDataVisibleObservable(View.VISIBLE);
                             }else if (listData != null) {
                                 if (observableList.size() == listData.getTotal()) {
                                     // 数据全部返回了
