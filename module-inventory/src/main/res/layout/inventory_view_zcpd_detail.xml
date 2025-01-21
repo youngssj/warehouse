@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel" />
+            type="com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpRvItemViewModel" />
     </data>
 
     <LinearLayout

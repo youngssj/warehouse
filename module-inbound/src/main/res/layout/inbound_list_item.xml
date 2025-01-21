@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
-    xmlns:binding="http://schemas.android.com/apk/res-auto"
-    app:ignore="NamespaceTypo">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.victor.inventory.ui.viewmodel.itemviewmodel.PdOddItemViewModel" />
+            type="com.victor.inbound.ui.viewmodel.itemviewmodel.InboundItemViewModel" />
     </data>
 
     <com.lihang.ShadowLayout
@@ -44,7 +42,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/workbench_check_list_content_title1_text"
+                    android:text="@string/workbench_inbound_list_content_title1_text"
                     android:textColor="@color/color_797979"
                     android:textSize="38mm" />
 
@@ -71,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/workbench_check_list_content_title2_text"
+                    android:text="@string/workbench_inbound_list_content_title2_text"
                     android:textColor="@color/color_797979"
                     android:textSize="38mm" />
 
@@ -98,7 +96,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/workbench_check_list_content_title3_text"
+                    android:text="@string/workbench_inbound_list_content_title3_text"
                     android:textColor="@color/color_797979"
                     android:textSize="38mm" />
 

@@ -21,6 +21,7 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -34,9 +35,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import me.goldze.mvvmhabit.R;
+import me.jessyan.autosize.AutoSizeCompat;
+import me.jessyan.autosize.internal.CancelAdapt;
 
 
-public final class DefaultErrorActivity extends AppCompatActivity {
+public final class DefaultErrorActivity extends AppCompatActivity implements CancelAdapt {
 
     @SuppressLint("PrivateResource")
     @Override

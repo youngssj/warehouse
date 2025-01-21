@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 import androidx.databinding.ViewDataBinding;
 
 import com.victor.inventory.databinding.InventoryItemVpZcpdBinding;
-import com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpItemViewModel;
+import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpItemViewModel;
 
 import me.tatarka.bindingcollectionadapter2.BindingViewPagerAdapter;
 

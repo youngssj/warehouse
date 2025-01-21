@@ -90,6 +90,11 @@
                     binding:tabSelectedTextColor="@color/colorPrimary"
                     binding:tabTextColor="@color/color_797979" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2mm"
+                    android:background="@color/color_F2F2F2" />
+
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/mViewPager"
                     android:layout_width="match_parent"

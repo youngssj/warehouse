@@ -1,4 +1,4 @@
-package com.victor.inventory.ui.viewmodel;
+package com.victor.inbound.ui.viewmodel;
 
 import android.app.Application;
 import android.view.View;
@@ -11,8 +11,8 @@ import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
-import com.victor.inventory.ui.viewmodel.itemviewmodel.PdOddItemViewModel;
-import com.victor.inventory.R;
+import com.victor.inbound.R;
+import com.victor.inbound.ui.viewmodel.itemviewmodel.InboundItemViewModel;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 
 import java.util.List;
@@ -21,26 +21,18 @@ import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
-/**
- * 版权：heihei
- *
- * @author JiangFB
- * 版本：1.0
- * 创建日期：2020/9/17
- * 邮箱：jxfengmtx@gmail.com
- */
-public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
-
-    public PdOddViewModel(@NonNull Application application, AppRepository model) {
+public class InboundListViewModel extends BaseOddViewModel<InboundItemViewModel> {
+    public InboundListViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
     }
 
     @Override
     protected int initItemLayout() {
-        return R.layout.inventory_item_pd_odd;
+        return R.layout.inbound_list_item;
     }
 
-    public void loadData(int page) {
+    @Override
+    protected void loadData(int page) {
         if (page == 1) {
             mMorePageNumber = 1;
             observableList.clear();
@@ -72,16 +64,16 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                     .subscribe(new ApiListDisposableObserver<List<TakeStockData>>() {
                         @Override
                         public void onResult(ListData<List<TakeStockData>> listData) {
-                            if(listData == null || listData.getTotal() == 0){
+                            if (listData == null || listData.getTotal() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
-                            }else if (listData != null) {
+                            } else if (listData != null) {
                                 if (observableList.size() == listData.getTotal()) {
                                     // 数据全部返回了
                                     canloadmore = false;
                                     ToastUtils.showShort(R.string.app_no_more_data_text);
                                 } else {
                                     for (TakeStockData takeStockData : listData.getList()) {
-                                        PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, takeStockData);
+                                        InboundItemViewModel itemViewModel = new InboundItemViewModel(InboundListViewModel.this, takeStockData);
                                         //双向绑定动态添加Item
                                         observableList.add(itemViewModel);
                                     }

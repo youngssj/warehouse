@@ -54,4 +54,11 @@ public class RouterActivityPath {
         /*工作*/
         public static final String PAGER_MATERIALS_QUERY = Materials + "/Materials_Query";
     }
+
+    public static class Inbound {
+        private static final String Inbound = "/Inbound";
+        /*工作*/
+        public static final String PAGER_INBOUND_LIST = Inbound + "/Inbound_List";
+        public static final String PAGER_INBOUND_SCAN = Inbound + "/Inbound_Scan";
+    }
 }

@@ -1,22 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
-    xmlns:binding="http://schemas.android.com/apk/res-auto"
-    app:ignore="NamespaceTypo">
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
 
     <data>
 
-
         <variable
             name="viewModel"
-            type="com.victor.inventory.ui.viewmodel.ZcpdViewModel" />
-
-        <variable
-            name="adapter"
-            type="com.victor.inventory.ui.adapter.ZcpdVpBindingAdapter" />
+            type="com.victor.inbound.ui.viewmodel.InboundScanViewModel" />
 
         <import type="android.view.View" />
-
     </data>
 
     <RelativeLayout
@@ -197,7 +189,7 @@
                     android:paddingBottom="12mm">
 
                     <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabs"
+                        android:id="@+id/tabLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/color_F8F9F9"
@@ -211,15 +203,11 @@
                         android:layout_height="2mm"
                         android:background="@color/color_F2F2F2" />
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/viewPager"
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/mViewPager"
                         android:layout_width="match_parent"
-                        android:layout_height="0mm"
-                        android:layout_weight="1"
-                        binding:itemBinding="@{viewModel.itemBinding}"
-                        binding:items="@{viewModel.items}"
-                        binding:onPageSelectedCommand="@{viewModel.onPageSelectedCommand}"
-                        binding:pageTitles="@{viewModel.pageTitles}" />
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
                 </LinearLayout>
             </com.lihang.ShadowLayout>
         </LinearLayout>

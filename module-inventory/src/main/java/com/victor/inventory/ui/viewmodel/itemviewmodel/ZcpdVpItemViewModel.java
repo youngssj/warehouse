@@ -1,4 +1,4 @@
-package com.victor.inventory.ui.viewmodel.itemViewmodel;
+package com.victor.inventory.ui.viewmodel.itemviewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;

@@ -7,7 +7,7 @@ android{
         }
     }
     //统一资源前缀，规范资源引用
-    resourcePrefix "workbench_"
+    resourcePrefix "inbound_"
 }
 
 dependencies {
@@ -21,6 +21,7 @@ dependencies {
     api project(':c72')
     api project(':pda')
     api project(':hiu_961')
+    api project(':module-workbench')
 
     api rootProject.ext.dependencies["refreshlayout"]
     api rootProject.ext.dependencies["ShadowLayout"]

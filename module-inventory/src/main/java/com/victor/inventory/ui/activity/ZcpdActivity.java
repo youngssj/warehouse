@@ -20,7 +20,7 @@ import com.victor.inventory.databinding.InventoryActivityZcpdBinding;
 import com.victor.inventory.databinding.InventoryViewZcpdDetailBinding;
 import com.victor.inventory.ui.adapter.ZcpdVpBindingAdapter;
 import com.victor.inventory.ui.viewmodel.ZcpdViewModel;
-import com.victor.inventory.ui.viewmodel.itemViewmodel.ZcpdVpRvItemViewModel;
+import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpRvItemViewModel;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
 import java.util.HashSet;
