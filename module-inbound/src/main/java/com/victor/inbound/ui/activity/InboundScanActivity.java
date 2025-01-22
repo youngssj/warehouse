@@ -7,12 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.base.VPFragmentAdapter;
+import com.victor.base.data.entity.InboundDetail;
+import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.base.utils.Constants;
@@ -23,8 +26,11 @@ import com.victor.inbound.ui.viewmodel.InboundScanViewModel;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import me.goldze.mvvmhabit.utils.ToastUtils;
 
 @Route(path = RouterActivityPath.Inbound.PAGER_INBOUND_SCAN)
 public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBinding, InboundScanViewModel> {
@@ -34,36 +40,28 @@ public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBind
 
     private String[] titles;
 
-    private int checkId;
-
-    public void initParam() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            checkId = bundle.getInt(Constants.BUNDLE.KEY, -1);
-        }
-    }
+    @Autowired(name = "inId")
+    int inId;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
-//        viewModel.updatePDItemModel(epcSet);
+        viewModel.updatePDItemModel(epcSet);
     }
 
     @Override
     protected void scanBarCodeCallback(String barCode) {
-//        Set set = new HashSet();
-//        ObservableList<ZcpdVpRvItemViewModel> allList = viewModel.items.get(0).observableList;
-//        for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : allList) {
-//            TakeStockDetail.ElecMaterialListDTO dataListBean = zcpdVpRvItemViewModel.entity.get();
-//            if (barCode.equals(dataListBean.getMaterialCode())) {
-//                set.add(dataListBean.getRfidCode());
-//                break;
-//            }
-//        }
-//        if (set.size() == 0) {
-//            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
-//            return;
-//        }
-//        viewModel.updatePDItemModel(set);
+        Set set = new HashSet();
+        for (InboundDetail.ElecMaterialList dataListBean : viewModel.elecMaterialList) {
+            if (barCode.equals(dataListBean.getMaterialCode())) {
+                set.add(dataListBean.getRfidCode());
+                break;
+            }
+        }
+        if (set.size() == 0) {
+            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
+            return;
+        }
+        viewModel.updatePDItemModel(set);
     }
 
     @Override
@@ -85,10 +83,11 @@ public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBind
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setPowerVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_inbound_title_text));
-        viewModel.getNetData(checkId);
+        viewModel.getNetData(inId);
         setRead(true);
 
         titles = new String[]{"待入库", "入库完成"};
@@ -110,5 +109,16 @@ public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBind
                 tab.setText(titles[i]);
             }
         }).attach();
+    }
+
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
+        viewModel.muc.scanFinishEvent.observe(this, aBoolean -> {
+            setReadFinish(aBoolean);
+        });
+        viewModel.muc.pageSelectEvent.observe(this, position -> {
+            binding.tabLayout.getTabAt(position).select();
+        });
     }
 }

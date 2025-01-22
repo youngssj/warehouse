@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.victor.base.data.entity.InboundDetail;
+import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.inbound.R;
+import com.victor.inbound.databinding.InboundScanDetailBinding;
 import com.victor.inbound.databinding.InboundScanFragmentBinding;
 import com.victor.inbound.ui.viewmodel.InboundScanListViewModel;
 
@@ -35,5 +39,16 @@ public class InboundScanFragment extends BaseFragment<InboundScanFragmentBinding
     @Override
     public void initData(Bundle savedInstanceState) {
         viewModel.setPosition(position);
+    }
+
+    @Override
+    public void initViewObservable() {
+        viewModel.uc.showCustomEvent.observe(this, inboundScanItemViewModel -> {
+            InboundScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.inbound_scan_detail, null, false);
+            binding.setViewModel(inboundScanItemViewModel);
+            InboundDetail.ElecMaterialList dataListBean = inboundScanItemViewModel.entity.get();
+            showCustomDialog(getResources().getString(R.string.workbench_inbound_detail_text), binding, (dialog, which) -> {
+            });
+        });
     }
 }

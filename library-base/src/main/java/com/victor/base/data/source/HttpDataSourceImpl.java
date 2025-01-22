@@ -10,6 +10,8 @@ import com.victor.base.data.entity.AssetInspectionOdd;
 import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
+import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
@@ -84,6 +86,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<InboundData>>> listInbound(int pageNum) {
+        return apiService.listInbound(pageNum, 10);
+    }
+
+    @Override
     public Observable<ListResponse<List<TakeStockData>>> listAllTakeStock(int pageNum) {
         return apiService.listTakeStock(pageNum, 10000);
     }
@@ -103,6 +110,13 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<BaseResponse<InboundDetail>> selectByInbound(int inId) {
+//        Map<String, String> map = Injection.getMapInstance();
+//        map.put("checkId", String.valueOf(checkId));
+        return apiService.selectByInbound(inId);
+    }
+
+    @Override
     public Observable<BaseResponse> saveCheckResult(int checkId, String checkPks, String noCheckPks, String batchNumber, String surplusCheckPks) {
         Map<String, String> map = Injection.getMapInstance();
         map.put("checkId", String.valueOf(checkId));
@@ -116,6 +130,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse> saveCheckedResult(TakeStockDetail mainInfo) {
         return apiService.saveCheckedResult(mainInfo);
+    }
+
+    @Override
+    public Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail) {
+        return apiService.saveInboundResult(inboundDetail);
     }
 
     @Override

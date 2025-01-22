@@ -58,6 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="5dp"
                 android:paddingStart="30mm"
                 android:paddingTop="50mm"
                 android:paddingEnd="30mm"

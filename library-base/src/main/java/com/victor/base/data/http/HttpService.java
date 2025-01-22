@@ -9,6 +9,8 @@ import com.victor.base.data.entity.AssetInspectionOdd;
 import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
+import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
@@ -73,6 +75,16 @@ public interface HttpService {
     Observable<ListResponse<List<TakeStockData>>> listTakeStock(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
+     * 入库列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    Observable<ListResponse<List<InboundData>>> listInbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
      * 盘盈
      *
      * @param params
@@ -101,6 +113,15 @@ public interface HttpService {
     Observable<BaseResponse<TakeStockDetail>> selectByCheck(@Path("dynamicPath") int path);
 
     /**
+     * 入库单详情
+     *
+     * @param path
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    Observable<BaseResponse<InboundDetail>> selectByInbound(@Path("dynamicPath") int path);
+
+    /**
      * 盘点完成
      *
      * @param params
@@ -118,6 +139,15 @@ public interface HttpService {
      */
     @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
     Observable<BaseResponse> saveCheckedResult(@Body TakeStockDetail mainInfo);
+
+    /**
+     * 入库完成
+     *
+     * @param inboundDetail
+     * @return
+     */
+    @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
+    Observable<BaseResponse> saveInboundResult(@Body InboundDetail inboundDetail);
 
     /**
      * 资产列表

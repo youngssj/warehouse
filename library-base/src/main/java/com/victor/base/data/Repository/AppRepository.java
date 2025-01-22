@@ -12,6 +12,8 @@ import com.victor.base.data.entity.AssetInspectionOdd;
 import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
+import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
@@ -92,6 +94,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Observable<ListResponse<List<InboundData>>> listInbound(int page) {
+        return mHttpDataSource.listInbound(page);
+    }
+
+    @Override
     public Observable<ListResponse<List<TakeStockData>>> listAllTakeStock(int page) {
         return mHttpDataSource.listAllTakeStock(page);
     }
@@ -107,6 +114,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Observable<BaseResponse<InboundDetail>> selectByInbound(int inId) {
+        return mHttpDataSource.selectByInbound(inId);
+    }
+
+    @Override
     public Observable<BaseResponse> saveCheckResult(int checkId, String checkPks, String noCheckPks, String batchNumber, String surplusCheckPks) {
         return mHttpDataSource.saveCheckResult(checkId, checkPks, noCheckPks, batchNumber, surplusCheckPks);
     }
@@ -114,6 +126,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<BaseResponse> saveCheckedResult(TakeStockDetail mainInfo) {
         return mHttpDataSource.saveCheckedResult(mainInfo);
+    }
+
+    @Override
+    public Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail) {
+        return mHttpDataSource.saveInboundResult(inboundDetail);
     }
 
     @Override

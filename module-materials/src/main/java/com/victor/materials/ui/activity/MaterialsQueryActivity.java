@@ -67,6 +67,7 @@ public class MaterialsQueryActivity extends BaseUhfActivity<MaterialsActivityQue
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_title1_text));
         titles = new String[]{"全部", "在库", "待入库", "待出库", "待移库", "待盘点", "待调拨"};

@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.materials.ui.viewmodel.itemviewmodel.MaterialsItemViewModel" />
+            type="com.victor.inbound.ui.viewmodel.itemviewmodel.InboundScanItemViewModel" />
     </data>
 
     <LinearLayout
@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title1"
+                android:text="@string/workbench_inbound_detail_title1"
                 android:textSize="15sp" />
 
             <TextView
@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title2"
+                android:text="@string/workbench_inbound_detail_title2"
                 android:textSize="15sp" />
 
             <TextView
@@ -57,14 +57,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title3"
+                android:text="@string/workbench_inbound_detail_title3"
                 android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.entity.materialStatus}" />
+                android:text="@{viewModel.entity.materialStatusName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -75,7 +75,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title4"
+                android:text="@string/workbench_inbound_detail_title4"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@{viewModel.entity.deptName}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workbench_inbound_detail_title5"
                 android:textSize="15sp" />
 
             <TextView
@@ -93,7 +111,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title5"
+                android:text="@string/workbench_inbound_detail_title6"
                 android:textSize="15sp" />
 
             <TextView
@@ -111,7 +129,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title6"
+                android:text="@string/workbench_inbound_detail_title7"
                 android:textSize="15sp" />
 
             <TextView
@@ -129,7 +147,61 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/workbench_materials_detail_title7"
+                android:text="@string/workbench_inbound_detail_title8"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@{viewModel.entity.unitName}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workbench_inbound_detail_title9"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@{viewModel.entity.providerName}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workbench_inbound_detail_title10"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@{viewModel.entity.specifications}" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/workbench_inbound_detail_title11"
                 android:textSize="15sp" />
 
             <TextView
