@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.lang.reflect.Field;
@@ -52,6 +53,8 @@ public abstract class BaseActivity<V extends ViewDataBinding, VM extends BaseVie
         if (restartApp()) {
             return;
         }
+
+        ARouter.getInstance().inject(this);
 
         //页面接受的参数方法
         initParam();

@@ -59,12 +59,6 @@ public class UhfC72Utils {
         }
     }
 
-
-    public void initUHF(Context context, int power) {
-        this.power = power;
-        initUHF(context);
-    }
-
     public void initUHF(Context context) {
         getReaderInstance();
         showProgress();
@@ -133,6 +127,21 @@ public class UhfC72Utils {
         } else {
             stopInventory();
         }
+    }
+
+    public void startSingleRead(Context context, ReadCallback readCallback) {
+        if (mReader == null) {
+            initUHF(context);
+        }
+        if (loopFlag) {
+            stopInventory();
+            return;
+        }
+        UHFTAGInfo uhftagInfo = mReader.inventorySingleTag();
+        SoundUtil.play(1, 0);
+        Set<String> epcSet = new HashSet<>();
+        epcSet.add(uhftagInfo.getEPC());
+        readCallback.callback(epcSet);
     }
 
     private long time;

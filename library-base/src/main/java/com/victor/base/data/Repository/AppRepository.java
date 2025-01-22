@@ -13,6 +13,7 @@ import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
 import com.victor.base.data.entity.LocationInfo;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.TakeStockData;
@@ -209,6 +210,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<BaseResponse<List<AssetData>>> queryMaterialList() {
         return mHttpDataSource.queryMaterialList();
+    }
+
+    @Override
+    public Observable<ListResponse<List<MaterialsData>>> listMaterials(int page, String materialStatus, String materialName, String rfidCode) {
+        return mHttpDataSource.listMaterials(page, materialStatus, materialName, rfidCode);
     }
 
     @Override

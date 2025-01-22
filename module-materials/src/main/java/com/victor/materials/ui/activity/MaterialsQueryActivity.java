@@ -40,7 +40,6 @@ public class MaterialsQueryActivity extends BaseUhfActivity<MaterialsActivityQue
             Iterator<String> iterator = epcSet.iterator();
             String firstValue = iterator.next();
             viewModel.updateRfid(firstValue);
-            toggleRead();
         }
     }
 
@@ -72,17 +71,17 @@ public class MaterialsQueryActivity extends BaseUhfActivity<MaterialsActivityQue
         viewModel.setTitleText(getResources().getString(R.string.workbench_title1_text));
         titles = new String[]{"全部", "在库", "待入库", "待出库", "待移库", "待盘点", "待调拨"};
 
-        setRead(true, 5);
+        setRead(true, true);
 
         mFragments = new ArrayList<>();
         if (savedInstanceState == null) {
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", null).navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", "1").navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", "11").navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", "12").navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", "14").navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", "13").navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).withString("materialStatus", "15").navigation());
         } else {
             mFragments.add(getSupportFragmentManager().findFragmentByTag(makeFragmentName(binding.mViewPager.getId(), 0)));
             mFragments.add(getSupportFragmentManager().findFragmentByTag(makeFragmentName(binding.mViewPager.getId(), 1)));
@@ -93,7 +92,7 @@ public class MaterialsQueryActivity extends BaseUhfActivity<MaterialsActivityQue
             mFragments.add(getSupportFragmentManager().findFragmentByTag(makeFragmentName(binding.mViewPager.getId(), 6)));
         }
         vpFragmentAdapter = new VPFragmentAdapter(this, mFragments);
-        binding.mViewPager.setUserInputEnabled(true);
+        binding.mViewPager.setUserInputEnabled(false);
         binding.mViewPager.setOffscreenPageLimit(mFragments.size());
         binding.mViewPager.setAdapter(vpFragmentAdapter);
         new TabLayoutMediator(binding.tabLayout, binding.mViewPager, new TabLayoutMediator.TabConfigurationStrategy() {

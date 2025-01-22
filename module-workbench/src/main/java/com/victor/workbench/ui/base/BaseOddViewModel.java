@@ -78,6 +78,7 @@ public abstract class BaseOddViewModel<T extends BaseRecycleItemViewModel> exten
     //下拉刷新
     public BindingCommand onRefreshCommand = new BindingCommand(() -> {
 //            ToastUtils.showShort("下拉刷新");
+        canloadmore = true;
         loadData(1);
     });
 

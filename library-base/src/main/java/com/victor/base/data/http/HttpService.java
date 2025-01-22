@@ -10,6 +10,7 @@ import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
 import com.victor.base.data.entity.LocationInfo;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
@@ -46,7 +47,7 @@ public interface HttpService {
      */
 //    @POST("/sysAs/login")
     @POST("/dev-api/mobile/login")
-    Observable<BaseResponse<TokenBean>> login(@Body  Map<String, String> params);
+    Observable<BaseResponse<TokenBean>> login(@Body Map<String, String> params);
 
     @GET("/dev-api/system/user/profile")
     Observable<BaseResponse<UserInfoBean>> userInfo();
@@ -283,5 +284,17 @@ public interface HttpService {
     @POST("/SysApproveActivity/assReject")
     Observable<BaseResponse> assReject(@FieldMap Map<String, String> params);
 
-
+    /**
+     * 物资查询列表
+     * @param materialStatus
+     * @param materialName
+     * @param rfidCode
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/elecMaterial/list")
+    Observable<ListResponse<List<MaterialsData>>> listMaterials(@Query("pageNum") int pageNum,
+                                                                @Query("pageSize") int pageSize,
+                                                                @Query("materialStatus") String materialStatus,
+                                                                @Query("materialName") String materialName,
+                                                                @Query("rfidCode") String rfidCode);
 }

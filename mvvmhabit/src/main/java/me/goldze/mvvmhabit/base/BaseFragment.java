@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
 import java.lang.reflect.ParameterizedType;
@@ -39,6 +40,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);
         initParam();
     }
 
@@ -114,33 +116,33 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
     //注册ViewModel与View的契约UI回调事件
     protected void registorUIChangeLiveDataCallBack() {
         //加载对话框显示
-        viewModel.getUC().getShowDialogEvent().observe(this, new Observer<String>() {
+        viewModel.getUC().getShowDialogEvent().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String title) {
                 showDialog(title);
             }
         });
-        viewModel.getUC().getShowProgressEvent().observe(this, new Observer<Void>() {
+        viewModel.getUC().getShowProgressEvent().observe(getViewLifecycleOwner(), new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 showProgress();
             }
         });
-        viewModel.getUC().getDismissProgressEvent().observe(this, new Observer<Void>() {
+        viewModel.getUC().getDismissProgressEvent().observe(getViewLifecycleOwner(), new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 dismissProgress();
             }
         });
         //加载对话框消失
-        viewModel.getUC().getDismissDialogEvent().observe(this, new Observer<Void>() {
+        viewModel.getUC().getDismissDialogEvent().observe(getViewLifecycleOwner(), new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 dismissDialog();
             }
         });
         //跳入新页面
-        viewModel.getUC().getStartActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+        viewModel.getUC().getStartActivityEvent().observe(getViewLifecycleOwner(), new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 Class<?> clz = (Class<?>) params.get(ParameterField.CLASS);
@@ -149,7 +151,7 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             }
         });
         //跳入ContainerActivity
-        viewModel.getUC().getStartContainerActivityEvent().observe(this, new Observer<Map<String, Object>>() {
+        viewModel.getUC().getStartContainerActivityEvent().observe(getViewLifecycleOwner(), new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(@Nullable Map<String, Object> params) {
                 String canonicalName = (String) params.get(ParameterField.CANONICAL_NAME);
@@ -158,14 +160,14 @@ public abstract class BaseFragment<V extends ViewDataBinding, VM extends BaseVie
             }
         });
         //关闭界面
-        viewModel.getUC().getFinishEvent().observe(this, new Observer<Void>() {
+        viewModel.getUC().getFinishEvent().observe(getViewLifecycleOwner(), new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 getActivity().finish();
             }
         });
         //关闭上一层
-        viewModel.getUC().getOnBackPressedEvent().observe(this, new Observer<Void>() {
+        viewModel.getUC().getOnBackPressedEvent().observe(getViewLifecycleOwner(), new Observer<Void>() {
             @Override
             public void onChanged(@Nullable Void v) {
                 getActivity().onBackPressed();

@@ -87,7 +87,7 @@ public class ZcpdActivity extends BaseUhfActivity<InventoryActivityZcpdBinding, 
         viewModel.setPowerVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_check_title_text));
         viewModel.getNetData(checkId);
-        setRead(true, 30);
+        setRead(true);
         //设置Adapter
         binding.setAdapter(new ZcpdVpBindingAdapter());
         binding.viewPager.setOffscreenPageLimit(1);

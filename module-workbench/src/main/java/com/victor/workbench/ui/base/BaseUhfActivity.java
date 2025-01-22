@@ -54,7 +54,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
 
     private boolean isReadFinish = false;
     protected boolean isRead = false;
-    private int power = 0;
+    protected boolean isSingle = false;
     private boolean keyUpFlag = true;
     private long startTime = 0;
 
@@ -62,9 +62,14 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
         return isRead;
     }
 
-    public void setRead(boolean read, int power) {
+    public void setRead(boolean read) {
         isRead = read;
-        this.power = power;
+        isSingle = false;
+    }
+
+    public void setRead(boolean read, boolean single) {
+        isRead = read;
+        isSingle = single;
     }
 
     private BroadcastReceiver keyReceiver = new BroadcastReceiver() {
@@ -83,7 +88,11 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                         ToastUtils.showShort("已全部扫描完，请点击完成");
                         return;
                     }
-                    mUhf961Utils.startRead(epcSet -> readUhfCallback(epcSet));
+                    if (isSingle) {
+                        mUhf961Utils.readSingleTag(epcSet -> readUhfCallback(epcSet));
+                    } else {
+                        mUhf961Utils.startRead(epcSet -> readUhfCallback(epcSet));
+                    }
                 }
                 return;
             } else if (keyDown) {
@@ -98,15 +107,6 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
         isReadFinish = readFinish;
         if (mUhfC72Utils != null) {//close uhf module.
             mUhfC72Utils.closeUhf();
-        }
-    }
-
-    public void toggleRead() {
-        if (mUhfC72Utils != null) {
-            mUhfC72Utils.startRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
-        }
-        if (mUhf961Utils != null) {
-            mUhf961Utils.startRead(epcSet -> readUhfCallback(epcSet));
         }
     }
 
@@ -172,7 +172,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
             case Constants.DEVICE.C72:
                 if (isRead) {
                     mUhfC72Utils = new UhfC72Utils(this);
-                    mUhfC72Utils.initUHF(this, power);
+                    mUhfC72Utils.initUHF(this);
 //                    return;
                 }
                 mBarCodeHelper = BarCodeHelper.getInstance(this);
@@ -181,7 +181,6 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
 
             case Constants.DEVICE.K71V1_64_BSP:
                 mUhf961Utils = new Uhf961Utils(BaseUhfActivity.this);
-                mUhf961Utils.setPower(power);
                 IntentFilter filter = new IntentFilter();
                 filter.addAction("android.rfid.FUN_KEY");
                 registerReceiver(keyReceiver, filter);
@@ -278,8 +277,13 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                         ToastUtils.showShort("已全部扫描完，请点击完成");
                         return false;
                     }
-                    if (mUhfC72Utils != null)
-                        mUhfC72Utils.startRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
+                    if (mUhfC72Utils != null) {
+                        if (isSingle) {
+                            mUhfC72Utils.startSingleRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
+                        }else{
+                            mUhfC72Utils.startRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
+                        }
+                    }
                     return true;
                 }
                 if (keyCode == 139) {  //扫码

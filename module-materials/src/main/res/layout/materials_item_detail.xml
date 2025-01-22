@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.materialsCode}" />
+                android:text="@{viewModel.entity.materialCode}" />
         </LinearLayout>
 
         <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.materialsName}" />
+                android:text="@{viewModel.entity.materialName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.materialsStatus}" />
+                android:text="@{viewModel.entity.materialStatus}" />
         </LinearLayout>
 
         <LinearLayout
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.materialsName}" />
+                android:text="@{viewModel.entity.warehouseName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.materialsName}" />
+                android:text="@{viewModel.entity.warehouseName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.materialsName}" />
+                android:text="@{viewModel.entity.warehouseName}" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@{viewModel.rfid}" />
+                android:text="@{viewModel.entity.rfidCode}" />
         </LinearLayout>
     </LinearLayout>
 </layout>

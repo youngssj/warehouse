@@ -77,4 +77,5 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
     api rootProject.ext.dependencies["multidex"]
     api rootProject.ext.dependencies["AndroidAutoSize"]
+    api rootProject.ext.dependencies["arouter-api"]
 }

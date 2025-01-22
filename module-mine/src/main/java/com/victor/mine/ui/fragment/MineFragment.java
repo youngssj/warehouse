@@ -44,7 +44,7 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
 
     @Override
     public void initViewObservable() {
-        viewModel.uc.exitEvent.observe(this, mineViewModel -> {
+        viewModel.uc.exitEvent.observe(getViewLifecycleOwner(), mineViewModel -> {
             MaterialDialogUtils.showBasicDialog(getContext(), getResources().getString(R.string.mine_exit_hint_text))
                     .onPositive((dialog, which) -> {
                         AppManager.getAppManager().finishAllActivity();

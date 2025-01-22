@@ -11,6 +11,7 @@ import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
 import com.victor.base.data.entity.LocationInfo;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
@@ -250,6 +251,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
         Map<String, String> map = Injection.getMapInstance();
         map.put("delflag", String.valueOf(0));
         return apiService.queryMaterialList(map);
+    }
+
+    @Override
+    public Observable<ListResponse<List<MaterialsData>>> listMaterials(int pageNum, String materialStatus, String materialName, String rfidCode) {
+        return apiService.listMaterials(pageNum, 10, materialStatus, materialName, rfidCode);
     }
 
 }

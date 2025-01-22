@@ -83,12 +83,12 @@
                     android:id="@+id/tabLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/color_F8F9F9"
+                    android:background="@color/colorPrimary"
                     binding:tabGravity="fill"
-                    binding:tabIndicatorColor="@color/colorPrimary"
+                    binding:tabIndicatorColor="@color/white"
                     binding:tabMode="scrollable"
-                    binding:tabSelectedTextColor="@color/colorPrimary"
-                    binding:tabTextColor="@color/color_797979" />
+                    binding:tabSelectedTextColor="@color/white"
+                    binding:tabTextColor="@color/color_9C9C9C" />
 
                 <View
                     android:layout_width="match_parent"

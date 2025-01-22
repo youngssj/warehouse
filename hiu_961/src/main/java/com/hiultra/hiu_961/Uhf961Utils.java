@@ -109,6 +109,49 @@ public class Uhf961Utils {
         mEpcDataAsyncTask.execute();
     }
 
+    public void readSingleTag(final ReadCallback readCallback) {
+        if (mEpcDataAsyncTask == null)
+            mEpcDataAsyncTask = new AsyncTask<Void, Void, Set<String>>() {
+                @Override
+                protected Set<String> doInBackground(Void... voids) {
+                    List<Reader.TAGINFO> list1;
+                    String data;
+                    mEpcSet.clear();
+                    while (loopFlag) {
+                        list1 = mReader.tagInventoryRealTime();
+                        if (list1 != null && list1.size() > 0) {
+                            SoundUtil.play(1, 0);
+                            for (Reader.TAGINFO tfs : list1) {
+                                byte[] epcdata = tfs.EpcId;
+                                data = Tools.Bytes2HexString(epcdata, epcdata.length);
+                                mEpcSet.add(EncodeUtil.rfidDecode(data));  //解码后加入set集合
+                                Log.i("data", "EPC:" + data);
+                            }
+                            stopInventory();
+                            if (isCancelled())
+                                return mEpcSet;
+                        }
+                    }
+                    return mEpcSet;
+                }
+
+                @Override
+                protected void onCancelled(Set<String> epcData) {
+                    super.onCancelled(epcData);
+                    if (epcData.size() != 0)
+                        readCallback.callback(mEpcSet);
+                }
+
+                @Override
+                protected void onPostExecute(Set<String> epcData) {
+                    if (epcData.size() != 0)
+                        readCallback.callback(mEpcSet);
+//                    updatePDItemModel(epcSet);
+                }
+            };
+        mEpcDataAsyncTask.execute();
+    }
+
     public void setPower(int power) {
         ToastUtils.showShort(Reader.READER_ERR.MT_OK_ERR == mReader.setPower(power, power)
                 ? "设置成功" : "设置失败");

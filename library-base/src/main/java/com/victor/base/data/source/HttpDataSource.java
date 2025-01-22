@@ -10,6 +10,7 @@ import com.victor.base.data.entity.AssetLocation;
 import com.victor.base.data.entity.AssetRepairData;
 import com.victor.base.data.entity.AssetRepairOdd;
 import com.victor.base.data.entity.LocationInfo;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
@@ -87,5 +88,7 @@ public interface HttpDataSource {
     Observable<BaseResponse> assReject(String pks, String approveNote);
 
     Observable<BaseResponse<List<AssetData>>> queryMaterialList();
+
+    Observable<ListResponse<List<MaterialsData>>> listMaterials(int page, String materialStatus, String materialName, String rfidCode);
 
 }

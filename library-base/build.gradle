@@ -56,7 +56,6 @@ dependencies {
     api project(':mvvmhabit')
     api project(':library-res')
     api project(':MPChartLib')
-    api rootProject.ext.dependencies["arouter-api"]
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     api files('libs\\BaiduLBS_Android.jar')
 

@@ -10,19 +10,22 @@
     </data>
 
     <LinearLayout
-        binding:onClickCommand="@{viewModel.itemClick}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="40mm"
         android:paddingTop="12mm"
-        android:paddingEnd="40mm">
+        android:paddingBottom="12mm"
+        binding:onClickCommand="@{viewModel.itemClick}">
 
         <TextView
             android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{viewModel.materialsCode}"
+            android:gravity="center"
+            android:paddingStart="20mm"
+            android:paddingEnd="20mm"
+            android:text="@{viewModel.entity.materialCode}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
 
@@ -30,23 +33,41 @@
             android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{viewModel.materialsName}"
+            android:gravity="center"
+            android:paddingStart="20mm"
+            android:paddingEnd="20mm"
+            android:text="@{viewModel.entity.materialName}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
+
+        <LinearLayout
+            android:layout_width="0mm"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                binding:background="@{viewModel.entity.materialStatusBackground}"
+                android:paddingStart="20mm"
+                android:paddingTop="6mm"
+                android:paddingBottom="6mm"
+                android:paddingEnd="20mm"
+                android:text="@{viewModel.entity.materialStatus}"
+                binding:textColor="@{viewModel.entity.materialStatusColor}"
+                android:textSize="36mm" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{viewModel.materialsStatus}"
-            android:textColor="@color/color_9C9C9C"
-            android:textSize="36mm" />
-
-        <TextView
-            android:layout_width="0mm"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@{viewModel.rfid}"
+            android:gravity="center"
+            android:paddingStart="20mm"
+            android:paddingEnd="20mm"
+            android:text="@{viewModel.entity.rfidCode}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
     </LinearLayout>

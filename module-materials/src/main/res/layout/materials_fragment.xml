@@ -9,26 +9,31 @@
             type="com.victor.materials.ui.viewmodel.MaterialsViewModel" />
 
         <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LineManagers" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="32mm"
-        android:paddingBottom="32mm">
+        android:background="@color/white">
 
         <LinearLayout
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="40mm"
-            android:paddingEnd="40mm">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@color/color_e6e6e6"
+                android:gravity="center"
+                android:paddingStart="20mm"
+                android:paddingTop="32mm"
+                android:paddingEnd="20mm"
+                android:paddingBottom="32mm"
                 android:text="@string/workbench_materials_content_title1_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
@@ -36,7 +41,14 @@
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2mm"
                 android:layout_weight="1"
+                android:background="@color/color_e6e6e6"
+                android:gravity="center"
+                android:paddingStart="20mm"
+                android:paddingTop="32mm"
+                android:paddingEnd="20mm"
+                android:paddingBottom="32mm"
                 android:text="@string/workbench_materials_content_title2_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
@@ -44,7 +56,14 @@
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2mm"
                 android:layout_weight="1"
+                android:background="@color/color_e6e6e6"
+                android:gravity="center"
+                android:paddingStart="20mm"
+                android:paddingTop="32mm"
+                android:paddingEnd="20mm"
+                android:paddingBottom="32mm"
                 android:text="@string/workbench_materials_content_title3_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
@@ -52,20 +71,61 @@
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2mm"
                 android:layout_weight="1"
+                android:background="@color/color_e6e6e6"
+                android:gravity="center"
+                android:paddingStart="20mm"
+                android:paddingTop="32mm"
+                android:paddingEnd="20mm"
+                android:paddingBottom="32mm"
                 android:text="@string/workbench_materials_content_title4_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/bga_refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            binding:itemBinding="@{viewModel.materialsItemBinding}"
-            binding:items="@{viewModel.materialsList}"
-            binding:layoutManager="@{LayoutManagers.linear()}" />
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            android:background="@color/white"
+            binding:autoRefreshCommand="@{viewModel.autoRefreshCommand}"
+            binding:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}"
+            binding:onRefreshCommand="@{viewModel.onRefreshCommand}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:overScrollMode="never"
+                android:scrollbars="none"
+                binding:itemBinding="@{viewModel.itemBinding}"
+                binding:items="@{viewModel.observableList}"
+                binding:layoutManager="@{LayoutManagers.linear()}"
+                binding:lineManager="@{LineManagers.horizontal()}" />
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/title"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.noDataVisibleObservable}">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bga_refresh_mt_change_to_release_refresh_04" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10mm"
+                android:text="@string/app_no_data_text"
+                android:textColor="@color/color_9C9C9C"
+                android:textSize="36mm" />
+        </LinearLayout>
+    </RelativeLayout>
 </layout>
