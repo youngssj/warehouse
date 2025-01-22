@@ -88,14 +88,14 @@ public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBind
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setPowerVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_inbound_title_text));
-//        viewModel.getNetData(checkId);
+        viewModel.getNetData(checkId);
         setRead(true);
 
-        titles = new String[]{"全部", "在库", "待入库", "待出库", "待移库", "待盘点", "待调拨"};
+        titles = new String[]{"待入库", "入库完成"};
         mFragments = new ArrayList<>();
         if (savedInstanceState == null) {
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
-            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Materials.PAGER_MATERIALS_LIST).navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Inbound.PAGER_INBOUND_SCAN).withInt("position", 0).navigation());
+            mFragments.add((Fragment) ARouter.getInstance().build(RouterFragmentPath.Inbound.PAGER_INBOUND_SCAN).withInt("position", 1).navigation());
         } else {
             mFragments.add(getSupportFragmentManager().findFragmentByTag(makeFragmentName(binding.mViewPager.getId(), 0)));
             mFragments.add(getSupportFragmentManager().findFragmentByTag(makeFragmentName(binding.mViewPager.getId(), 1)));

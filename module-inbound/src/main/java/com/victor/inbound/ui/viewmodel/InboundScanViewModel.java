@@ -11,6 +11,7 @@ import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inbound.R;
+import com.victor.inbound.bean.InboundScanItemsBean;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
@@ -29,6 +31,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     public ObservableField<TakeStockDetail> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
+
     public InboundScanViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
     }
@@ -171,10 +174,12 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                             if (data != null) {
                                 entity.set(data);
                                 checkDataNum.set("0/" + data.getElecMaterialList().size());
-//                                for (int i = 0; i < TAB_NUM; i++) {
-//                                    ZcpdVpItemViewModel itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, entity.get().getBatchNumber(), entity.get().getElecMaterialList());
-//                                    items.add(itemViewModel);
-//                                }
+                                // 向fragment发送数据，刚进入只有待入库数据
+                                InboundScanItemsBean inboundScanItemsBean = new InboundScanItemsBean();
+                                inboundScanItemsBean.setPosition(0);
+                                inboundScanItemsBean.setBatchNumber(data.getBatchNumber());
+                                inboundScanItemsBean.setElecMaterialList(data.getElecMaterialList());
+                                RxBus.getDefault().post(inboundScanItemsBean);
                             }
                         }
 

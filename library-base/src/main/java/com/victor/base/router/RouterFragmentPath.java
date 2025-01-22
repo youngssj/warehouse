@@ -48,4 +48,10 @@ public class RouterFragmentPath {
         /*工作*/
         public static final String PAGER_MATERIALS_LIST = Materials + "/Materials_List";
     }
+
+    public static class Inbound {
+        private static final String Inbound = "/Inbound";
+        /*工作*/
+        public static final String PAGER_INBOUND_SCAN = Inbound + "/Inbound_scan";
+    }
 }
