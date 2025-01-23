@@ -10,14 +10,13 @@ import androidx.databinding.DataBindingUtil;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.data.entity.InboundDetail;
-import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.router.RouterFragmentPath;
+import com.victor.inbound.BR;
 import com.victor.inbound.R;
 import com.victor.inbound.databinding.InboundScanDetailBinding;
 import com.victor.inbound.databinding.InboundScanFragmentBinding;
 import com.victor.inbound.ui.viewmodel.InboundScanListViewModel;
 
-import cn.bingoogolapple.refreshlayout.BR;
 import me.goldze.mvvmhabit.base.BaseFragment;
 
 @Route(path = RouterFragmentPath.Inbound.PAGER_INBOUND_SCAN)

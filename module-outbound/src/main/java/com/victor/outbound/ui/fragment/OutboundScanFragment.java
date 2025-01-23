@@ -11,12 +11,11 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.router.RouterFragmentPath;
+import com.victor.outbound.BR;
 import com.victor.outbound.R;
 import com.victor.outbound.databinding.OutboundScanDetailBinding;
 import com.victor.outbound.databinding.OutboundScanFragmentBinding;
 import com.victor.outbound.ui.viewmodel.OutboundScanListViewModel;
-
-import cn.bingoogolapple.refreshlayout.BR;
 import me.goldze.mvvmhabit.base.BaseFragment;
 
 @Route(path = RouterFragmentPath.Outbound.PAGER_OUTBOUND_SCAN)
