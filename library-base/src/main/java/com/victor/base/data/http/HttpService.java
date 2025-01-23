@@ -13,6 +13,8 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
+import com.victor.base.data.entity.MovementData;
+import com.victor.base.data.entity.MovementDetail;
 import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundDetail;
@@ -97,6 +99,16 @@ public interface HttpService {
     Observable<ListResponse<List<OutboundData>>> listOutbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
+     * 移库列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    Observable<ListResponse<List<MovementData>>> listMovement(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
      * 盘盈
      *
      * @param params
@@ -143,6 +155,15 @@ public interface HttpService {
     Observable<BaseResponse<InboundDetail>> selectByOutbound(@Path("dynamicPath") int path);
 
     /**
+     * 移库单详情
+     *
+     * @param path
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    Observable<BaseResponse<MovementDetail>> selectByMovement(@Path("dynamicPath") int path);
+
+    /**
      * 盘点完成
      *
      * @param params
@@ -178,6 +199,15 @@ public interface HttpService {
      */
     @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
     Observable<BaseResponse> saveOutboundResult(@Body OutboundDetail outboundDetail);
+
+    /**
+     * 移库完成
+     *
+     * @param movementDetail
+     * @return
+     */
+    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    Observable<BaseResponse> saveMovementResult(@Body MovementDetail movementDetail);
 
     /**
      * 资产列表

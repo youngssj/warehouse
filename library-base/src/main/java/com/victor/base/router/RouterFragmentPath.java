@@ -60,4 +60,10 @@ public class RouterFragmentPath {
         /*工作*/
         public static final String PAGER_OUTBOUND_SCAN = Outbound + "/Outbound_scan";
     }
+
+    public static class Movement {
+        private static final String Movement = "/Movement";
+        /*工作*/
+        public static final String PAGER_MOVEMENT_SCAN = Movement + "/Movement_scan";
+    }
 }

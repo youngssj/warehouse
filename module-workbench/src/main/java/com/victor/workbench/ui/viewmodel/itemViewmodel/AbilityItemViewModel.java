@@ -32,7 +32,7 @@ public class AbilityItemViewModel extends ItemViewModel<WorkBenchViewModel> {
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title3_text).equals(name.get())) {
                 ARouter.getInstance().build(RouterActivityPath.Outbound.PAGER_OUTBOUND_LIST).navigation();
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title4_text).equals(name.get())) {
-
+                ARouter.getInstance().build(RouterActivityPath.Movement.PAGER_MOVEMENT_LIST).navigation();
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title5_text).equals(name.get())) {
 
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title6_text).equals(name.get())) {

@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/module-main" />
             <option value="$PROJECT_DIR$/module-materials" />
             <option value="$PROJECT_DIR$/module-mine" />
+            <option value="$PROJECT_DIR$/module-movement" />
             <option value="$PROJECT_DIR$/module-outbound" />
             <option value="$PROJECT_DIR$/module-sync" />
             <option value="$PROJECT_DIR$/module-workbench" />

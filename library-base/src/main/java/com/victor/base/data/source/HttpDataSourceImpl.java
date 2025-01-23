@@ -14,6 +14,8 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
+import com.victor.base.data.entity.MovementData;
+import com.victor.base.data.entity.MovementDetail;
 import com.victor.base.data.entity.OddNum;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundDetail;
@@ -98,6 +100,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<MovementData>>> listMovement(int pageNum) {
+        return apiService.listMovement(pageNum, 10);
+    }
+
+    @Override
     public Observable<ListResponse<List<TakeStockData>>> listAllTakeStock(int pageNum) {
         return apiService.listTakeStock(pageNum, 10000);
     }
@@ -125,6 +132,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<BaseResponse<MovementDetail>> selectByMovement(int movementId) {
+        return apiService.selectByMovement(movementId);
+    }
+
+    @Override
     public Observable<BaseResponse> saveCheckResult(int checkId, String checkPks, String noCheckPks, String batchNumber, String surplusCheckPks) {
         Map<String, String> map = Injection.getMapInstance();
         map.put("checkId", String.valueOf(checkId));
@@ -148,6 +160,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail) {
         return apiService.saveOutboundResult(outboundDetail);
+    }
+
+    @Override
+    public Observable<BaseResponse> saveMovementResult(MovementDetail movementDetail) {
+        return apiService.saveMovementResult(movementDetail);
     }
 
     @Override

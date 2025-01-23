@@ -44,6 +44,7 @@
     <string name="workbench_title4_text">移库管理</string>
     <string name="workbench_title5_text">调拨管理</string>
     <string name="workbench_title6_text">盘点管理</string>
+    <!--  盘点  -->
     <string name="workbench_check_power_text">功率</string>
     <string name="workbench_check_power_title_text">设置功率</string>
     <string name="workbench_check_power_content_title_text">输出功率：</string>
@@ -79,6 +80,7 @@
     <string name="workbench_check_detail_title5">使用部门：</string>
     <string name="workbench_check_detail_title6">存放地点：</string>
     <string name="workbench_check_detail_title7">盘点结果：</string>
+    <!--  物资查询  -->
     <string name="workbench_materials_search1_title_text">物资名称：</string>
     <string name="workbench_materials_search2_title_text">RFID编码：</string>
     <string name="workbench_materials_search_button_text">搜索</string>
@@ -94,6 +96,7 @@
     <string name="workbench_materials_detail_title5">库区：</string>
     <string name="workbench_materials_detail_title6">库位：</string>
     <string name="workbench_materials_detail_title7">RFID编码：</string>
+    <!--  入库  -->
     <string name="workbench_inbound_list_title_text">入库单</string>
     <string name="workbench_inbound_title_text">物资入库</string>
     <string name="workbench_inbound_tab1_text">待入库</string>
@@ -119,6 +122,7 @@
     <string name="workbench_inbound_scan_list_title2">结果：</string>
     <string name="workbench_inbound_success_text">已入库</string>
     <string name="workbench_inbound_failure_text">未入库</string>
+    <!--  出库  -->
     <string name="workbench_outbound_list_title_text">出库单</string>
     <string name="workbench_outbound_title_text">物资出库</string>
     <string name="workbench_outbound_tab1_text">待出库</string>
@@ -144,6 +148,32 @@
     <string name="workbench_outbound_scan_list_title2">结果：</string>
     <string name="workbench_outbound_success_text">已出库</string>
     <string name="workbench_outbound_failure_text">未出库</string>
+    <!--  移库  -->
+    <string name="workbench_movement_list_title_text">移库单</string>
+    <string name="workbench_movement_title_text">物资移库</string>
+    <string name="workbench_movement_tab1_text">待移库</string>
+    <string name="workbench_movement_tab2_text">移库完成</string>
+    <string name="workbench_movement_list_content_title1_text">移库单号：</string>
+    <string name="workbench_movement_list_content_title2_text">移库主题：</string>
+    <string name="workbench_movement_list_content_title3_text">移库时间：</string>
+    <string name="workbench_movement_scan_content_title1_text">移库数据：</string>
+    <string name="workbench_movement_scan_finish_text">移库完成</string>
+    <string name="workbench_movement_detail_text">移库详情</string>
+    <string name="workbench_movement_detail_title1">物资编码：</string>
+    <string name="workbench_movement_detail_title2">物资名称：</string>
+    <string name="workbench_movement_detail_title3">物资状态：</string>
+    <string name="workbench_movement_detail_title4">所属公司：</string>
+    <string name="workbench_movement_detail_title5">库房：</string>
+    <string name="workbench_movement_detail_title6">库区：</string>
+    <string name="workbench_movement_detail_title7">库位：</string>
+    <string name="workbench_movement_detail_title8">单位：</string>
+    <string name="workbench_movement_detail_title9">供应商：</string>
+    <string name="workbench_movement_detail_title10">规格型号：</string>
+    <string name="workbench_movement_detail_title11">RFID编码：</string>
+    <string name="workbench_movement_scan_list_title1">使用部门：</string>
+    <string name="workbench_movement_scan_list_title2">结果：</string>
+    <string name="workbench_movement_success_text">已移库</string>
+    <string name="workbench_movement_failure_text">未移库</string>
     <string name="mine_title1_text">手机号</string>
     <string name="mine_title2_text">邮箱</string>
     <string name="mine_title3_text">所属部门</string>
