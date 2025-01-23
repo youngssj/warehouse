@@ -1,6 +1,6 @@
 package com.victor.outbound.bean;
 
-import com.victor.base.data.entity.InboundDetail;
+import com.victor.base.data.entity.OutboundDetail;
 
 import java.util.List;
 
@@ -16,13 +16,13 @@ public class OutboundScanUpdateItemsBean {
         this.position = position;
     }
 
-    private List<InboundDetail.ElecMaterialList> elecMaterialList;
+    private List<OutboundDetail.ElecMaterialList> elecMaterialList;
 
-    public List<InboundDetail.ElecMaterialList> getElecMaterialList() {
+    public List<OutboundDetail.ElecMaterialList> getElecMaterialList() {
         return elecMaterialList;
     }
 
-    public void setElecMaterialList(List<InboundDetail.ElecMaterialList> elecMaterialList) {
+    public void setElecMaterialList(List<OutboundDetail.ElecMaterialList> elecMaterialList) {
         this.elecMaterialList = elecMaterialList;
     }
 

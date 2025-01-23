@@ -15,6 +15,8 @@ import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
+import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
@@ -91,6 +93,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<OutboundData>>> listOutbound(int pageNum) {
+        return apiService.listOutbound(pageNum, 10);
+    }
+
+    @Override
     public Observable<ListResponse<List<TakeStockData>>> listAllTakeStock(int pageNum) {
         return apiService.listTakeStock(pageNum, 10000);
     }
@@ -104,16 +111,17 @@ public class HttpDataSourceImpl implements HttpDataSource {
 
     @Override
     public Observable<BaseResponse<TakeStockDetail>> selectByCheck(int checkId) {
-//        Map<String, String> map = Injection.getMapInstance();
-//        map.put("checkId", String.valueOf(checkId));
         return apiService.selectByCheck(checkId);
     }
 
     @Override
     public Observable<BaseResponse<InboundDetail>> selectByInbound(int inId) {
-//        Map<String, String> map = Injection.getMapInstance();
-//        map.put("checkId", String.valueOf(checkId));
         return apiService.selectByInbound(inId);
+    }
+
+    @Override
+    public Observable<BaseResponse<InboundDetail>> selectByOutbound(int outId) {
+        return apiService.selectByOutbound(outId);
     }
 
     @Override
@@ -135,6 +143,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail) {
         return apiService.saveInboundResult(inboundDetail);
+    }
+
+    @Override
+    public Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail) {
+        return apiService.saveOutboundResult(outboundDetail);
     }
 
     @Override

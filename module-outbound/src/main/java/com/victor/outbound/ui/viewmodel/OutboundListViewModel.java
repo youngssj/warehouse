@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.AssetCheckOdd;
-import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
@@ -58,12 +58,12 @@ public class OutboundListViewModel extends BaseOddViewModel<OutboundItemViewMode
 //                        }
                     });
         else {
-            model.listInbound(page)
+            model.listOutbound(page)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
-                    .subscribe(new ApiListDisposableObserver<List<InboundData>>() {
+                    .subscribe(new ApiListDisposableObserver<List<OutboundData>>() {
                         @Override
-                        public void onResult(ListData<List<InboundData>> listData) {
+                        public void onResult(ListData<List<OutboundData>> listData) {
                             if (listData == null || listData.getTotal() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
                             } else if (listData != null) {
@@ -72,8 +72,8 @@ public class OutboundListViewModel extends BaseOddViewModel<OutboundItemViewMode
                                     canloadmore = false;
                                     ToastUtils.showShort(R.string.app_no_more_data_text);
                                 } else {
-                                    for (InboundData inboundData : listData.getList()) {
-                                        OutboundItemViewModel itemViewModel = new OutboundItemViewModel(OutboundListViewModel.this, inboundData);
+                                    for (OutboundData outboundData : listData.getList()) {
+                                        OutboundItemViewModel itemViewModel = new OutboundItemViewModel(OutboundListViewModel.this, outboundData);
                                         //双向绑定动态添加Item
                                         observableList.add(itemViewModel);
                                     }

@@ -14,6 +14,8 @@ import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
+import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
@@ -45,6 +47,8 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<InboundData>>> listInbound(int page);
 
+    Observable<ListResponse<List<OutboundData>>> listOutbound(int page);
+
     Observable<ListResponse<List<TakeStockData>>> listAllTakeStock(int page);
 
     Observable<BaseResponse<AssetCheckData>> selectOneCheck(int checkId);
@@ -53,11 +57,15 @@ public interface HttpDataSource {
 
     Observable<BaseResponse<InboundDetail>> selectByInbound(int inId);
 
+    Observable<BaseResponse<InboundDetail>> selectByOutbound(int outId);
+
     Observable<BaseResponse> saveCheckResult(int checkId, String checkPks, String noCheckPks, String batchNumber, String surplusCheckPks);
 
     Observable<BaseResponse> saveCheckedResult(TakeStockDetail mainInfo);
 
     Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail);
+
+    Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail);
 
     Observable<BaseResponse<List<AssetInspectionOdd>>> listInspection(int page);
 

@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.victor.base.data.entity.InboundDetail;
+import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.outbound.R;
 import com.victor.outbound.databinding.OutboundScanDetailBinding;
@@ -45,7 +45,7 @@ public class OutboundScanFragment extends BaseFragment<OutboundScanFragmentBindi
         viewModel.uc.showCustomEvent.observe(this, outboundScanItemViewModel -> {
             OutboundScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.outbound_scan_detail, null, false);
             binding.setViewModel(outboundScanItemViewModel);
-            InboundDetail.ElecMaterialList dataListBean = outboundScanItemViewModel.entity.get();
+            OutboundDetail.ElecMaterialList dataListBean = outboundScanItemViewModel.entity.get();
             showCustomDialog(getResources().getString(R.string.workbench_outbound_detail_text), binding, (dialog, which) -> {
             });
         });

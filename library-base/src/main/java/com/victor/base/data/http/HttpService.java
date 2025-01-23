@@ -14,6 +14,8 @@ import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.LocationInfo;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.OddNum;
+import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.entity.TokenBean;
@@ -85,6 +87,16 @@ public interface HttpService {
     Observable<ListResponse<List<InboundData>>> listInbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
+     * 出库列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    Observable<ListResponse<List<OutboundData>>> listOutbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
      * 盘盈
      *
      * @param params
@@ -122,6 +134,15 @@ public interface HttpService {
     Observable<BaseResponse<InboundDetail>> selectByInbound(@Path("dynamicPath") int path);
 
     /**
+     * 出库单详情
+     *
+     * @param path
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    Observable<BaseResponse<InboundDetail>> selectByOutbound(@Path("dynamicPath") int path);
+
+    /**
      * 盘点完成
      *
      * @param params
@@ -148,6 +169,15 @@ public interface HttpService {
      */
     @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
     Observable<BaseResponse> saveInboundResult(@Body InboundDetail inboundDetail);
+
+    /**
+     * 出库完成
+     *
+     * @param outboundDetail
+     * @return
+     */
+    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    Observable<BaseResponse> saveOutboundResult(@Body OutboundDetail outboundDetail);
 
     /**
      * 资产列表
