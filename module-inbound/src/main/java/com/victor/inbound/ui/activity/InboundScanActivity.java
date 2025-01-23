@@ -51,7 +51,7 @@ public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBind
     @Override
     protected void scanBarCodeCallback(String barCode) {
         Set set = new HashSet();
-        for (InboundDetail.ElecMaterialList dataListBean : viewModel.elecMaterialList) {
+        for (InboundDetail.ElecMaterialList dataListBean : viewModel.entity.get().getElecMaterialList()) {
             if (barCode.equals(dataListBean.getMaterialCode())) {
                 set.add(dataListBean.getRfidCode());
                 break;

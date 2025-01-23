@@ -1,7 +1,6 @@
 package com.victor.inbound.ui.viewmodel;
 
 import android.app.Application;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
@@ -12,6 +11,8 @@ import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inbound.R;
 import com.victor.inbound.bean.InboundScanAddItemsBean;
+import com.victor.inbound.bean.InboundScanRemoveItemsBean;
+import com.victor.inbound.bean.InboundScanUpdateItemsBean;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
@@ -33,7 +34,6 @@ import me.goldze.mvvmhabit.utils.Utils;
 
 public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
-    public List<InboundDetail.ElecMaterialList> elecMaterialList;
     public ObservableField<InboundDetail> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
@@ -50,28 +50,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     }
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-//        List<String> pddIds = new ArrayList<>();
-//        List<String> wPddIds = new ArrayList<>();
-////        if (mPddList != null && mPddList.size() > 0) {
-////            for (ZcpdVpRvItemViewModel zc : mPddList) {
-////                if (mPyListId.indexOf(String.valueOf(zc.entity.get().getMaterialId())) == -1) {  //不在盘盈列表中
-////                    pddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
-////                }
-////            }
-////            for (ZcpdVpRvItemViewModel zc : mWpddList) {
-////                wPddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
-////            }
-////
         InboundDetail mainInfo = entity.get();
-//
-//        List<InboundDetail.ElecMaterialListDTO> elecMaterialListDTOS = new ArrayList<>();
-//        for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
-//            InboundDetail.ElecMaterialListDTO elecMaterialListDTO = zcpdVpRvItemViewModel.entity.get();
-//            elecMaterialListDTOS.add(elecMaterialListDTO);
-//        }
-
-//        mainInfo.setElecMaterialList(elecMaterialListDTOS);
-
 
         if (Constants.CONFIG.IS_OFFLINE) {
             // 盘盈
@@ -106,7 +85,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
                         }
                     });
-        } else
+        } else {
             model.saveInboundResult(mainInfo)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
@@ -125,8 +104,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                             dismissProgress();
                         }
                     });
-//        } else
-//            ToastUtils.showShort("未盘到资产");
+        }
     });
 
     public void getNetData(int inId) {
@@ -165,7 +143,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         }
                     });
 
-        } else
+        } else {
             model.selectByInbound(inId)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
@@ -179,12 +157,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                     .subscribe(new ApiDisposableObserver<InboundDetail>() {
                         @Override
                         public void onResult(InboundDetail data) {
-                            if (data == null || data.getElecMaterialList().size() == 0) {
-                                setNoDataVisibleObservable(View.VISIBLE);
-                                return;
-                            }
-
-                            if (data != null) {
+                            if (data != null && data.getElecMaterialList().size() > 0) {
                                 entity.set(data);
                                 checkDataNum.set("0/" + data.getElecMaterialList().size());
                                 // 向fragment发送数据，刚进入只有待入库数据
@@ -192,7 +165,6 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                                 inboundScanAddItemsBean.setPosition(0);
                                 inboundScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
                                 RxBus.getDefault().post(inboundScanAddItemsBean);
-                                elecMaterialList = data.getElecMaterialList();
                             }
                         }
 
@@ -201,54 +173,59 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                             dismissProgress();
                         }
                     });
+        }
     }
 
     private Set<InboundDetail.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
 
-    //
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
-        for (InboundDetail.ElecMaterialList bean : elecMaterialList) {
+        boolean hasData = false;
+        for (InboundDetail.ElecMaterialList bean : entity.get().getElecMaterialList()) {
             if (sets.contains(bean.getRfidCode())) {
-                bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
-                bean.setCheckResult(1);
-                bean.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_success_text));
                 sets.remove(bean.getRfidCode());
-                rvSet.add(bean);  //防止添加的数据重复
-            } else {
-                bean.setCheckResult(2);
-                bean.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_failure_text));
-                bean.setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
+
+                if (!rvSet.contains(bean)) {
+                    rvSet.add(bean);  //防止添加的数据重复
+
+                    bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
+                    bean.setIsIn(1);
+                    bean.setIsInMessage(getApplication().getResources().getString(R.string.workbench_inbound_success_text));
+
+                    // 添加
+                    InboundScanAddItemsBean inboundScanAddItemsBean = new InboundScanAddItemsBean();
+                    inboundScanAddItemsBean.setPosition(1);
+                    inboundScanAddItemsBean.setElecMaterialList(new ArrayList<>());
+                    inboundScanAddItemsBean.getElecMaterialList().add(bean);
+                    RxBus.getDefault().post(inboundScanAddItemsBean);
+
+                    // 移除
+                    InboundScanRemoveItemsBean inboundScanRemoveItemsBean = new InboundScanRemoveItemsBean();
+                    inboundScanRemoveItemsBean.setPosition(0);
+                    inboundScanRemoveItemsBean.setElecMaterialList(new ArrayList<>());
+                    inboundScanRemoveItemsBean.getElecMaterialList().add(bean);
+                    RxBus.getDefault().post(inboundScanRemoveItemsBean);
+
+                    hasData = true;
+                }
+            } else if (!rvSet.contains(bean)) {
+                // 更新列表未扫描到的条目为红色
+                InboundScanUpdateItemsBean inboundScanUpdateItemsBean = new InboundScanUpdateItemsBean();
+                inboundScanUpdateItemsBean.setPosition(0);
+                inboundScanUpdateItemsBean.setElecMaterialList(new ArrayList<>());
+                inboundScanUpdateItemsBean.getElecMaterialList().add(bean);
+                RxBus.getDefault().post(inboundScanUpdateItemsBean);
             }
         }
 
-        if (rvSet.size() > 0) {
-            muc.pageSelectEvent.setValue(1);  //选中盘点到 页面
+        if (hasData && rvSet.size() > 0) {
+            muc.pageSelectEvent.setValue(1);  //选中入库完成页面
         }
 
-        InboundScanAddItemsBean inboundScanAddItemsBean = new InboundScanAddItemsBean();
-        inboundScanAddItemsBean.setPosition(1);
-        inboundScanAddItemsBean.setElecMaterialList(new ArrayList<>());
-
-        InboundScanAddItemsBean inboundScanRemoveItemsBean = new InboundScanAddItemsBean();
-        inboundScanRemoveItemsBean.setPosition(0);
-        inboundScanRemoveItemsBean.setElecMaterialList(new ArrayList<>());
-
-        for (InboundDetail.ElecMaterialList bean : rvSet) {
-            if (rvSet.size() <= entity.get().getElecMaterialList().size()) {
-                inboundScanAddItemsBean.getElecMaterialList().add(bean);
-                inboundScanRemoveItemsBean.getElecMaterialList().add(bean);
-            }
-        }
-        RxBus.getDefault().post(inboundScanAddItemsBean);
-        RxBus.getDefault().post(inboundScanRemoveItemsBean);
-
-//        setBgColor();
-
-        checkDataNum.set(inboundScanAddItemsBean.getElecMaterialList().size() + "/" + entity.get().getElecMaterialList().size());
-
-        if (elecMaterialList.size() == rvSet.size()) {
+        if (entity.get().getElecMaterialList().size() == rvSet.size()) {
             muc.scanFinishEvent.setValue(true);
         }
+
+        checkDataNum.set(rvSet.size() + "/" + entity.get().getElecMaterialList().size());
     }
 }

@@ -115,6 +115,8 @@
     <string name="workbench_inbound_detail_title11">RFID编码：</string>
     <string name="workbench_inbound_scan_list_title1">使用部门：</string>
     <string name="workbench_inbound_scan_list_title2">结果：</string>
+    <string name="workbench_inbound_success_text">已入库</string>
+    <string name="workbench_inbound_failure_text">未入库</string>
     <string name="mine_title1_text">手机号</string>
     <string name="mine_title2_text">邮箱</string>
     <string name="mine_title3_text">所属部门</string>

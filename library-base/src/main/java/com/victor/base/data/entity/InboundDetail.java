@@ -197,7 +197,6 @@ public class InboundDetail {
         private int indetailId;
         private int inId;
         private int materialId;
-        private String isIn;
         private Object inDate;
         private String materialCode;
         private String materialName;
@@ -210,8 +209,8 @@ public class InboundDetail {
         private String providerName;
         private String specifications;
         private String rfidCode;
-        private int checkResult; // 盘点结果 1正常（已盘点） 2亏
-        private transient String checkResultMessage; // 盘点结果 1正常（已盘点） 2亏
+        private int isIn; // 入库结果 0未入库 1已入库
+        private transient String isInMessage; // 入库结果 0未入库 1已入库
         @Ignore
         public transient Drawable bgColor;
         @Ignore
@@ -305,20 +304,20 @@ public class InboundDetail {
             this.rfidCode = rfidCode;
         }
 
-        public int getCheckResult() {
-            return checkResult;
+        public int getIsIn() {
+            return isIn;
         }
 
-        public void setCheckResult(int checkResult) {
-            this.checkResult = checkResult;
+        public void setIsIn(int isIn) {
+            this.isIn = isIn;
         }
 
-        public String getCheckResultMessage() {
-            return checkResultMessage;
+        public String getIsInMessage() {
+            return isInMessage;
         }
 
-        public void setCheckResultMessage(String checkResultMessage) {
-            this.checkResultMessage = checkResultMessage;
+        public void setIsInMessage(String isInMessage) {
+            this.isInMessage = isInMessage;
         }
 
         public Drawable getBgColor() {
@@ -401,20 +400,42 @@ public class InboundDetail {
             this.materialId = materialId;
         }
 
-        public String getIsIn() {
-            return isIn;
-        }
-
-        public void setIsIn(String isIn) {
-            this.isIn = isIn;
-        }
-
         public Object getInDate() {
             return inDate;
         }
 
         public void setInDate(Object inDate) {
             this.inDate = inDate;
+        }
+
+        @Override
+        public String toString() {
+            return "ElecMaterialList{" +
+                    "createBy='" + createBy + '\'' +
+                    ", createTime='" + createTime + '\'' +
+                    ", updateBy='" + updateBy + '\'' +
+                    ", updateTime=" + updateTime +
+                    ", remark='" + remark + '\'' +
+                    ", indetailId=" + indetailId +
+                    ", inId=" + inId +
+                    ", materialId=" + materialId +
+                    ", isIn='" + isIn + '\'' +
+                    ", inDate=" + inDate +
+                    ", materialCode='" + materialCode + '\'' +
+                    ", materialName='" + materialName + '\'' +
+                    ", materialStatusName='" + materialStatusName + '\'' +
+                    ", deptName='" + deptName + '\'' +
+                    ", warehouseName='" + warehouseName + '\'' +
+                    ", whAreaName='" + whAreaName + '\'' +
+                    ", whLocationName='" + whLocationName + '\'' +
+                    ", unitName='" + unitName + '\'' +
+                    ", providerName='" + providerName + '\'' +
+                    ", specifications='" + specifications + '\'' +
+                    ", rfidCode='" + rfidCode + '\'' +
+                    ", isInMessage='" + isInMessage + '\'' +
+                    ", bgColor=" + bgColor +
+                    ", textColor=" + textColor +
+                    '}';
         }
     }
 }

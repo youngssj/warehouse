@@ -216,7 +216,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:singleLine="true"
-                    android:text='@{viewModel.entity.checkResultMessage}'
+                    android:text='@{viewModel.entity.isInMessage}'
                     android:textColor="@color/color_333333"
                     android:textSize="38mm" />
             </LinearLayout>

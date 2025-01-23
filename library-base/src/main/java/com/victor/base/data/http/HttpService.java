@@ -146,7 +146,7 @@ public interface HttpService {
      * @param inboundDetail
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
+    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
     Observable<BaseResponse> saveInboundResult(@Body InboundDetail inboundDetail);
 
     /**

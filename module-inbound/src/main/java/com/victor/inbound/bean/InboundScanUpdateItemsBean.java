@@ -4,7 +4,7 @@ import com.victor.base.data.entity.InboundDetail;
 
 import java.util.List;
 
-public class InboundScanAddItemsBean {
+public class InboundScanUpdateItemsBean {
 
     private int position;
 
