@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    app:ignore="NamespaceTypo">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.victor.outbound.ui.viewmodel.itemviewmodel.OutboundScanItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{viewModel.entity.bgColor}"
+        android:orientation="vertical"
+        android:paddingStart="30mm"
+        android:paddingTop="10mm"
+        android:paddingEnd="30mm"
+        android:paddingBottom="10mm"
+        binding:onClickCommand="@{viewModel.itemClick}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="14mm">
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_detail_title1"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@{viewModel.entity.materialCode}"
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_detail_title2"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@{viewModel.entity.materialName}"
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14mm">
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_scan_list_title1"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@{viewModel.entity.deptName}"
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_detail_title5"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@{viewModel.entity.warehouseName}"
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14mm">
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_detail_title6"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="@{viewModel.entity.whAreaName}"
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_detail_title7"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text='@{viewModel.entity.whLocationName}'
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14mm">
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_detail_title11"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text='@{viewModel.entity.rfidCode}'
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_outbound_scan_list_title2"
+                    android:textColor="@color/color_565656"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text='@{viewModel.entity.isInMessage}'
+                    android:textColor="@color/color_333333"
+                    android:textSize="38mm" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
