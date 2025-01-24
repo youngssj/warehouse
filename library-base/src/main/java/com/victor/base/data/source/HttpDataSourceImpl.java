@@ -1,6 +1,8 @@
 package com.victor.base.data.source;
 
 import com.victor.base.app.Injection;
+import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.AssetApproveOdd;
 import com.victor.base.data.entity.AssetCheckData;
 import com.victor.base.data.entity.AssetCheckOdd;
@@ -105,6 +107,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<AllocateData>>> listAllocate(int pageNum) {
+        return apiService.listAllocate(pageNum, 10);
+    }
+
+    @Override
     public Observable<ListResponse<List<TakeStockData>>> listAllTakeStock(int pageNum) {
         return apiService.listTakeStock(pageNum, 10000);
     }
@@ -137,6 +144,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<BaseResponse<AllocateDetail>> selectByAllocate(int allocateId) {
+        return apiService.selectByAllocate(allocateId);
+    }
+
+    @Override
     public Observable<BaseResponse> saveCheckResult(int checkId, String checkPks, String noCheckPks, String batchNumber, String surplusCheckPks) {
         Map<String, String> map = Injection.getMapInstance();
         map.put("checkId", String.valueOf(checkId));
@@ -165,6 +177,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse> saveMovementResult(MovementDetail movementDetail) {
         return apiService.saveMovementResult(movementDetail);
+    }
+
+    @Override
+    public Observable<BaseResponse> saveAllocateResult(AllocateDetail allocateDetail) {
+        return apiService.saveAllocateResult(allocateDetail);
     }
 
     @Override

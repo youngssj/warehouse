@@ -1,5 +1,7 @@
 package com.victor.base.data.http;
 
+import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.AssetApproveOdd;
 import com.victor.base.data.entity.AssetCheckData;
 import com.victor.base.data.entity.AssetCheckOdd;
@@ -109,6 +111,16 @@ public interface HttpService {
     Observable<ListResponse<List<MovementData>>> listMovement(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
+     * 调拨列表
+     *
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    Observable<ListResponse<List<AllocateData>>> listAllocate(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+
+    /**
      * 盘盈
      *
      * @param params
@@ -164,6 +176,15 @@ public interface HttpService {
     Observable<BaseResponse<MovementDetail>> selectByMovement(@Path("dynamicPath") int path);
 
     /**
+     * 调拨单详情
+     *
+     * @param path
+     * @return
+     */
+    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    Observable<BaseResponse<AllocateDetail>> selectByAllocate(@Path("dynamicPath") int path);
+
+    /**
      * 盘点完成
      *
      * @param params
@@ -208,6 +229,15 @@ public interface HttpService {
      */
     @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
     Observable<BaseResponse> saveMovementResult(@Body MovementDetail movementDetail);
+
+    /**
+     * 调拨完成
+     *
+     * @param movementDetail
+     * @return
+     */
+    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    Observable<BaseResponse> saveAllocateResult(@Body AllocateDetail allocateDetail);
 
     /**
      * 资产列表

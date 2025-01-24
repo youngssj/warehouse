@@ -75,4 +75,11 @@ public class RouterActivityPath {
         public static final String PAGER_MOVEMENT_LIST = Movement + "/Movement_List";
         public static final String PAGER_MOVEMENT_SCAN = Movement + "/Movement_Scan";
     }
+
+    public static class Allocate {
+        private static final String Allocate = "/Allocate";
+        /*工作*/
+        public static final String PAGER_ALLOCATE_LIST = Allocate + "/Allocate_List";
+        public static final String PAGER_ALLOCATE_SCAN = Allocate + "/Allocate_Scan";
+    }
 }

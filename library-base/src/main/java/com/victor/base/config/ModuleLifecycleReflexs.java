@@ -13,11 +13,12 @@ public class ModuleLifecycleReflexs {
     private static final String WorkBenchInit = "com.victor.workbench.WorkBenchModuleInit";
     private static final String InventoryInit = "com.victor.inventory.InventoryModuleInit";
     private static final String MaterialsInit = "com.victor.materials.MaterialsModuleInit";
-    private static final String InboundInit = "com.victor.inbound.InboundModuleInit";
+    private static final String InboundInit = "com.victor.allocate.InboundModuleInit";
     private static final String OutboundInit = "com.victor.outbound.OutboundModuleInit";
     private static final String MovementInit = "com.victor.movement.MovementModuleInit";
+    private static final String AllocateInit = "com.victor.allocate.AllocateModuleInit";
     private static final String MineInit = "com.victor.mine.MineModuleInit";
     private static final String SyncInit = "com.victor.sync.SyncModuleInit";
     public static String[] initModuleNames = {BaseInit, MainInit, WorkBenchInit, InventoryInit,
-            MaterialsInit, InboundInit, OutboundInit, MovementInit, MineInit, SyncInit};
+            MaterialsInit, InboundInit, OutboundInit, MovementInit, AllocateInit, MineInit, SyncInit};
 }

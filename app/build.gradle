@@ -145,6 +145,7 @@ dependencies {
         implementation project(':module-inbound')
         implementation project(':module-outbound')
         implementation project(':module-movement')
+        implementation project(':module-allocate')
     }
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
 }
