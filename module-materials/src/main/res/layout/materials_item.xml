@@ -48,16 +48,15 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="160mm"
                 android:layout_height="wrap_content"
-                binding:background="@{viewModel.entity.materialStatusBackground}"
-                android:paddingStart="20mm"
+                android:gravity="center"
                 android:paddingTop="6mm"
                 android:paddingBottom="6mm"
-                android:paddingEnd="20mm"
                 android:text="@{viewModel.entity.materialStatus}"
-                binding:textColor="@{viewModel.entity.materialStatusColor}"
-                android:textSize="36mm" />
+                android:textSize="36mm"
+                binding:background="@{viewModel.entity.materialStatusBackground}"
+                binding:textColor="@{viewModel.entity.materialStatusColor}" />
         </LinearLayout>
 
         <TextView

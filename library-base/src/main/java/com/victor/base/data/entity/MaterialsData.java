@@ -125,7 +125,7 @@ public class MaterialsData {
         if ("0".equals(materialStatus)) {
             return R.color.color_258DFF;
         } else if ("1".equals(materialStatus)) {
-            return R.color.color_4BFF00;
+            return R.color.color_42DC02;
         } else if ("2".equals(materialStatus)) {
             return R.color.color_FF0000;
         } else if ("11".equals(materialStatus)) {
