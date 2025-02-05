@@ -14,6 +14,7 @@ public class RouterActivityPath {
         private static final String MAIN = "/main";
         /*主业务界面*/
         public static final String PAGER_ONLINE_MAIN = MAIN +"/OnlineMain";
+        /*主业务界面*/
         public static final String PAGER_OFFLINE_MAIN = MAIN +"/OfflineMain";
     }
 
@@ -44,42 +45,45 @@ public class RouterActivityPath {
 
     public static class Inventory {
         private static final String Inventory = "/Inventory";
-        /*工作*/
+        /*盘点*/
         public static final String PAGER_INVENTORY_CHECK_LIST = Inventory + "/InventoryCheckList";
         public static final String PAGER_INVENTORY_CHECK = Inventory + "/InventoryCheck";
     }
 
     public static class Materials {
         private static final String Materials = "/Materials";
-        /*工作*/
+        /*物资查询*/
         public static final String PAGER_MATERIALS_QUERY = Materials + "/Materials_Query";
     }
 
     public static class Inbound {
         private static final String Inbound = "/Inbound";
-        /*工作*/
+        /*入库列表*/
         public static final String PAGER_INBOUND_LIST = Inbound + "/Inbound_List";
+        /*物资入库*/
         public static final String PAGER_INBOUND_SCAN = Inbound + "/Inbound_Scan";
     }
 
     public static class Outbound {
         private static final String Outbound = "/Outbound";
-        /*工作*/
+        /*出库列表*/
         public static final String PAGER_OUTBOUND_LIST = Outbound + "/Outbound_List";
+        /*物资出库*/
         public static final String PAGER_OUTBOUND_SCAN = Outbound + "/Outbound_Scan";
     }
 
     public static class Movement {
         private static final String Movement = "/Movement";
-        /*工作*/
+        /*移库列表*/
         public static final String PAGER_MOVEMENT_LIST = Movement + "/Movement_List";
+        /*物资移库*/
         public static final String PAGER_MOVEMENT_SCAN = Movement + "/Movement_Scan";
     }
 
     public static class Allocate {
         private static final String Allocate = "/Allocate";
-        /*工作*/
         public static final String PAGER_ALLOCATE_LIST = Allocate + "/Allocate_List";
+        /*物资调拨*/
         public static final String PAGER_ALLOCATE_SCAN = Allocate + "/Allocate_Scan";
     }
 }

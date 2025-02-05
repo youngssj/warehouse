@@ -65,7 +65,7 @@ public interface HttpDataSource {
 
     Observable<BaseResponse<InboundDetail>> selectByInbound(int inId);
 
-    Observable<BaseResponse<InboundDetail>> selectByOutbound(int outId);
+    Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId);
 
     Observable<BaseResponse<MovementDetail>> selectByMovement(int movementId);
 

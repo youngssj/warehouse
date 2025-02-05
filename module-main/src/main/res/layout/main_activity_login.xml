@@ -67,6 +67,7 @@
             <com.victor.base.widget.ClearableEditText
                 android:layout_width="match_parent"
                 android:layout_height="110mm"
+                binding:hint="@string/login_password_hint_text"
                 binding:inputType="textPassword"
                 binding:maxLength="20"
                 binding:maxLines="1"

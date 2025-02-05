@@ -25,7 +25,7 @@ public class ViewAdapter {
     }
 
     @BindingAdapter("onTextChanged")
-    public static void  setListeners(ClearableEditText editText, InverseBindingListener onTextChanged) {
+    public static void setListeners(ClearableEditText editText, InverseBindingListener onTextChanged) {
         editText.setTextChangeListener(new ClearableEditText.TextChangeListener() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {

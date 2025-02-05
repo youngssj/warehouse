@@ -134,7 +134,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse<InboundDetail>> selectByOutbound(int outId) {
+    public Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId) {
         return apiService.selectByOutbound(outId);
     }
 

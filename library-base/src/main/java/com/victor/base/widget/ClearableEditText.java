@@ -86,12 +86,7 @@ public class ClearableEditText extends LinearLayout {
                 || inputType == (EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_NUMBER_VARIATION_PASSWORD)
                 || inputType == (EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_TEXT_VARIATION_WEB_PASSWORD)) {
             initPasswordVisiable();
-            ivClear.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setPasswordVisiable();
-                }
-            });
+            setPasswordListener();
         } else {
             setListener();
         }
@@ -128,6 +123,33 @@ public class ClearableEditText extends LinearLayout {
                 } else {
                     ivClear.setVisibility(View.VISIBLE);
                 }
+                if (textChangeListener != null) {
+                    textChangeListener.onTextChanged(s, start, before, count);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private void setPasswordListener() {
+        ivClear.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setPasswordVisiable();
+            }
+        });
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (textChangeListener != null) {
                     textChangeListener.onTextChanged(s, start, before, count);
                 }

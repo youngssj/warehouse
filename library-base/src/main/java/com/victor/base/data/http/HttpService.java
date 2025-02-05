@@ -164,7 +164,7 @@ public interface HttpService {
      * @return
      */
     @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
-    Observable<BaseResponse<InboundDetail>> selectByOutbound(@Path("dynamicPath") int path);
+    Observable<BaseResponse<OutboundDetail>> selectByOutbound(@Path("dynamicPath") int path);
 
     /**
      * 移库单详情

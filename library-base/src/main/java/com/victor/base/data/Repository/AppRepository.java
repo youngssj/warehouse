@@ -140,7 +140,7 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<BaseResponse<InboundDetail>> selectByOutbound(int outId) {
+    public Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId) {
         return mHttpDataSource.selectByOutbound(outId);
     }
 
