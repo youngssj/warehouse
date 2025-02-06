@@ -38,8 +38,8 @@ public class MovementScanActivity extends BaseUhfActivity<MovementScanActivityBi
 
     private String[] titles;
 
-    @Autowired(name = "inId")
-    int inId;
+    @Autowired(name = "movementId")
+    int movementId;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
@@ -85,7 +85,7 @@ public class MovementScanActivity extends BaseUhfActivity<MovementScanActivityBi
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setPowerVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_movement_title_text));
-        viewModel.getNetData(inId);
+        viewModel.getNetData(movementId);
         setRead(true);
 
         titles = new String[]{getResources().getString(R.string.workbench_movement_tab1_text), getResources().getString(R.string.workbench_movement_tab2_text)};

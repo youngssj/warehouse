@@ -18,7 +18,7 @@ public class OutboundItemViewModel extends BaseRecycleItemViewModel<OutboundList
     @Override
     protected void itemClickCallback() {
         ARouter.getInstance().build(RouterActivityPath.Outbound.PAGER_OUTBOUND_SCAN)
-                .withInt("inId", entity.get().getInId())
+                .withInt("outId", entity.get().getOutId())
                 .navigation();
     }
 }

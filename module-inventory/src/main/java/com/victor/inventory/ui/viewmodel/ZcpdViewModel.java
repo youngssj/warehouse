@@ -13,10 +13,11 @@ import com.victor.base.data.entity.AssetData;
 import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
-import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpItemViewModel;
-import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpRvItemViewModel;
 import com.victor.inventory.BR;
 import com.victor.inventory.R;
+import com.victor.inventory.bean.InventoryListRefreshBean;
+import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpItemViewModel;
+import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpRvItemViewModel;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.observers.DefaultObserver;
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.KLog;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -107,69 +109,71 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 //                wPddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
 //            }
 //
-            TakeStockDetail mainInfo = entity.get();
+        TakeStockDetail mainInfo = entity.get();
 
-            List<TakeStockDetail.ElecMaterialListDTO> elecMaterialListDTOS = new ArrayList<>();
-            for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
-                TakeStockDetail.ElecMaterialListDTO elecMaterialListDTO = zcpdVpRvItemViewModel.entity.get();
-                elecMaterialListDTOS.add(elecMaterialListDTO);
-            }
+        List<TakeStockDetail.ElecMaterialListDTO> elecMaterialListDTOS = new ArrayList<>();
+        for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
+            TakeStockDetail.ElecMaterialListDTO elecMaterialListDTO = zcpdVpRvItemViewModel.entity.get();
+            elecMaterialListDTOS.add(elecMaterialListDTO);
+        }
 
-            mainInfo.setElecMaterialList(elecMaterialListDTOS);
+        mainInfo.setElecMaterialList(elecMaterialListDTOS);
 
 
-            if (Constants.CONFIG.IS_OFFLINE) {
-                // 盘盈
-                List<TakeStockDetail.ElecMaterialListDTO> pyDataList = new ArrayList<>();
+        if (Constants.CONFIG.IS_OFFLINE) {
+            // 盘盈
+            List<TakeStockDetail.ElecMaterialListDTO> pyDataList = new ArrayList<>();
 //                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
 //                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
 //                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
 //                    }
 //                }
-                Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
+            Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
 //                    model._saveCheckResult(mainInfo.getCheckId(),
 //                            StringUtils.listToStr(pddIds, ","), StringUtils.listToStr(wPddIds, ","), mainInfo.getBatchNumber(), pyDataList);
-                            emitter.onNext(true);
-                        })
-                        .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                        .compose(RxUtils.schedulersTransformer())
-                        .subscribe(new DefaultObserver<Boolean>() {
-                            @Override
-                            public void onNext(Boolean b) {
-                                btnVisiable.set(false);
-                                ToastUtils.showShort(R.string.workbench_check_submit_success_text);
-                                finish();
-                            }
+                        emitter.onNext(true);
+                    })
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .compose(RxUtils.schedulersTransformer())
+                    .subscribe(new DefaultObserver<Boolean>() {
+                        @Override
+                        public void onNext(Boolean b) {
+                            btnVisiable.set(false);
+                            ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new InventoryListRefreshBean());
+                            finish();
+                        }
 
-                            @Override
-                            public void onError(Throwable e) {
+                        @Override
+                        public void onError(Throwable e) {
 
-                            }
+                        }
 
-                            @Override
-                            public void onComplete() {
+                        @Override
+                        public void onComplete() {
 
-                            }
-                        });
-            } else
-                model.saveCheckedResult(mainInfo)
-                        .compose(RxUtils.schedulersTransformer())
-                        .compose(RxUtils.exceptionTransformer())
-                        .doOnSubscribe(disposable -> {
-                            showProgress();
-                        }).subscribe(new ApiDisposableObserver() {
-                            @Override
-                            public void onResult(Object o) {
-                                btnVisiable.set(false);
-                                ToastUtils.showShort(R.string.workbench_check_submit_success_text);
-                                finish();
-                            }
+                        }
+                    });
+        } else
+            model.saveCheckedResult(mainInfo)
+                    .compose(RxUtils.schedulersTransformer())
+                    .compose(RxUtils.exceptionTransformer())
+                    .doOnSubscribe(disposable -> {
+                        showProgress();
+                    }).subscribe(new ApiDisposableObserver() {
+                        @Override
+                        public void onResult(Object o) {
+                            btnVisiable.set(false);
+                            ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new InventoryListRefreshBean());
+                            finish();
+                        }
 
-                            @Override
-                            public void onComplete() {
-                                dismissProgress();
-                            }
-                        });
+                        @Override
+                        public void onComplete() {
+                            dismissProgress();
+                        }
+                    });
 //        } else
 //            ToastUtils.showShort("未盘到资产");
     });
@@ -237,6 +241,8 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             if (data == null || data.getElecMaterialList().size() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
                                 return;
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
                             }
 
                             if (data != null) {

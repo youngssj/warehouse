@@ -39,6 +39,7 @@ public class MaterialsViewModel extends BaseOddViewModel<MaterialsItemViewModel>
 
     public MaterialsViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
+        uc.beginRefreshing.call();
     }
 
     @Override

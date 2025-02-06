@@ -10,6 +10,7 @@ import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inbound.R;
+import com.victor.inbound.bean.InboundListRefreshBean;
 import com.victor.inbound.bean.InboundScanAddItemsBean;
 import com.victor.inbound.bean.InboundScanRemoveItemsBean;
 import com.victor.inbound.bean.InboundScanUpdateItemsBean;
@@ -72,6 +73,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onNext(Boolean b) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new InboundListRefreshBean());
                             finish();
                         }
 
@@ -96,6 +98,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onResult(Object o) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new InboundListRefreshBean());
                             finish();
                         }
 

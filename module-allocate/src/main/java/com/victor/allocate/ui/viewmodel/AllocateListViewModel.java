@@ -5,25 +5,30 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.victor.allocate.R;
+import com.victor.allocate.bean.AllocateListRefreshBean;
+import com.victor.allocate.ui.viewmodel.itemviewmodel.AllocateItemViewModel;
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.AssetCheckOdd;
 import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.AssetCheckOdd;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
-import com.victor.allocate.R;
-import com.victor.allocate.ui.viewmodel.itemviewmodel.AllocateItemViewModel;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class AllocateListViewModel extends BaseOddViewModel<AllocateItemViewModel> {
     public AllocateListViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
+        uc.beginRefreshing.call();
     }
 
     @Override
@@ -49,7 +54,8 @@ public class AllocateListViewModel extends BaseOddViewModel<AllocateItemViewMode
                             if (page == 1)
                                 setNoDataVisibleObservable(View.VISIBLE);
                             else ToastUtils.showShort(R.string.app_no_more_data_text);
-                            return;
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
                         }
 //                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
 //                            PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, assetCheckOdd);
@@ -67,6 +73,7 @@ public class AllocateListViewModel extends BaseOddViewModel<AllocateItemViewMode
                             if (listData == null || listData.getTotal() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
                             } else if (listData != null) {
+                                setNoDataVisibleObservable(View.GONE);
                                 if (observableList.size() == listData.getTotal()) {
                                     // 数据全部返回了
                                     canloadmore = false;
@@ -88,5 +95,30 @@ public class AllocateListViewModel extends BaseOddViewModel<AllocateItemViewMode
                         }
                     });
         }
+    }
+
+    //订阅者
+    private Disposable mSubscriptionRefresh;
+
+    //注册RxBus
+    @Override
+    public void registerRxBus() {
+        super.registerRxBus();
+        mSubscriptionRefresh = RxBus.getDefault().toObservable(AllocateListRefreshBean.class)
+                .subscribe(new Consumer<AllocateListRefreshBean>() {
+                    @Override
+                    public void accept(AllocateListRefreshBean allocateListRefreshBean) throws Exception {
+                        uc.beginRefreshing.call();
+                    }
+                });
+        RxSubscriptions.add(mSubscriptionRefresh);
+    }
+
+    //移除RxBus
+    @Override
+    public void removeRxBus() {
+        super.removeRxBus();
+        //将订阅者从管理站中移除
+        RxSubscriptions.remove(mSubscriptionRefresh);
     }
 }

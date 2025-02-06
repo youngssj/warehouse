@@ -5,21 +5,21 @@ public class OutboundData {
     private String createTime;
     private String updateBy;
     private Object updateTime;
-    private Object remark;
-    private int inId;
-    private String batchNumber;
-    private String inTheme;
-    private String planInDate;
-    private int inUserId;
+    private String remark;
+    private int outId;
     private String auditStatus;
-    private Object secondStatus;
     private int bussId;
+    private String batchNumber;
+    private String outTheme;
+    private String planOutDate;
+    private int outUserId;
     private String userName;
     private Object materialCategory;
-    private String inStatus;
-    private String inType;
+    private String outStatus;
+    private String outType;
     private String delFlag;
     private int deptId;
+    private Object secondStatus;
     private Object elecMaterialList;
 
     public String getCreateBy() {
@@ -54,52 +54,20 @@ public class OutboundData {
         this.updateTime = updateTime;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public int getInId() {
-        return inId;
+    public int getOutId() {
+        return outId;
     }
 
-    public void setInId(int inId) {
-        this.inId = inId;
-    }
-
-    public String getBatchNumber() {
-        return batchNumber;
-    }
-
-    public void setBatchNumber(String batchNumber) {
-        this.batchNumber = batchNumber;
-    }
-
-    public String getInTheme() {
-        return inTheme;
-    }
-
-    public void setInTheme(String inTheme) {
-        this.inTheme = inTheme;
-    }
-
-    public String getPlanInDate() {
-        return planInDate;
-    }
-
-    public void setPlanInDate(String planInDate) {
-        this.planInDate = planInDate;
-    }
-
-    public int getInUserId() {
-        return inUserId;
-    }
-
-    public void setInUserId(int inUserId) {
-        this.inUserId = inUserId;
+    public void setOutId(int outId) {
+        this.outId = outId;
     }
 
     public String getAuditStatus() {
@@ -110,20 +78,44 @@ public class OutboundData {
         this.auditStatus = auditStatus;
     }
 
-    public Object getSecondStatus() {
-        return secondStatus;
-    }
-
-    public void setSecondStatus(Object secondStatus) {
-        this.secondStatus = secondStatus;
-    }
-
     public int getBussId() {
         return bussId;
     }
 
     public void setBussId(int bussId) {
         this.bussId = bussId;
+    }
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+
+    public String getOutTheme() {
+        return outTheme;
+    }
+
+    public void setOutTheme(String outTheme) {
+        this.outTheme = outTheme;
+    }
+
+    public String getPlanOutDate() {
+        return planOutDate;
+    }
+
+    public void setPlanOutDate(String planOutDate) {
+        this.planOutDate = planOutDate;
+    }
+
+    public int getOutUserId() {
+        return outUserId;
+    }
+
+    public void setOutUserId(int outUserId) {
+        this.outUserId = outUserId;
     }
 
     public String getUserName() {
@@ -142,20 +134,20 @@ public class OutboundData {
         this.materialCategory = materialCategory;
     }
 
-    public String getInStatus() {
-        return inStatus;
+    public String getOutStatus() {
+        return outStatus;
     }
 
-    public void setInStatus(String inStatus) {
-        this.inStatus = inStatus;
+    public void setOutStatus(String outStatus) {
+        this.outStatus = outStatus;
     }
 
-    public String getInType() {
-        return inType;
+    public String getOutType() {
+        return outType;
     }
 
-    public void setInType(String inType) {
-        this.inType = inType;
+    public void setOutType(String outType) {
+        this.outType = outType;
     }
 
     public String getDelFlag() {
@@ -172,6 +164,14 @@ public class OutboundData {
 
     public void setDeptId(int deptId) {
         this.deptId = deptId;
+    }
+
+    public Object getSecondStatus() {
+        return secondStatus;
+    }
+
+    public void setSecondStatus(Object secondStatus) {
+        this.secondStatus = secondStatus;
     }
 
     public Object getElecMaterialList() {

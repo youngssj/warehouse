@@ -10,6 +10,7 @@ import com.victor.base.data.entity.MovementDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.movement.R;
+import com.victor.movement.bean.MovementListRefreshBean;
 import com.victor.movement.bean.MovementScanAddItemsBean;
 import com.victor.movement.bean.MovementScanRemoveItemsBean;
 import com.victor.movement.bean.MovementScanUpdateItemsBean;
@@ -72,6 +73,7 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onNext(Boolean b) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new MovementListRefreshBean());
                             finish();
                         }
 
@@ -96,6 +98,7 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onResult(Object o) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new MovementListRefreshBean());
                             finish();
                         }
 
@@ -107,7 +110,7 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     });
 
-    public void getNetData(int inId) {
+    public void getNetData(int movementId) {
         if (Constants.CONFIG.IS_OFFLINE) {
             Observable.create((ObservableOnSubscribe<MovementDetail>) emitter -> {
 //                MovementDetail data = model._selectOneCheck(checkId);
@@ -144,7 +147,7 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                     });
 
         } else {
-            model.selectByMovement(inId)
+            model.selectByMovement(movementId)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

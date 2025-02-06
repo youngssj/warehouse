@@ -54,6 +54,8 @@ public abstract class BaseOddViewModel<T extends BaseRecycleItemViewModel> exten
     public UIChangeObservable uc = new UIChangeObservable();
 
     public class UIChangeObservable {
+        //下拉刷新开始
+        public SingleLiveEvent beginRefreshing = new SingleLiveEvent<>();
         //下拉刷新完成
         public SingleLiveEvent finishRefreshing = new SingleLiveEvent<>();
         //上拉加载完成

@@ -12,20 +12,20 @@ public class OutboundDetail {
     private String updateBy;
     private Object updateTime;
     private String remark;
-    private int inId;
-    private String batchNumber;
-    private String inTheme;
-    private String planInDate;
-    private int inUserId;
+    private int outId;
     private String auditStatus;
-    private Object secondStatus;
     private int bussId;
+    private String batchNumber;
+    private String outTheme;
+    private String planOutDate;
+    private int outUserId;
     private String userName;
     private Object materialCategory;
-    private String inStatus;
-    private String inType;
+    private String outStatus;
+    private String outType;
     private String delFlag;
     private int deptId;
+    private Object secondStatus;
     private List<ElecMaterialList> elecMaterialList;
 
     public String getCreateBy() {
@@ -68,44 +68,12 @@ public class OutboundDetail {
         this.remark = remark;
     }
 
-    public int getInId() {
-        return inId;
+    public int getOutId() {
+        return outId;
     }
 
-    public void setInId(int inId) {
-        this.inId = inId;
-    }
-
-    public String getBatchNumber() {
-        return batchNumber;
-    }
-
-    public void setBatchNumber(String batchNumber) {
-        this.batchNumber = batchNumber;
-    }
-
-    public String getInTheme() {
-        return inTheme;
-    }
-
-    public void setInTheme(String inTheme) {
-        this.inTheme = inTheme;
-    }
-
-    public String getPlanInDate() {
-        return planInDate;
-    }
-
-    public void setPlanInDate(String planInDate) {
-        this.planInDate = planInDate;
-    }
-
-    public int getInUserId() {
-        return inUserId;
-    }
-
-    public void setInUserId(int inUserId) {
-        this.inUserId = inUserId;
+    public void setOutId(int outId) {
+        this.outId = outId;
     }
 
     public String getAuditStatus() {
@@ -116,20 +84,44 @@ public class OutboundDetail {
         this.auditStatus = auditStatus;
     }
 
-    public Object getSecondStatus() {
-        return secondStatus;
-    }
-
-    public void setSecondStatus(Object secondStatus) {
-        this.secondStatus = secondStatus;
-    }
-
     public int getBussId() {
         return bussId;
     }
 
     public void setBussId(int bussId) {
         this.bussId = bussId;
+    }
+
+    public String getBatchNumber() {
+        return batchNumber;
+    }
+
+    public void setBatchNumber(String batchNumber) {
+        this.batchNumber = batchNumber;
+    }
+
+    public String getOutTheme() {
+        return outTheme;
+    }
+
+    public void setOutTheme(String outTheme) {
+        this.outTheme = outTheme;
+    }
+
+    public String getPlanOutDate() {
+        return planOutDate;
+    }
+
+    public void setPlanOutDate(String planOutDate) {
+        this.planOutDate = planOutDate;
+    }
+
+    public int getOutUserId() {
+        return outUserId;
+    }
+
+    public void setOutUserId(int outUserId) {
+        this.outUserId = outUserId;
     }
 
     public String getUserName() {
@@ -148,20 +140,20 @@ public class OutboundDetail {
         this.materialCategory = materialCategory;
     }
 
-    public String getInStatus() {
-        return inStatus;
+    public String getOutStatus() {
+        return outStatus;
     }
 
-    public void setInStatus(String inStatus) {
-        this.inStatus = inStatus;
+    public void setOutStatus(String outStatus) {
+        this.outStatus = outStatus;
     }
 
-    public String getInType() {
-        return inType;
+    public String getOutType() {
+        return outType;
     }
 
-    public void setInType(String inType) {
-        this.inType = inType;
+    public void setOutType(String outType) {
+        this.outType = outType;
     }
 
     public String getDelFlag() {
@@ -180,6 +172,14 @@ public class OutboundDetail {
         this.deptId = deptId;
     }
 
+    public Object getSecondStatus() {
+        return secondStatus;
+    }
+
+    public void setSecondStatus(Object secondStatus) {
+        this.secondStatus = secondStatus;
+    }
+
     public List<ElecMaterialList> getElecMaterialList() {
         return elecMaterialList;
     }
@@ -192,12 +192,12 @@ public class OutboundDetail {
         private String createBy;
         private String createTime;
         private String updateBy;
-        private Object updateTime;
+        private String updateTime;
         private String remark;
-        private int indetailId;
-        private int inId;
+        private int outdetailId;
+        private int outId;
         private int materialId;
-        private Object inDate;
+        private String outDate;
         private String materialCode;
         private String materialName;
         private String materialStatusName;
@@ -209,7 +209,7 @@ public class OutboundDetail {
         private String providerName;
         private String specifications;
         private String rfidCode;
-        private int isIn; // 入库结果 0未入库 1已入库
+        private String isOut; // 入库结果 0未入库 1已入库
         private transient String isInMessage; // 入库结果 0未入库 1已入库
         @Ignore
         public transient Drawable bgColor;
@@ -304,14 +304,6 @@ public class OutboundDetail {
             this.rfidCode = rfidCode;
         }
 
-        public int getIsIn() {
-            return isIn;
-        }
-
-        public void setIsIn(int isIn) {
-            this.isIn = isIn;
-        }
-
         public String getIsInMessage() {
             return isInMessage;
         }
@@ -360,11 +352,11 @@ public class OutboundDetail {
             this.updateBy = updateBy;
         }
 
-        public Object getUpdateTime() {
+        public String getUpdateTime() {
             return updateTime;
         }
 
-        public void setUpdateTime(Object updateTime) {
+        public void setUpdateTime(String updateTime) {
             this.updateTime = updateTime;
         }
 
@@ -376,20 +368,20 @@ public class OutboundDetail {
             this.remark = remark;
         }
 
-        public int getIndetailId() {
-            return indetailId;
+        public int getOutdetailId() {
+            return outdetailId;
         }
 
-        public void setIndetailId(int indetailId) {
-            this.indetailId = indetailId;
+        public void setOutdetailId(int outdetailId) {
+            this.outdetailId = outdetailId;
         }
 
-        public int getInId() {
-            return inId;
+        public int getOutId() {
+            return outId;
         }
 
-        public void setInId(int inId) {
-            this.inId = inId;
+        public void setOutId(int outId) {
+            this.outId = outId;
         }
 
         public int getMaterialId() {
@@ -400,42 +392,46 @@ public class OutboundDetail {
             this.materialId = materialId;
         }
 
-        public Object getInDate() {
-            return inDate;
+        public String getIsOut() {
+            return isOut;
         }
 
-        public void setInDate(Object inDate) {
-            this.inDate = inDate;
+        public void setIsOut(String isOut) {
+            this.isOut = isOut;
         }
 
-        @Override
-        public String toString() {
-            return "ElecMaterialList{" +
-                    "createBy='" + createBy + '\'' +
-                    ", createTime='" + createTime + '\'' +
-                    ", updateBy='" + updateBy + '\'' +
-                    ", updateTime=" + updateTime +
-                    ", remark='" + remark + '\'' +
-                    ", indetailId=" + indetailId +
-                    ", inId=" + inId +
-                    ", materialId=" + materialId +
-                    ", isIn='" + isIn + '\'' +
-                    ", inDate=" + inDate +
-                    ", materialCode='" + materialCode + '\'' +
-                    ", materialName='" + materialName + '\'' +
-                    ", materialStatusName='" + materialStatusName + '\'' +
-                    ", deptName='" + deptName + '\'' +
-                    ", warehouseName='" + warehouseName + '\'' +
-                    ", whAreaName='" + whAreaName + '\'' +
-                    ", whLocationName='" + whLocationName + '\'' +
-                    ", unitName='" + unitName + '\'' +
-                    ", providerName='" + providerName + '\'' +
-                    ", specifications='" + specifications + '\'' +
-                    ", rfidCode='" + rfidCode + '\'' +
-                    ", isInMessage='" + isInMessage + '\'' +
-                    ", bgColor=" + bgColor +
-                    ", textColor=" + textColor +
-                    '}';
+        public String getOutDate() {
+            return outDate;
         }
+
+        public void setOutDate(String outDate) {
+            this.outDate = outDate;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "OutboundDetail{" +
+                "createBy='" + createBy + '\'' +
+                ", createTime='" + createTime + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", updateTime=" + updateTime +
+                ", remark='" + remark + '\'' +
+                ", outId=" + outId +
+                ", auditStatus='" + auditStatus + '\'' +
+                ", bussId=" + bussId +
+                ", batchNumber='" + batchNumber + '\'' +
+                ", outTheme='" + outTheme + '\'' +
+                ", planOutDate='" + planOutDate + '\'' +
+                ", outUserId=" + outUserId +
+                ", userName='" + userName + '\'' +
+                ", materialCategory=" + materialCategory +
+                ", outStatus='" + outStatus + '\'' +
+                ", outType='" + outType + '\'' +
+                ", delFlag='" + delFlag + '\'' +
+                ", deptId=" + deptId +
+                ", secondStatus=" + secondStatus +
+                ", elecMaterialList=" + elecMaterialList +
+                '}';
     }
 }

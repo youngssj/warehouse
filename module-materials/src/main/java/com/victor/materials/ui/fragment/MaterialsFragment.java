@@ -46,6 +46,14 @@ public class MaterialsFragment extends BaseFragment<MaterialsFragmentBinding, Ma
             showCustomDialog(getResources().getString(R.string.workbench_materials_detail_text), binding, (dialog, which) -> {
             });
         });
+        //监听下拉刷新开始
+        viewModel.uc.beginRefreshing.observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                //结束刷新
+                binding.bgaRefresh.beginRefreshing();
+            }
+        });
         //监听下拉刷新完成
         viewModel.uc.finishRefreshing.observe(getViewLifecycleOwner(), new Observer() {
             @Override

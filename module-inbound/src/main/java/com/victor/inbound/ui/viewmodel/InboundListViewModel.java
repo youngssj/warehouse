@@ -13,18 +13,23 @@ import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inbound.R;
+import com.victor.inbound.bean.InboundListRefreshBean;
 import com.victor.inbound.ui.viewmodel.itemviewmodel.InboundItemViewModel;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class InboundListViewModel extends BaseOddViewModel<InboundItemViewModel> {
     public InboundListViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
+        uc.beginRefreshing.call();
     }
 
     @Override
@@ -50,7 +55,8 @@ public class InboundListViewModel extends BaseOddViewModel<InboundItemViewModel>
                             if (page == 1)
                                 setNoDataVisibleObservable(View.VISIBLE);
                             else ToastUtils.showShort(R.string.app_no_more_data_text);
-                            return;
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
                         }
 //                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
 //                            PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, assetCheckOdd);
@@ -68,6 +74,7 @@ public class InboundListViewModel extends BaseOddViewModel<InboundItemViewModel>
                             if (listData == null || listData.getTotal() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
                             } else if (listData != null) {
+                                setNoDataVisibleObservable(View.GONE);
                                 if (observableList.size() == listData.getTotal()) {
                                     // 数据全部返回了
                                     canloadmore = false;
@@ -89,5 +96,30 @@ public class InboundListViewModel extends BaseOddViewModel<InboundItemViewModel>
                         }
                     });
         }
+    }
+
+    //订阅者
+    private Disposable mSubscriptionRefresh;
+
+    //注册RxBus
+    @Override
+    public void registerRxBus() {
+        super.registerRxBus();
+        mSubscriptionRefresh = RxBus.getDefault().toObservable(InboundListRefreshBean.class)
+                .subscribe(new Consumer<InboundListRefreshBean>() {
+                    @Override
+                    public void accept(InboundListRefreshBean inboundListRefreshBean) throws Exception {
+                        uc.beginRefreshing.call();
+                    }
+                });
+        RxSubscriptions.add(mSubscriptionRefresh);
+    }
+
+    //移除RxBus
+    @Override
+    public void removeRxBus() {
+        super.removeRxBus();
+        //将订阅者从管理站中移除
+        RxSubscriptions.remove(mSubscriptionRefresh);
     }
 }

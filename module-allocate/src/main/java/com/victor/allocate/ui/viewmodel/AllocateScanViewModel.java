@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.victor.allocate.bean.AllocateListRefreshBean;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
@@ -72,6 +73,7 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onNext(Boolean b) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new AllocateListRefreshBean());
                             finish();
                         }
 
@@ -96,6 +98,7 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onResult(Object o) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                            RxBus.getDefault().post(new AllocateListRefreshBean());
                             finish();
                         }
 

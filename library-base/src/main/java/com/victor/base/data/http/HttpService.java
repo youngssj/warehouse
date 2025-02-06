@@ -97,7 +97,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    @GET("/dev-api/mobile/storage/ElecMaterialOutinfo/list")
     Observable<ListResponse<List<OutboundData>>> listOutbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -107,7 +107,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    @GET("/dev-api/mobile/storage/moveinfo/list")
     Observable<ListResponse<List<MovementData>>> listMovement(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -163,7 +163,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    @GET("/dev-api/mobile/storage/ElecMaterialOutinfo/{dynamicPath}")
     Observable<BaseResponse<OutboundDetail>> selectByOutbound(@Path("dynamicPath") int path);
 
     /**
@@ -218,7 +218,7 @@ public interface HttpService {
      * @param outboundDetail
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    @POST("/dev-api/mobile/storage/ElecMaterialOutinfo/completeInfo")
     Observable<BaseResponse> saveOutboundResult(@Body OutboundDetail outboundDetail);
 
     /**

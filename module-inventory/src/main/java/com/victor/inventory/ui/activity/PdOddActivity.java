@@ -45,6 +45,14 @@ public class PdOddActivity extends MBaseActivity<InventoryFragmentPdOddBinding, 
 
     @Override
     public void initViewObservable() {
+        //监听下拉刷新开始
+        viewModel.uc.beginRefreshing.observe(this, new Observer() {
+            @Override
+            public void onChanged(@Nullable Object o) {
+                //结束刷新
+                binding.include.bgaRefresh.beginRefreshing();
+            }
+        });
         //监听下拉刷新完成
         viewModel.uc.finishRefreshing.observe(this, new Observer() {
             @Override

@@ -29,7 +29,6 @@
             android:layout_height="match_parent"
             android:layout_below="@id/title"
             android:background="@color/color_F8F9F9"
-            binding:autoRefreshCommand="@{viewModel.autoRefreshCommand}"
             binding:onLoadMoreCommand="@{viewModel.onLoadMoreCommand}"
             binding:onRefreshCommand="@{viewModel.onRefreshCommand}">
 

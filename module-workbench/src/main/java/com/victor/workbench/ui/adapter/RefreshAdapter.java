@@ -18,11 +18,10 @@ import me.goldze.mvvmhabit.utils.Utils;
  * 邮箱：jxfengmtx@gmail.com
  */
 public class RefreshAdapter {
-    @BindingAdapter(value = {"onRefreshCommand", "onLoadMoreCommand", "autoRefreshCommand"}, requireAll = false)
+    @BindingAdapter(value = {"onRefreshCommand", "onLoadMoreCommand"}, requireAll = false)
     public static void onRefreshAndLoadMoreCommand(BGARefreshLayout layout,
                                                    final BindingCommand onRefreshCommand,
-                                                   final BindingCommand onLoadMoreCommand,
-                                                   BindingCommand autoRefreshCommand) {
+                                                   final BindingCommand onLoadMoreCommand) {
         layout.setDelegate(new BGARefreshLayout.BGARefreshLayoutDelegate() {
             @Override
             public void onBGARefreshLayoutBeginRefreshing(BGARefreshLayout refreshLayout) {
@@ -47,9 +46,5 @@ public class RefreshAdapter {
         meiTuanRefreshViewHolder.setChangeToReleaseRefreshAnimResId(R.drawable.workbench_bga_refresh_mt_change_to_release_refresh);
         meiTuanRefreshViewHolder.setRefreshingAnimResId(R.drawable.workbench_bga_refresh_mt_refreshing);
         layout.setRefreshViewHolder(meiTuanRefreshViewHolder);
-
-        if(autoRefreshCommand != null){
-            layout.beginRefreshing();
-        }
     }
 }

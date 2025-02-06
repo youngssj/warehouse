@@ -3,24 +3,29 @@ package com.victor.base.data.entity;
 public class MovementData {
     private String createBy;
     private String createTime;
-    private String updateBy;
+    private Object updateBy;
     private Object updateTime;
-    private Object remark;
-    private int inId;
+    private String remark;
+    private int id;
+    private int bussId;
+    private int oldAreaId;
+    private String oldAreaName;
+    private int newAreaId;
+    private String newAreaName;
+    private Object oldLocationId;
+    private Object newLocationId;
     private String batchNumber;
-    private String inTheme;
-    private String planInDate;
-    private int inUserId;
+    private int moveUserId;
+    private Object deptId;
+    private String moveStatus;
+    private Object moveType;
+    private String moveTheme;
     private String auditStatus;
     private Object secondStatus;
-    private int bussId;
-    private String userName;
-    private Object materialCategory;
-    private String inStatus;
-    private String inType;
+    private String planMoveDate;
     private String delFlag;
-    private int deptId;
     private Object elecMaterialList;
+    private Object materials;
 
     public String getCreateBy() {
         return createBy;
@@ -38,11 +43,11 @@ public class MovementData {
         this.createTime = createTime;
     }
 
-    public String getUpdateBy() {
+    public Object getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(String updateBy) {
+    public void setUpdateBy(Object updateBy) {
         this.updateBy = updateBy;
     }
 
@@ -54,20 +59,76 @@ public class MovementData {
         this.updateTime = updateTime;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
-    public int getInId() {
-        return inId;
+    public int getId() {
+        return id;
     }
 
-    public void setInId(int inId) {
-        this.inId = inId;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getBussId() {
+        return bussId;
+    }
+
+    public void setBussId(int bussId) {
+        this.bussId = bussId;
+    }
+
+    public int getOldAreaId() {
+        return oldAreaId;
+    }
+
+    public void setOldAreaId(int oldAreaId) {
+        this.oldAreaId = oldAreaId;
+    }
+
+    public String getOldAreaName() {
+        return oldAreaName;
+    }
+
+    public void setOldAreaName(String oldAreaName) {
+        this.oldAreaName = oldAreaName;
+    }
+
+    public int getNewAreaId() {
+        return newAreaId;
+    }
+
+    public void setNewAreaId(int newAreaId) {
+        this.newAreaId = newAreaId;
+    }
+
+    public String getNewAreaName() {
+        return newAreaName;
+    }
+
+    public void setNewAreaName(String newAreaName) {
+        this.newAreaName = newAreaName;
+    }
+
+    public Object getOldLocationId() {
+        return oldLocationId;
+    }
+
+    public void setOldLocationId(Object oldLocationId) {
+        this.oldLocationId = oldLocationId;
+    }
+
+    public Object getNewLocationId() {
+        return newLocationId;
+    }
+
+    public void setNewLocationId(Object newLocationId) {
+        this.newLocationId = newLocationId;
     }
 
     public String getBatchNumber() {
@@ -78,28 +139,44 @@ public class MovementData {
         this.batchNumber = batchNumber;
     }
 
-    public String getInTheme() {
-        return inTheme;
+    public int getMoveUserId() {
+        return moveUserId;
     }
 
-    public void setInTheme(String inTheme) {
-        this.inTheme = inTheme;
+    public void setMoveUserId(int moveUserId) {
+        this.moveUserId = moveUserId;
     }
 
-    public String getPlanInDate() {
-        return planInDate;
+    public Object getDeptId() {
+        return deptId;
     }
 
-    public void setPlanInDate(String planInDate) {
-        this.planInDate = planInDate;
+    public void setDeptId(Object deptId) {
+        this.deptId = deptId;
     }
 
-    public int getInUserId() {
-        return inUserId;
+    public String getMoveStatus() {
+        return moveStatus;
     }
 
-    public void setInUserId(int inUserId) {
-        this.inUserId = inUserId;
+    public void setMoveStatus(String moveStatus) {
+        this.moveStatus = moveStatus;
+    }
+
+    public Object getMoveType() {
+        return moveType;
+    }
+
+    public void setMoveType(Object moveType) {
+        this.moveType = moveType;
+    }
+
+    public String getMoveTheme() {
+        return moveTheme;
+    }
+
+    public void setMoveTheme(String moveTheme) {
+        this.moveTheme = moveTheme;
     }
 
     public String getAuditStatus() {
@@ -118,44 +195,12 @@ public class MovementData {
         this.secondStatus = secondStatus;
     }
 
-    public int getBussId() {
-        return bussId;
+    public String getPlanMoveDate() {
+        return planMoveDate;
     }
 
-    public void setBussId(int bussId) {
-        this.bussId = bussId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Object getMaterialCategory() {
-        return materialCategory;
-    }
-
-    public void setMaterialCategory(Object materialCategory) {
-        this.materialCategory = materialCategory;
-    }
-
-    public String getInStatus() {
-        return inStatus;
-    }
-
-    public void setInStatus(String inStatus) {
-        this.inStatus = inStatus;
-    }
-
-    public String getInType() {
-        return inType;
-    }
-
-    public void setInType(String inType) {
-        this.inType = inType;
+    public void setPlanMoveDate(String planMoveDate) {
+        this.planMoveDate = planMoveDate;
     }
 
     public String getDelFlag() {
@@ -166,19 +211,19 @@ public class MovementData {
         this.delFlag = delFlag;
     }
 
-    public int getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(int deptId) {
-        this.deptId = deptId;
-    }
-
     public Object getElecMaterialList() {
         return elecMaterialList;
     }
 
     public void setElecMaterialList(Object elecMaterialList) {
         this.elecMaterialList = elecMaterialList;
+    }
+
+    public Object getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(Object materials) {
+        this.materials = materials;
     }
 }

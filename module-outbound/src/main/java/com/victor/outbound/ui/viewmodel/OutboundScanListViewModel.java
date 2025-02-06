@@ -97,7 +97,7 @@ public class OutboundScanListViewModel extends BaseViewModel {
                             for (OutboundDetail.ElecMaterialList bean : outboundScanItemsBean.getElecMaterialList()) {
                                 for (OutboundScanItemViewModel itemViewModel : outboundScanList) {
                                     if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
-                                        itemViewModel.entity.get().setIsIn(0);
+                                        itemViewModel.entity.get().setIsOut("0");
                                         itemViewModel.entity.get().setIsInMessage(getApplication().getResources().getString(R.string.workbench_outbound_failure_text));
                                         itemViewModel.entity.get().setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
                                         itemViewModel.entity.notifyChange();

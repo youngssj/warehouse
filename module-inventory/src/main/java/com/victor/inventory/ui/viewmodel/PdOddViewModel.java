@@ -11,13 +11,17 @@ import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.TakeStockData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
-import com.victor.inventory.ui.viewmodel.itemviewmodel.PdOddItemViewModel;
 import com.victor.inventory.R;
+import com.victor.inventory.bean.InventoryListRefreshBean;
+import com.victor.inventory.ui.viewmodel.itemviewmodel.PdOddItemViewModel;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
@@ -33,6 +37,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
 
     public PdOddViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
+        uc.beginRefreshing.call();
     }
 
     @Override
@@ -57,7 +62,8 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                             if (page == 1)
                                 setNoDataVisibleObservable(View.VISIBLE);
                             else ToastUtils.showShort(R.string.app_no_more_data_text);
-                            return;
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
                         }
 //                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
 //                            PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, assetCheckOdd);
@@ -72,9 +78,10 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                     .subscribe(new ApiListDisposableObserver<List<TakeStockData>>() {
                         @Override
                         public void onResult(ListData<List<TakeStockData>> listData) {
-                            if(listData == null || listData.getTotal() == 0){
+                            if (listData == null || listData.getTotal() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
-                            }else if (listData != null) {
+                            } else if (listData != null) {
+                                setNoDataVisibleObservable(View.GONE);
                                 if (observableList.size() == listData.getTotal()) {
                                     // 数据全部返回了
                                     canloadmore = false;
@@ -96,5 +103,30 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                         }
                     });
         }
+    }
+
+    //订阅者
+    private Disposable mSubscriptionRefresh;
+
+    //注册RxBus
+    @Override
+    public void registerRxBus() {
+        super.registerRxBus();
+        mSubscriptionRefresh = RxBus.getDefault().toObservable(InventoryListRefreshBean.class)
+                .subscribe(new Consumer<InventoryListRefreshBean>() {
+                    @Override
+                    public void accept(InventoryListRefreshBean inventoryListRefreshBean) throws Exception {
+                        uc.beginRefreshing.call();
+                    }
+                });
+        RxSubscriptions.add(mSubscriptionRefresh);
+    }
+
+    //移除RxBus
+    @Override
+    public void removeRxBus() {
+        super.removeRxBus();
+        //将订阅者从管理站中移除
+        RxSubscriptions.remove(mSubscriptionRefresh);
     }
 }

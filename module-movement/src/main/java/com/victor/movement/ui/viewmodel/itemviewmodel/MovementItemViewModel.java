@@ -18,7 +18,7 @@ public class MovementItemViewModel extends BaseRecycleItemViewModel<MovementList
     @Override
     protected void itemClickCallback() {
         ARouter.getInstance().build(RouterActivityPath.Movement.PAGER_MOVEMENT_SCAN)
-                .withInt("inId", entity.get().getInId())
+                .withInt("movementId", entity.get().getId())
                 .navigation();
     }
 }

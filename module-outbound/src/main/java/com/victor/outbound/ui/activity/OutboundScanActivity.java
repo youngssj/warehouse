@@ -38,8 +38,8 @@ public class OutboundScanActivity extends BaseUhfActivity<OutboundScanActivityBi
 
     private String[] titles;
 
-    @Autowired(name = "inId")
-    int inId;
+    @Autowired(name = "outId")
+    int outId;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
@@ -85,7 +85,7 @@ public class OutboundScanActivity extends BaseUhfActivity<OutboundScanActivityBi
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setPowerVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_outbound_title_text));
-        viewModel.getNetData(inId);
+        viewModel.getNetData(outId);
         setRead(true);
 
         titles = new String[]{getResources().getString(R.string.workbench_outbound_tab1_text), getResources().getString(R.string.workbench_outbound_tab2_text)};
