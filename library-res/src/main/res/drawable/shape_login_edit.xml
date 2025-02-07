@@ -1,64 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 边 -->
-    <item>
+    <item android:bottom="1mm"
+        android:left="1mm"
+        android:right="1mm"
+        android:top="1mm">
         <shape android:shape="rectangle">
-            <padding
-                android:bottom="1mm"
-                android:left="1mm"
-                android:right="1mm"
-                android:top="1mm" />
             <solid android:color="#00CCCCCC" />
             <corners android:radius="3mm" />
         </shape>
     </item>
-    <item>
+    <item android:bottom="2mm"
+        android:left="2mm"
+        android:right="2mm"
+        android:top="2mm">
         <shape android:shape="rectangle">
-            <padding
-                android:bottom="1mm"
-                android:left="1mm"
-                android:right="1mm"
-                android:top="1mm" />
             <solid android:color="#05CCCCCC" />
             <corners android:radius="3mm" />
         </shape>
     </item>
-    <item>
+    <item android:bottom="3mm"
+        android:left="3mm"
+        android:right="3mm"
+        android:top="3mm">
         <shape android:shape="rectangle">
-            <padding
-                android:bottom="1mm"
-                android:left="1mm"
-                android:right="1mm"
-                android:top="1mm" />
             <solid android:color="#10CCCCCC" />
             <corners android:radius="3mm" />
         </shape>
     </item>
-    <item>
+    <item android:bottom="4mm"
+        android:left="4mm"
+        android:right="4mm"
+        android:top="4mm">
         <shape android:shape="rectangle">
-            <padding
-                android:bottom="1mm"
-                android:left="1mm"
-                android:right="1mm"
-                android:top="1mm" />
-            <solid android:color="#20CCCCCC" />
+            <solid android:color="#15CCCCCC" />
             <corners android:radius="3mm" />
         </shape>
     </item>
-    <item>
+    <item android:bottom="1mm"
+        android:left="1mm"
+        android:right="1mm"
+        android:top="1mm">
         <shape android:shape="rectangle">
-            <padding
-                android:bottom="1mm"
-                android:left="1mm"
-                android:right="1mm"
-                android:top="1mm" />
-            <solid android:color="#30CCCCCC" />
+            <solid android:color="#20CCCCCC" />
             <corners android:radius="3mm" />
         </shape>
     </item>
 
     <!-- 中心背景 -->
-    <item>
+    <item android:bottom="5mm"
+        android:left="5mm"
+        android:right="5mm"
+        android:top="5mm">
         <shape android:shape="rectangle"
             android:useLevel="false">
             <!-- 实心 -->

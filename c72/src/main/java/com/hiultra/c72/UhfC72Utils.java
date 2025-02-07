@@ -137,10 +137,17 @@ public class UhfC72Utils {
             stopInventory();
             return;
         }
+
+        int power = mReader.getPower();
+        mReader.setPower(5);
+
         UHFTAGInfo uhftagInfo = mReader.inventorySingleTag();
+        mReader.setPower(power);
         SoundUtil.play(1, 0);
         Set<String> epcSet = new HashSet<>();
-        epcSet.add(uhftagInfo.getEPC());
+        if(uhftagInfo != null) {
+            epcSet.add(uhftagInfo.getEPC());
+        }
         readCallback.callback(epcSet);
     }
 

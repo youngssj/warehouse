@@ -192,8 +192,8 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                     rvSet.add(bean);  //防止添加的数据重复
 
                     bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
-                    bean.setIsIn(1);
-                    bean.setIsInMessage(getApplication().getResources().getString(R.string.workbench_movement_success_text));
+                    bean.setIsMove("1");
+                    bean.setIsMoveMessage(getApplication().getResources().getString(R.string.workbench_movement_success_text));
 
                     // 添加
                     MovementScanAddItemsBean movementScanAddItemsBean = new MovementScanAddItemsBean();

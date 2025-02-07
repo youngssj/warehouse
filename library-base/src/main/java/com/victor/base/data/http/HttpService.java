@@ -172,7 +172,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    @GET("/dev-api/mobile/storage/ElecMaterialMoveinfo/{dynamicPath}")
     Observable<BaseResponse<MovementDetail>> selectByMovement(@Path("dynamicPath") int path);
 
     /**

@@ -193,7 +193,7 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
                     bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
                     bean.setIsOut("1");
-                    bean.setIsInMessage(getApplication().getResources().getString(R.string.workbench_outbound_success_text));
+                    bean.setIsOutMessage(getApplication().getResources().getString(R.string.workbench_outbound_success_text));
 
                     // 添加
                     OutboundScanAddItemsBean outboundScanAddItemsBean = new OutboundScanAddItemsBean();

@@ -97,8 +97,8 @@ public class MovementScanListViewModel extends BaseViewModel {
                             for (MovementDetail.ElecMaterialList bean : movementScanItemsBean.getElecMaterialList()) {
                                 for (MovementScanItemViewModel itemViewModel : movementScanList) {
                                     if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
-                                        itemViewModel.entity.get().setIsIn(0);
-                                        itemViewModel.entity.get().setIsInMessage(getApplication().getResources().getString(R.string.workbench_movement_failure_text));
+                                        itemViewModel.entity.get().setIsMove("0");
+                                        itemViewModel.entity.get().setIsMoveMessage(getApplication().getResources().getString(R.string.workbench_movement_failure_text));
                                         itemViewModel.entity.get().setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
                                         itemViewModel.entity.notifyChange();
                                     }

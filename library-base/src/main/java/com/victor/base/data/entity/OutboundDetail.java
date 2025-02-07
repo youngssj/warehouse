@@ -210,7 +210,7 @@ public class OutboundDetail {
         private String specifications;
         private String rfidCode;
         private String isOut; // 入库结果 0未入库 1已入库
-        private transient String isInMessage; // 入库结果 0未入库 1已入库
+        private transient String isOutMessage; // 入库结果 0未入库 1已入库
         @Ignore
         public transient Drawable bgColor;
         @Ignore
@@ -304,12 +304,12 @@ public class OutboundDetail {
             this.rfidCode = rfidCode;
         }
 
-        public String getIsInMessage() {
-            return isInMessage;
+        public String getIsOutMessage() {
+            return isOutMessage;
         }
 
-        public void setIsInMessage(String isInMessage) {
-            this.isInMessage = isInMessage;
+        public void setIsOutMessage(String isOutMessage) {
+            this.isOutMessage = isOutMessage;
         }
 
         public Drawable getBgColor() {
