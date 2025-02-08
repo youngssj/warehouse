@@ -14,13 +14,13 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 public class InboundScanItemViewModel extends ItemViewModel<InboundScanListViewModel> {
 
-    public ObservableField<InboundData.ElecMaterialList> entity = new ObservableField<>();
+    public ObservableField<InboundData.InboundElecMaterial> entity = new ObservableField<>();
 
     public BindingCommand itemClick = new BindingCommand(() -> {
         viewModel.uc.showCustomEvent.setValue(this);
     });
 
-    public InboundScanItemViewModel(@NonNull InboundScanListViewModel viewModel, InboundData.ElecMaterialList bean) {
+    public InboundScanItemViewModel(@NonNull InboundScanListViewModel viewModel, InboundData.InboundElecMaterial bean) {
         super(viewModel);
         this.entity.set(bean);
     }

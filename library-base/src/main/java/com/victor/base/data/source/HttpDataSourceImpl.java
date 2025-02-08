@@ -86,6 +86,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<InboundData>>> listAllInbound(int pageNum) {
+        return apiService.listInbound(pageNum, 100000);
+    }
+
+    @Override
     public Observable<ListResponse<List<OutboundData>>> listOutbound(int pageNum) {
         return apiService.listOutbound(pageNum, 10);
     }

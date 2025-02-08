@@ -4,11 +4,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.victor.base.data.dao.InboundDataDao;
+import com.victor.base.data.dao.InboundElecMaterialDao;
+import com.victor.base.data.dao.InventoryDataDao;
 import com.victor.base.data.dao.InventoryElecMaterialDao;
 import com.victor.base.data.dao.SyncInfoDao;
-import com.victor.base.data.dao.InventoryDataDao;
 import com.victor.base.data.dao.UserTokenDao;
-import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.UserToken;
@@ -25,10 +27,13 @@ import me.goldze.mvvmhabit.utils.Utils;
  * 创建日期：2020/9/9
  * 邮箱：jxfengmtx@gmail.com
  */
-@Database(entities = {UserToken.class,
+@Database(entities = {
+        UserToken.class,
         SyncInfo.class,
         InventoryData.class,
         InventoryData.InventoryElecMaterial.class,
+        InboundData.class,
+        InboundData.InboundElecMaterial.class,
 }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase DB;  //创建单例
@@ -58,4 +63,10 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // 盘点单详情
     public abstract InventoryElecMaterialDao inventoryElecMaterialDao();
+
+    // 入库单
+    public abstract InboundDataDao inboundDataDao();
+
+    // 入库单详情
+    public abstract InboundElecMaterialDao inboundElecMaterialDao();
 }

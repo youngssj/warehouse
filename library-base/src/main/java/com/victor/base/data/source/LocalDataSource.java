@@ -1,5 +1,6 @@
 package com.victor.base.data.source;
 
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.InventoryData;
@@ -59,14 +60,13 @@ public interface LocalDataSource {
 
     /* ----------------同步数据------------- */
     void _saveSyncDate(SyncInfo syncInfo);
-
     SyncInfo _getSyncDate(int syncId);
-
     void _deleteInventoryData();
-
     void _insertInventoryData(InventoryData... inventoryDatas);
-
-    void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS);
+    void _insertInventoryElecMaterial(InventoryData.InventoryElecMaterial... inventoryElecMaterials);
+    void _deleteInboundData();
+    void _insertInboundData(InboundData... inboundDatas);
+    void _insertInboundElecMaterial(InboundData.InboundElecMaterial... inboundElecMaterials);
     /* ----------------同步数据------------- */
 
     /* ---------------本地接口，数据操作----------------- */

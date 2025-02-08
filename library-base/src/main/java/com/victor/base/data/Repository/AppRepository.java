@@ -96,6 +96,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Observable<ListResponse<List<InboundData>>> listAllInbound(int page) {
+        return mHttpDataSource.listAllInbound(page);
+    }
+
+    @Override
     public Observable<ListResponse<List<OutboundData>>> listOutbound(int page) {
         return mHttpDataSource.listOutbound(page);
     }
@@ -244,8 +249,23 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS) {
-        mLocalDataSource._insertElecMaterial(InventoryElecMaterialS);
+    public void _insertInventoryElecMaterial(InventoryData.InventoryElecMaterial... inventoryElecMaterials) {
+        mLocalDataSource._insertInventoryElecMaterial(inventoryElecMaterials);
+    }
+
+    @Override
+    public void _deleteInboundData() {
+        mLocalDataSource._deleteInboundData();
+    }
+
+    @Override
+    public void _insertInboundData(InboundData... inboundDatas) {
+        mLocalDataSource._insertInboundData(inboundDatas);
+    }
+
+    @Override
+    public void _insertInboundElecMaterial(InboundData.InboundElecMaterial... inboundElecMaterials) {
+        mLocalDataSource._insertInboundElecMaterial(inboundElecMaterials);
     }
 
     @Override
@@ -254,7 +274,7 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public InventoryData _selectOneInventory(int checkId){
+    public InventoryData _selectOneInventory(int checkId) {
         return mLocalDataSource._selectOneInventory(checkId);
     }
 

@@ -55,7 +55,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
         if (Constants.CONFIG.IS_OFFLINE) {
             // 盘盈
-            List<InboundData.ElecMaterialList> pyDataList = new ArrayList<>();
+            List<InboundData.InboundElecMaterial> pyDataList = new ArrayList<>();
 //                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
 //                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
 //                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
@@ -179,12 +179,12 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     }
 
-    private Set<InboundData.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
+    private Set<InboundData.InboundElecMaterial> rvSet = new HashSet<>();  //盘点到单子集合
 
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
         boolean hasData = false;
-        for (InboundData.ElecMaterialList bean : entity.get().getElecMaterialList()) {
+        for (InboundData.InboundElecMaterial bean : entity.get().getElecMaterialList()) {
             if (sets.contains(bean.getRfidCode())) {
                 sets.remove(bean.getRfidCode());
 

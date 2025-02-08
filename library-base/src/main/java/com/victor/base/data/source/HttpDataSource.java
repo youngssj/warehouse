@@ -39,6 +39,8 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<InboundData>>> listInbound(int page);
 
+    Observable<ListResponse<List<InboundData>>> listAllInbound(int page);
+
     Observable<ListResponse<List<OutboundData>>> listOutbound(int page);
 
     Observable<ListResponse<List<MovementData>>> listMovement(int page);

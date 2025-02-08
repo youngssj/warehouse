@@ -2,50 +2,75 @@ package com.victor.base.data.entity;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.List;
 
+@Entity
 public class InboundData {
     private String createBy;
     private String createTime;
     private String updateBy;
-    private Object updateTime;
-    private Object remark;
+    private String updateTime;
+    private String remark;
+    @PrimaryKey
     private int inId;
     private String batchNumber;
     private String inTheme;
     private String planInDate;
     private int inUserId;
     private String auditStatus;
-    private Object secondStatus;
+    private String secondStatus;
     private int bussId;
     private String userName;
-    private Object materialCategory;
+    private String materialCategory;
     private String inStatus;
     private String inType;
     private String delFlag;
     private int deptId;
-    private List<ElecMaterialList> elecMaterialList;
+    @Ignore
+    private List<InboundElecMaterial> inboundElecMaterial;
+    private int finished;
+    private String checkDate;
 
-    public List<ElecMaterialList> getElecMaterialList() {
-        return elecMaterialList;
+    public int getFinished() {
+        return finished;
     }
 
-    public void setElecMaterialList(List<ElecMaterialList> elecMaterialList) {
-        this.elecMaterialList = elecMaterialList;
+    public void setFinished(int finished) {
+        this.finished = finished;
     }
 
-    public static class ElecMaterialList {
+    public String getCheckDate() {
+        return checkDate;
+    }
+
+    public void setCheckDate(String checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public List<InboundElecMaterial> getElecMaterialList() {
+        return inboundElecMaterial;
+    }
+
+    public void setElecMaterialList(List<InboundElecMaterial> inboundElecMaterial) {
+        this.inboundElecMaterial = inboundElecMaterial;
+    }
+
+    @Entity
+    public static class InboundElecMaterial {
         private String createBy;
         private String createTime;
         private String updateBy;
-        private Object updateTime;
+        private String updateTime;
         private String remark;
+        @PrimaryKey
         private int indetailId;
         private int inId;
         private int materialId;
-        private Object inDate;
+        private String inDate;
         private String materialCode;
         private String materialName;
         private String materialStatusName;
@@ -208,11 +233,11 @@ public class InboundData {
             this.updateBy = updateBy;
         }
 
-        public Object getUpdateTime() {
+        public String getUpdateTime() {
             return updateTime;
         }
 
-        public void setUpdateTime(Object updateTime) {
+        public void setUpdateTime(String updateTime) {
             this.updateTime = updateTime;
         }
 
@@ -248,11 +273,11 @@ public class InboundData {
             this.materialId = materialId;
         }
 
-        public Object getInDate() {
+        public String getInDate() {
             return inDate;
         }
 
-        public void setInDate(Object inDate) {
+        public void setInDate(String inDate) {
             this.inDate = inDate;
         }
 
@@ -311,19 +336,19 @@ public class InboundData {
         this.updateBy = updateBy;
     }
 
-    public Object getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Object updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
@@ -375,11 +400,11 @@ public class InboundData {
         this.auditStatus = auditStatus;
     }
 
-    public Object getSecondStatus() {
+    public String getSecondStatus() {
         return secondStatus;
     }
 
-    public void setSecondStatus(Object secondStatus) {
+    public void setSecondStatus(String secondStatus) {
         this.secondStatus = secondStatus;
     }
 
@@ -399,11 +424,11 @@ public class InboundData {
         this.userName = userName;
     }
 
-    public Object getMaterialCategory() {
+    public String getMaterialCategory() {
         return materialCategory;
     }
 
-    public void setMaterialCategory(Object materialCategory) {
+    public void setMaterialCategory(String materialCategory) {
         this.materialCategory = materialCategory;
     }
 

@@ -45,7 +45,7 @@ public class InboundScanFragment extends BaseFragment<InboundScanFragmentBinding
         viewModel.uc.showCustomEvent.observe(this, inboundScanItemViewModel -> {
             InboundScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.inbound_scan_detail, null, false);
             binding.setViewModel(inboundScanItemViewModel);
-            InboundData.ElecMaterialList dataListBean = inboundScanItemViewModel.entity.get();
+            InboundData.InboundElecMaterial dataListBean = inboundScanItemViewModel.entity.get();
             showCustomDialog(getResources().getString(R.string.workbench_inbound_detail_text), binding, (dialog, which) -> {
             });
         });

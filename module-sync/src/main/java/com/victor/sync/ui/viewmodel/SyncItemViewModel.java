@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.SyncInfo;
@@ -37,11 +38,59 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         final SyncInfo syncInfo = entity.get();
 
         switch (syncInfo.getSyncText()) {
+            case "入库":
+                downloadInboundData(syncInfo);
+                break;
             case "盘点":
                 downloadInventoryData(syncInfo);
                 break;
         }
     });
+
+    private void downloadInboundData(SyncInfo syncInfo) {
+        model.listAllInbound(1)
+                .compose(RxUtils.schedulersTransformer())
+                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
+                .subscribe(new ApiListDisposableObserver<List<InboundData>>() {
+                    @Override
+                    public void onResult(ListData<List<InboundData>> listData) {
+                        List<InboundData> data = listData.getList();
+                        if (data == null || data.size() == 0) {
+                            ToastUtils.showShort("无入库单数据");
+                            return;
+                        }
+
+                        // 删除本地盘点数据
+                        model._deleteInboundData();
+                        // 插入盘点单数组
+                        model._insertInboundData(data.toArray(new InboundData[data.size()]));
+
+                        // 设置下载条数
+                        syncInfo.setDownTotalValue(data.size());
+
+                        Observable<BaseResponse<InboundData>> baseResponseObservable = null;
+                        if (data.size() > 0) {
+                            baseResponseObservable = model.selectByInbound(data.get(0).getInId());
+                        }
+                        for (int i = 1; i < data.size(); i++) {
+                            baseResponseObservable = baseResponseObservable.concatWith(model.selectByInbound(data.get(i).getInId()));
+                        }
+
+                        baseResponseObservable.compose(RxUtils.schedulersTransformer())
+                                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
+                                .subscribe(new ApiDisposableObserver<InboundData>() {
+                                    @Override
+                                    public void onResult(InboundData data) {
+                                        if (null != data) {
+                                            List<InboundData.InboundElecMaterial> dataList = data.getElecMaterialList();
+                                            model._insertInboundElecMaterial(dataList.toArray(new InboundData.InboundElecMaterial[dataList.size()]));
+                                            setDownProcess(syncInfo);
+                                        }
+                                    }
+                                });
+                    }
+                });
+    }
 
     // 下载盘点数据
     private void downloadInventoryData(SyncInfo syncInfo) {
@@ -80,7 +129,7 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                                     public void onResult(InventoryData data) {
                                         if (null != data) {
                                             List<InventoryData.InventoryElecMaterial> dataList = data.getElecMaterialList();
-                                            model._insertElecMaterial(dataList.toArray(new InventoryData.InventoryElecMaterial[dataList.size()]));
+                                            model._insertInventoryElecMaterial(dataList.toArray(new InventoryData.InventoryElecMaterial[dataList.size()]));
                                             setDownProcess(syncInfo);
                                         }
                                     }

@@ -57,7 +57,7 @@ public class InboundScanListViewModel extends BaseViewModel {
                     public void accept(InboundScanAddItemsBean inboundScanItemsBean) throws Exception {
                         if (inboundScanItemsBean != null && inboundScanItemsBean.getPosition() == position) {
                             if (inboundScanItemsBean.getElecMaterialList() != null && inboundScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (InboundData.ElecMaterialList bean : inboundScanItemsBean.getElecMaterialList()) {
+                                for (InboundData.InboundElecMaterial bean : inboundScanItemsBean.getElecMaterialList()) {
                                     inboundScanList.add(new InboundScanItemViewModel(InboundScanListViewModel.this, bean));
                                 }
                             }
@@ -76,7 +76,7 @@ public class InboundScanListViewModel extends BaseViewModel {
                     public void accept(InboundScanRemoveItemsBean inboundScanItemsBean) throws Exception {
                         if (inboundScanItemsBean != null && inboundScanItemsBean.getPosition() == position) {
                             if (inboundScanItemsBean.getElecMaterialList() != null && inboundScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (InboundData.ElecMaterialList bean : inboundScanItemsBean.getElecMaterialList()) {
+                                for (InboundData.InboundElecMaterial bean : inboundScanItemsBean.getElecMaterialList()) {
                                     inboundScanList.remove(new InboundScanItemViewModel(InboundScanListViewModel.this, bean));
                                 }
                             }
@@ -94,7 +94,7 @@ public class InboundScanListViewModel extends BaseViewModel {
                     @Override
                     public void accept(InboundScanUpdateItemsBean inboundScanItemsBean) throws Exception {
                         if (inboundScanItemsBean != null && inboundScanItemsBean.getPosition() == position) {
-                            for (InboundData.ElecMaterialList bean : inboundScanItemsBean.getElecMaterialList()) {
+                            for (InboundData.InboundElecMaterial bean : inboundScanItemsBean.getElecMaterialList()) {
                                 for (InboundScanItemViewModel itemViewModel : inboundScanList) {
                                     if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
                                         itemViewModel.entity.get().setIsIn(0);

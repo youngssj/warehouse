@@ -17,13 +17,13 @@ public class InboundScanRemoveItemsBean {
         this.position = position;
     }
 
-    private List<InboundData.ElecMaterialList> elecMaterialList;
+    private List<InboundData.InboundElecMaterial> inboundElecMaterial;
 
-    public List<InboundData.ElecMaterialList> getElecMaterialList() {
-        return elecMaterialList;
+    public List<InboundData.InboundElecMaterial> getElecMaterialList() {
+        return inboundElecMaterial;
     }
 
-    public void setElecMaterialList(List<InboundData.ElecMaterialList> elecMaterialList) {
-        this.elecMaterialList = elecMaterialList;
+    public void setElecMaterialList(List<InboundData.InboundElecMaterial> inboundElecMaterial) {
+        this.inboundElecMaterial = inboundElecMaterial;
     }
 }

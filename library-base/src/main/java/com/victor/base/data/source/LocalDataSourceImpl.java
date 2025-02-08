@@ -2,6 +2,7 @@ package com.victor.base.data.source;
 
 import com.victor.base.BuildConfig;
 import com.victor.base.app.AppDatabase;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.utils.Constants.CONFIG;
@@ -133,8 +134,24 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS) {
-        db.inventoryElecMaterialDao().insertAll(InventoryElecMaterialS);
+    public void _insertInventoryElecMaterial(InventoryData.InventoryElecMaterial... inventoryElecMaterials) {
+        db.inventoryElecMaterialDao().insertAll(inventoryElecMaterials);
+    }
+
+    @Override
+    public void _deleteInboundData() {
+        db.inboundDataDao().deleteAll();
+        db.inboundElecMaterialDao().deleteAll();
+    }
+
+    @Override
+    public void _insertInboundData(InboundData... inboundDatas) {
+        db.inboundDataDao().insertAll(inboundDatas);
+    }
+
+    @Override
+    public void _insertInboundElecMaterial(InboundData.InboundElecMaterial... inboundElecMaterials) {
+        db.inboundElecMaterialDao().insertAll(inboundElecMaterials);
     }
 
     @Override
@@ -155,7 +172,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
     @Override
     public void _saveInventoryResult(InventoryData inventoryData) {
         _insertInventoryData(inventoryData);
-        _insertElecMaterial(inventoryData.getElecMaterialList().toArray(new InventoryData.InventoryElecMaterial[0]));
+        _insertInventoryElecMaterial(inventoryData.getElecMaterialList().toArray(new InventoryData.InventoryElecMaterial[0]));
     }
 
     @Override
