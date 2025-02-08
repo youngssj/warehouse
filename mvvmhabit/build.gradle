@@ -78,4 +78,5 @@ dependencies {
     api rootProject.ext.dependencies["multidex"]
     api rootProject.ext.dependencies["AndroidAutoSize"]
     api rootProject.ext.dependencies["arouter-api"]
+    api rootProject.ext.dependencies["daimajia"]
 }

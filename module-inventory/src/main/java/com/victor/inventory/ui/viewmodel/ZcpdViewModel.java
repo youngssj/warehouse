@@ -9,8 +9,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.AssetData;
-import com.victor.base.data.entity.TakeStockDetail;
+import com.victor.base.data.entity.InventoryDetail;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inventory.BR;
@@ -70,7 +69,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         public SingleLiveEvent<ZcpdVpRvItemViewModel> showCustomEvent = new SingleLiveEvent<>();
     }
 
-    public ObservableField<TakeStockDetail> entity = new ObservableField<>();
+    public ObservableField<InventoryDetail> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
 
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
@@ -109,20 +108,20 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 //                wPddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
 //            }
 //
-        TakeStockDetail mainInfo = entity.get();
+        InventoryDetail mainInfo = entity.get();
 
-        List<TakeStockDetail.ElecMaterialListDTO> elecMaterialListDTOS = new ArrayList<>();
+        List<InventoryDetail.InventoryElecMaterial> InventoryElecMaterialS = new ArrayList<>();
         for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
-            TakeStockDetail.ElecMaterialListDTO elecMaterialListDTO = zcpdVpRvItemViewModel.entity.get();
-            elecMaterialListDTOS.add(elecMaterialListDTO);
+            InventoryDetail.InventoryElecMaterial InventoryElecMaterial = zcpdVpRvItemViewModel.entity.get();
+            InventoryElecMaterialS.add(InventoryElecMaterial);
         }
 
-        mainInfo.setElecMaterialList(elecMaterialListDTOS);
+        mainInfo.setElecMaterialList(InventoryElecMaterialS);
 
 
         if (Constants.CONFIG.IS_OFFLINE) {
             // 盘盈
-            List<TakeStockDetail.ElecMaterialListDTO> pyDataList = new ArrayList<>();
+            List<InventoryDetail.InventoryElecMaterial> pyDataList = new ArrayList<>();
 //                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
 //                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
 //                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
@@ -190,15 +189,15 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
     public void getNetData(int checkId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<TakeStockDetail>) emitter -> {
+            Observable.create((ObservableOnSubscribe<InventoryDetail>) emitter -> {
 //                TakeStockDetail data = model._selectOneCheck(checkId);
 //                emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<TakeStockDetail>() {
+                    .subscribe(new DefaultObserver<InventoryDetail>() {
                         @Override
-                        public void onNext(TakeStockDetail data) {
+                        public void onNext(InventoryDetail data) {
 //                            if (data == null || data.getDataList().size() == 0) {
 //                                setNoDataVisibleObservable(View.VISIBLE);
 //                                return;
@@ -224,7 +223,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                         }
                     });
 
-        } else
+        } else {
             model.selectByCheck(checkId)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
@@ -235,9 +234,9 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             showProgress();
                         }
                     })
-                    .subscribe(new ApiDisposableObserver<TakeStockDetail>() {
+                    .subscribe(new ApiDisposableObserver<InventoryDetail>() {
                         @Override
-                        public void onResult(TakeStockDetail data) {
+                        public void onResult(InventoryDetail data) {
                             if (data == null || data.getElecMaterialList().size() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
                                 return;
@@ -260,6 +259,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             dismissProgress();
                         }
                     });
+        }
     }
 
     public void updatePDItemModel(Set<String> sets) {
@@ -268,7 +268,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         mPddList = items.get(1).observableList;
         mWpddList = items.get(2).observableList;
         for (ZcpdVpRvItemViewModel viewModel : mPdAllList) {
-            TakeStockDetail.ElecMaterialListDTO bean = viewModel.entity.get();
+            InventoryDetail.InventoryElecMaterial bean = viewModel.entity.get();
             if (sets.contains(bean.getRfidCode())) {
                 bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
                 bean.setCheckResult(1);
@@ -305,36 +305,6 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         if (mPddList.size() == entity.get().getElecMaterialList().size() + mPyListId.size() && mWpddList.size() == 0) {  //全部盘点完成，盘点到的数据=已盘点+盘盈
             uc.scanFinishEvent.setValue(true);
         }
-    }
-
-    private void getPyData(Set<String> sets) {
-        model.rfidToMaterialInfo(new ArrayList<>(sets))
-                .compose(RxUtils.schedulersTransformer())
-                .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                .compose(RxUtils.exceptionTransformer()).subscribe(new ApiDisposableObserver<List<AssetData>>() {
-                    @Override
-                    public void onResult(List<AssetData> beans) {
-                        mPyListId.clear();
-                        for (AssetData bean : beans) {
-                            if (bean != null) {
-                                mPyListId.add(String.valueOf(bean.getMaterialId()));
-
-                                TakeStockDetail.ElecMaterialListDTO dataListBean = new TakeStockDetail.ElecMaterialListDTO();
-//                        dataListBean.setBatchNumber(entity.get().getMainInfo().getBatchNumber());
-                                dataListBean.setCheckResult(0);
-                                dataListBean.setBgColor(Utils.getContext().getDrawable(R.color.color_81c480));
-                                dataListBean.setMaterialId(bean.getMaterialId());
-//                        dataListBean.setMaterialCode(bean.getMaterialCode());
-//                        dataListBean.setMaterialName(bean.getMaterialName());
-//                        dataListBean.setSpecification(bean.getSpecification());
-//                        dataListBean.setSortName(bean.getSortName());
-//                        dataListBean.setUseDepmName(bean.getUseDepmName());
-//                        dataListBean.setLocationName(bean.getLocationName());
-                                mPddList.add(new ZcpdVpRvItemViewModel(ZcpdViewModel.this, null, dataListBean));
-                            }
-                        }
-                    }
-                });
     }
 
     private void setBgColor() {

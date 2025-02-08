@@ -1,10 +1,14 @@
 package com.victor.sync.ui.fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -35,4 +39,10 @@ public class SyncFragment extends BaseFragment<SyncFragmentSyncBinding, SyncView
         return new ViewModelProvider(this, factory).get(SyncViewModel.class);
     }
 
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        super.initData(savedInstanceState);
+        String[] stringArray = getResources().getStringArray(R.array.sync_home);
+        viewModel.loadData(stringArray);
+    }
 }

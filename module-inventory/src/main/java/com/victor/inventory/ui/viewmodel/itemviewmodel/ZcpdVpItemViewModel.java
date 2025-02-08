@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 
-import com.victor.base.data.entity.TakeStockDetail;
+import com.victor.base.data.entity.InventoryDetail;
 import com.victor.inventory.BR;
 import com.victor.inventory.R;
 import com.victor.inventory.ui.viewmodel.ZcpdViewModel;
@@ -29,12 +29,12 @@ public class ZcpdVpItemViewModel extends ItemViewModel<ZcpdViewModel> {
 
     public ItemBinding<ZcpdVpRvItemViewModel> itemBinding = ItemBinding.of(BR.viewModel, R.layout.inventory_item_vp_rv_zcpd);
 
-    public ZcpdVpItemViewModel(@NonNull ZcpdViewModel viewModel, int pagerIndex, String batchNumber, List<TakeStockDetail.ElecMaterialListDTO> data) {
+    public ZcpdVpItemViewModel(@NonNull ZcpdViewModel viewModel, int pagerIndex, String batchNumber, List<InventoryDetail.InventoryElecMaterial> data) {
         super(viewModel);
         switch (pagerIndex) {
             case 0:
             case 2:
-                for (TakeStockDetail.ElecMaterialListDTO bean : data) {
+                for (InventoryDetail.InventoryElecMaterial bean : data) {
                     observableList.add(new ZcpdVpRvItemViewModel(viewModel, batchNumber, bean));
                 }
                 break;

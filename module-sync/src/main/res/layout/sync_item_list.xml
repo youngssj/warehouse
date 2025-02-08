@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    app:ignore="NamespaceTypo">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.victor.sync.ui.viewmodel.SyncItemViewModel" />
+    </data>
+
+    <com.lihang.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        binding:hl_cornerRadius="8dp"
+        binding:hl_shadowColor="@color/color_797979"
+        binding:hl_shadowLimit="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                binding:onClickCommand="@{viewModel.itemDownClick}">
+
+                <com.daimajia.numberprogressbar.NumberProgressBar
+                    style="@style/NumberProgressBar_Beauty_Red"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    binding:progress_current="@{viewModel.entity.downValue}"
+                    binding:progress_reached_bar_height="3dp"
+                    binding:progress_text_size="13sp"
+                    binding:progress_unreached_bar_height="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{viewModel.entity.syncText}"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:text="盘点" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下载"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/color_F8F9F9" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                binding:isVisible="@{viewModel.entity.upValue!=-1}"
+                binding:onClickCommand="@{viewModel.itemUpClick}">
+
+                <com.daimajia.numberprogressbar.NumberProgressBar
+                    style="@style/NumberProgressBar_Default"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    binding:progress_current="@{viewModel.entity.upValue}"
+                    binding:progress_reached_bar_height="3dp"
+                    binding:progress_text_size="13sp"
+                    binding:progress_unreached_bar_height="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{viewModel.entity.syncText}"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:text="盘点" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="上传"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.lihang.ShadowLayout>
+</layout>

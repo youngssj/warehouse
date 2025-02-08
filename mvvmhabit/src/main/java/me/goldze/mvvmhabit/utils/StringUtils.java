@@ -1,5 +1,9 @@
 package me.goldze.mvvmhabit.utils;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Created by goldze on 2017/5/14.
  * 字符串相关工具类
@@ -182,5 +186,32 @@ public final class StringUtils {
             }
         }
         return new String(chars);
+    }
+
+    /**
+     * @param list
+     * @param spaceChar 间隔符
+     * @return
+     */
+    public static String listToStr(List<String> list, String spaceChar) {
+        StringBuilder sb = new StringBuilder();
+        for (String str :
+                list) {
+            sb.append(str);
+            sb.append(spaceChar);
+        }
+        return sb.length() > 0 ? sb.deleteCharAt(sb.length() - 1).toString() : sb.toString();
+    }
+
+    /**
+     * @param list
+     * @param spaceChar 间隔符
+     * @return
+     */
+    public static List<String> strToList(String str, String spaceChar) {
+        String[] split = str.split(spaceChar);
+        ArrayList<String> arrayList = new ArrayList<>(split.length);
+        Collections.addAll(arrayList, split);
+        return arrayList;
     }
 }

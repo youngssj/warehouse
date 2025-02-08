@@ -3,7 +3,7 @@ package com.victor.inventory.ui.viewmodel.itemviewmodel;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.victor.base.data.entity.TakeStockData;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.utils.Constants;
 import com.victor.inventory.ui.viewmodel.PdOddViewModel;
@@ -17,10 +17,10 @@ import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
  * 创建日期：2020/9/9
  * 邮箱：jxfengmtx@gmail.com
  */
-public class PdOddItemViewModel extends BaseRecycleItemViewModel<PdOddViewModel, TakeStockData> {
+public class PdOddItemViewModel extends BaseRecycleItemViewModel<PdOddViewModel, InventoryData> {
 
 
-    public PdOddItemViewModel(@NonNull PdOddViewModel viewModel, TakeStockData data) {
+    public PdOddItemViewModel(@NonNull PdOddViewModel viewModel, InventoryData data) {
         super(viewModel, data);
     }
 

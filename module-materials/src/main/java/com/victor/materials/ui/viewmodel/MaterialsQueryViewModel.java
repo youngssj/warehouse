@@ -1,26 +1,17 @@
 package com.victor.materials.ui.viewmodel;
 
 import android.app.Application;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.ListData;
-import com.victor.base.data.entity.TakeStockData;
-import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.materials.bean.MaterialsQueryConditionBean;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
-
-import java.util.List;
-import java.util.Set;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.utils.KLog;
-import me.goldze.mvvmhabit.utils.RxUtils;
-import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class MaterialsQueryViewModel extends BaseTitleViewModel<AppRepository> {
     public MaterialsQueryViewModel(@NonNull Application application, AppRepository model) {

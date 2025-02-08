@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.entity.InboundDetail;
-import com.victor.base.data.entity.TakeStockDetail;
 import com.victor.inbound.ui.viewmodel.InboundScanListViewModel;
 
 import java.util.Objects;

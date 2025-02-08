@@ -1,15 +1,8 @@
 package com.victor.base.data.source;
 
-import com.victor.base.data.entity.AssetCheckData;
-import com.victor.base.data.entity.AssetCheckOdd;
-import com.victor.base.data.entity.AssetData;
-import com.victor.base.data.entity.AssetInspectionData;
-import com.victor.base.data.entity.AssetInspectionOdd;
-import com.victor.base.data.entity.AssetRepairData;
-import com.victor.base.data.entity.AssetRepairOdd;
 import com.victor.base.data.entity.SyncInfo;
-import com.victor.base.data.entity.TakeStockData;
-import com.victor.base.data.entity.TakeStockDetail;
+import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.InventoryDetail;
 
 import java.util.List;
 
@@ -24,6 +17,7 @@ import io.reactivex.Maybe;
  * 邮箱：jxfengmtx@gmail.com
  */
 public interface LocalDataSource {
+
     /**
      * 保存用户名
      */
@@ -63,77 +57,19 @@ public interface LocalDataSource {
 
     void _deleteAll();
 
-    void _deleteCheckData();
-
-    //----------------同步数据-------------
-
-    void _insertAssetCheckOdd(AssetCheckOdd... assetCheckOdds);
-
-    void _insertTakeStockData(TakeStockData... takeStockDatas);
-
-    void _insertAssetCheckData(AssetCheckData.DataListBean... dataListBeans);
-
-    void _insertElecMaterial(TakeStockDetail.ElecMaterialListDTO... elecMaterialListDTOS);
-
-    void _insertAssetData(AssetData... assetDatas);
-
+    /* ----------------同步数据------------- */
     void _saveSyncDate(SyncInfo syncInfo);
 
     SyncInfo _getSyncDate(int syncId);
 
-
-    //---------------本地接口，数据操作-----------------
-
-
-    List<AssetCheckData.DataListBean> _selectCheckDetailAll(String lastDate);
-
-    List<AssetCheckOdd> _selectCheckOddAll(String lastDate);
-
-    Maybe<List<AssetCheckOdd>> _listCheck(int page);
-
-    void _saveCheckResult(int checkId, String checkPks, String noCheckPks, String batchNumber,List<AssetCheckData.DataListBean> surplusCheckPks);
-
-    AssetCheckData _selectOneCheck(int checkId);
-
-    List<AssetData> _rfidToMaterialInfo(List<String> epcs);
-
-    List<AssetData> _barCodeToMaterialInfo(String barCode);
-    // 巡检
-    Maybe<List<AssetInspectionOdd>> _listInspection(int page);
-
-    void _saveInspectionResult(int inspectionId, int result,String inspectionContent);
-
-    void _saveInspection(int inspectionId,String batchNumber);
-
-    AssetInspectionData _selectInspectionDataById(int inspectionId);
-
-    void _insertAssetInspectionOds(List<AssetInspectionOdd> assetInspectionOddList);
-
-    void _insertAssetInspectionData(List<AssetInspectionData.DataListBean> dataListBeans);
-
-    List<AssetInspectionData.DataListBean> _selectInspectionDetailAll(String lastDate);
-
-    List<AssetInspectionOdd> _selectInspectionOddAll(String lastDate);
-
     void _deleteTakeStockData();
 
-    void _deleteInspectionData();
+    void _insertTakeStockData(InventoryData... takeStockDatas);
 
-    void _deleteRepairData();
+    void _insertElecMaterial(InventoryDetail.InventoryElecMaterial... InventoryElecMaterialS);
+    /* ----------------同步数据------------- */
 
-    void _insertAssetRepairOds(List<AssetRepairOdd> assetRepairOddList);
-
-    void _insertAssetRepairData(List<AssetRepairData.DataListBean> dataListBeans);
-
-    List<AssetRepairOdd> _selectRepairOddAll(String lastDate);
-
-    List<AssetRepairData.DataListBean> _selectRepairDetailAll(String lastDate);
-
-    void _saveRepairResult(int repairDetailId,int materialId,String repairCosts,String  repairContent);
-
-    AssetRepairData _selectRepairDataById(int repairId);
-
-    void _saveRepair(int repairId, String batchNumber);
-
-    Maybe<List<AssetRepairOdd>> _listRepair(int page);
+    /* ---------------本地接口，数据操作----------------- */
+    Maybe<List<InventoryData>> _listTakeStock(int page);
+    /* ---------------本地接口，数据操作----------------- */
 }
