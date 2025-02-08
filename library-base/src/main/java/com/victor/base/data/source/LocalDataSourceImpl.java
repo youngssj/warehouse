@@ -3,7 +3,7 @@ package com.victor.base.data.source;
 import com.victor.base.BuildConfig;
 import com.victor.base.app.AppDatabase;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.utils.Constants.CONFIG;
 import com.victor.base.utils.Constants.SP;
@@ -133,12 +133,17 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public void _insertElecMaterial(InventoryDetail.InventoryElecMaterial... InventoryElecMaterialS) {
+    public void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS) {
         db.elecMaterialDao().insertAll(InventoryElecMaterialS);
     }
 
     @Override
     public Maybe<List<InventoryData>> _listTakeStock(int page) {
         return db.takeStockDataDao().getAll(10 * (page - 1), page * 10);
+    }
+
+    @Override
+    public Maybe<InventoryData> _selectOneInventory(int checkId) {
+        return null;
     }
 }

@@ -9,7 +9,7 @@ import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inventory.BR;
@@ -69,7 +69,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         public SingleLiveEvent<ZcpdVpRvItemViewModel> showCustomEvent = new SingleLiveEvent<>();
     }
 
-    public ObservableField<InventoryDetail> entity = new ObservableField<>();
+    public ObservableField<InventoryData> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
 
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
@@ -108,11 +108,11 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 //                wPddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
 //            }
 //
-        InventoryDetail mainInfo = entity.get();
+        InventoryData mainInfo = entity.get();
 
-        List<InventoryDetail.InventoryElecMaterial> InventoryElecMaterialS = new ArrayList<>();
+        List<InventoryData.InventoryElecMaterial> InventoryElecMaterialS = new ArrayList<>();
         for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
-            InventoryDetail.InventoryElecMaterial InventoryElecMaterial = zcpdVpRvItemViewModel.entity.get();
+            InventoryData.InventoryElecMaterial InventoryElecMaterial = zcpdVpRvItemViewModel.entity.get();
             InventoryElecMaterialS.add(InventoryElecMaterial);
         }
 
@@ -121,7 +121,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
         if (Constants.CONFIG.IS_OFFLINE) {
             // 盘盈
-            List<InventoryDetail.InventoryElecMaterial> pyDataList = new ArrayList<>();
+            List<InventoryData.InventoryElecMaterial> pyDataList = new ArrayList<>();
 //                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
 //                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
 //                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
@@ -189,15 +189,16 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
     public void getNetData(int checkId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<InventoryDetail>) emitter -> {
-//                TakeStockDetail data = model._selectOneCheck(checkId);
+            model._selectOneInventory(checkId);
+            Observable.create((ObservableOnSubscribe<InventoryData>) emitter -> {
+//                TakeStockDetail data = model._selectOneInventory(checkId);
 //                emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<InventoryDetail>() {
+                    .subscribe(new DefaultObserver<InventoryData>() {
                         @Override
-                        public void onNext(InventoryDetail data) {
+                        public void onNext(InventoryData data) {
 //                            if (data == null || data.getDataList().size() == 0) {
 //                                setNoDataVisibleObservable(View.VISIBLE);
 //                                return;
@@ -234,9 +235,9 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             showProgress();
                         }
                     })
-                    .subscribe(new ApiDisposableObserver<InventoryDetail>() {
+                    .subscribe(new ApiDisposableObserver<InventoryData>() {
                         @Override
-                        public void onResult(InventoryDetail data) {
+                        public void onResult(InventoryData data) {
                             if (data == null || data.getElecMaterialList().size() == 0) {
                                 setNoDataVisibleObservable(View.VISIBLE);
                                 return;
@@ -268,7 +269,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         mPddList = items.get(1).observableList;
         mWpddList = items.get(2).observableList;
         for (ZcpdVpRvItemViewModel viewModel : mPdAllList) {
-            InventoryDetail.InventoryElecMaterial bean = viewModel.entity.get();
+            InventoryData.InventoryElecMaterial bean = viewModel.entity.get();
             if (sets.contains(bean.getRfidCode())) {
                 bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
                 bean.setCheckResult(1);

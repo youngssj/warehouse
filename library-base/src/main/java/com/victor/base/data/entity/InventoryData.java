@@ -1,7 +1,12 @@
 package com.victor.base.data.entity;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import java.util.List;
 
 @Entity
 public class InventoryData {
@@ -24,7 +29,215 @@ public class InventoryData {
     private String delFlag;
     private int checkUserId;
     private String userName;
-    private String elecMaterialList;
+    @Ignore
+    private List<InventoryData.InventoryElecMaterial> elecMaterialList;
+
+    @Entity
+    public static class InventoryElecMaterial {
+
+        private String createBy;
+        private String createTime;
+        private String updateBy;
+        private String updateTime;
+        private String remark;
+        @PrimaryKey
+        private int checkDetailId;
+        private int checkId;
+        private int materialId;
+        private String rfidCode;
+        private String materialName; // 资产名称
+        private String specifications; // 资产规格
+        private String materialCode; // 资产编码
+        private String deptName; // 使用部门
+        private String warehouseName; // 存放地点
+        private String whAreaName; // 库区
+        private String whLocationName; // 库位
+        private int checkResult; // 盘点结果 1正常（已盘点） 2亏
+        private transient String checkResultMessage; // 盘点结果 1正常（已盘点） 2亏
+        private String positionNo;
+        private String checkDate;
+
+        @Ignore
+        public transient Drawable bgColor;
+        @Ignore
+        public transient Drawable textColor;
+
+        public String getCheckDate() {
+            return checkDate;
+        }
+
+        public void setCheckDate(String checkDate) {
+            this.checkDate = checkDate;
+        }
+
+        public String getCheckResultMessage() {
+            return checkResultMessage;
+        }
+
+        public void setCheckResultMessage(String checkResultMessage) {
+            this.checkResultMessage = checkResultMessage;
+        }
+
+        public String getCreateBy() {
+            return createBy;
+        }
+
+        public void setCreateBy(String createBy) {
+            this.createBy = createBy;
+        }
+
+        public String getCreateTime() {
+            return createTime;
+        }
+
+        public void setCreateTime(String createTime) {
+            this.createTime = createTime;
+        }
+
+        public String getUpdateBy() {
+            return updateBy;
+        }
+
+        public void setUpdateBy(String updateBy) {
+            this.updateBy = updateBy;
+        }
+
+        public String getUpdateTime() {
+            return updateTime;
+        }
+
+        public void setUpdateTime(String updateTime) {
+            this.updateTime = updateTime;
+        }
+
+        public String getRemark() {
+            return remark;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
+
+        public int getCheckDetailId() {
+            return checkDetailId;
+        }
+
+        public void setCheckDetailId(int checkDetailId) {
+            this.checkDetailId = checkDetailId;
+        }
+
+        public int getCheckId() {
+            return checkId;
+        }
+
+        public void setCheckId(int checkId) {
+            this.checkId = checkId;
+        }
+
+        public int getMaterialId() {
+            return materialId;
+        }
+
+        public void setMaterialId(int materialId) {
+            this.materialId = materialId;
+        }
+
+        public String getRfidCode() {
+            return rfidCode;
+        }
+
+        public void setRfidCode(String rfidCode) {
+            this.rfidCode = rfidCode;
+        }
+
+        public String getMaterialName() {
+            return materialName;
+        }
+
+        public void setMaterialName(String materialName) {
+            this.materialName = materialName;
+        }
+
+        public String getSpecifications() {
+            return specifications;
+        }
+
+        public void setSpecifications(String specifications) {
+            this.specifications = specifications;
+        }
+
+        public String getMaterialCode() {
+            return materialCode;
+        }
+
+        public void setMaterialCode(String materialCode) {
+            this.materialCode = materialCode;
+        }
+
+        public String getDeptName() {
+            return deptName;
+        }
+
+        public void setDeptName(String deptName) {
+            this.deptName = deptName;
+        }
+
+        public String getWarehouseName() {
+            return warehouseName;
+        }
+
+        public void setWarehouseName(String warehouseName) {
+            this.warehouseName = warehouseName;
+        }
+
+        public String getWhAreaName() {
+            return whAreaName;
+        }
+
+        public void setWhAreaName(String whAreaName) {
+            this.whAreaName = whAreaName;
+        }
+
+        public String getWhLocationName() {
+            return whLocationName;
+        }
+
+        public void setWhLocationName(String whLocationName) {
+            this.whLocationName = whLocationName;
+        }
+
+        public int getCheckResult() {
+            return checkResult;
+        }
+
+        public void setCheckResult(int checkResult) {
+            this.checkResult = checkResult;
+        }
+
+        public String getPositionNo() {
+            return positionNo;
+        }
+
+        public void setPositionNo(String positionNo) {
+            this.positionNo = positionNo;
+        }
+
+        public Drawable getBgColor() {
+            return bgColor;
+        }
+
+        public void setBgColor(Drawable bgColor) {
+            this.bgColor = bgColor;
+        }
+
+        public Drawable getTextColor() {
+            return textColor;
+        }
+
+        public void setTextColor(Drawable textColor) {
+            this.textColor = textColor;
+        }
+    }
 
     public String getCreateBy() {
         return createBy;
@@ -170,11 +383,11 @@ public class InventoryData {
         this.userName = userName;
     }
 
-    public String getElecMaterialList() {
+    public List<InventoryData.InventoryElecMaterial> getElecMaterialList() {
         return elecMaterialList;
     }
 
-    public void setElecMaterialList(String elecMaterialList) {
+    public void setElecMaterialList(List<InventoryData.InventoryElecMaterial> elecMaterialList) {
         this.elecMaterialList = elecMaterialList;
     }
 }

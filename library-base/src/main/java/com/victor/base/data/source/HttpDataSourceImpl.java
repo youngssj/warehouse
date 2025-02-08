@@ -5,7 +5,7 @@ import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.MovementDetail;
@@ -104,7 +104,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse<InventoryDetail>> selectByCheck(int checkId) {
+    public Observable<BaseResponse<InventoryData>> selectByCheck(int checkId) {
         return apiService.selectByCheck(checkId);
     }
 
@@ -129,7 +129,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse> saveCheckedResult(InventoryDetail mainInfo) {
+    public Observable<BaseResponse> saveCheckedResult(InventoryData mainInfo) {
         return apiService.saveCheckedResult(mainInfo);
     }
 

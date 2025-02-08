@@ -5,7 +5,7 @@ import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.MovementDetail;
@@ -119,7 +119,7 @@ public interface HttpService {
      * @return
      */
     @GET("/dev-api/mobile/storage/ElecMaterialCheckinfo/{dynamicPath}")
-    Observable<BaseResponse<InventoryDetail>> selectByCheck(@Path("dynamicPath") int path);
+    Observable<BaseResponse<InventoryData>> selectByCheck(@Path("dynamicPath") int path);
 
     /**
      * 入库单详情
@@ -174,7 +174,7 @@ public interface HttpService {
      * @return
      */
     @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
-    Observable<BaseResponse> saveCheckedResult(@Body InventoryDetail mainInfo);
+    Observable<BaseResponse> saveCheckedResult(@Body InventoryData mainInfo);
 
     /**
      * 入库完成

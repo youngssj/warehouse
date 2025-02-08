@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.data.http.DownDisposableObserver;
@@ -84,7 +84,7 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                         model._insertTakeStockData(data.toArray(new InventoryData[data.size()]));
                         // 设置下载条数
                         syncInfo.setDownTotalValue(data.size());
-                        Observable<BaseResponse<InventoryDetail>> baseResponseObservable = null;
+                        Observable<BaseResponse<InventoryData>> baseResponseObservable = null;
                         if (data.size() > 0) {
                             baseResponseObservable = model.selectByCheck(data.get(0).getCheckId());
                         }
@@ -96,12 +96,12 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 })
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
-                .subscribe(new ApiDisposableObserver<InventoryDetail>() {
+                .subscribe(new ApiDisposableObserver<InventoryData>() {
                     @Override
-                    public void onResult(InventoryDetail data) {
+                    public void onResult(InventoryData data) {
                         if (null != data) {
-                            List<InventoryDetail.InventoryElecMaterial> dataList = data.getElecMaterialList();
-                            model._insertElecMaterial(dataList.toArray(new InventoryDetail.InventoryElecMaterial[dataList.size()]));
+                            List<InventoryData.InventoryElecMaterial> dataList = data.getElecMaterialList();
+                            model._insertElecMaterial(dataList.toArray(new InventoryData.InventoryElecMaterial[dataList.size()]));
                             setDownProcess(syncInfo);
                         }
                     }

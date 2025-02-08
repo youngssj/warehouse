@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.inventory.ui.viewmodel.ZcpdViewModel;
 
 import java.util.Objects;
@@ -25,13 +25,13 @@ public class ZcpdVpRvItemViewModel extends ItemViewModel<ZcpdViewModel> {
 
     public ObservableField<String> batchNumber = new ObservableField<>();
 
-    public ObservableField<InventoryDetail.InventoryElecMaterial> entity = new ObservableField<>();
+    public ObservableField<InventoryData.InventoryElecMaterial> entity = new ObservableField<>();
 
     public BindingCommand itemClick = new BindingCommand(() -> {
         viewModel.uc.showCustomEvent.setValue(this);
     });
 
-    public ZcpdVpRvItemViewModel(@NonNull ZcpdViewModel viewModel, String batchNumber, InventoryDetail.InventoryElecMaterial data) {
+    public ZcpdVpRvItemViewModel(@NonNull ZcpdViewModel viewModel, String batchNumber, InventoryData.InventoryElecMaterial data) {
         super(viewModel);
         entity.set(data);
         this.batchNumber.set(batchNumber);

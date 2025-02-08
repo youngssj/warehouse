@@ -2,7 +2,7 @@ package com.victor.base.data.source;
 
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 
 import java.util.List;
 
@@ -66,10 +66,12 @@ public interface LocalDataSource {
 
     void _insertTakeStockData(InventoryData... takeStockDatas);
 
-    void _insertElecMaterial(InventoryDetail.InventoryElecMaterial... InventoryElecMaterialS);
+    void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS);
     /* ----------------同步数据------------- */
 
     /* ---------------本地接口，数据操作----------------- */
     Maybe<List<InventoryData>> _listTakeStock(int page);
+
+    Maybe<InventoryData> _selectOneInventory(int checkId);
     /* ---------------本地接口，数据操作----------------- */
 }

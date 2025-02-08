@@ -9,7 +9,7 @@ import com.victor.base.data.dao.SyncInfoDao;
 import com.victor.base.data.dao.InventoryDataDao;
 import com.victor.base.data.dao.UserTokenDao;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.UserToken;
 import com.victor.base.data.source.LocalDataSourceImpl;
@@ -28,7 +28,7 @@ import me.goldze.mvvmhabit.utils.Utils;
 @Database(entities = {UserToken.class,
         SyncInfo.class,
         InventoryData.class,
-        InventoryDetail.InventoryElecMaterial.class,
+        InventoryData.InventoryElecMaterial.class,
 }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase DB;  //创建单例

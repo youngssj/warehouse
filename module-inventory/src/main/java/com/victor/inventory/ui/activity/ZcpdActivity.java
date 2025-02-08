@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.google.android.material.tabs.TabLayout;
 import com.victor.base.app.AppViewModelFactory;
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.utils.Constants;
 import com.victor.inventory.BR;
@@ -58,7 +58,7 @@ public class ZcpdActivity extends BaseUhfActivity<InventoryActivityZcpdBinding, 
         Set set = new HashSet();
         ObservableList<ZcpdVpRvItemViewModel> allList = viewModel.items.get(0).observableList;
         for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : allList) {
-            InventoryDetail.InventoryElecMaterial dataListBean = zcpdVpRvItemViewModel.entity.get();
+            InventoryData.InventoryElecMaterial dataListBean = zcpdVpRvItemViewModel.entity.get();
             if (barCode.equals(dataListBean.getMaterialCode())) {
                 set.add(dataListBean.getRfidCode());
                 break;
@@ -111,7 +111,7 @@ public class ZcpdActivity extends BaseUhfActivity<InventoryActivityZcpdBinding, 
         viewModel.uc.showCustomEvent.observe(this, vpRvItemViewModel -> {
             InventoryViewZcpdDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.inventory_view_zcpd_detail, null, false);
             binding.setViewModel(vpRvItemViewModel);
-            InventoryDetail.InventoryElecMaterial dataListBean = vpRvItemViewModel.entity.get();
+            InventoryData.InventoryElecMaterial dataListBean = vpRvItemViewModel.entity.get();
             showCustomDialog(getResources().getString(R.string.workbench_check_detail_text), binding, (dialog, which) -> {
             });
         });

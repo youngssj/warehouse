@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.victor.base.data.entity.InventoryDetail;
+import com.victor.base.data.entity.InventoryData;
 
 import java.util.List;
 
@@ -22,16 +22,16 @@ import java.util.List;
 @Dao
 public interface InventoryElecMaterialDao {
     @Query("SELECT * FROM InventoryElecMaterial where checkId=(:checkId)")
-    List<InventoryDetail.InventoryElecMaterial> getAll(String checkId);
+    List<InventoryData.InventoryElecMaterial> getAll(String checkId);
 
     @Query("SELECT * FROM InventoryElecMaterial where datetime(checkDate) between datetime((:lastDate)) and datetime(CURRENT_TIMESTAMP,'localtime')")
-    List<InventoryDetail.InventoryElecMaterial> getAllByDate(String lastDate);
+    List<InventoryData.InventoryElecMaterial> getAllByDate(String lastDate);
 
     @Query("SELECT * FROM InventoryElecMaterial WHERE rfidCode in (:epcs)  COLLATE NOCASE ")
-    List<InventoryDetail.InventoryElecMaterial> getAllByRfid(List<String> epcs);
+    List<InventoryData.InventoryElecMaterial> getAllByRfid(List<String> epcs);
 
     @Query("SELECT * FROM InventoryElecMaterial WHERE materialCode = (:barCode)  COLLATE NOCASE ")
-    List<InventoryDetail.InventoryElecMaterial> getAllByBarcode(String barCode);
+    List<InventoryData.InventoryElecMaterial> getAllByBarcode(String barCode);
 
     //更新部分字段
     @Query("Update InventoryElecMaterial set checkResult=(:checkResult),checkDate =(:checkDate) where checkDetailId in (:ids)")
@@ -41,15 +41,15 @@ public interface InventoryElecMaterialDao {
     void deleteAll();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(InventoryDetail.InventoryElecMaterial... dataListBeans);
+    void insertAll(InventoryData.InventoryElecMaterial... dataListBeans);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<InventoryDetail.InventoryElecMaterial> dataListBeans);
+    void insertAll(List<InventoryData.InventoryElecMaterial> dataListBeans);
 
     @Delete
-    void delete(InventoryDetail.InventoryElecMaterial dataListBean);
+    void delete(InventoryData.InventoryElecMaterial dataListBean);
 
     @Update
-    void update(InventoryDetail.InventoryElecMaterial... dataListBeans);
+    void update(InventoryData.InventoryElecMaterial... dataListBeans);
 
 }
