@@ -2,7 +2,6 @@ package com.victor.base.data.source;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
@@ -48,7 +47,7 @@ public interface HttpDataSource {
 
     Observable<BaseResponse<InventoryData>> selectByCheck(int checkId);
 
-    Observable<BaseResponse<InboundDetail>> selectByInbound(int inId);
+    Observable<BaseResponse<InboundData>> selectByInbound(int inId);
 
     Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId);
 
@@ -58,7 +57,7 @@ public interface HttpDataSource {
 
     Observable<BaseResponse> saveCheckedResult(InventoryData inventoryData);
 
-    Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail);
+    Observable<BaseResponse> saveInboundResult(InboundData inboundData);
 
     Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail);
 

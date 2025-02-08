@@ -2,7 +2,6 @@ package com.victor.base.data.http;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
@@ -127,7 +126,7 @@ public interface HttpService {
      * @return
      */
     @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
-    Observable<BaseResponse<InboundDetail>> selectByInbound(@Path("dynamicPath") int path);
+    Observable<BaseResponse<InboundData>> selectByInbound(@Path("dynamicPath") int path);
 
     /**
      * 出库单详情
@@ -178,11 +177,11 @@ public interface HttpService {
     /**
      * 入库完成
      *
-     * @param inboundDetail
+     * @param inboundData
      * @return
      */
     @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
-    Observable<BaseResponse> saveInboundResult(@Body InboundDetail inboundDetail);
+    Observable<BaseResponse> saveInboundResult(@Body InboundData inboundData);
 
     /**
      * 出库完成

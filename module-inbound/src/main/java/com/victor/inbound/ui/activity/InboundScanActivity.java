@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.base.VPFragmentAdapter;
-import com.victor.base.data.entity.InboundDetail;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.inbound.BR;
@@ -49,7 +49,7 @@ public class InboundScanActivity extends BaseUhfActivity<InboundScanActivityBind
     @Override
     protected void scanBarCodeCallback(String barCode) {
         Set set = new HashSet();
-        for (InboundDetail.ElecMaterialList dataListBean : viewModel.entity.get().getElecMaterialList()) {
+        for (InboundData.ElecMaterialList dataListBean : viewModel.entity.get().getElecMaterialList()) {
             if (barCode.equals(dataListBean.getMaterialCode())) {
                 set.add(dataListBean.getRfidCode());
                 break;

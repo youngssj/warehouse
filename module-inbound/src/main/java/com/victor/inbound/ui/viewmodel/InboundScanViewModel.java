@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.InboundDetail;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.inbound.R;
@@ -35,7 +35,7 @@ import me.goldze.mvvmhabit.utils.Utils;
 
 public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
-    public ObservableField<InboundDetail> entity = new ObservableField<>();
+    public ObservableField<InboundData> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
@@ -51,11 +51,11 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     }
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-        InboundDetail mainInfo = entity.get();
+        InboundData mainInfo = entity.get();
 
         if (Constants.CONFIG.IS_OFFLINE) {
             // 盘盈
-            List<InboundDetail.ElecMaterialList> pyDataList = new ArrayList<>();
+            List<InboundData.ElecMaterialList> pyDataList = new ArrayList<>();
 //                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
 //                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
 //                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
@@ -112,15 +112,15 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public void getNetData(int inId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<InboundDetail>) emitter -> {
-//                InboundDetail data = model._selectOneCheck(checkId);
+            Observable.create((ObservableOnSubscribe<InboundData>) emitter -> {
+//                InboundData data = model._selectOneCheck(checkId);
 //                emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<InboundDetail>() {
+                    .subscribe(new DefaultObserver<InboundData>() {
                         @Override
-                        public void onNext(InboundDetail data) {
+                        public void onNext(InboundData data) {
 //                            if (data == null || data.getDataList().size() == 0) {
 //                                setNoDataVisibleObservable(View.VISIBLE);
 //                                return;
@@ -157,9 +157,9 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                             showProgress();
                         }
                     })
-                    .subscribe(new ApiDisposableObserver<InboundDetail>() {
+                    .subscribe(new ApiDisposableObserver<InboundData>() {
                         @Override
-                        public void onResult(InboundDetail data) {
+                        public void onResult(InboundData data) {
                             if (data != null && data.getElecMaterialList().size() > 0) {
                                 entity.set(data);
                                 checkDataNum.set("0/" + data.getElecMaterialList().size());
@@ -179,12 +179,12 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     }
 
-    private Set<InboundDetail.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
+    private Set<InboundData.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
 
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
         boolean hasData = false;
-        for (InboundDetail.ElecMaterialList bean : entity.get().getElecMaterialList()) {
+        for (InboundData.ElecMaterialList bean : entity.get().getElecMaterialList()) {
             if (sets.contains(bean.getRfidCode())) {
                 sets.remove(bean.getRfidCode());
 

@@ -3,7 +3,6 @@ package com.victor.base.data.source;
 import com.victor.base.app.Injection;
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
@@ -107,7 +106,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse<InboundDetail>> selectByInbound(int inId) {
+    public Observable<BaseResponse<InboundData>> selectByInbound(int inId) {
         return apiService.selectByInbound(inId);
     }
 
@@ -132,8 +131,8 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail) {
-        return apiService.saveInboundResult(inboundDetail);
+    public Observable<BaseResponse> saveInboundResult(InboundData inboundData) {
+        return apiService.saveInboundResult(inboundData);
     }
 
     @Override
