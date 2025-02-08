@@ -62,16 +62,22 @@ public interface LocalDataSource {
 
     SyncInfo _getSyncDate(int syncId);
 
-    void _deleteTakeStockData();
+    void _deleteInventoryData();
 
-    void _insertTakeStockData(InventoryData... takeStockDatas);
+    void _insertInventoryData(InventoryData... inventoryDatas);
 
     void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS);
     /* ----------------同步数据------------- */
 
     /* ---------------本地接口，数据操作----------------- */
-    Maybe<List<InventoryData>> _listTakeStock(int page);
+    Maybe<List<InventoryData>> _listInventory(int page);
 
-    Maybe<InventoryData> _selectOneInventory(int checkId);
+    InventoryData _selectOneInventory(int checkId);
+
+    void _saveInventoryResult(InventoryData inventoryData);
+
+    List<InventoryData> _selectFinishedInventoryByDate(String syncDate);
+
+    void _deleteInventoryDataById(int checkId);
     /* ---------------本地接口，数据操作----------------- */
 }

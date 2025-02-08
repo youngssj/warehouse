@@ -14,7 +14,6 @@ import com.victor.base.data.entity.MovementDetail;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.data.entity.SyncInfo;
-import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.ListResponse;
@@ -84,13 +83,13 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<ListResponse<List<InventoryData>>> listTakeStock(int page) {
-        return mHttpDataSource.listTakeStock(page);
+    public Observable<ListResponse<List<InventoryData>>> listInventory(int page) {
+        return mHttpDataSource.listInventory(page);
     }
 
     @Override
-    public Observable<ListResponse<List<InventoryData>>> listAllTakeStock(int page) {
-        return mHttpDataSource.listAllTakeStock(page);
+    public Observable<ListResponse<List<InventoryData>>> listAllInventory(int page) {
+        return mHttpDataSource.listAllInventory(page);
     }
 
     @Override
@@ -139,8 +138,8 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<BaseResponse> saveCheckedResult(InventoryData mainInfo) {
-        return mHttpDataSource.saveCheckedResult(mainInfo);
+    public Observable<BaseResponse> saveCheckedResult(InventoryData inventoryData) {
+        return mHttpDataSource.saveCheckedResult(inventoryData);
     }
 
     @Override
@@ -237,13 +236,13 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public void _deleteTakeStockData() {
-        mLocalDataSource._deleteTakeStockData();
+    public void _deleteInventoryData() {
+        mLocalDataSource._deleteInventoryData();
     }
 
     @Override
-    public void _insertTakeStockData(InventoryData... takeStockDatas) {
-        mLocalDataSource._insertTakeStockData(takeStockDatas);
+    public void _insertInventoryData(InventoryData... inventoryDatas) {
+        mLocalDataSource._insertInventoryData(inventoryDatas);
     }
 
     @Override
@@ -252,12 +251,27 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Maybe<List<InventoryData>> _listTakeStock(int page) {
-        return mLocalDataSource._listTakeStock(page);
+    public Maybe<List<InventoryData>> _listInventory(int page) {
+        return mLocalDataSource._listInventory(page);
     }
 
     @Override
-    public Maybe<InventoryData> _selectOneInventory(int checkId){
+    public InventoryData _selectOneInventory(int checkId){
         return mLocalDataSource._selectOneInventory(checkId);
+    }
+
+    @Override
+    public void _saveInventoryResult(InventoryData inventoryData) {
+        mLocalDataSource._saveInventoryResult(inventoryData);
+    }
+
+    @Override
+    public List<InventoryData> _selectFinishedInventoryByDate(String syncDate) {
+        return mLocalDataSource._selectFinishedInventoryByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteInventoryDataById(int checkId) {
+        mLocalDataSource._deleteInventoryDataById(checkId);
     }
 }

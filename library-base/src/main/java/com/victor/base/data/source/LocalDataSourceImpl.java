@@ -3,7 +3,6 @@ package com.victor.base.data.source;
 import com.victor.base.BuildConfig;
 import com.victor.base.app.AppDatabase;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.utils.Constants.CONFIG;
 import com.victor.base.utils.Constants.SP;
@@ -11,6 +10,7 @@ import com.victor.base.utils.Constants.SP;
 import java.util.List;
 
 import io.reactivex.Maybe;
+import me.goldze.mvvmhabit.utils.KLog;
 import me.goldze.mvvmhabit.utils.SPUtils;
 
 /**
@@ -107,7 +107,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     @Override
     public void _deleteAll() {
-        _deleteTakeStockData();
+        _deleteInventoryData();
         db.syncInfoDao().deleteAll();
     }
 
@@ -122,28 +122,50 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public void _deleteTakeStockData() {
-        db.takeStockDataDao().deleteAll();
-        db.elecMaterialDao().deleteAll();
+    public void _deleteInventoryData() {
+        db.inventoryDataDao().deleteAll();
+        db.inventoryElecMaterialDao().deleteAll();
     }
 
     @Override
-    public void _insertTakeStockData(InventoryData... takeStockDatas) {
-        db.takeStockDataDao().insertAll(takeStockDatas);
+    public void _insertInventoryData(InventoryData... inventoryDatas) {
+        db.inventoryDataDao().insertAll(inventoryDatas);
     }
 
     @Override
     public void _insertElecMaterial(InventoryData.InventoryElecMaterial... InventoryElecMaterialS) {
-        db.elecMaterialDao().insertAll(InventoryElecMaterialS);
+        db.inventoryElecMaterialDao().insertAll(InventoryElecMaterialS);
     }
 
     @Override
-    public Maybe<List<InventoryData>> _listTakeStock(int page) {
-        return db.takeStockDataDao().getAll(10 * (page - 1), page * 10);
+    public Maybe<List<InventoryData>> _listInventory(int page) {
+        return db.inventoryDataDao().getAll(10 * (page - 1), page * 10);
     }
 
     @Override
-    public Maybe<InventoryData> _selectOneInventory(int checkId) {
-        return null;
+    public InventoryData _selectOneInventory(int checkId) {
+        InventoryData inventoryData = db.inventoryDataDao().getOneById(checkId);
+        if (null == inventoryData) {
+            KLog.i("inventoryData");
+        }
+        inventoryData.setElecMaterialList(db.inventoryElecMaterialDao().getAll(checkId));
+        return inventoryData;
+    }
+
+    @Override
+    public void _saveInventoryResult(InventoryData inventoryData) {
+        _insertInventoryData(inventoryData);
+        _insertElecMaterial(inventoryData.getElecMaterialList().toArray(new InventoryData.InventoryElecMaterial[0]));
+    }
+
+    @Override
+    public List<InventoryData> _selectFinishedInventoryByDate(String syncDate) {
+        return db.inventoryDataDao().getFinishedByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteInventoryDataById(int checkId) {
+        db.inventoryDataDao().deleteById(checkId);
+        db.inventoryElecMaterialDao().deleteByCheckId(checkId);
     }
 }

@@ -12,6 +12,7 @@ import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
+import com.victor.base.utils.DateUtil;
 import com.victor.inventory.BR;
 import com.victor.inventory.R;
 import com.victor.inventory.bean.InventoryListRefreshBean;
@@ -96,19 +97,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
     };
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-        List<String> pddIds = new ArrayList<>();
-        List<String> wPddIds = new ArrayList<>();
-//        if (mPddList != null && mPddList.size() > 0) {
-//            for (ZcpdVpRvItemViewModel zc : mPddList) {
-//                if (mPyListId.indexOf(String.valueOf(zc.entity.get().getMaterialId())) == -1) {  //不在盘盈列表中
-//                    pddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
-//                }
-//            }
-//            for (ZcpdVpRvItemViewModel zc : mWpddList) {
-//                wPddIds.add(Objects.requireNonNull(zc.entity.get()).getCheckDetailId() + "");
-//            }
-//
-        InventoryData mainInfo = entity.get();
+        InventoryData inventoryData = entity.get();
 
         List<InventoryData.InventoryElecMaterial> InventoryElecMaterialS = new ArrayList<>();
         for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
@@ -116,20 +105,13 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
             InventoryElecMaterialS.add(InventoryElecMaterial);
         }
 
-        mainInfo.setElecMaterialList(InventoryElecMaterialS);
-
+        inventoryData.setElecMaterialList(InventoryElecMaterialS);
+        inventoryData.setFinished(1);
+        inventoryData.setCheckDate(DateUtil.getNowTime());
 
         if (Constants.CONFIG.IS_OFFLINE) {
-            // 盘盈
-            List<InventoryData.InventoryElecMaterial> pyDataList = new ArrayList<>();
-//                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
-//                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
-//                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
-//                    }
-//                }
             Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-//                    model._saveCheckResult(mainInfo.getCheckId(),
-//                            StringUtils.listToStr(pddIds, ","), StringUtils.listToStr(wPddIds, ","), mainInfo.getBatchNumber(), pyDataList);
+                    model._saveInventoryResult(inventoryData);
                         emitter.onNext(true);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -153,8 +135,8 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
                         }
                     });
-        } else
-            model.saveCheckedResult(mainInfo)
+        } else {
+            model.saveCheckedResult(inventoryData)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .doOnSubscribe(disposable -> {
@@ -173,10 +155,9 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             dismissProgress();
                         }
                     });
-//        } else
-//            ToastUtils.showShort("未盘到资产");
+        }
     });
-    //ViewPager切换监听
+
     public BindingCommand<Integer> onPageSelectedCommand = new BindingCommand<>(index -> pagerIndex = index);
 
     public ZcpdViewModel(@NonNull Application application, AppRepository model) {
@@ -189,29 +170,16 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
     public void getNetData(int checkId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            model._selectOneInventory(checkId);
             Observable.create((ObservableOnSubscribe<InventoryData>) emitter -> {
-//                TakeStockDetail data = model._selectOneInventory(checkId);
-//                emitter.onNext(data);
+                        InventoryData data = model._selectOneInventory(checkId);
+                        emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
                     .subscribe(new DefaultObserver<InventoryData>() {
                         @Override
                         public void onNext(InventoryData data) {
-//                            if (data == null || data.getDataList().size() == 0) {
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                                return;
-//                            }
-//                            if (data != null) {
-//                                entity.set(data);
-//                                checkDataNum.set("0/" + data.getDataList().size());
-//                                ZcpdVpItemViewModel itemViewModel = null;
-//                                for (int i = 0; i < TAB_NUM; i++) {
-//                                    itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, data.getDataList());
-//                                    items.add(itemViewModel);
-//                                }
-//                            }
+                            handleInventoryData(data);
                         }
 
                         @Override
@@ -238,21 +206,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                     .subscribe(new ApiDisposableObserver<InventoryData>() {
                         @Override
                         public void onResult(InventoryData data) {
-                            if (data == null || data.getElecMaterialList().size() == 0) {
-                                setNoDataVisibleObservable(View.VISIBLE);
-                                return;
-                            } else {
-                                setNoDataVisibleObservable(View.GONE);
-                            }
-
-                            if (data != null) {
-                                entity.set(data);
-                                checkDataNum.set("0/" + data.getElecMaterialList().size());
-                                for (int i = 0; i < TAB_NUM; i++) {
-                                    ZcpdVpItemViewModel itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, entity.get().getBatchNumber(), entity.get().getElecMaterialList());
-                                    items.add(itemViewModel);
-                                }
-                            }
+                            handleInventoryData(data);
                         }
 
                         @Override
@@ -260,6 +214,22 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                             dismissProgress();
                         }
                     });
+        }
+    }
+
+    private void handleInventoryData(InventoryData data) {
+        if (data == null || data.getElecMaterialList().size() == 0) {
+            setNoDataVisibleObservable(View.VISIBLE);
+            return;
+        } else {
+            setNoDataVisibleObservable(View.GONE);
+        }
+
+        entity.set(data);
+        checkDataNum.set("0/" + data.getElecMaterialList().size());
+        for (int i = 0; i < TAB_NUM; i++) {
+            ZcpdVpItemViewModel itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, entity.get().getBatchNumber(), entity.get().getElecMaterialList());
+            items.add(itemViewModel);
         }
     }
 
@@ -298,11 +268,8 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
         setBgColor();
 
-//        getPyData(sets);  //获取盘盈数据
-
         checkDataNum.set(mPddList.size() + "/" + entity.get().getElecMaterialList().size());
-   /*     if (mPddList.size() > 0 || mPyListId.size() > 0) {
-        }*/
+
         if (mPddList.size() == entity.get().getElecMaterialList().size() + mPyListId.size() && mWpddList.size() == 0) {  //全部盘点完成，盘点到的数据=已盘点+盘盈
             uc.scanFinishEvent.setValue(true);
         }
@@ -321,9 +288,5 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
             itemViewModel.entity.get().setCheckResultMessage("未盘点");
             itemViewModel.entity.notifyChange();
         }
-     /*   for (ZcpdVpRvItemViewModel itemViewModel : mPdAllList) {
-            itemViewModel.entity.get().setBgColor(Utils.getContext().getDrawable(R.color.white));
-            itemViewModel.entity.notifyChange();
-        }*/
     }
 }

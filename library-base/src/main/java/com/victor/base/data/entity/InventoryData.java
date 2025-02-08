@@ -31,6 +31,24 @@ public class InventoryData {
     private String userName;
     @Ignore
     private List<InventoryData.InventoryElecMaterial> elecMaterialList;
+    private int finished;
+    private String checkDate;
+
+    public String getCheckDate() {
+        return checkDate;
+    }
+
+    public void setCheckDate(String checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public int getFinished() {
+        return finished;
+    }
+
+    public void setFinished(int finished) {
+        this.finished = finished;
+    }
 
     @Entity
     public static class InventoryElecMaterial {

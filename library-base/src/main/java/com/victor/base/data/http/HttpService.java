@@ -70,7 +70,7 @@ public interface HttpService {
      * @return
      */
     @GET("/dev-api/mobile/storage/ElecMaterialCheckinfo/list")
-    Observable<ListResponse<List<InventoryData>>> listTakeStock(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
+    Observable<ListResponse<List<InventoryData>>> listInventory(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
      * 入库列表
@@ -170,11 +170,11 @@ public interface HttpService {
     /**
      * 盘点完成
      *
-     * @param mainInfo
+     * @param inventoryData
      * @return
      */
     @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
-    Observable<BaseResponse> saveCheckedResult(@Body InventoryData mainInfo);
+    Observable<BaseResponse> saveCheckedResult(@Body InventoryData inventoryData);
 
     /**
      * 入库完成
@@ -200,7 +200,7 @@ public interface HttpService {
      * @param movementDetail
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    @POST("/dev-api/mobile/storage/moveinfo/completeMove")
     Observable<BaseResponse> saveMovementResult(@Body MovementDetail movementDetail);
 
     /**

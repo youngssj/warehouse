@@ -26,14 +26,20 @@ public interface InventoryDataDao {
     @Query("SELECT * FROM InventoryData limit (:offset),(:limit)")
     Maybe<List<InventoryData>> getAll(int offset, int limit);
 
+    @Query("SELECT * FROM InventoryData where finished=1 and datetime(checkDate) between datetime((:lastDate)) and datetime(CURRENT_TIMESTAMP,'localtime')")
+    List<InventoryData> getFinishedByDate(String lastDate);
+
     @Query("SELECT COUNT(*) FROM InventoryData")
     int getCount();
 
     @Query("SELECT * FROM InventoryData WHERE checkId=(:checkId)")
-    InventoryData getOneByIds(int checkId);
+    InventoryData getOneById(int checkId);
 
     @Query("DELETE FROM InventoryData")
     void deleteAll();
+
+    @Query("DELETE FROM InventoryData where checkId=(:checkId)")
+    void deleteById(int checkId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(InventoryData... inventoryDatas);

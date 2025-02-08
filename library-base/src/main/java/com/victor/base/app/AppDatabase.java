@@ -54,8 +54,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract SyncInfoDao syncInfoDao();
 
     // 盘点单
-    public abstract InventoryDataDao takeStockDataDao();
+    public abstract InventoryDataDao inventoryDataDao();
 
     // 盘点单详情
-    public abstract InventoryElecMaterialDao elecMaterialDao();
+    public abstract InventoryElecMaterialDao inventoryElecMaterialDao();
 }

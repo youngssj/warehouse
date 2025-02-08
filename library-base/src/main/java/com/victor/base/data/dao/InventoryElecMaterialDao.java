@@ -22,7 +22,7 @@ import java.util.List;
 @Dao
 public interface InventoryElecMaterialDao {
     @Query("SELECT * FROM InventoryElecMaterial where checkId=(:checkId)")
-    List<InventoryData.InventoryElecMaterial> getAll(String checkId);
+    List<InventoryData.InventoryElecMaterial> getAll(int checkId);
 
     @Query("SELECT * FROM InventoryElecMaterial where datetime(checkDate) between datetime((:lastDate)) and datetime(CURRENT_TIMESTAMP,'localtime')")
     List<InventoryData.InventoryElecMaterial> getAllByDate(String lastDate);
@@ -39,6 +39,9 @@ public interface InventoryElecMaterialDao {
 
     @Query("DELETE FROM InventoryElecMaterial")
     void deleteAll();
+
+    @Query("DELETE FROM InventoryElecMaterial where checkId=(:checkId)")
+    void deleteByCheckId(int checkId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(InventoryData.InventoryElecMaterial... dataListBeans);

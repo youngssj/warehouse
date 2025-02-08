@@ -36,9 +36,9 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<MaterialsData>>> listMaterials(int pageNum, String materialStatus, String materialName, String rfidCode);
 
-    Observable<ListResponse<List<InventoryData>>> listTakeStock(int page);
+    Observable<ListResponse<List<InventoryData>>> listInventory(int page);
 
-    Observable<ListResponse<List<InventoryData>>> listAllTakeStock(int page);
+    Observable<ListResponse<List<InventoryData>>> listAllInventory(int page);
 
     Observable<ListResponse<List<InboundData>>> listInbound(int page);
 
@@ -58,7 +58,7 @@ public interface HttpDataSource {
 
     Observable<BaseResponse<AllocateDetail>> selectByAllocate(int allocateId);
 
-    Observable<BaseResponse> saveCheckedResult(InventoryData mainInfo);
+    Observable<BaseResponse> saveCheckedResult(InventoryData inventoryData);
 
     Observable<BaseResponse> saveInboundResult(InboundDetail inboundDetail);
 

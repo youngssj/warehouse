@@ -74,13 +74,13 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<ListResponse<List<InventoryData>>> listTakeStock(int pageNum) {
-        return apiService.listTakeStock(pageNum, 10);
+    public Observable<ListResponse<List<InventoryData>>> listInventory(int pageNum) {
+        return apiService.listInventory(pageNum, 10);
     }
 
     @Override
-    public Observable<ListResponse<List<InventoryData>>> listAllTakeStock(int pageNum) {
-        return apiService.listTakeStock(pageNum, 100000);
+    public Observable<ListResponse<List<InventoryData>>> listAllInventory(int pageNum) {
+        return apiService.listInventory(pageNum, 100000);
     }
 
     @Override
@@ -129,8 +129,8 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse> saveCheckedResult(InventoryData mainInfo) {
-        return apiService.saveCheckedResult(mainInfo);
+    public Observable<BaseResponse> saveCheckedResult(InventoryData inventoryData) {
+        return apiService.saveCheckedResult(inventoryData);
     }
 
     @Override

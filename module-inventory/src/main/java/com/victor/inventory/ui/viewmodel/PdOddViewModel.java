@@ -50,7 +50,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
             observableList.clear();
         }
         if (Constants.CONFIG.IS_OFFLINE)
-            model._listTakeStock(page)
+            model._listInventory(page)
                     .compose(RxUtils.MaybeSchTransformer())
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .subscribe((Consumer<List<InventoryData>>) takeStockDatas -> {
@@ -75,7 +75,7 @@ public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
                         uc.finishLoadmore.call();
                     });
         else {
-            model.listTakeStock(page)
+            model.listInventory(page)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .subscribe(new ApiListDisposableObserver<List<InventoryData>>() {
