@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
-import com.victor.base.data.entity.AllocateDetail;
 import com.victor.allocate.ui.viewmodel.AllocateScanListViewModel;
+import com.victor.base.data.entity.AllocateData;
 
 import java.util.Objects;
 
@@ -14,13 +14,13 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 public class AllocateScanItemViewModel extends ItemViewModel<AllocateScanListViewModel> {
 
-    public ObservableField<AllocateDetail.ElecMaterialList> entity = new ObservableField<>();
+    public ObservableField<AllocateData.AllocateMaterial> entity = new ObservableField<>();
 
     public BindingCommand itemClick = new BindingCommand(() -> {
         viewModel.uc.showCustomEvent.setValue(this);
     });
 
-    public AllocateScanItemViewModel(@NonNull AllocateScanListViewModel viewModel, AllocateDetail.ElecMaterialList bean) {
+    public AllocateScanItemViewModel(@NonNull AllocateScanListViewModel viewModel, AllocateData.AllocateMaterial bean) {
         super(viewModel);
         this.entity.set(bean);
     }

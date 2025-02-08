@@ -18,7 +18,7 @@ public class AllocateItemViewModel extends BaseRecycleItemViewModel<AllocateList
     @Override
     protected void itemClickCallback() {
         ARouter.getInstance().build(RouterActivityPath.Allocate.PAGER_ALLOCATE_SCAN)
-                .withInt("inId", entity.get().getInId())
+                .withInt("allocateId", entity.get().getId())
                 .navigation();
     }
 }

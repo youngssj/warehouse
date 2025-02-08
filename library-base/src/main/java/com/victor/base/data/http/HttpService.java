@@ -1,10 +1,8 @@
 package com.victor.base.data.http;
 
 import com.victor.base.data.entity.AllocateData;
-import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
-import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
@@ -50,6 +48,7 @@ public interface HttpService {
 
     /**
      * 物资查询列表
+     *
      * @param materialStatus
      * @param materialName
      * @param rfidCode
@@ -109,7 +108,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    @GET("/dev-api/mobile/storage/ElecExchangeInfo/list")
     Observable<ListResponse<List<AllocateData>>> listAllocate(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -154,8 +153,8 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
-    Observable<BaseResponse<AllocateDetail>> selectByAllocate(@Path("dynamicPath") int path);
+    @GET("/dev-api/mobile/storage/ElecExchangeInfo/{dynamicPath}")
+    Observable<BaseResponse<AllocateData>> selectByAllocate(@Path("dynamicPath") int path);
 
     /**
      * 盘点完成
@@ -206,9 +205,9 @@ public interface HttpService {
     /**
      * 调拨完成
      *
-     * @param allocateDetail
+     * @param allocateData
      * @return
      */
     @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
-    Observable<BaseResponse> saveAllocateResult(@Body AllocateDetail allocateDetail);
+    Observable<BaseResponse> saveAllocateResult(@Body AllocateData allocateData);
 }

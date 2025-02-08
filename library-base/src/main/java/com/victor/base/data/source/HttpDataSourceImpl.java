@@ -2,7 +2,6 @@ package com.victor.base.data.source;
 
 import com.victor.base.app.Injection;
 import com.victor.base.data.entity.AllocateData;
-import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.InventoryData;
@@ -11,7 +10,6 @@ import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.MovementDetail;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundDetail;
-import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.HttpService;
@@ -124,7 +122,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse<AllocateDetail>> selectByAllocate(int allocateId) {
+    public Observable<BaseResponse<AllocateData>> selectByAllocate(int allocateId) {
         return apiService.selectByAllocate(allocateId);
     }
 
@@ -149,7 +147,7 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse> saveAllocateResult(AllocateDetail allocateDetail) {
-        return apiService.saveAllocateResult(allocateDetail);
+    public Observable<BaseResponse> saveAllocateResult(AllocateData allocateData) {
+        return apiService.saveAllocateResult(allocateData);
     }
 }

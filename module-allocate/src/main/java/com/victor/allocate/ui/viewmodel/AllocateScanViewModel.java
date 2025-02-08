@@ -5,15 +5,15 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
-import com.victor.allocate.bean.AllocateListRefreshBean;
-import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.AllocateDetail;
-import com.victor.base.data.http.ApiDisposableObserver;
-import com.victor.base.utils.Constants;
 import com.victor.allocate.R;
+import com.victor.allocate.bean.AllocateListRefreshBean;
 import com.victor.allocate.bean.AllocateScanAddItemsBean;
 import com.victor.allocate.bean.AllocateScanRemoveItemsBean;
 import com.victor.allocate.bean.AllocateScanUpdateItemsBean;
+import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.http.ApiDisposableObserver;
+import com.victor.base.utils.Constants;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ import me.goldze.mvvmhabit.utils.Utils;
 
 public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
 
-    public ObservableField<AllocateDetail> entity = new ObservableField<>();
+    public ObservableField<AllocateData> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
@@ -51,11 +51,11 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
     }
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-        AllocateDetail mainInfo = entity.get();
+        AllocateData allocateData = entity.get();
 
         if (Constants.CONFIG.IS_OFFLINE) {
             // 盘盈
-            List<AllocateDetail.ElecMaterialList> pyDataList = new ArrayList<>();
+            List<AllocateData.AllocateMaterial> pyDataList = new ArrayList<>();
 //                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
 //                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
 //                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
@@ -88,7 +88,7 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                         }
                     });
         } else {
-            model.saveAllocateResult(mainInfo)
+            model.saveAllocateResult(allocateData)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .doOnSubscribe(disposable -> {
@@ -110,17 +110,17 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     });
 
-    public void getNetData(int inId) {
+    public void getNetData(int allocateId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<AllocateDetail>) emitter -> {
+            Observable.create((ObservableOnSubscribe<AllocateData>) emitter -> {
 //                AllocateDetail data = model._selectOneCheck(checkId);
 //                emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<AllocateDetail>() {
+                    .subscribe(new DefaultObserver<AllocateData>() {
                         @Override
-                        public void onNext(AllocateDetail data) {
+                        public void onNext(AllocateData data) {
 //                            if (data == null || data.getDataList().size() == 0) {
 //                                setNoDataVisibleObservable(View.VISIBLE);
 //                                return;
@@ -147,7 +147,7 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                     });
 
         } else {
-            model.selectByAllocate(inId)
+            model.selectByAllocate(allocateId)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -157,16 +157,16 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                             showProgress();
                         }
                     })
-                    .subscribe(new ApiDisposableObserver<AllocateDetail>() {
+                    .subscribe(new ApiDisposableObserver<AllocateData>() {
                         @Override
-                        public void onResult(AllocateDetail data) {
-                            if (data != null && data.getElecMaterialList().size() > 0) {
+                        public void onResult(AllocateData data) {
+                            if (data != null && data.getMaterials().size() > 0) {
                                 entity.set(data);
-                                checkDataNum.set("0/" + data.getElecMaterialList().size());
+                                checkDataNum.set("0/" + data.getMaterials().size());
                                 // 向fragment发送数据，刚进入只有待入库数据
                                 AllocateScanAddItemsBean allocateScanAddItemsBean = new AllocateScanAddItemsBean();
                                 allocateScanAddItemsBean.setPosition(0);
-                                allocateScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
+                                allocateScanAddItemsBean.setMaterials(data.getMaterials());
                                 RxBus.getDefault().post(allocateScanAddItemsBean);
                             }
                         }
@@ -179,12 +179,12 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     }
 
-    private Set<AllocateDetail.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
+    private Set<AllocateData.AllocateMaterial> rvSet = new HashSet<>();  //盘点到单子集合
 
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
         boolean hasData = false;
-        for (AllocateDetail.ElecMaterialList bean : entity.get().getElecMaterialList()) {
+        for (AllocateData.AllocateMaterial bean : entity.get().getMaterials()) {
             if (sets.contains(bean.getRfidCode())) {
                 sets.remove(bean.getRfidCode());
 
@@ -192,21 +192,21 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                     rvSet.add(bean);  //防止添加的数据重复
 
                     bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
-                    bean.setIsIn(1);
-                    bean.setIsInMessage(getApplication().getResources().getString(R.string.workbench_allocate_success_text));
+                    bean.setIsAllocate("1");
+                    bean.setIsAllocateMessage(getApplication().getResources().getString(R.string.workbench_allocate_success_text));
 
                     // 添加
                     AllocateScanAddItemsBean allocateScanAddItemsBean = new AllocateScanAddItemsBean();
                     allocateScanAddItemsBean.setPosition(1);
-                    allocateScanAddItemsBean.setElecMaterialList(new ArrayList<>());
-                    allocateScanAddItemsBean.getElecMaterialList().add(bean);
+                    allocateScanAddItemsBean.setMaterials(new ArrayList<>());
+                    allocateScanAddItemsBean.getMaterials().add(bean);
                     RxBus.getDefault().post(allocateScanAddItemsBean);
 
                     // 移除
                     AllocateScanRemoveItemsBean allocateScanRemoveItemsBean = new AllocateScanRemoveItemsBean();
                     allocateScanRemoveItemsBean.setPosition(0);
-                    allocateScanRemoveItemsBean.setElecMaterialList(new ArrayList<>());
-                    allocateScanRemoveItemsBean.getElecMaterialList().add(bean);
+                    allocateScanRemoveItemsBean.setMaterials(new ArrayList<>());
+                    allocateScanRemoveItemsBean.getMaterials().add(bean);
                     RxBus.getDefault().post(allocateScanRemoveItemsBean);
 
                     hasData = true;
@@ -215,8 +215,8 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
                 // 更新列表未扫描到的条目为红色
                 AllocateScanUpdateItemsBean allocateScanUpdateItemsBean = new AllocateScanUpdateItemsBean();
                 allocateScanUpdateItemsBean.setPosition(0);
-                allocateScanUpdateItemsBean.setElecMaterialList(new ArrayList<>());
-                allocateScanUpdateItemsBean.getElecMaterialList().add(bean);
+                allocateScanUpdateItemsBean.setMaterials(new ArrayList<>());
+                allocateScanUpdateItemsBean.getMaterials().add(bean);
                 RxBus.getDefault().post(allocateScanUpdateItemsBean);
             }
         }
@@ -225,10 +225,10 @@ public class AllocateScanViewModel extends BaseTitleViewModel<AppRepository> {
             muc.pageSelectEvent.setValue(1);  //选中入库完成页面
         }
 
-        if (entity.get().getElecMaterialList().size() == rvSet.size()) {
+        if (entity.get().getMaterials().size() == rvSet.size()) {
             muc.scanFinishEvent.setValue(true);
         }
 
-        checkDataNum.set(rvSet.size() + "/" + entity.get().getElecMaterialList().size());
+        checkDataNum.set(rvSet.size() + "/" + entity.get().getMaterials().size());
     }
 }

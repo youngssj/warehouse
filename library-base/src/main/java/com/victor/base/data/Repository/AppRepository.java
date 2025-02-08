@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.victor.base.data.entity.AllocateData;
-import com.victor.base.data.entity.AllocateDetail;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InboundDetail;
 import com.victor.base.data.entity.InventoryData;
@@ -133,7 +132,7 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<BaseResponse<AllocateDetail>> selectByAllocate(int allocateId) {
+    public Observable<BaseResponse<AllocateData>> selectByAllocate(int allocateId) {
         return mHttpDataSource.selectByAllocate(allocateId);
     }
 
@@ -158,8 +157,8 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<BaseResponse> saveAllocateResult(AllocateDetail allocateDetail) {
-        return mHttpDataSource.saveAllocateResult(allocateDetail);
+    public Observable<BaseResponse> saveAllocateResult(AllocateData allocateData) {
+        return mHttpDataSource.saveAllocateResult(allocateData);
     }
 
     @Override

@@ -8,13 +8,13 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import com.victor.base.data.entity.AllocateDetail;
 import com.victor.allocate.BR;
 import com.victor.allocate.R;
 import com.victor.allocate.bean.AllocateScanAddItemsBean;
 import com.victor.allocate.bean.AllocateScanRemoveItemsBean;
 import com.victor.allocate.bean.AllocateScanUpdateItemsBean;
 import com.victor.allocate.ui.viewmodel.itemviewmodel.AllocateScanItemViewModel;
+import com.victor.base.data.entity.AllocateData;
 
 import java.util.Objects;
 
@@ -56,8 +56,8 @@ public class AllocateScanListViewModel extends BaseViewModel {
                     @Override
                     public void accept(AllocateScanAddItemsBean allocateScanItemsBean) throws Exception {
                         if (allocateScanItemsBean != null && allocateScanItemsBean.getPosition() == position) {
-                            if (allocateScanItemsBean.getElecMaterialList() != null && allocateScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (AllocateDetail.ElecMaterialList bean : allocateScanItemsBean.getElecMaterialList()) {
+                            if (allocateScanItemsBean.getMaterials() != null && allocateScanItemsBean.getMaterials().size() > 0) {
+                                for (AllocateData.AllocateMaterial bean : allocateScanItemsBean.getMaterials()) {
                                     allocateScanList.add(new AllocateScanItemViewModel(AllocateScanListViewModel.this, bean));
                                 }
                             }
@@ -75,8 +75,8 @@ public class AllocateScanListViewModel extends BaseViewModel {
                     @Override
                     public void accept(AllocateScanRemoveItemsBean allocateScanItemsBean) throws Exception {
                         if (allocateScanItemsBean != null && allocateScanItemsBean.getPosition() == position) {
-                            if (allocateScanItemsBean.getElecMaterialList() != null && allocateScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (AllocateDetail.ElecMaterialList bean : allocateScanItemsBean.getElecMaterialList()) {
+                            if (allocateScanItemsBean.getMaterials() != null && allocateScanItemsBean.getMaterials().size() > 0) {
+                                for (AllocateData.AllocateMaterial bean : allocateScanItemsBean.getMaterials()) {
                                     allocateScanList.remove(new AllocateScanItemViewModel(AllocateScanListViewModel.this, bean));
                                 }
                             }
@@ -94,11 +94,11 @@ public class AllocateScanListViewModel extends BaseViewModel {
                     @Override
                     public void accept(AllocateScanUpdateItemsBean allocateScanItemsBean) throws Exception {
                         if (allocateScanItemsBean != null && allocateScanItemsBean.getPosition() == position) {
-                            for (AllocateDetail.ElecMaterialList bean : allocateScanItemsBean.getElecMaterialList()) {
+                            for (AllocateData.AllocateMaterial bean : allocateScanItemsBean.getMaterials()) {
                                 for (AllocateScanItemViewModel itemViewModel : allocateScanList) {
                                     if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
-                                        itemViewModel.entity.get().setIsIn(0);
-                                        itemViewModel.entity.get().setIsInMessage(getApplication().getResources().getString(R.string.workbench_allocate_failure_text));
+                                        itemViewModel.entity.get().setIsAllocate("0");
+                                        itemViewModel.entity.get().setIsAllocateMessage(getApplication().getResources().getString(R.string.workbench_allocate_failure_text));
                                         itemViewModel.entity.get().setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
                                         itemViewModel.entity.notifyChange();
                                     }

@@ -1,6 +1,6 @@
 package com.victor.allocate.bean;
 
-import com.victor.base.data.entity.AllocateDetail;
+import com.victor.base.data.entity.AllocateData;
 
 import java.util.List;
 
@@ -16,21 +16,21 @@ public class AllocateScanAddItemsBean {
         this.position = position;
     }
 
-    private List<AllocateDetail.ElecMaterialList> elecMaterialList;
+    private List<AllocateData.AllocateMaterial> materials;
 
-    public List<AllocateDetail.ElecMaterialList> getElecMaterialList() {
-        return elecMaterialList;
+    public List<AllocateData.AllocateMaterial> getMaterials() {
+        return materials;
     }
 
-    public void setElecMaterialList(List<AllocateDetail.ElecMaterialList> elecMaterialList) {
-        this.elecMaterialList = elecMaterialList;
+    public void setMaterials(List<AllocateData.AllocateMaterial> materials) {
+        this.materials = materials;
     }
 
     @Override
     public String toString() {
         return "AllocateScanAddItemsBean{" +
                 "position=" + position +
-                ", elecMaterialList=" + elecMaterialList +
+                ", materials=" + materials +
                 '}';
     }
 }

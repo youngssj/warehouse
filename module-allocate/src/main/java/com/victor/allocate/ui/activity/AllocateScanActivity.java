@@ -12,15 +12,15 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.victor.base.app.AppViewModelFactory;
-import com.victor.base.base.VPFragmentAdapter;
-import com.victor.base.data.entity.AllocateDetail;
-import com.victor.base.router.RouterActivityPath;
-import com.victor.base.router.RouterFragmentPath;
 import com.victor.allocate.BR;
 import com.victor.allocate.R;
 import com.victor.allocate.databinding.AllocateScanActivityBinding;
 import com.victor.allocate.ui.viewmodel.AllocateScanViewModel;
+import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.base.VPFragmentAdapter;
+import com.victor.base.data.entity.AllocateData;
+import com.victor.base.router.RouterActivityPath;
+import com.victor.base.router.RouterFragmentPath;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
 import java.util.ArrayList;
@@ -38,8 +38,8 @@ public class AllocateScanActivity extends BaseUhfActivity<AllocateScanActivityBi
 
     private String[] titles;
 
-    @Autowired(name = "inId")
-    int inId;
+    @Autowired(name = "allocateId")
+    int allocateId;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
@@ -49,7 +49,7 @@ public class AllocateScanActivity extends BaseUhfActivity<AllocateScanActivityBi
     @Override
     protected void scanBarCodeCallback(String barCode) {
         Set set = new HashSet();
-        for (AllocateDetail.ElecMaterialList dataListBean : viewModel.entity.get().getElecMaterialList()) {
+        for (AllocateData.AllocateMaterial dataListBean : viewModel.entity.get().getMaterials()) {
             if (barCode.equals(dataListBean.getMaterialCode())) {
                 set.add(dataListBean.getRfidCode());
                 break;
@@ -85,7 +85,7 @@ public class AllocateScanActivity extends BaseUhfActivity<AllocateScanActivityBi
         viewModel.setBackVisibleObservable(View.VISIBLE);
         viewModel.setPowerVisibleObservable(View.VISIBLE);
         viewModel.setTitleText(getResources().getString(R.string.workbench_allocate_title_text));
-        viewModel.getNetData(inId);
+        viewModel.getNetData(allocateId);
         setRead(true);
 
         titles = new String[]{getResources().getString(R.string.workbench_allocate_tab1_text), getResources().getString(R.string.workbench_allocate_tab2_text)};

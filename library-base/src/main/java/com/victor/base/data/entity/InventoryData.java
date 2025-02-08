@@ -30,7 +30,7 @@ public class InventoryData {
     private int checkUserId;
     private String userName;
     @Ignore
-    private List<InventoryData.InventoryElecMaterial> elecMaterialList;
+    private List<InventoryElecMaterial> elecMaterialList;
     private int finished;
     private String checkDate;
 
