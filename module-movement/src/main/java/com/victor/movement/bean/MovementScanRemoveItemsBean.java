@@ -1,7 +1,7 @@
 
 package com.victor.movement.bean;
 
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 
 import java.util.List;
 
@@ -17,13 +17,13 @@ public class MovementScanRemoveItemsBean {
         this.position = position;
     }
 
-    private List<MovementDetail.ElecMaterialList> elecMaterialList;
+    private List<MovementData.MovementElecMaterial> elecMaterialList;
 
-    public List<MovementDetail.ElecMaterialList> getElecMaterialList() {
+    public List<MovementData.MovementElecMaterial> getElecMaterialList() {
         return elecMaterialList;
     }
 
-    public void setElecMaterialList(List<MovementDetail.ElecMaterialList> elecMaterialList) {
+    public void setElecMaterialList(List<MovementData.MovementElecMaterial> elecMaterialList) {
         this.elecMaterialList = elecMaterialList;
     }
 }

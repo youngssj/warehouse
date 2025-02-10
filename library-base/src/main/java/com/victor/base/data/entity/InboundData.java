@@ -31,7 +31,7 @@ public class InboundData {
     private String delFlag;
     private int deptId;
     @Ignore
-    private List<InboundElecMaterial> inboundElecMaterial;
+    private List<InboundElecMaterial> elecMaterialList;
     private int finished;
     private String checkDate;
 
@@ -52,11 +52,11 @@ public class InboundData {
     }
 
     public List<InboundElecMaterial> getElecMaterialList() {
-        return inboundElecMaterial;
+        return elecMaterialList;
     }
 
-    public void setElecMaterialList(List<InboundElecMaterial> inboundElecMaterial) {
-        this.inboundElecMaterial = inboundElecMaterial;
+    public void setElecMaterialList(List<InboundElecMaterial> elecMaterialList) {
+        this.elecMaterialList = elecMaterialList;
     }
 
     @Entity

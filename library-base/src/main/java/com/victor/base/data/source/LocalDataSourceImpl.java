@@ -4,6 +4,8 @@ import com.victor.base.BuildConfig;
 import com.victor.base.app.AppDatabase;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MovementData;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.utils.Constants.CONFIG;
 import com.victor.base.utils.Constants.SP;
@@ -11,7 +13,6 @@ import com.victor.base.utils.Constants.SP;
 import java.util.List;
 
 import io.reactivex.Maybe;
-import me.goldze.mvvmhabit.utils.KLog;
 import me.goldze.mvvmhabit.utils.SPUtils;
 
 /**
@@ -162,9 +163,6 @@ public class LocalDataSourceImpl implements LocalDataSource {
     @Override
     public InventoryData _selectOneInventory(int checkId) {
         InventoryData inventoryData = db.inventoryDataDao().getOneById(checkId);
-        if (null == inventoryData) {
-            KLog.i("inventoryData");
-        }
         inventoryData.setElecMaterialList(db.inventoryElecMaterialDao().getAll(checkId));
         return inventoryData;
     }
@@ -184,5 +182,124 @@ public class LocalDataSourceImpl implements LocalDataSource {
     public void _deleteInventoryDataById(int checkId) {
         db.inventoryDataDao().deleteById(checkId);
         db.inventoryElecMaterialDao().deleteByCheckId(checkId);
+    }
+
+    @Override
+    public Maybe<List<InboundData>> _listInbound(int page) {
+        return db.inboundDataDao().getAll(10 * (page - 1), page * 10);
+    }
+
+    @Override
+    public InboundData _selectOneInbound(int inId) {
+        InboundData inboundData = db.inboundDataDao().getOneById(inId);
+        inboundData.setElecMaterialList(db.inboundElecMaterialDao().getAll(inId));
+        return inboundData;
+    }
+
+    @Override
+    public void _saveInboundResult(InboundData inboundData) {
+        _insertInboundData(inboundData);
+        _insertInboundElecMaterial(inboundData.getElecMaterialList().toArray(new InboundData.InboundElecMaterial[0]));
+    }
+
+    @Override
+    public Maybe<List<OutboundData>> _listOutbound(int page) {
+        return db.outboundDataDao().getAll(10 * (page - 1), page * 10);
+    }
+
+    @Override
+    public OutboundData _selectOneOutbound(int outId) {
+        OutboundData outboundData = db.outboundDataDao().getOneById(outId);
+        outboundData.setElecMaterialList(db.outboundElecMaterialDao().getAll(outId));
+        return outboundData;
+    }
+
+    @Override
+    public void _saveOutboundResult(OutboundData outboundData) {
+        _insertOutboundData(outboundData);
+        _insertOutboundElecMaterial(outboundData.getElecMaterialList().toArray(new OutboundData.OutboundElecMaterial[0]));
+    }
+
+    @Override
+    public Maybe<List<MovementData>> _listMovement(int page) {
+        return db.movementDataDao().getAll(10 * (page - 1), page * 10);
+    }
+
+    @Override
+    public MovementData _selectOneMovement(int moveId) {
+        MovementData movementData = db.movementDataDao().getOneById(moveId);
+        movementData.setElecMaterialList(db.movementElecMaterialDao().getAll(moveId));
+        return movementData;
+    }
+
+    @Override
+    public void _saveMovementResult(MovementData movementData) {
+        _insertMovementData(movementData);
+        _insertMovementElecMaterial(movementData.getElecMaterialList().toArray(new MovementData.MovementElecMaterial[0]));
+    }
+
+    @Override
+    public List<InboundData> _selectFinishedInboundByDate(String syncDate) {
+        return db.inboundDataDao().getFinishedByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteInboundDataById(int inId) {
+        db.inboundDataDao().deleteById(inId);
+        db.inboundElecMaterialDao().deleteByInId(inId);
+    }
+
+    @Override
+    public void _deleteOutboundData() {
+        db.outboundDataDao().deleteAll();
+        db.outboundElecMaterialDao().deleteAll();
+    }
+
+    @Override
+    public void _insertOutboundData(OutboundData... outboundDatas) {
+        db.outboundDataDao().insertAll(outboundDatas);
+    }
+
+    @Override
+    public void _insertOutboundElecMaterial(OutboundData.OutboundElecMaterial... outboundElecMaterials) {
+        db.outboundElecMaterialDao().insertAll(outboundElecMaterials);
+    }
+
+    @Override
+    public List<OutboundData> _selectFinishedOutboundByDate(String syncDate) {
+        return db.outboundDataDao().getFinishedByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteOutboundDataById(int outId) {
+        db.outboundDataDao().deleteById(outId);
+        db.outboundElecMaterialDao().deleteByInId(outId);
+    }
+
+    @Override
+    public void _deleteMovementData() {
+        db.movementDataDao().deleteAll();
+        db.movementElecMaterialDao().deleteAll();
+    }
+
+    @Override
+    public void _insertMovementData(MovementData... movementDatas) {
+        db.movementDataDao().insertAll(movementDatas);
+    }
+
+    @Override
+    public void _insertMovementElecMaterial(MovementData.MovementElecMaterial... movementElecMaterials) {
+        db.movementElecMaterialDao().insertAll(movementElecMaterials);
+    }
+
+    @Override
+    public List<MovementData> _selectFinishedMovementByDate(String syncDate) {
+        return db.movementDataDao().getFinishedByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteMovementDataById(int moveId) {
+        db.movementDataDao().deleteById(moveId);
+        db.movementElecMaterialDao().deleteByMoveId(moveId);
     }
 }

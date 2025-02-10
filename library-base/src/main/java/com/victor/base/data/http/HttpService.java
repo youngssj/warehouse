@@ -5,9 +5,9 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
-import com.victor.base.data.entity.OutboundDetail;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 
@@ -135,7 +135,7 @@ public interface HttpService {
      * @return
      */
     @GET("/dev-api/mobile/storage/ElecMaterialOutinfo/{dynamicPath}")
-    Observable<BaseResponse<OutboundDetail>> selectByOutbound(@Path("dynamicPath") int path);
+    Observable<BaseResponse<OutboundData>> selectByOutbound(@Path("dynamicPath") int path);
 
     /**
      * 移库单详情
@@ -144,7 +144,7 @@ public interface HttpService {
      * @return
      */
     @GET("/dev-api/mobile/storage/ElecMaterialMoveinfo/{dynamicPath}")
-    Observable<BaseResponse<MovementDetail>> selectByMovement(@Path("dynamicPath") int path);
+    Observable<BaseResponse<MovementData>> selectByMovement(@Path("dynamicPath") int path);
 
     /**
      * 调拨单详情
@@ -190,7 +190,7 @@ public interface HttpService {
      * @return
      */
     @POST("/dev-api/mobile/storage/ElecMaterialOutinfo/completeInfo")
-    Observable<BaseResponse> saveOutboundResult(@Body OutboundDetail outboundDetail);
+    Observable<BaseResponse> saveOutboundResult(@Body OutboundData outboundDetail);
 
     /**
      * 移库完成
@@ -199,7 +199,7 @@ public interface HttpService {
      * @return
      */
     @POST("/dev-api/mobile/storage/moveinfo/completeMove")
-    Observable<BaseResponse> saveMovementResult(@Body MovementDetail movementDetail);
+    Observable<BaseResponse> saveMovementResult(@Body MovementData movementDetail);
 
     /**
      * 调拨完成

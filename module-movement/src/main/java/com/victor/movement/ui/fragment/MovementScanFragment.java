@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.movement.BR;
 import com.victor.movement.R;
@@ -45,7 +45,7 @@ public class MovementScanFragment extends BaseFragment<MovementScanFragmentBindi
         viewModel.uc.showCustomEvent.observe(this, movementScanItemViewModel -> {
             MovementScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.movement_scan_detail, null, false);
             binding.setViewModel(movementScanItemViewModel);
-            MovementDetail.ElecMaterialList dataListBean = movementScanItemViewModel.entity.get();
+            MovementData.MovementElecMaterial dataListBean = movementScanItemViewModel.entity.get();
             showCustomDialog(getResources().getString(R.string.workbench_movement_detail_text), binding, (dialog, which) -> {
             });
         });

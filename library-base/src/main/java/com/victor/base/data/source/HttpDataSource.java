@@ -5,9 +5,9 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
-import com.victor.base.data.entity.OutboundDetail;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.ListResponse;
@@ -43,7 +43,11 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<OutboundData>>> listOutbound(int page);
 
+    Observable<ListResponse<List<OutboundData>>> listAllOutbound(int page);
+
     Observable<ListResponse<List<MovementData>>> listMovement(int page);
+
+    Observable<ListResponse<List<MovementData>>> listAllMovement(int page);
 
     Observable<ListResponse<List<AllocateData>>> listAllocate(int page);
 
@@ -51,9 +55,9 @@ public interface HttpDataSource {
 
     Observable<BaseResponse<InboundData>> selectByInbound(int inId);
 
-    Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId);
+    Observable<BaseResponse<OutboundData>> selectByOutbound(int outId);
 
-    Observable<BaseResponse<MovementDetail>> selectByMovement(int movementId);
+    Observable<BaseResponse<MovementData>> selectByMovement(int movementId);
 
     Observable<BaseResponse<AllocateData>> selectByAllocate(int allocateId);
 
@@ -61,9 +65,9 @@ public interface HttpDataSource {
 
     Observable<BaseResponse> saveInboundResult(InboundData inboundData);
 
-    Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail);
+    Observable<BaseResponse> saveOutboundResult(OutboundData outboundDetail);
 
-    Observable<BaseResponse> saveMovementResult(MovementDetail movementDetail);
+    Observable<BaseResponse> saveMovementResult(MovementData movementDetail);
 
     Observable<BaseResponse> saveAllocateResult(AllocateData allocateData);
 }

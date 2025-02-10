@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.movement.ui.viewmodel.MovementScanListViewModel;
 
 import java.util.Objects;
@@ -14,13 +14,13 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 public class MovementScanItemViewModel extends ItemViewModel<MovementScanListViewModel> {
 
-    public ObservableField<MovementDetail.ElecMaterialList> entity = new ObservableField<>();
+    public ObservableField<MovementData.MovementElecMaterial> entity = new ObservableField<>();
 
     public BindingCommand itemClick = new BindingCommand(() -> {
         viewModel.uc.showCustomEvent.setValue(this);
     });
 
-    public MovementScanItemViewModel(@NonNull MovementScanListViewModel viewModel, MovementDetail.ElecMaterialList bean) {
+    public MovementScanItemViewModel(@NonNull MovementScanListViewModel viewModel, MovementData.MovementElecMaterial bean) {
         super(viewModel);
         this.entity.set(bean);
     }

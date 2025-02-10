@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.http.ApiListDisposableObserver;
@@ -42,26 +43,30 @@ public class OutboundListViewModel extends BaseOddViewModel<OutboundItemViewMode
             observableList.clear();
         }
         if (Constants.CONFIG.IS_OFFLINE) {
-//            model._listCheck(page)
-//                    .compose(RxUtils.MaybeSchTransformer())
-//                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-//                    .subscribe((Consumer<List<AssetCheckOdd>>) assetCheckOdds -> {
-//
-//                        uc.finishRefreshing.call();
-//                        uc.finishLoadmore.call();
-//                        if (assetCheckOdds == null || assetCheckOdds.size() == 0) {
-//                            if (page == 1)
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                            else ToastUtils.showShort(R.string.app_no_more_data_text);
-//                        } else {
-//                            setNoDataVisibleObservable(View.GONE);
-//                        }
-////                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
-////                            PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, assetCheckOdd);
-////                            //双向绑定动态添加Item
-////                            observableList.add(itemViewModel);
-////                        }
-//                    });
+            model._listOutbound(page)
+                    .compose(RxUtils.MaybeSchTransformer())
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .subscribe((Consumer<List<OutboundData>>) outboundDatas -> {
+                        if (outboundDatas == null || outboundDatas.size() == 0) {
+                            if (page == 1) {
+                                setNoDataVisibleObservable(View.VISIBLE);
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
+                                canloadmore = false;
+                                ToastUtils.showShort(R.string.app_no_more_data_text);
+                            }
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
+                            for (OutboundData outboundData : outboundDatas) {
+                                OutboundItemViewModel itemViewModel = new OutboundItemViewModel(OutboundListViewModel.this, outboundData);
+                                //双向绑定动态添加Item
+                                observableList.add(itemViewModel);
+                            }
+                        }
+
+                        uc.finishRefreshing.call();
+                        uc.finishLoadmore.call();
+                    });
         } else {
             model.listOutbound(page)
                     .compose(RxUtils.schedulersTransformer())

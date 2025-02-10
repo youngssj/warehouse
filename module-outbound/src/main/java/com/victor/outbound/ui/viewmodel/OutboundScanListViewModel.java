@@ -8,7 +8,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import com.victor.base.data.entity.OutboundDetail;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.outbound.BR;
 import com.victor.outbound.R;
 import com.victor.outbound.bean.OutboundScanAddItemsBean;
@@ -57,7 +57,7 @@ public class OutboundScanListViewModel extends BaseViewModel {
                     public void accept(OutboundScanAddItemsBean outboundScanItemsBean) throws Exception {
                         if (outboundScanItemsBean != null && outboundScanItemsBean.getPosition() == position) {
                             if (outboundScanItemsBean.getElecMaterialList() != null && outboundScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (OutboundDetail.ElecMaterialList bean : outboundScanItemsBean.getElecMaterialList()) {
+                                for (OutboundData.OutboundElecMaterial bean : outboundScanItemsBean.getElecMaterialList()) {
                                     outboundScanList.add(new OutboundScanItemViewModel(OutboundScanListViewModel.this, bean));
                                 }
                             }
@@ -76,7 +76,7 @@ public class OutboundScanListViewModel extends BaseViewModel {
                     public void accept(OutboundScanRemoveItemsBean outboundScanItemsBean) throws Exception {
                         if (outboundScanItemsBean != null && outboundScanItemsBean.getPosition() == position) {
                             if (outboundScanItemsBean.getElecMaterialList() != null && outboundScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (OutboundDetail.ElecMaterialList bean : outboundScanItemsBean.getElecMaterialList()) {
+                                for (OutboundData.OutboundElecMaterial bean : outboundScanItemsBean.getElecMaterialList()) {
                                     outboundScanList.remove(new OutboundScanItemViewModel(OutboundScanListViewModel.this, bean));
                                 }
                             }
@@ -94,7 +94,7 @@ public class OutboundScanListViewModel extends BaseViewModel {
                     @Override
                     public void accept(OutboundScanUpdateItemsBean outboundScanItemsBean) throws Exception {
                         if (outboundScanItemsBean != null && outboundScanItemsBean.getPosition() == position) {
-                            for (OutboundDetail.ElecMaterialList bean : outboundScanItemsBean.getElecMaterialList()) {
+                            for (OutboundData.OutboundElecMaterial bean : outboundScanItemsBean.getElecMaterialList()) {
                                 for (OutboundScanItemViewModel itemViewModel : outboundScanList) {
                                     if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
                                         itemViewModel.entity.get().setIsOut("0");

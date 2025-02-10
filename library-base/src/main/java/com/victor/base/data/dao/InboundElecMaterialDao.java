@@ -26,7 +26,7 @@ public interface InboundElecMaterialDao {
     void deleteAll();
 
     @Query("DELETE FROM InboundElecMaterial where inId=(:inId)")
-    void deleteByCheckId(int inId);
+    void deleteByInId(int inId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(InboundData.InboundElecMaterial... dataListBeans);

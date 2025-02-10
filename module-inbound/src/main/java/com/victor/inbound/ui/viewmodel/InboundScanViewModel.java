@@ -1,14 +1,17 @@
 package com.victor.inbound.ui.viewmodel;
 
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
+import com.victor.base.utils.DateUtil;
 import com.victor.inbound.R;
 import com.victor.inbound.bean.InboundListRefreshBean;
 import com.victor.inbound.bean.InboundScanAddItemsBean;
@@ -51,19 +54,13 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     }
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-        InboundData mainInfo = entity.get();
+        InboundData inboundData = entity.get();
+        inboundData.setFinished(1);
+        inboundData.setCheckDate(DateUtil.getNowTime());
 
         if (Constants.CONFIG.IS_OFFLINE) {
-            // 盘盈
-            List<InboundData.InboundElecMaterial> pyDataList = new ArrayList<>();
-//                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
-//                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
-//                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
-//                    }
-//                }
             Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-//                    model._saveCheckResult(mainInfo.getCheckId(),
-//                            StringUtils.listToStr(pddIds, ","), StringUtils.listToStr(wPddIds, ","), mainInfo.getBatchNumber(), pyDataList);
+                        model._saveInboundResult(inboundData);
                         emitter.onNext(true);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -88,7 +85,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         }
                     });
         } else {
-            model.saveInboundResult(mainInfo)
+            model.saveInboundResult(inboundData)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .doOnSubscribe(disposable -> {
@@ -113,27 +110,15 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     public void getNetData(int inId) {
         if (Constants.CONFIG.IS_OFFLINE) {
             Observable.create((ObservableOnSubscribe<InboundData>) emitter -> {
-//                InboundData data = model._selectOneCheck(checkId);
-//                emitter.onNext(data);
+                        InboundData data = model._selectOneInbound(inId);
+                        emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
                     .subscribe(new DefaultObserver<InboundData>() {
                         @Override
                         public void onNext(InboundData data) {
-//                            if (data == null || data.getDataList().size() == 0) {
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                                return;
-//                            }
-//                            if (data != null) {
-//                                entity.set(data);
-//                                checkDataNum.set("0/" + data.getDataList().size());
-//                                ZcpdVpItemViewModel itemViewModel = null;
-//                                for (int i = 0; i < TAB_NUM; i++) {
-//                                    itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, data.getDataList());
-//                                    items.add(itemViewModel);
-//                                }
-//                            }
+                            handleInboundData(data);
                         }
 
                         @Override
@@ -145,7 +130,6 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onComplete() {
                         }
                     });
-
         } else {
             model.selectByInbound(inId)
                     .compose(RxUtils.schedulersTransformer())
@@ -160,15 +144,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                     .subscribe(new ApiDisposableObserver<InboundData>() {
                         @Override
                         public void onResult(InboundData data) {
-                            if (data != null && data.getElecMaterialList().size() > 0) {
-                                entity.set(data);
-                                checkDataNum.set("0/" + data.getElecMaterialList().size());
-                                // 向fragment发送数据，刚进入只有待入库数据
-                                InboundScanAddItemsBean inboundScanAddItemsBean = new InboundScanAddItemsBean();
-                                inboundScanAddItemsBean.setPosition(0);
-                                inboundScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
-                                RxBus.getDefault().post(inboundScanAddItemsBean);
-                            }
+                            handleInboundData(data);
                         }
 
                         @Override
@@ -176,6 +152,18 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                             dismissProgress();
                         }
                     });
+        }
+    }
+
+    private void handleInboundData(InboundData data) {
+        if (data != null && data.getElecMaterialList().size() > 0) {
+            entity.set(data);
+            checkDataNum.set("0/" + data.getElecMaterialList().size());
+            // 向fragment发送数据，刚进入只有待入库数据
+            InboundScanAddItemsBean inboundScanAddItemsBean = new InboundScanAddItemsBean();
+            inboundScanAddItemsBean.setPosition(0);
+            inboundScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
+            RxBus.getDefault().post(inboundScanAddItemsBean);
         }
     }
 

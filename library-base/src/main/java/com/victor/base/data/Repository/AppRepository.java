@@ -8,9 +8,8 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
-import com.victor.base.data.entity.OutboundDetail;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
@@ -106,8 +105,18 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Observable<ListResponse<List<OutboundData>>> listAllOutbound(int page) {
+        return mHttpDataSource.listAllOutbound(page);
+    }
+
+    @Override
     public Observable<ListResponse<List<MovementData>>> listMovement(int page) {
         return mHttpDataSource.listMovement(page);
+    }
+
+    @Override
+    public Observable<ListResponse<List<MovementData>>> listAllMovement(int page) {
+        return mHttpDataSource.listAllMovement(page);
     }
 
     @Override
@@ -126,12 +135,12 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId) {
+    public Observable<BaseResponse<OutboundData>> selectByOutbound(int outId) {
         return mHttpDataSource.selectByOutbound(outId);
     }
 
     @Override
-    public Observable<BaseResponse<MovementDetail>> selectByMovement(int movementId) {
+    public Observable<BaseResponse<MovementData>> selectByMovement(int movementId) {
         return mHttpDataSource.selectByMovement(movementId);
     }
 
@@ -151,12 +160,12 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail) {
+    public Observable<BaseResponse> saveOutboundResult(OutboundData outboundDetail) {
         return mHttpDataSource.saveOutboundResult(outboundDetail);
     }
 
     @Override
-    public Observable<BaseResponse> saveMovementResult(MovementDetail movementDetail) {
+    public Observable<BaseResponse> saveMovementResult(MovementData movementDetail) {
         return mHttpDataSource.saveMovementResult(movementDetail);
     }
 
@@ -291,5 +300,110 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public void _deleteInventoryDataById(int checkId) {
         mLocalDataSource._deleteInventoryDataById(checkId);
+    }
+
+    @Override
+    public Maybe<List<InboundData>> _listInbound(int page) {
+        return mLocalDataSource._listInbound(page);
+    }
+
+    @Override
+    public InboundData _selectOneInbound(int inId) {
+        return mLocalDataSource._selectOneInbound(inId);
+    }
+
+    @Override
+    public void _saveInboundResult(InboundData inboundData) {
+        mLocalDataSource._saveInboundResult(inboundData);
+    }
+
+    @Override
+    public List<InboundData> _selectFinishedInboundByDate(String syncDate) {
+        return mLocalDataSource._selectFinishedInboundByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteInboundDataById(int inId) {
+        mLocalDataSource._deleteInboundDataById(inId);
+    }
+
+    @Override
+    public void _deleteOutboundData() {
+        mLocalDataSource._deleteOutboundData();
+    }
+
+    @Override
+    public void _insertOutboundData(OutboundData... outboundDatas) {
+        mLocalDataSource._insertOutboundData(outboundDatas);
+    }
+
+    @Override
+    public void _insertOutboundElecMaterial(OutboundData.OutboundElecMaterial... outboundElecMaterials) {
+        mLocalDataSource._insertOutboundElecMaterial(outboundElecMaterials);
+    }
+
+    @Override
+    public Maybe<List<OutboundData>> _listOutbound(int page) {
+        return mLocalDataSource._listOutbound(page);
+    }
+
+    @Override
+    public OutboundData _selectOneOutbound(int outId) {
+        return mLocalDataSource._selectOneOutbound(outId);
+    }
+
+    @Override
+    public void _saveOutboundResult(OutboundData outboundData) {
+        mLocalDataSource._saveOutboundResult(outboundData);
+    }
+
+    @Override
+    public Maybe<List<MovementData>> _listMovement(int page) {
+        return mLocalDataSource._listMovement(page);
+    }
+
+    @Override
+    public MovementData _selectOneMovement(int moveId) {
+        return mLocalDataSource._selectOneMovement(moveId);
+    }
+
+    @Override
+    public void _saveMovementResult(MovementData movementData) {
+        mLocalDataSource._saveMovementResult(movementData);
+    }
+
+    @Override
+    public List<OutboundData> _selectFinishedOutboundByDate(String syncDate) {
+        return mLocalDataSource._selectFinishedOutboundByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteOutboundDataById(int outId) {
+        mLocalDataSource._deleteOutboundDataById(outId);
+    }
+
+    @Override
+    public void _deleteMovementData() {
+        mLocalDataSource._deleteMovementData();
+    }
+
+    @Override
+    public void _insertMovementData(MovementData... movementDatas) {
+        mLocalDataSource._insertMovementData(movementDatas);
+    }
+
+    @Override
+    public void _insertMovementElecMaterial(MovementData.MovementElecMaterial... movementElecMaterials) {
+        mLocalDataSource._insertMovementElecMaterial(movementElecMaterials);
+    }
+
+    @Override
+    public List<MovementData> _selectFinishedMovementByDate(String syncDate) {
+        return mLocalDataSource._selectFinishedMovementByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteMovementDataById(int moveId) {
+        mLocalDataSource._deleteMovementDataById(moveId);
     }
 }

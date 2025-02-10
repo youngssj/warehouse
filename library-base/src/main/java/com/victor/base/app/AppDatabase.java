@@ -8,10 +8,16 @@ import com.victor.base.data.dao.InboundDataDao;
 import com.victor.base.data.dao.InboundElecMaterialDao;
 import com.victor.base.data.dao.InventoryDataDao;
 import com.victor.base.data.dao.InventoryElecMaterialDao;
+import com.victor.base.data.dao.MovementDataDao;
+import com.victor.base.data.dao.MovementElecMaterialDao;
+import com.victor.base.data.dao.OutboundDataDao;
+import com.victor.base.data.dao.OutboundElecMaterialDao;
 import com.victor.base.data.dao.SyncInfoDao;
 import com.victor.base.data.dao.UserTokenDao;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MovementData;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.UserToken;
 import com.victor.base.data.source.LocalDataSourceImpl;
@@ -34,6 +40,10 @@ import me.goldze.mvvmhabit.utils.Utils;
         InventoryData.InventoryElecMaterial.class,
         InboundData.class,
         InboundData.InboundElecMaterial.class,
+        OutboundData.class,
+        OutboundData.OutboundElecMaterial.class,
+        MovementData.class,
+        MovementData.MovementElecMaterial.class,
 }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase DB;  //创建单例
@@ -69,4 +79,16 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // 入库单详情
     public abstract InboundElecMaterialDao inboundElecMaterialDao();
+
+    // 出库单
+    public abstract OutboundDataDao outboundDataDao();
+
+    // 出库单详情
+    public abstract OutboundElecMaterialDao outboundElecMaterialDao();
+
+    // 移库单
+    public abstract MovementDataDao movementDataDao();
+
+    // 移库单详情
+    public abstract MovementElecMaterialDao movementElecMaterialDao();
 }

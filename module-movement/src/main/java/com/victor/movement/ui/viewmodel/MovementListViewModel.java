@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.http.ApiListDisposableObserver;
@@ -42,26 +43,30 @@ public class MovementListViewModel extends BaseOddViewModel<MovementItemViewMode
             observableList.clear();
         }
         if (Constants.CONFIG.IS_OFFLINE) {
-//            model._listCheck(page)
-//                    .compose(RxUtils.MaybeSchTransformer())
-//                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-//                    .subscribe((Consumer<List<AssetCheckOdd>>) assetCheckOdds -> {
-//
-//                        uc.finishRefreshing.call();
-//                        uc.finishLoadmore.call();
-//                        if (assetCheckOdds == null || assetCheckOdds.size() == 0) {
-//                            if (page == 1)
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                            else ToastUtils.showShort(R.string.app_no_more_data_text);
-//                        } else {
-//                            setNoDataVisibleObservable(View.GONE);
-//                        }
-////                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
-////                            PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, assetCheckOdd);
-////                            //双向绑定动态添加Item
-////                            observableList.add(itemViewModel);
-////                        }
-//                    });
+            model._listMovement(page)
+                    .compose(RxUtils.MaybeSchTransformer())
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .subscribe((Consumer<List<MovementData>>) movementDatas -> {
+                        if (movementDatas == null || movementDatas.size() == 0) {
+                            if (page == 1) {
+                                setNoDataVisibleObservable(View.VISIBLE);
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
+                                canloadmore = false;
+                                ToastUtils.showShort(R.string.app_no_more_data_text);
+                            }
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
+                            for (MovementData movementData : movementDatas) {
+                                MovementItemViewModel itemViewModel = new MovementItemViewModel(MovementListViewModel.this, movementData);
+                                //双向绑定动态添加Item
+                                observableList.add(itemViewModel);
+                            }
+                        }
+
+                        uc.finishRefreshing.call();
+                        uc.finishLoadmore.call();
+                    });
         } else {
             model.listMovement(page)
                     .compose(RxUtils.schedulersTransformer())

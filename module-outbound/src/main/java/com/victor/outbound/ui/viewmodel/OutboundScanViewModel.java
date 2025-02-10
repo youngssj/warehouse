@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.OutboundDetail;
+import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
+import com.victor.base.utils.DateUtil;
 import com.victor.outbound.R;
 import com.victor.outbound.bean.OutboundListRefreshBean;
 import com.victor.outbound.bean.OutboundScanAddItemsBean;
@@ -35,7 +37,7 @@ import me.goldze.mvvmhabit.utils.Utils;
 
 public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
-    public ObservableField<OutboundDetail> entity = new ObservableField<>();
+    public ObservableField<OutboundData> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
@@ -51,19 +53,13 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     }
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-        OutboundDetail mainInfo = entity.get();
+        OutboundData outboundData = entity.get();
+        outboundData.setFinished(1);
+        outboundData.setCheckDate(DateUtil.getNowTime());
 
         if (Constants.CONFIG.IS_OFFLINE) {
-            // 盘盈
-            List<OutboundDetail.ElecMaterialList> pyDataList = new ArrayList<>();
-//                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
-//                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
-//                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
-//                    }
-//                }
             Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-//                    model._saveCheckResult(mainInfo.getCheckId(),
-//                            StringUtils.listToStr(pddIds, ","), StringUtils.listToStr(wPddIds, ","), mainInfo.getBatchNumber(), pyDataList);
+                        model._saveOutboundResult(outboundData);
                         emitter.onNext(true);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -88,7 +84,7 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         }
                     });
         } else {
-            model.saveOutboundResult(mainInfo)
+            model.saveOutboundResult(outboundData)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .doOnSubscribe(disposable -> {
@@ -112,28 +108,16 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public void getNetData(int outId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<OutboundDetail>) emitter -> {
-//                InboundDetail data = model._selectOneCheck(checkId);
-//                emitter.onNext(data);
+            Observable.create((ObservableOnSubscribe<OutboundData>) emitter -> {
+                        OutboundData data = model._selectOneOutbound(outId);
+                        emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<OutboundDetail>() {
+                    .subscribe(new DefaultObserver<OutboundData>() {
                         @Override
-                        public void onNext(OutboundDetail data) {
-//                            if (data == null || data.getDataList().size() == 0) {
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                                return;
-//                            }
-//                            if (data != null) {
-//                                entity.set(data);
-//                                checkDataNum.set("0/" + data.getDataList().size());
-//                                ZcpdVpItemViewModel itemViewModel = null;
-//                                for (int i = 0; i < TAB_NUM; i++) {
-//                                    itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, data.getDataList());
-//                                    items.add(itemViewModel);
-//                                }
-//                            }
+                        public void onNext(OutboundData data) {
+                            handleOutboundData(data);
                         }
 
                         @Override
@@ -145,7 +129,6 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onComplete() {
                         }
                     });
-
         } else {
             model.selectByOutbound(outId)
                     .compose(RxUtils.schedulersTransformer())
@@ -157,18 +140,10 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                             showProgress();
                         }
                     })
-                    .subscribe(new ApiDisposableObserver<OutboundDetail>() {
+                    .subscribe(new ApiDisposableObserver<OutboundData>() {
                         @Override
-                        public void onResult(OutboundDetail data) {
-                            if (data != null && data.getElecMaterialList().size() > 0) {
-                                entity.set(data);
-                                checkDataNum.set("0/" + data.getElecMaterialList().size());
-                                // 向fragment发送数据，刚进入只有待入库数据
-                                OutboundScanAddItemsBean outboundScanAddItemsBean = new OutboundScanAddItemsBean();
-                                outboundScanAddItemsBean.setPosition(0);
-                                outboundScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
-                                RxBus.getDefault().post(outboundScanAddItemsBean);
-                            }
+                        public void onResult(OutboundData data) {
+                            handleOutboundData(data);
                         }
 
                         @Override
@@ -179,12 +154,24 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     }
 
-    private Set<OutboundDetail.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
+    private void handleOutboundData(OutboundData data) {
+        if (data != null && data.getElecMaterialList().size() > 0) {
+            entity.set(data);
+            checkDataNum.set("0/" + data.getElecMaterialList().size());
+            // 向fragment发送数据，刚进入只有待入库数据
+            OutboundScanAddItemsBean outboundScanAddItemsBean = new OutboundScanAddItemsBean();
+            outboundScanAddItemsBean.setPosition(0);
+            outboundScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
+            RxBus.getDefault().post(outboundScanAddItemsBean);
+        }
+    }
+
+    private Set<OutboundData.OutboundElecMaterial> rvSet = new HashSet<>();  //盘点到单子集合
 
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
         boolean hasData = false;
-        for (OutboundDetail.ElecMaterialList bean : entity.get().getElecMaterialList()) {
+        for (OutboundData.OutboundElecMaterial bean : entity.get().getElecMaterialList()) {
             if (sets.contains(bean.getRfidCode())) {
                 sets.remove(bean.getRfidCode());
 

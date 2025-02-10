@@ -29,5 +29,5 @@ public interface InboundDataDao {
     void deleteById(int inId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(InboundData... inventoryDatas);
+    void insertAll(InboundData... inboundDatas);
 }

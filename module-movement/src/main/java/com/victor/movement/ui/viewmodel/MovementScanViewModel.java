@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
+import com.victor.base.utils.DateUtil;
 import com.victor.movement.R;
 import com.victor.movement.bean.MovementListRefreshBean;
 import com.victor.movement.bean.MovementScanAddItemsBean;
@@ -35,7 +37,7 @@ import me.goldze.mvvmhabit.utils.Utils;
 
 public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
 
-    public ObservableField<MovementDetail> entity = new ObservableField<>();
+    public ObservableField<MovementData> entity = new ObservableField<>();
     public ObservableField<String> checkDataNum = new ObservableField<>("0/0");
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
@@ -51,19 +53,13 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
     }
 
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
-        MovementDetail mainInfo = entity.get();
+        MovementData movementData = entity.get();
+        movementData.setFinished(1);
+        movementData.setCheckDate(DateUtil.getNowTime());
 
         if (Constants.CONFIG.IS_OFFLINE) {
-            // 盘盈
-            List<MovementDetail.ElecMaterialList> pyDataList = new ArrayList<>();
-//                for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : mPddList) {
-//                    if (zcpdVpRvItemViewModel.entity.get().getCheckResult().equals("盘盈")) {
-//                        pyDataList.add(zcpdVpRvItemViewModel.entity.get());
-//                    }
-//                }
             Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-//                    model._saveCheckResult(mainInfo.getCheckId(),
-//                            StringUtils.listToStr(pddIds, ","), StringUtils.listToStr(wPddIds, ","), mainInfo.getBatchNumber(), pyDataList);
+                        model._saveMovementResult(movementData);
                         emitter.onNext(true);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
@@ -88,7 +84,7 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                         }
                     });
         } else {
-            model.saveMovementResult(mainInfo)
+            model.saveMovementResult(movementData)
                     .compose(RxUtils.schedulersTransformer())
                     .compose(RxUtils.exceptionTransformer())
                     .doOnSubscribe(disposable -> {
@@ -112,28 +108,16 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public void getNetData(int movementId) {
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<MovementDetail>) emitter -> {
-//                MovementDetail data = model._selectOneCheck(checkId);
-//                emitter.onNext(data);
+            Observable.create((ObservableOnSubscribe<MovementData>) emitter -> {
+                        MovementData data = model._selectOneMovement(movementId);
+                        emitter.onNext(data);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
                     .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<MovementDetail>() {
+                    .subscribe(new DefaultObserver<MovementData>() {
                         @Override
-                        public void onNext(MovementDetail data) {
-//                            if (data == null || data.getDataList().size() == 0) {
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                                return;
-//                            }
-//                            if (data != null) {
-//                                entity.set(data);
-//                                checkDataNum.set("0/" + data.getDataList().size());
-//                                ZcpdVpItemViewModel itemViewModel = null;
-//                                for (int i = 0; i < TAB_NUM; i++) {
-//                                    itemViewModel = new ZcpdVpItemViewModel(ZcpdViewModel.this, i, data.getDataList());
-//                                    items.add(itemViewModel);
-//                                }
-//                            }
+                        public void onNext(MovementData data) {
+                            handleMovementData(data);
                         }
 
                         @Override
@@ -145,7 +129,6 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onComplete() {
                         }
                     });
-
         } else {
             model.selectByMovement(movementId)
                     .compose(RxUtils.schedulersTransformer())
@@ -157,9 +140,9 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
                             showProgress();
                         }
                     })
-                    .subscribe(new ApiDisposableObserver<MovementDetail>() {
+                    .subscribe(new ApiDisposableObserver<MovementData>() {
                         @Override
-                        public void onResult(MovementDetail data) {
+                        public void onResult(MovementData data) {
                             if (data != null && data.getElecMaterialList().size() > 0) {
                                 entity.set(data);
                                 checkDataNum.set("0/" + data.getElecMaterialList().size());
@@ -179,12 +162,24 @@ public class MovementScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     }
 
-    private Set<MovementDetail.ElecMaterialList> rvSet = new HashSet<>();  //盘点到单子集合
+    private void handleMovementData(MovementData data) {
+        if (data != null && data.getElecMaterialList().size() > 0) {
+            entity.set(data);
+            checkDataNum.set("0/" + data.getElecMaterialList().size());
+            // 向fragment发送数据，刚进入只有待入库数据
+            MovementScanAddItemsBean movementScanAddItemsBean = new MovementScanAddItemsBean();
+            movementScanAddItemsBean.setPosition(0);
+            movementScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
+            RxBus.getDefault().post(movementScanAddItemsBean);
+        }
+    }
+
+    private Set<MovementData.MovementElecMaterial> rvSet = new HashSet<>();  //盘点到单子集合
 
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
         boolean hasData = false;
-        for (MovementDetail.ElecMaterialList bean : entity.get().getElecMaterialList()) {
+        for (MovementData.MovementElecMaterial bean : entity.get().getElecMaterialList()) {
             if (sets.contains(bean.getRfidCode())) {
                 sets.remove(bean.getRfidCode());
 

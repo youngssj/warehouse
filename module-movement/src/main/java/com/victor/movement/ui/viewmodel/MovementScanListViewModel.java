@@ -8,7 +8,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.movement.BR;
 import com.victor.movement.R;
 import com.victor.movement.bean.MovementScanAddItemsBean;
@@ -57,7 +57,7 @@ public class MovementScanListViewModel extends BaseViewModel {
                     public void accept(MovementScanAddItemsBean movementScanItemsBean) throws Exception {
                         if (movementScanItemsBean != null && movementScanItemsBean.getPosition() == position) {
                             if (movementScanItemsBean.getElecMaterialList() != null && movementScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (MovementDetail.ElecMaterialList bean : movementScanItemsBean.getElecMaterialList()) {
+                                for (MovementData.MovementElecMaterial bean : movementScanItemsBean.getElecMaterialList()) {
                                     movementScanList.add(new MovementScanItemViewModel(MovementScanListViewModel.this, bean));
                                 }
                             }
@@ -76,7 +76,7 @@ public class MovementScanListViewModel extends BaseViewModel {
                     public void accept(MovementScanRemoveItemsBean movementScanItemsBean) throws Exception {
                         if (movementScanItemsBean != null && movementScanItemsBean.getPosition() == position) {
                             if (movementScanItemsBean.getElecMaterialList() != null && movementScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (MovementDetail.ElecMaterialList bean : movementScanItemsBean.getElecMaterialList()) {
+                                for (MovementData.MovementElecMaterial bean : movementScanItemsBean.getElecMaterialList()) {
                                     movementScanList.remove(new MovementScanItemViewModel(MovementScanListViewModel.this, bean));
                                 }
                             }
@@ -94,7 +94,7 @@ public class MovementScanListViewModel extends BaseViewModel {
                     @Override
                     public void accept(MovementScanUpdateItemsBean movementScanItemsBean) throws Exception {
                         if (movementScanItemsBean != null && movementScanItemsBean.getPosition() == position) {
-                            for (MovementDetail.ElecMaterialList bean : movementScanItemsBean.getElecMaterialList()) {
+                            for (MovementData.MovementElecMaterial bean : movementScanItemsBean.getElecMaterialList()) {
                                 for (MovementScanItemViewModel itemViewModel : movementScanList) {
                                     if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
                                         itemViewModel.entity.get().setIsMove("0");

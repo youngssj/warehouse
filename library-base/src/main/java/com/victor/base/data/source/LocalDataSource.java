@@ -1,6 +1,8 @@
 package com.victor.base.data.source;
 
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.MovementData;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.InventoryData;
@@ -61,23 +63,48 @@ public interface LocalDataSource {
     /* ----------------同步数据------------- */
     void _saveSyncDate(SyncInfo syncInfo);
     SyncInfo _getSyncDate(int syncId);
+    // 盘点
     void _deleteInventoryData();
     void _insertInventoryData(InventoryData... inventoryDatas);
     void _insertInventoryElecMaterial(InventoryData.InventoryElecMaterial... inventoryElecMaterials);
+    List<InventoryData> _selectFinishedInventoryByDate(String syncDate);
+    void _deleteInventoryDataById(int checkId);
+    // 入库
     void _deleteInboundData();
     void _insertInboundData(InboundData... inboundDatas);
     void _insertInboundElecMaterial(InboundData.InboundElecMaterial... inboundElecMaterials);
+    List<InboundData> _selectFinishedInboundByDate(String syncDate);
+    void _deleteInboundDataById(int inId);
+    // 出库
+    void _deleteOutboundData();
+    void _insertOutboundData(OutboundData... outboundDatas);
+    void _insertOutboundElecMaterial(OutboundData.OutboundElecMaterial... outboundElecMaterials);
+    List<OutboundData> _selectFinishedOutboundByDate(String syncDate);
+    void _deleteOutboundDataById(int outId);
+    // 移库
+    void _deleteMovementData();
+    void _insertMovementData(MovementData... movementDatas);
+    void _insertMovementElecMaterial(MovementData.MovementElecMaterial... movementElecMaterials);
+    List<MovementData> _selectFinishedMovementByDate(String syncDate);
+    void _deleteMovementDataById(int moveId);
     /* ----------------同步数据------------- */
 
     /* ---------------本地接口，数据操作----------------- */
+    // 盘点
     Maybe<List<InventoryData>> _listInventory(int page);
-
     InventoryData _selectOneInventory(int checkId);
-
     void _saveInventoryResult(InventoryData inventoryData);
-
-    List<InventoryData> _selectFinishedInventoryByDate(String syncDate);
-
-    void _deleteInventoryDataById(int checkId);
+    // 入库
+    Maybe<List<InboundData>> _listInbound(int page);
+    InboundData _selectOneInbound(int inId);
+    void _saveInboundResult(InboundData inboundData);
+    // 出库
+    Maybe<List<OutboundData>> _listOutbound(int page);
+    OutboundData _selectOneOutbound(int outId);
+    void _saveOutboundResult(OutboundData outboundData);
+    // 移库
+    Maybe<List<MovementData>> _listMovement(int page);
+    MovementData _selectOneMovement(int moveId);
+    void _saveMovementResult(MovementData movementData);
     /* ---------------本地接口，数据操作----------------- */
 }

@@ -99,13 +99,13 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
         InventoryData inventoryData = entity.get();
 
-        List<InventoryData.InventoryElecMaterial> InventoryElecMaterialS = new ArrayList<>();
+        List<InventoryData.InventoryElecMaterial> inventoryElecMaterialS = new ArrayList<>();
         for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
-            InventoryData.InventoryElecMaterial InventoryElecMaterial = zcpdVpRvItemViewModel.entity.get();
-            InventoryElecMaterialS.add(InventoryElecMaterial);
+            InventoryData.InventoryElecMaterial inventoryElecMaterial = zcpdVpRvItemViewModel.entity.get();
+            inventoryElecMaterialS.add(inventoryElecMaterial);
         }
 
-        inventoryData.setElecMaterialList(InventoryElecMaterialS);
+        inventoryData.setElecMaterialList(inventoryElecMaterialS);
         inventoryData.setFinished(1);
         inventoryData.setCheckDate(DateUtil.getNowTime());
 
@@ -191,7 +191,6 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onComplete() {
                         }
                     });
-
         } else {
             model.selectByCheck(checkId)
                     .compose(RxUtils.schedulersTransformer())

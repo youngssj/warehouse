@@ -6,9 +6,9 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementDetail;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
-import com.victor.base.data.entity.OutboundDetail;
+import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.HttpService;
@@ -96,8 +96,18 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<OutboundData>>> listAllOutbound(int pageNum) {
+        return apiService.listOutbound(pageNum, 100000);
+    }
+
+    @Override
     public Observable<ListResponse<List<MovementData>>> listMovement(int pageNum) {
         return apiService.listMovement(pageNum, 10);
+    }
+
+    @Override
+    public Observable<ListResponse<List<MovementData>>> listAllMovement(int pageNum) {
+        return apiService.listMovement(pageNum, 100000);
     }
 
     @Override
@@ -116,12 +126,12 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse<OutboundDetail>> selectByOutbound(int outId) {
+    public Observable<BaseResponse<OutboundData>> selectByOutbound(int outId) {
         return apiService.selectByOutbound(outId);
     }
 
     @Override
-    public Observable<BaseResponse<MovementDetail>> selectByMovement(int movementId) {
+    public Observable<BaseResponse<MovementData>> selectByMovement(int movementId) {
         return apiService.selectByMovement(movementId);
     }
 
@@ -141,12 +151,12 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<BaseResponse> saveOutboundResult(OutboundDetail outboundDetail) {
+    public Observable<BaseResponse> saveOutboundResult(OutboundData outboundDetail) {
         return apiService.saveOutboundResult(outboundDetail);
     }
 
     @Override
-    public Observable<BaseResponse> saveMovementResult(MovementDetail movementDetail) {
+    public Observable<BaseResponse> saveMovementResult(MovementData movementDetail) {
         return apiService.saveMovementResult(movementDetail);
     }
 

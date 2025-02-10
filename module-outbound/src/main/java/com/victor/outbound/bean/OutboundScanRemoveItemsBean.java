@@ -1,7 +1,7 @@
 
 package com.victor.outbound.bean;
 
-import com.victor.base.data.entity.OutboundDetail;
+import com.victor.base.data.entity.OutboundData;
 
 import java.util.List;
 
@@ -17,13 +17,13 @@ public class OutboundScanRemoveItemsBean {
         this.position = position;
     }
 
-    private List<OutboundDetail.ElecMaterialList> elecMaterialList;
+    private List<OutboundData.OutboundElecMaterial> elecMaterialList;
 
-    public List<OutboundDetail.ElecMaterialList> getElecMaterialList() {
+    public List<OutboundData.OutboundElecMaterial> getElecMaterialList() {
         return elecMaterialList;
     }
 
-    public void setElecMaterialList(List<OutboundDetail.ElecMaterialList> elecMaterialList) {
+    public void setElecMaterialList(List<OutboundData.OutboundElecMaterial> elecMaterialList) {
         this.elecMaterialList = elecMaterialList;
     }
 }
