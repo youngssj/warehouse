@@ -27,7 +27,6 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
 
     }
 
-
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
@@ -49,7 +48,7 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
         // if  NetworkAvailable no !   must to call onCompleted
         if (!NetworkUtil.isNetworkAvailable(Utils.getContext())) {
             KLog.d("无网络，读取缓存数据");
-            onComplete();
+//            onComplete();
         }
     }
 
@@ -74,7 +73,6 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     break;
                 case CodeRule.CODE_10:
                     //                onResult((T) baseResponse.getData());
-                    onComplete();
                     break;
                 case CodeRule.CODE_200:
                     // 请求成功, 正确的操作方式, 并消息提示
@@ -121,7 +119,7 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     break;
             }
         }
-        onComplete();
+//        onComplete();
     }
 
     public static final class CodeRule {

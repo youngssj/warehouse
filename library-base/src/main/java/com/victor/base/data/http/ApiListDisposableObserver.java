@@ -44,7 +44,7 @@ public abstract class ApiListDisposableObserver<T> extends DisposableObserver<T>
         // if  NetworkAvailable no !   must to call onCompleted
         if (!NetworkUtil.isNetworkAvailable(Utils.getContext())) {
             KLog.d("无网络，读取缓存数据");
-            onComplete();
+//            onComplete();
         }
     }
 
@@ -54,7 +54,7 @@ public abstract class ApiListDisposableObserver<T> extends DisposableObserver<T>
             ListResponse listResponse = (ListResponse) o;
             onResult(new ListData<T>(listResponse.getTotal(), (T)listResponse.getRows()));
         }
-        onComplete();
+//        onComplete();
     }
 
     public static final class CodeRule {

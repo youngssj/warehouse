@@ -207,6 +207,6 @@ public interface HttpService {
      * @param allocateData
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    @POST("/dev-api/mobile/storage/ElecExchangeInfo/completeExchange")
     Observable<BaseResponse> saveAllocateResult(@Body AllocateData allocateData);
 }

@@ -286,6 +286,11 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 .subscribe(new ApiDisposableObserver() {
                     @Override
                     public void onResult(Object o) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
                         boolean finished = setUpProcess(syncInfo);
                         if (finished) {
                             for (InboundData inboundData : inboundDatas) {
@@ -323,6 +328,11 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 .subscribe(new ApiDisposableObserver() {
                     @Override
                     public void onResult(Object o) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
                         boolean finished = setUpProcess(syncInfo);
                         if (finished) {
                             for (OutboundData outboundData : outboundDatas) {
@@ -360,6 +370,11 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 .subscribe(new ApiDisposableObserver() {
                     @Override
                     public void onResult(Object o) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
                         boolean finished = setUpProcess(syncInfo);
                         if (finished) {
                             for (MovementData movementData : movementDatas) {
@@ -453,13 +468,13 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         } else {
             syncInfo.setUpValue(upValue);
         }
+        entity.notifyChange();
         if (syncInfo.getUpValue() == 100) {
             // 删除盘点单
             ToastUtils.showShortSafe("上传完成");
             saveSyncDate(syncInfo);
             return true;
         }
-        entity.notifyChange();
         return false;
     }
 
