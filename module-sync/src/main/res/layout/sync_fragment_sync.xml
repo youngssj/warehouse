@@ -24,8 +24,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="0mm"
+            android:layout_marginTop="20mm"
             android:layout_weight="1"
             binding:itemBinding="@{viewModel.itemBinding}"
             binding:items="@{viewModel.observableList}"
@@ -37,26 +37,28 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0mm"
+                android:layout_height="86mm"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="20mm"
+                android:layout_marginEnd="20mm"
                 android:layout_weight="1"
                 android:background="@drawable/selector_login_btn"
                 android:text="重新登录"
                 android:textColor="@color/white"
+                android:textSize="30mm"
                 binding:onClickCommand="@{viewModel.reloadLogin}" />
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0mm"
+                android:layout_height="86mm"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="20mm"
                 android:layout_weight="1"
                 android:background="@drawable/selector_login_btn"
                 android:text="清空数据"
                 android:textColor="@color/white"
+                android:textSize="30mm"
                 binding:onClickCommand="@{viewModel.clearClick}" />
         </LinearLayout>
 
@@ -66,26 +68,28 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0mm"
+                android:layout_height="86mm"
                 android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="20mm"
+                android:layout_marginEnd="20mm"
                 android:layout_weight="1"
                 android:background="@drawable/selector_login_btn"
                 android:text="全部下载"
                 android:textColor="@color/white"
+                android:textSize="30mm"
                 binding:onClickCommand="@{viewModel.allDownLoad}" />
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="0mm"
+                android:layout_height="86mm"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="20mm"
                 android:layout_weight="1"
                 android:background="@drawable/selector_login_btn"
                 android:text="全部上传"
                 android:textColor="@color/white"
+                android:textSize="30mm"
                 binding:onClickCommand="@{viewModel.allUpLoad}" />
         </LinearLayout>
     </LinearLayout>

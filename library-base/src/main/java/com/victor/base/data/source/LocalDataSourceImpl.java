@@ -110,6 +110,10 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     @Override
     public void _deleteAll() {
+        _deleteInboundData();
+        _deleteOutboundData();
+        _deleteMovementData();
+        _deleteAllocateData();
         _deleteInventoryData();
         db.syncInfoDao().deleteAll();
     }

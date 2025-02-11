@@ -14,11 +14,11 @@
     <com.lihang.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        binding:hl_cornerRadius="8dp"
+        android:layout_marginStart="20mm"
+        android:layout_marginEnd="20mm"
+        binding:hl_cornerRadius="20mm"
         binding:hl_shadowColor="@color/color_797979"
-        binding:hl_shadowLimit="3dp">
+        binding:hl_shadowLimit="6mm">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,31 +28,29 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="26mm"
                 binding:onClickCommand="@{viewModel.itemDownClick}">
 
                 <com.daimajia.numberprogressbar.NumberProgressBar
                     style="@style/NumberProgressBar_Beauty_Red"
-                    android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_width="0mm"
+                    android:layout_height="40mm"
                     android:layout_weight="1"
                     binding:progress_current="@{viewModel.entity.downValue}"
-                    binding:progress_reached_bar_height="3dp"
-                    binding:progress_text_size="13sp"
-                    binding:progress_unreached_bar_height="2dp" />
+                    binding:progress_reached_bar_height="6mm"
+                    binding:progress_text_size="30mm"
+                    binding:progress_unreached_bar_height="4mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20mm"
                     android:text="@{viewModel.entity.syncText}"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="36mm"
                     android:textStyle="bold"
                     app:text="盘点" />
 
@@ -61,43 +59,41 @@
                     android:layout_height="wrap_content"
                     android:text="下载"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="36mm"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="2mm"
                 android:background="@color/color_F8F9F9" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="26mm"
                 binding:isVisible="@{viewModel.entity.upValue!=-1}"
                 binding:onClickCommand="@{viewModel.itemUpClick}">
 
                 <com.daimajia.numberprogressbar.NumberProgressBar
                     style="@style/NumberProgressBar_Default"
-                    android:layout_width="0dp"
+                    android:layout_width="0mm"
                     android:layout_weight="1"
                     binding:progress_current="@{viewModel.entity.upValue}"
-                    binding:progress_reached_bar_height="3dp"
-                    binding:progress_text_size="13sp"
-                    binding:progress_unreached_bar_height="2dp" />
+                    binding:progress_reached_bar_height="6mm"
+                    binding:progress_text_size="30mm"
+                    binding:progress_unreached_bar_height="4mm" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="20mm"
                     android:text="@{viewModel.entity.syncText}"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="36mm"
                     android:textStyle="bold"
                     app:text="盘点" />
 
@@ -106,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:text="上传"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="36mm"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
