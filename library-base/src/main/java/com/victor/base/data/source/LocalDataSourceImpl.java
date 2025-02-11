@@ -2,6 +2,7 @@ package com.victor.base.data.source;
 
 import com.victor.base.BuildConfig;
 import com.victor.base.app.AppDatabase;
+import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MovementData;
@@ -239,6 +240,24 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
+    public Maybe<List<AllocateData>> _listAllocate(int page) {
+        return db.allocateDataDao().getAll(10 * (page - 1), page * 10);
+    }
+
+    @Override
+    public AllocateData _selectOneAllocate(int allocateId) {
+        AllocateData allocateData = db.allocateDataDao().getOneById(allocateId);
+        allocateData.setMaterials(db.allocateMaterialDao().getAll(allocateId));
+        return allocateData;
+    }
+
+    @Override
+    public void _saveAllocateResult(AllocateData allocateData) {
+        _insertAllocateData(allocateData);
+        _insertAllocateMaterial(allocateData.getMaterials().toArray(new AllocateData.AllocateMaterial[0]));
+    }
+
+    @Override
     public List<InboundData> _selectFinishedInboundByDate(String syncDate) {
         return db.inboundDataDao().getFinishedByDate(syncDate);
     }
@@ -273,7 +292,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
     @Override
     public void _deleteOutboundDataById(int outId) {
         db.outboundDataDao().deleteById(outId);
-        db.outboundElecMaterialDao().deleteByInId(outId);
+        db.outboundElecMaterialDao().deleteByOutId(outId);
     }
 
     @Override
@@ -301,5 +320,32 @@ public class LocalDataSourceImpl implements LocalDataSource {
     public void _deleteMovementDataById(int moveId) {
         db.movementDataDao().deleteById(moveId);
         db.movementElecMaterialDao().deleteByMoveId(moveId);
+    }
+
+    @Override
+    public void _deleteAllocateData() {
+        db.allocateDataDao().deleteAll();
+        db.allocateMaterialDao().deleteAll();
+    }
+
+    @Override
+    public void _insertAllocateData(AllocateData... allocateDatas) {
+        db.allocateDataDao().insertAll(allocateDatas);
+    }
+
+    @Override
+    public void _insertAllocateMaterial(AllocateData.AllocateMaterial... allocateMaterials) {
+        db.allocateMaterialDao().insertAll(allocateMaterials);
+    }
+
+    @Override
+    public List<AllocateData> _selectFinishedAllocateByDate(String syncDate) {
+        return db.allocateDataDao().getFinishedByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteAllocateDataById(int allocateId) {
+        db.allocateDataDao().deleteById(allocateId);
+        db.allocateMaterialDao().deleteByAllocateId(allocateId);
     }
 }

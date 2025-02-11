@@ -10,6 +10,7 @@ import com.victor.allocate.bean.AllocateListRefreshBean;
 import com.victor.allocate.ui.viewmodel.itemviewmodel.AllocateItemViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.Constants;
@@ -42,26 +43,30 @@ public class AllocateListViewModel extends BaseOddViewModel<AllocateItemViewMode
             observableList.clear();
         }
         if (Constants.CONFIG.IS_OFFLINE) {
-//            model._listCheck(page)
-//                    .compose(RxUtils.MaybeSchTransformer())
-//                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-//                    .subscribe((Consumer<List<AssetCheckOdd>>) assetCheckOdds -> {
-//
-//                        uc.finishRefreshing.call();
-//                        uc.finishLoadmore.call();
-//                        if (assetCheckOdds == null || assetCheckOdds.size() == 0) {
-//                            if (page == 1)
-//                                setNoDataVisibleObservable(View.VISIBLE);
-//                            else ToastUtils.showShort(R.string.app_no_more_data_text);
-//                        } else {
-//                            setNoDataVisibleObservable(View.GONE);
-//                        }
-////                        for (AssetCheckOdd assetCheckOdd : assetCheckOdds) {
-////                            PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, assetCheckOdd);
-////                            //双向绑定动态添加Item
-////                            observableList.add(itemViewModel);
-////                        }
-//                    });
+            model._listAllocate(page)
+                    .compose(RxUtils.MaybeSchTransformer())
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .subscribe((Consumer<List<AllocateData>>) allocateDatas -> {
+                        if (allocateDatas == null || allocateDatas.size() == 0) {
+                            if (page == 1) {
+                                setNoDataVisibleObservable(View.VISIBLE);
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
+                                canloadmore = false;
+                                ToastUtils.showShort(R.string.app_no_more_data_text);
+                            }
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
+                            for (AllocateData allocateData : allocateDatas) {
+                                AllocateItemViewModel itemViewModel = new AllocateItemViewModel(AllocateListViewModel.this, allocateData);
+                                //双向绑定动态添加Item
+                                observableList.add(itemViewModel);
+                            }
+                        }
+
+                        uc.finishRefreshing.call();
+                        uc.finishLoadmore.call();
+                    });
         } else {
             model.listAllocate(page)
                     .compose(RxUtils.schedulersTransformer())

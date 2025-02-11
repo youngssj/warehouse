@@ -4,6 +4,8 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.victor.base.data.dao.AllocateDataDao;
+import com.victor.base.data.dao.AllocateMaterialDao;
 import com.victor.base.data.dao.InboundDataDao;
 import com.victor.base.data.dao.InboundElecMaterialDao;
 import com.victor.base.data.dao.InventoryDataDao;
@@ -14,6 +16,7 @@ import com.victor.base.data.dao.OutboundDataDao;
 import com.victor.base.data.dao.OutboundElecMaterialDao;
 import com.victor.base.data.dao.SyncInfoDao;
 import com.victor.base.data.dao.UserTokenDao;
+import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MovementData;
@@ -44,6 +47,8 @@ import me.goldze.mvvmhabit.utils.Utils;
         OutboundData.OutboundElecMaterial.class,
         MovementData.class,
         MovementData.MovementElecMaterial.class,
+        AllocateData.class,
+        AllocateData.AllocateMaterial.class,
 }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase DB;  //创建单例
@@ -91,4 +96,10 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // 移库单详情
     public abstract MovementElecMaterialDao movementElecMaterialDao();
+
+    // 调拨单
+    public abstract AllocateDataDao allocateDataDao();
+
+    // 调拨单详情
+    public abstract AllocateMaterialDao allocateMaterialDao();
 }

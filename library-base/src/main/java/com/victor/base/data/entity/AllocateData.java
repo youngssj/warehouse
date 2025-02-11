@@ -2,44 +2,69 @@ package com.victor.base.data.entity;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.List;
 
+@Entity
 public class AllocateData {
     private String createBy;
     private String createTime;
-    private Object updateBy;
-    private Object updateTime;
+    private String updateBy;
+    private String updateTime;
     private String remark;
+    @PrimaryKey
     private int id;
     private int bussId;
     private String exchangeName;
     private int applyDept;
     private int exchangeDept;
+    @Ignore
     private List<AllocateMaterial> materials;
     private String exchangePerson;
     private String exchangeStatus;
     private String exchangeTel;
     private String auditStatus;
     private int deptId;
-    private Object handleStatus;
+    private String handleStatus;
     private String exchangeNumber;
-    private Object handleDept;
+    private String handleDept;
     private String applyDeptName;
     private String excDeptName;
     private String delFlag;
     private String planExchangeDate;
-    private Object excdetailList;
-    private Object secondStatus;
+    private String secondStatus;
+    private int finished;
+    private String checkDate;
 
+    public int getFinished() {
+        return finished;
+    }
+
+    public void setFinished(int finished) {
+        this.finished = finished;
+    }
+
+    public String getCheckDate() {
+        return checkDate;
+    }
+
+    public void setCheckDate(String checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    @Entity
     public static class AllocateMaterial {
 
+        private int allocateId;
         private String createBy;
         private String createTime;
         private String updateBy;
         private String updateTime;
         private String remark;
+        @PrimaryKey
         private int materialId;
         private String materialCode;
         private String materialName;
@@ -59,9 +84,9 @@ public class AllocateData {
         private int unitId;
         private int providerId;
         private String specifications;
-        private Object purchaseDate;
-        private Object inDate;
-        private Object preRepairDate;
+        private String purchaseDate;
+        private String inDate;
+        private String preRepairDate;
         private int repairCycle;
         private int serviceLife;
         private String rfidCode;
@@ -72,6 +97,14 @@ public class AllocateData {
         public transient Drawable bgColor;
         @Ignore
         public transient Drawable textColor;
+
+        public int getAllocateId() {
+            return allocateId;
+        }
+
+        public void setAllocateId(int allocateId) {
+            this.allocateId = allocateId;
+        }
 
         public String getIsAllocate() {
             return isAllocate;
@@ -297,27 +330,27 @@ public class AllocateData {
             this.specifications = specifications;
         }
 
-        public Object getPurchaseDate() {
+        public String getPurchaseDate() {
             return purchaseDate;
         }
 
-        public void setPurchaseDate(Object purchaseDate) {
+        public void setPurchaseDate(String purchaseDate) {
             this.purchaseDate = purchaseDate;
         }
 
-        public Object getInDate() {
+        public String getInDate() {
             return inDate;
         }
 
-        public void setInDate(Object inDate) {
+        public void setInDate(String inDate) {
             this.inDate = inDate;
         }
 
-        public Object getPreRepairDate() {
+        public String getPreRepairDate() {
             return preRepairDate;
         }
 
-        public void setPreRepairDate(Object preRepairDate) {
+        public void setPreRepairDate(String preRepairDate) {
             this.preRepairDate = preRepairDate;
         }
 
@@ -370,19 +403,19 @@ public class AllocateData {
         this.createTime = createTime;
     }
 
-    public Object getUpdateBy() {
+    public String getUpdateBy() {
         return updateBy;
     }
 
-    public void setUpdateBy(Object updateBy) {
+    public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
     }
 
-    public Object getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Object updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -482,11 +515,11 @@ public class AllocateData {
         this.deptId = deptId;
     }
 
-    public Object getHandleStatus() {
+    public String getHandleStatus() {
         return handleStatus;
     }
 
-    public void setHandleStatus(Object handleStatus) {
+    public void setHandleStatus(String handleStatus) {
         this.handleStatus = handleStatus;
     }
 
@@ -498,11 +531,11 @@ public class AllocateData {
         this.exchangeNumber = exchangeNumber;
     }
 
-    public Object getHandleDept() {
+    public String getHandleDept() {
         return handleDept;
     }
 
-    public void setHandleDept(Object handleDept) {
+    public void setHandleDept(String handleDept) {
         this.handleDept = handleDept;
     }
 
@@ -538,19 +571,11 @@ public class AllocateData {
         this.planExchangeDate = planExchangeDate;
     }
 
-    public Object getExcdetailList() {
-        return excdetailList;
-    }
-
-    public void setExcdetailList(Object excdetailList) {
-        this.excdetailList = excdetailList;
-    }
-
-    public Object getSecondStatus() {
+    public String getSecondStatus() {
         return secondStatus;
     }
 
-    public void setSecondStatus(Object secondStatus) {
+    public void setSecondStatus(String secondStatus) {
         this.secondStatus = secondStatus;
     }
 }

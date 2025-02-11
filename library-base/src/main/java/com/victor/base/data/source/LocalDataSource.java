@@ -1,5 +1,6 @@
 package com.victor.base.data.source;
 
+import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
@@ -87,6 +88,12 @@ public interface LocalDataSource {
     void _insertMovementElecMaterial(MovementData.MovementElecMaterial... movementElecMaterials);
     List<MovementData> _selectFinishedMovementByDate(String syncDate);
     void _deleteMovementDataById(int moveId);
+    // 调拨
+    void _deleteAllocateData();
+    void _insertAllocateData(AllocateData... allocateDatas);
+    void _insertAllocateMaterial(AllocateData.AllocateMaterial... allocateMaterials);
+    List<AllocateData> _selectFinishedAllocateByDate(String syncDate);
+    void _deleteAllocateDataById(int allocateId);
     /* ----------------同步数据------------- */
 
     /* ---------------本地接口，数据操作----------------- */
@@ -106,5 +113,9 @@ public interface LocalDataSource {
     Maybe<List<MovementData>> _listMovement(int page);
     MovementData _selectOneMovement(int moveId);
     void _saveMovementResult(MovementData movementData);
+    // 调拨
+    Maybe<List<AllocateData>> _listAllocate(int page);
+    AllocateData _selectOneAllocate(int allocateId);
+    void _saveAllocateResult(AllocateData allocateData);
     /* ---------------本地接口，数据操作----------------- */
 }

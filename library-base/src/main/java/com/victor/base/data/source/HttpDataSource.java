@@ -51,6 +51,8 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<AllocateData>>> listAllocate(int page);
 
+    Observable<ListResponse<List<AllocateData>>> listAllAllocate(int page);
+
     Observable<BaseResponse<InventoryData>> selectByCheck(int checkId);
 
     Observable<BaseResponse<InboundData>> selectByInbound(int inId);

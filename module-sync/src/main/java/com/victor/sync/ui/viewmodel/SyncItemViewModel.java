@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.ListData;
@@ -47,6 +48,9 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 break;
             case "移库":
                 downloadMovementData(syncInfo);
+                break;
+            case "调拨":
+                downloadAllocateData(syncInfo);
                 break;
             case "盘点":
                 downloadInventoryData(syncInfo);
@@ -189,6 +193,54 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 });
     }
 
+    private void downloadAllocateData(SyncInfo syncInfo) {
+        model.listAllAllocate(1)
+                .compose(RxUtils.schedulersTransformer())
+                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
+                .subscribe(new ApiListDisposableObserver<List<AllocateData>>() {
+                    @Override
+                    public void onResult(ListData<List<AllocateData>> listData) {
+                        List<AllocateData> data = listData.getList();
+                        if (data == null || data.size() == 0) {
+                            ToastUtils.showShort("无调拨单数据");
+                            return;
+                        }
+
+                        // 删除本地盘点数据
+                        model._deleteAllocateData();
+                        // 插入盘点单数组
+                        model._insertAllocateData(data.toArray(new AllocateData[data.size()]));
+
+                        // 设置下载条数
+                        syncInfo.setDownTotalValue(data.size());
+
+                        Observable<BaseResponse<AllocateData>> baseResponseObservable = null;
+                        if (data.size() > 0) {
+                            baseResponseObservable = model.selectByAllocate(data.get(0).getId());
+                        }
+                        for (int i = 1; i < data.size(); i++) {
+                            baseResponseObservable = baseResponseObservable.concatWith(model.selectByAllocate(data.get(i).getId()));
+                        }
+
+                        baseResponseObservable.compose(RxUtils.schedulersTransformer())
+                                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
+                                .subscribe(new ApiDisposableObserver<AllocateData>() {
+                                    @Override
+                                    public void onResult(AllocateData data) {
+                                        if (null != data) {
+                                            List<AllocateData.AllocateMaterial> dataList = data.getMaterials();
+                                            for (AllocateData.AllocateMaterial allocateMaterial : dataList) {
+                                                allocateMaterial.setAllocateId(data.getId());
+                                            }
+                                            model._insertAllocateMaterial(dataList.toArray(new AllocateData.AllocateMaterial[dataList.size()]));
+                                            setDownProcess(syncInfo);
+                                        }
+                                    }
+                                });
+                    }
+                });
+    }
+
     // 下载盘点数据
     private void downloadInventoryData(SyncInfo syncInfo) {
         model.listAllInventory(1)
@@ -252,6 +304,9 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 break;
             case "移库":
                 uploadMovementData(syncInfo, syncDate);
+                break;
+            case "调拨":
+                uploadAllocateData(syncInfo, syncDate);
                 break;
             case "盘点":
                 uploadInventoryData(syncInfo, syncDate);
@@ -379,6 +434,48 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                         if (finished) {
                             for (MovementData movementData : movementDatas) {
                                 model._deleteMovementDataById(movementData.getId());
+                            }
+                        }
+                    }
+                });
+    }
+
+    // 上传调拨数据
+    private void uploadAllocateData(SyncInfo syncInfo, String syncDate) {
+        List<AllocateData> allocateDatas = model._selectFinishedAllocateByDate(syncDate);
+        if (allocateDatas == null || allocateDatas.size() == 0) {
+            ToastUtils.showShort("无调拨数据上传");
+            syncInfo.setUpValue(0);
+            return;
+        }
+
+        for (AllocateData allocateData : allocateDatas) {
+            AllocateData tmpAllocateData = model._selectOneAllocate(allocateData.getId());
+            allocateData.setMaterials(tmpAllocateData.getMaterials());
+        }
+
+        Observable<BaseResponse> saveObservable = model.saveAllocateResult(allocateDatas.get(0));
+        for (int i = 1; i < allocateDatas.size(); i++) {
+            Observable<BaseResponse> observable = model.saveAllocateResult(allocateDatas.get(i));
+            saveObservable = saveObservable.concatWith(observable);
+        }
+
+        syncInfo.setUpTotalValue(allocateDatas.size());
+        saveObservable.compose(RxUtils.schedulersTransformer())
+                .compose(RxUtils.exceptionTransformer())
+                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
+                .subscribe(new ApiDisposableObserver() {
+                    @Override
+                    public void onResult(Object o) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        boolean finished = setUpProcess(syncInfo);
+                        if (finished) {
+                            for (AllocateData allocateData : allocateDatas) {
+                                model._deleteAllocateDataById(allocateData.getId());
                             }
                         }
                     }

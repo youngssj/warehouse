@@ -4,6 +4,7 @@
         <item>入库</item>
         <item>出库</item>
         <item>移库</item>
+        <item>调拨</item>
         <item>盘点</item>
     </string-array>
 

@@ -116,6 +116,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<AllocateData>>> listAllAllocate(int pageNum) {
+        return apiService.listAllocate(pageNum, 100000);
+    }
+
+    @Override
     public Observable<BaseResponse<InventoryData>> selectByCheck(int checkId) {
         return apiService.selectByCheck(checkId);
     }

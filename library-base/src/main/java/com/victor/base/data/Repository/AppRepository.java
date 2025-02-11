@@ -8,7 +8,6 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.TokenBean;
@@ -122,6 +121,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<ListResponse<List<AllocateData>>> listAllocate(int page) {
         return mHttpDataSource.listAllocate(page);
+    }
+
+    @Override
+    public Observable<ListResponse<List<AllocateData>>> listAllAllocate(int page) {
+        return mHttpDataSource.listAllAllocate(page);
     }
 
     @Override
@@ -373,6 +377,21 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Maybe<List<AllocateData>> _listAllocate(int page) {
+        return mLocalDataSource._listAllocate(page);
+    }
+
+    @Override
+    public AllocateData _selectOneAllocate(int allocateId) {
+        return mLocalDataSource._selectOneAllocate(allocateId);
+    }
+
+    @Override
+    public void _saveAllocateResult(AllocateData allocateData) {
+        mLocalDataSource._saveAllocateResult(allocateData);
+    }
+
+    @Override
     public List<OutboundData> _selectFinishedOutboundByDate(String syncDate) {
         return mLocalDataSource._selectFinishedOutboundByDate(syncDate);
     }
@@ -405,5 +424,30 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public void _deleteMovementDataById(int moveId) {
         mLocalDataSource._deleteMovementDataById(moveId);
+    }
+
+    @Override
+    public void _deleteAllocateData() {
+        mLocalDataSource._deleteAllocateData();
+    }
+
+    @Override
+    public void _insertAllocateData(AllocateData... allocateDatas) {
+        mLocalDataSource._insertAllocateData(allocateDatas);
+    }
+
+    @Override
+    public void _insertAllocateMaterial(AllocateData.AllocateMaterial... allocateMaterials) {
+        mLocalDataSource._insertAllocateMaterial(allocateMaterials);
+    }
+
+    @Override
+    public List<AllocateData> _selectFinishedAllocateByDate(String syncDate) {
+        return mLocalDataSource._selectFinishedAllocateByDate(syncDate);
+    }
+
+    @Override
+    public void _deleteAllocateDataById(int allocateId) {
+        mLocalDataSource._deleteAllocateDataById(allocateId);
     }
 }
