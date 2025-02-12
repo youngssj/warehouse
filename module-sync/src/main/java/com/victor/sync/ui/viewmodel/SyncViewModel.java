@@ -1,9 +1,11 @@
 package com.victor.sync.ui.viewmodel;
 
+import android.app.Activity;
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.data.Repository.AppRepository;
@@ -14,17 +16,11 @@ import com.victor.workbench.ui.base.BaseOddViewModel;
 import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
-import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class SyncViewModel extends BaseOddViewModel<SyncItemViewModel> {
 
-    public UIChangeObservable uc = new UIChangeObservable();
-
-    public class UIChangeObservable {
-        public SingleLiveEvent<Integer> importClickObser = new SingleLiveEvent<>();
-    }
-
+    public MutableLiveData<Activity> activityLiveData = new MutableLiveData<>();
 
     public SyncViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
@@ -43,7 +39,7 @@ public class SyncViewModel extends BaseOddViewModel<SyncItemViewModel> {
     public void loadData(String[] stringArray) {
         observableList.clear();
         for (int i = 0; i < stringArray.length; i++) {
-            observableList.add(new SyncItemViewModel(this, new SyncInfo(i, stringArray[i]), model));
+            observableList.add(new SyncItemViewModel(activityLiveData, this, new SyncInfo(i, stringArray[i]), model));
         }
     }
 

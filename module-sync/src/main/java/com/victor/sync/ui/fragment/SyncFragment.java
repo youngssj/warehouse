@@ -38,6 +38,7 @@ public class SyncFragment extends BaseFragment<SyncFragmentSyncBinding, SyncView
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
+        viewModel.activityLiveData.setValue(getActivity());
         String[] stringArray = getResources().getStringArray(R.array.sync_home);
         viewModel.loadData(stringArray);
     }

@@ -6,8 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.ListData;
+import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.data.http.ApiListDisposableObserver;
@@ -17,18 +18,17 @@ import com.victor.sync.ui.viewmodel.SyncItemViewModel;
 import java.util.List;
 
 import io.reactivex.Observable;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.BaseResponse;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
-public class InboundController {
+public class AllocateController {
     public void download(MutableLiveData<Activity> activityLiveData, AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
         String syncDate = getSyncDate(model, syncInfo);
         if (syncDate != null) {
-            List<InboundData> inboundDatas = model._selectFinishedInboundByDate(syncDate);
-            if (inboundDatas != null && inboundDatas.size() > 0) {
+            List<AllocateData> allocateDatas = model._selectFinishedAllocateByDate(syncDate);
+            if (allocateDatas != null && allocateDatas.size() > 0) {
                 // 存在未上传的数据，弹窗提示
                 MaterialDialogUtils.showBasicDialog(activityLiveData.getValue(), activityLiveData.getValue().getResources().getString(R.string.sync_delete_data_hint_text))
                         .onPositive((dialog, which) -> {
@@ -45,42 +45,45 @@ public class InboundController {
     }
 
     private void toDownload(AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
-        model.listAllInbound(1)
+        model.listAllAllocate(1)
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.bindToLifecycle(lifecycleProvider))
-                .subscribe(new ApiListDisposableObserver<List<InboundData>>() {
+                .subscribe(new ApiListDisposableObserver<List<AllocateData>>() {
                     @Override
-                    public void onResult(ListData<List<InboundData>> listData) {
-                        List<InboundData> data = listData.getList();
+                    public void onResult(ListData<List<AllocateData>> listData) {
+                        List<AllocateData> data = listData.getList();
                         if (data == null || data.size() == 0) {
-                            ToastUtils.showShort("无入库单数据");
+                            ToastUtils.showShort("无调拨单数据");
                             return;
                         }
 
                         // 删除本地盘点数据
-                        model._deleteInboundData();
+                        model._deleteAllocateData();
                         // 插入盘点单数组
-                        model._insertInboundData(data.toArray(new InboundData[data.size()]));
+                        model._insertAllocateData(data.toArray(new AllocateData[data.size()]));
 
                         // 设置下载条数
                         syncInfo.setDownTotalValue(data.size());
 
-                        Observable<BaseResponse<InboundData>> baseResponseObservable = null;
+                        Observable<BaseResponse<AllocateData>> baseResponseObservable = null;
                         if (data.size() > 0) {
-                            baseResponseObservable = model.selectByInbound(data.get(0).getInId());
+                            baseResponseObservable = model.selectByAllocate(data.get(0).getId());
                         }
                         for (int i = 1; i < data.size(); i++) {
-                            baseResponseObservable = baseResponseObservable.concatWith(model.selectByInbound(data.get(i).getInId()));
+                            baseResponseObservable = baseResponseObservable.concatWith(model.selectByAllocate(data.get(i).getId()));
                         }
 
                         baseResponseObservable.compose(RxUtils.schedulersTransformer())
                                 .compose(RxUtils.bindToLifecycle(lifecycleProvider))
-                                .subscribe(new ApiDisposableObserver<InboundData>() {
+                                .subscribe(new ApiDisposableObserver<AllocateData>() {
                                     @Override
-                                    public void onResult(InboundData data) {
+                                    public void onResult(AllocateData data) {
                                         if (null != data) {
-                                            List<InboundData.InboundElecMaterial> dataList = data.getElecMaterialList();
-                                            model._insertInboundElecMaterial(dataList.toArray(new InboundData.InboundElecMaterial[dataList.size()]));
+                                            List<AllocateData.AllocateMaterial> dataList = data.getMaterials();
+                                            for (AllocateData.AllocateMaterial allocateMaterial : dataList) {
+                                                allocateMaterial.setAllocateId(data.getId());
+                                            }
+                                            model._insertAllocateMaterial(dataList.toArray(new AllocateData.AllocateMaterial[dataList.size()]));
                                             listener.onDownloadSuccess(syncInfo);
                                         }
                                     }
@@ -105,25 +108,25 @@ public class InboundController {
             return;
         }
 
-        List<InboundData> inboundDatas = model._selectFinishedInboundByDate(syncDate);
-        if (inboundDatas == null || inboundDatas.size() == 0) {
-            ToastUtils.showShort("无入库数据上传");
+        List<AllocateData> allocateDatas = model._selectFinishedAllocateByDate(syncDate);
+        if (allocateDatas == null || allocateDatas.size() == 0) {
+            ToastUtils.showShort("无调拨数据上传");
             syncInfo.setUpValue(0);
             return;
         }
 
-        for (InboundData inboundData : inboundDatas) {
-            InboundData tmpInboundData = model._selectOneInbound(inboundData.getInId());
-            inboundData.setElecMaterialList(tmpInboundData.getElecMaterialList());
+        for (AllocateData allocateData : allocateDatas) {
+            AllocateData tmpAllocateData = model._selectOneAllocate(allocateData.getId());
+            allocateData.setMaterials(tmpAllocateData.getMaterials());
         }
 
-        Observable<BaseResponse> saveObservable = model.saveInboundResult(inboundDatas.get(0));
-        for (int i = 1; i < inboundDatas.size(); i++) {
-            Observable<BaseResponse> observable = model.saveInboundResult(inboundDatas.get(i));
+        Observable<BaseResponse> saveObservable = model.saveAllocateResult(allocateDatas.get(0));
+        for (int i = 1; i < allocateDatas.size(); i++) {
+            Observable<BaseResponse> observable = model.saveAllocateResult(allocateDatas.get(i));
             saveObservable = saveObservable.concatWith(observable);
         }
 
-        syncInfo.setUpTotalValue(inboundDatas.size());
+        syncInfo.setUpTotalValue(allocateDatas.size());
         saveObservable.compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.exceptionTransformer())
                 .compose(RxUtils.bindToLifecycle(lifecycleProvider))
@@ -137,8 +140,8 @@ public class InboundController {
                     public void onComplete() {
                         boolean finished = listener.onUploadSuccess(syncInfo);
                         if (finished) {
-                            for (InboundData inboundData : inboundDatas) {
-                                model._deleteInboundDataById(inboundData.getInId());
+                            for (AllocateData allocateData : allocateDatas) {
+                                model._deleteAllocateDataById(allocateData.getId());
                             }
                             if (gotoDownload) {
                                 toDownload(model, lifecycleProvider, syncInfo, listener);
