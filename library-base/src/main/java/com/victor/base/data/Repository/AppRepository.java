@@ -79,8 +79,8 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int page) {
-        return mHttpDataSource.listAllMaterials(page);
+    public Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int page, int pageSize) {
+        return mHttpDataSource.listAllMaterials(page, pageSize);
     }
 
     @Override
@@ -462,8 +462,8 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public void _deleteAllMaterials() {
-        mLocalDataSource._deleteAllMaterials();
+    public void _deleteMaterialsData() {
+        mLocalDataSource._deleteMaterialsData();
     }
 
     @Override

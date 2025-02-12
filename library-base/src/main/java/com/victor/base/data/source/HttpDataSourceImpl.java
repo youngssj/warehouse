@@ -6,8 +6,6 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
@@ -71,8 +69,8 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
-    public Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int pageNum) {
-        return apiService.listMaterials(pageNum, 1000000, null, null, null);
+    public Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int pageNum, int pageSize) {
+        return apiService.listMaterials(pageNum, pageSize, null, null, null);
     }
 
     @Override

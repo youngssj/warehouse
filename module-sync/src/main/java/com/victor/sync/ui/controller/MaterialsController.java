@@ -20,18 +20,11 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class MaterialsController {
 
+    private int page = 1;
+    private int pageSize = 3;
+
     public void download(AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
-        syncInfo.setDownTotalValue(100);
-        RxTimer.interval(1, 200, new RxTimer.RxAction() {
-            @Override
-            public void action(long number) {
-                if (syncInfo.getDownValue() >= 100) {
-                    RxTimer.cancel();
-                }
-                listener.onDownloadSuccess(syncInfo);
-            }
-        });
-        model.listAllMaterials(1)
+        model.listAllMaterials(page, pageSize)
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.bindToLifecycle(lifecycleProvider))
                 .subscribe(new ApiListDisposableObserver<List<MaterialsData>>() {
@@ -43,13 +36,25 @@ public class MaterialsController {
                             return;
                         }
 
-                        // 删除本地物资数据
-                        model._deleteAllMaterials();
+                        syncInfo.setDownTotalValue(listData.getTotal());
+
+                        int downloadSize = (page - 1) * pageSize + data.size();
+                        syncInfo.setDownValue(downloadSize * 100 / 16);
+
+                        if(page == 1) {
+                            // 删除本地物资数据
+                            model._deleteMaterialsData();
+                        }
+
                         // 插入物资数据
                         model._insertMaterialsData(data.toArray(new MaterialsData[data.size()]));
 
-                        syncInfo.setDownValue(100);
                         listener.onDownloadSuccess(syncInfo);
+
+                        if(downloadSize < listData.getTotal()){
+                            page++;
+                            download(model, lifecycleProvider, syncInfo, listener);
+                        }
                     }
                 });
     }

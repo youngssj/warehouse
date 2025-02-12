@@ -97,7 +97,7 @@ public interface LocalDataSource {
     void _insertAllocateMaterial(AllocateData.AllocateMaterial... allocateMaterials);
     List<AllocateData> _selectFinishedAllocateByDate(String syncDate);
     void _deleteAllocateDataById(int allocateId);
-    void _deleteAllMaterials();
+    void _deleteMaterialsData();
     void _insertMaterialsData(MaterialsData... materialsDatas);
     /* ----------------同步数据------------- */
 

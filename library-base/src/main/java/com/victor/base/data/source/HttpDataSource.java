@@ -5,8 +5,6 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
@@ -33,7 +31,7 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<MaterialsData>>> listMaterials(int pageNum, String materialStatus, String materialName, String rfidCode);
 
-    Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int pageNum);
+    Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int pageNum, int pageSize);
 
     Observable<ListResponse<List<InventoryData>>> listInventory(int page);
 

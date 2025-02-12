@@ -111,6 +111,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
 
     @Override
     public void _deleteAll() {
+        _deleteMaterialsData();
         _deleteInboundData();
         _deleteOutboundData();
         _deleteMovementData();
@@ -369,7 +370,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public void _deleteAllMaterials() {
+    public void _deleteMaterialsData() {
         db.materialDataDao().deleteAll();
     }
 
