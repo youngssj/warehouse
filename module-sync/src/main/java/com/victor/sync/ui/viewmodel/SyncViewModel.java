@@ -77,9 +77,7 @@ public class SyncViewModel extends BaseOddViewModel<SyncItemViewModel> {
     });
 
     private void reloadLogin() {
-        finish();
-        model.savePassword2Local("");
-        model.saveToken2Local("");
         ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN).navigation();
+        finish();
     }
 }

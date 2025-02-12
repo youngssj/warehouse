@@ -15,6 +15,7 @@ import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.utils.DateUtil;
+import com.victor.sync.ui.controller.InboundController;
 import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
 
 import java.util.List;
@@ -36,12 +37,25 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, SyncInfo> {
     private AppRepository model;
 
+    SyncInfoUpDownLoadListener syncInfoListener = new SyncInfoUpDownLoadListener() {
+        @Override
+        public boolean onDownloadSuccess(SyncInfo syncInfo) {
+            setDownProcess(syncInfo);
+            return true;
+        }
+
+        @Override
+        public boolean onUploadSuccess(SyncInfo syncInfo) {
+            return setUpProcess(syncInfo);
+        }
+    };
+
     public BindingCommand itemDownClick = new BindingCommand(() -> {
         final SyncInfo syncInfo = entity.get();
 
         switch (syncInfo.getSyncText()) {
             case "入库":
-                downloadInboundData(syncInfo);
+                new InboundController().download(model, viewModel, syncInfo, syncInfoListener);
                 break;
             case "出库":
                 downloadOutboundData(syncInfo);
@@ -57,51 +71,6 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
                 break;
         }
     });
-
-    private void downloadInboundData(SyncInfo syncInfo) {
-        model.listAllInbound(1)
-                .compose(RxUtils.schedulersTransformer())
-                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
-                .subscribe(new ApiListDisposableObserver<List<InboundData>>() {
-                    @Override
-                    public void onResult(ListData<List<InboundData>> listData) {
-                        List<InboundData> data = listData.getList();
-                        if (data == null || data.size() == 0) {
-                            ToastUtils.showShort("无入库单数据");
-                            return;
-                        }
-
-                        // 删除本地盘点数据
-                        model._deleteInboundData();
-                        // 插入盘点单数组
-                        model._insertInboundData(data.toArray(new InboundData[data.size()]));
-
-                        // 设置下载条数
-                        syncInfo.setDownTotalValue(data.size());
-
-                        Observable<BaseResponse<InboundData>> baseResponseObservable = null;
-                        if (data.size() > 0) {
-                            baseResponseObservable = model.selectByInbound(data.get(0).getInId());
-                        }
-                        for (int i = 1; i < data.size(); i++) {
-                            baseResponseObservable = baseResponseObservable.concatWith(model.selectByInbound(data.get(i).getInId()));
-                        }
-
-                        baseResponseObservable.compose(RxUtils.schedulersTransformer())
-                                .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
-                                .subscribe(new ApiDisposableObserver<InboundData>() {
-                                    @Override
-                                    public void onResult(InboundData data) {
-                                        if (null != data) {
-                                            List<InboundData.InboundElecMaterial> dataList = data.getElecMaterialList();
-                                            model._insertInboundElecMaterial(dataList.toArray(new InboundData.InboundElecMaterial[dataList.size()]));
-                                            setDownProcess(syncInfo);
-                                        }
-                                    }
-                                });
-                    }
-                });
-    }
 
     private void downloadOutboundData(SyncInfo syncInfo) {
         model.listAllOutbound(1)
@@ -289,27 +258,21 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
 
     public BindingCommand itemUpClick = new BindingCommand(() -> {
         final SyncInfo syncInfo = entity.get();
-        SyncInfo syncInfoByDate = model._getSyncDate(syncInfo.getSyncId());
-        if (syncInfoByDate == null) {
-            ToastUtils.showShort("无本地数据");
-            return;
-        }
-        String syncDate = syncInfoByDate.getSyncDate();
         switch (syncInfo.getSyncText()) {
             case "入库":
-                uploadInboundData(syncInfo, syncDate);
+                new InboundController().upload(model, viewModel.getLifecycleProvider(), syncInfo, syncInfoListener);
                 break;
             case "出库":
-                uploadOutboundData(syncInfo, syncDate);
+//                uploadOutboundData(syncInfo, syncDate);
                 break;
             case "移库":
-                uploadMovementData(syncInfo, syncDate);
+//                uploadMovementData(syncInfo, syncDate);
                 break;
             case "调拨":
-                uploadAllocateData(syncInfo, syncDate);
+//                uploadAllocateData(syncInfo, syncDate);
                 break;
             case "盘点":
-                uploadInventoryData(syncInfo, syncDate);
+//                uploadInventoryData(syncInfo, syncDate);
                 break;
         }
     });
@@ -524,8 +487,6 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         this.model = appRepository;
         final SyncInfo syncInfo = entity.get();
         switch (syncInfo.getSyncText()) {
-            case "盘点":
-                break;
             case "查询":
                 syncInfo.setUpValue(-1);
                 break;
@@ -582,6 +543,8 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
 
     // 下载信息监听
     public interface SyncInfoUpDownLoadListener {
-        void onSuccess(SyncInfo syncInfo);
+        boolean onDownloadSuccess(SyncInfo syncInfo);
+
+        boolean onUploadSuccess(SyncInfo syncInfo);
     }
 }

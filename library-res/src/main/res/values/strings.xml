@@ -206,4 +206,5 @@
     <string name="mine_title4_text">所属角色</string>
     <string name="mine_exit_text">退出</string>
     <string name="mine_exit_hint_text">确认退出登录吗？</string>
+    <string name="sync_delete_data_hint_text">存在尚未上传的数据，继续下载会覆盖这些数据，是否先上传？</string>
 </resources>
