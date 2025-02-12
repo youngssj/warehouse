@@ -39,7 +39,11 @@ public class SyncViewModel extends BaseOddViewModel<SyncItemViewModel> {
     public void loadData(String[] stringArray) {
         observableList.clear();
         for (int i = 0; i < stringArray.length; i++) {
-            observableList.add(new SyncItemViewModel(activityLiveData, this, new SyncInfo(i, stringArray[i]), model));
+            SyncInfo syncInfo = model._getSyncById(i);
+            if(syncInfo == null){
+                syncInfo = new SyncInfo(i, stringArray[i]);
+            }
+            observableList.add(new SyncItemViewModel(activityLiveData, this, syncInfo, model));
         }
     }
 

@@ -25,7 +25,7 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class AllocateController {
     public void download(MutableLiveData<Activity> activityLiveData, AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate != null) {
             List<AllocateData> allocateDatas = model._selectFinishedAllocateByDate(syncDate);
             if (allocateDatas != null && allocateDatas.size() > 0) {
@@ -102,16 +102,15 @@ public class AllocateController {
                        SyncInfo syncInfo,
                        SyncItemViewModel.SyncInfoUpDownLoadListener listener,
                        boolean gotoDownload) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate == null) {
-            ToastUtils.showShort("无本地数据");
+            ToastUtils.showShort("无调拨数据上传");
             return;
         }
 
         List<AllocateData> allocateDatas = model._selectFinishedAllocateByDate(syncDate);
         if (allocateDatas == null || allocateDatas.size() == 0) {
             ToastUtils.showShort("无调拨数据上传");
-            syncInfo.setUpValue(0);
             return;
         }
 
@@ -149,13 +148,5 @@ public class AllocateController {
                         }
                     }
                 });
-    }
-
-    private String getSyncDate(AppRepository model, SyncInfo syncInfo) {
-        SyncInfo syncInfoByDate = model._getSyncDate(syncInfo.getSyncId());
-        if (syncInfoByDate == null) {
-            return null;
-        }
-        return syncInfoByDate.getSyncDate();
     }
 }

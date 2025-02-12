@@ -247,8 +247,8 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
-    public SyncInfo _getSyncDate(int syncId) {
-        return mLocalDataSource._getSyncDate(syncId);
+    public SyncInfo _getSyncById(int syncId) {
+        return mLocalDataSource._getSyncById(syncId);
     }
 
     @Override

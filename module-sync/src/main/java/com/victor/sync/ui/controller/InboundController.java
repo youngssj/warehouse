@@ -17,7 +17,6 @@ import com.victor.sync.ui.viewmodel.SyncItemViewModel;
 import java.util.List;
 
 import io.reactivex.Observable;
-import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.http.BaseResponse;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
 import me.goldze.mvvmhabit.utils.RxUtils;
@@ -25,7 +24,7 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class InboundController {
     public void download(MutableLiveData<Activity> activityLiveData, AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate != null) {
             List<InboundData> inboundDatas = model._selectFinishedInboundByDate(syncDate);
             if (inboundDatas != null && inboundDatas.size() > 0) {
@@ -99,16 +98,15 @@ public class InboundController {
                        SyncInfo syncInfo,
                        SyncItemViewModel.SyncInfoUpDownLoadListener listener,
                        boolean gotoDownload) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate == null) {
-            ToastUtils.showShort("无本地数据");
+            ToastUtils.showShort("无入库数据上传");
             return;
         }
 
         List<InboundData> inboundDatas = model._selectFinishedInboundByDate(syncDate);
         if (inboundDatas == null || inboundDatas.size() == 0) {
             ToastUtils.showShort("无入库数据上传");
-            syncInfo.setUpValue(0);
             return;
         }
 
@@ -146,13 +144,5 @@ public class InboundController {
                         }
                     }
                 });
-    }
-
-    private String getSyncDate(AppRepository model, SyncInfo syncInfo) {
-        SyncInfo syncInfoByDate = model._getSyncDate(syncInfo.getSyncId());
-        if (syncInfoByDate == null) {
-            return null;
-        }
-        return syncInfoByDate.getSyncDate();
     }
 }

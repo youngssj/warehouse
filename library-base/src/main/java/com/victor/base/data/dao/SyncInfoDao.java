@@ -5,11 +5,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.victor.base.data.entity.SyncInfo;
-
-import java.util.List;
 
 /**
  * 版权：heihei
@@ -24,9 +21,6 @@ public interface SyncInfoDao {
     @Query("SELECT * FROM SyncInfo where syncId = (:id)")
     SyncInfo getAllById(int id);
 
-    @Query("SELECT * FROM SyncInfo where datetime(syncDate) between datetime(:lastDate) and datetime(CURRENT_TIMESTAMP,'localtime')")
-    List<SyncInfo> getAllByDate(String lastDate);
-
     @Query("DELETE FROM SyncInfo")
     void deleteAll();
 
@@ -35,8 +29,4 @@ public interface SyncInfoDao {
 
     @Delete
     void delete(SyncInfo dataListBean);
-
-    @Update
-    void update(SyncInfo... dataListBeans);
-
 }

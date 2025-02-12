@@ -87,11 +87,10 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         }
     });
 
-    public SyncItemViewModel(MutableLiveData<Activity> activityLiveData, @NonNull SyncViewModel viewModel, SyncInfo data, AppRepository appRepository) {
-        super(viewModel, data);
+    public SyncItemViewModel(MutableLiveData<Activity> activityLiveData, @NonNull SyncViewModel viewModel, SyncInfo syncInfo, AppRepository appRepository) {
+        super(viewModel, syncInfo);
         this.model = appRepository;
         this.activityLiveData = activityLiveData;
-        final SyncInfo syncInfo = entity.get();
         switch (syncInfo.getSyncText()) {
             case "查询":
                 syncInfo.setUpValue(-1);
@@ -106,7 +105,6 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
 
     // 计算下载进度
     private void setDownProcess(SyncInfo syncInfo) {
-        Log.e("123", syncInfo.toString());
         int interval = 100 / syncInfo.getDownTotalValue();
 
         int downValue = syncInfo.getDownValue() + interval;
@@ -117,13 +115,13 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         }
         if (syncInfo.getDownValue() == 100) {
             ToastUtils.showShortSafe("下载完成");
-            saveSyncDate(syncInfo);
+            syncInfo.setSyncDate(DateUtil.getNowTime());
+            model._saveSyncDate(syncInfo);
         }
         entity.notifyChange();
     }
 
     private boolean setUpProcess(SyncInfo syncInfo) {
-        Log.e("syncInfo::", syncInfo.toString());
         int interval = 100 / syncInfo.getUpTotalValue();
 
         int upValue = syncInfo.getUpValue() + interval;
@@ -136,15 +134,11 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         if (syncInfo.getUpValue() == 100) {
             // 删除盘点单
             ToastUtils.showShortSafe("上传完成");
-            saveSyncDate(syncInfo);
+            syncInfo.setSyncDate(DateUtil.getNowTime());
+            model._saveSyncDate(syncInfo);
             return true;
         }
         return false;
-    }
-
-    private void saveSyncDate(SyncInfo syncInfo) {
-        syncInfo.setSyncDate(DateUtil.getNowTime());
-        model._saveSyncDate(syncInfo);
     }
 
     // 下载信息监听

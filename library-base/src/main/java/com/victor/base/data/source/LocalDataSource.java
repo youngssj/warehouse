@@ -63,7 +63,7 @@ public interface LocalDataSource {
 
     /* ----------------同步数据------------- */
     void _saveSyncDate(SyncInfo syncInfo);
-    SyncInfo _getSyncDate(int syncId);
+    SyncInfo _getSyncById(int syncId);
     // 盘点
     void _deleteInventoryData();
     void _insertInventoryData(InventoryData... inventoryDatas);

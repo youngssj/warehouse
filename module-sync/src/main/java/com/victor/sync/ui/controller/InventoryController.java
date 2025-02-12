@@ -24,7 +24,7 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class InventoryController {
     public void download(MutableLiveData<Activity> activityLiveData, AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate != null) {
             List<InventoryData> inventoryDatas = model._selectFinishedInventoryByDate(syncDate);
             if (inventoryDatas != null && inventoryDatas.size() > 0) {
@@ -98,16 +98,15 @@ public class InventoryController {
                          SyncInfo syncInfo,
                          SyncItemViewModel.SyncInfoUpDownLoadListener listener,
                          boolean gotoDownload) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate == null) {
-            ToastUtils.showShort("无本地数据");
+            ToastUtils.showShort("无盘点数据上传");
             return;
         }
 
         List<InventoryData> inventoryDatas = model._selectFinishedInventoryByDate(syncDate);
         if (inventoryDatas == null || inventoryDatas.size() == 0) {
             ToastUtils.showShort("无盘点数据上传");
-            syncInfo.setUpValue(0);
             return;
         }
 
@@ -140,13 +139,5 @@ public class InventoryController {
                         }
                     }
                 });
-    }
-
-    private String getSyncDate(AppRepository model, SyncInfo syncInfo) {
-        SyncInfo syncInfoByDate = model._getSyncDate(syncInfo.getSyncId());
-        if (syncInfoByDate == null) {
-            return null;
-        }
-        return syncInfoByDate.getSyncDate();
     }
 }

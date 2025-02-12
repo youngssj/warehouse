@@ -124,7 +124,7 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
-    public SyncInfo _getSyncDate(int syncId) {
+    public SyncInfo _getSyncById(int syncId) {
         return db.syncInfoDao().getAllById(syncId);
     }
 

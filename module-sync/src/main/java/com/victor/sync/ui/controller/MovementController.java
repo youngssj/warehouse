@@ -25,7 +25,7 @@ import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class MovementController {
     public void download(MutableLiveData<Activity> activityLiveData, AppRepository model, LifecycleProvider lifecycleProvider, SyncInfo syncInfo, SyncItemViewModel.SyncInfoUpDownLoadListener listener) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate != null) {
             List<MovementData> movementDatas = model._selectFinishedMovementByDate(syncDate);
             if (movementDatas != null && movementDatas.size() > 0) {
@@ -99,16 +99,15 @@ public class MovementController {
                        SyncInfo syncInfo,
                        SyncItemViewModel.SyncInfoUpDownLoadListener listener,
                        boolean gotoDownload) {
-        String syncDate = getSyncDate(model, syncInfo);
+        String syncDate = syncInfo.getSyncDate();
         if (syncDate == null) {
-            ToastUtils.showShort("无本地数据");
+            ToastUtils.showShort("无移库数据上传");
             return;
         }
 
         List<MovementData> movementDatas = model._selectFinishedMovementByDate(syncDate);
         if (movementDatas == null || movementDatas.size() == 0) {
             ToastUtils.showShort("无移库数据上传");
-            syncInfo.setUpValue(0);
             return;
         }
 
@@ -146,13 +145,5 @@ public class MovementController {
                         }
                     }
                 });
-    }
-
-    private String getSyncDate(AppRepository model, SyncInfo syncInfo) {
-        SyncInfo syncInfoByDate = model._getSyncDate(syncInfo.getSyncId());
-        if (syncInfoByDate == null) {
-            return null;
-        }
-        return syncInfoByDate.getSyncDate();
     }
 }

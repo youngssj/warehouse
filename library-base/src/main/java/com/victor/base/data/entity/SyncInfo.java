@@ -16,9 +16,13 @@ import androidx.room.PrimaryKey;
 public class SyncInfo {
     @PrimaryKey
     private int syncId;
+    @Ignore
     private int downValue;
+    @Ignore
     private int upValue;
+    @Ignore
     private int upTotalValue;
+    @Ignore
     private int downTotalValue;
     private String syncText;
     private int syncStatus;
