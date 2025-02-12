@@ -1,13 +1,18 @@
 package com.victor.base.data.entity;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.victor.base.R;
 
+@Entity
 public class MaterialsData {
     private String createBy;
     private String createTime;
     private String updateBy;
     private String updateTime;
-    private Object remark;
+    private String remark;
+    @PrimaryKey
     private int materialId;
     private String materialCode;
     private String materialName;
@@ -27,12 +32,7 @@ public class MaterialsData {
     private int whLocationId;
     private int unitId;
     private int providerId;
-    private Object specifications;
-    private Object purchaseDate;
-    private Object inDate;
-    private Object preRepairDate;
     private int repairCycle;
-    private Object serviceLife;
     private String rfidCode;
     private String delFlag;
 
@@ -68,11 +68,11 @@ public class MaterialsData {
         this.updateTime = updateTime;
     }
 
-    public Object getRemark() {
+    public String getRemark() {
         return remark;
     }
 
-    public void setRemark(Object remark) {
+    public void setRemark(String remark) {
         this.remark = remark;
     }
 
@@ -101,6 +101,10 @@ public class MaterialsData {
     }
 
     public String getMaterialStatus() {
+        return materialStatus;
+    }
+
+    public String getMaterialStatusFormat() {
         if ("0".equals(materialStatus)) {
             return "录入";
         } else if ("1".equals(materialStatus)) {
@@ -122,6 +126,14 @@ public class MaterialsData {
     }
 
     public int getMaterialStatusColor() {
+        return materialStatusColor;
+    }
+
+    public int getMaterialStatusBackground() {
+        return materialStatusBackground;
+    }
+
+    public int getMaterialStatusColorFormat() {
         if ("0".equals(materialStatus)) {
             return R.color.color_258DFF;
         } else if ("1".equals(materialStatus)) {
@@ -146,7 +158,7 @@ public class MaterialsData {
         this.materialStatusColor = materialStatusColor;
     }
 
-    public int getMaterialStatusBackground() {
+    public int getMaterialStatusBackgroundFormat() {
         if ("0".equals(materialStatus)) {
             return R.drawable.materials_shape_status_1;
         } else if ("1".equals(materialStatus)) {
@@ -279,52 +291,12 @@ public class MaterialsData {
         this.providerId = providerId;
     }
 
-    public Object getSpecifications() {
-        return specifications;
-    }
-
-    public void setSpecifications(Object specifications) {
-        this.specifications = specifications;
-    }
-
-    public Object getPurchaseDate() {
-        return purchaseDate;
-    }
-
-    public void setPurchaseDate(Object purchaseDate) {
-        this.purchaseDate = purchaseDate;
-    }
-
-    public Object getInDate() {
-        return inDate;
-    }
-
-    public void setInDate(Object inDate) {
-        this.inDate = inDate;
-    }
-
-    public Object getPreRepairDate() {
-        return preRepairDate;
-    }
-
-    public void setPreRepairDate(Object preRepairDate) {
-        this.preRepairDate = preRepairDate;
-    }
-
     public int getRepairCycle() {
         return repairCycle;
     }
 
     public void setRepairCycle(int repairCycle) {
         this.repairCycle = repairCycle;
-    }
-
-    public Object getServiceLife() {
-        return serviceLife;
-    }
-
-    public void setServiceLife(Object serviceLife) {
-        this.serviceLife = serviceLife;
     }
 
     public String getRfidCode() {

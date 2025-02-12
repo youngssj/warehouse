@@ -53,10 +53,10 @@
                 android:gravity="center"
                 android:paddingTop="6mm"
                 android:paddingBottom="6mm"
-                android:text="@{viewModel.entity.materialStatus}"
+                android:text="@{viewModel.entity.materialStatusFormat}"
                 android:textSize="36mm"
-                binding:background="@{viewModel.entity.materialStatusBackground}"
-                binding:textColor="@{viewModel.entity.materialStatusColor}" />
+                binding:background="@{viewModel.entity.materialStatusBackgroundFormat}"
+                binding:textColor="@{viewModel.entity.materialStatusColorFormat}" />
         </LinearLayout>
 
         <TextView

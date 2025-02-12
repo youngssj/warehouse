@@ -12,6 +12,7 @@ import com.victor.base.utils.DateUtil;
 import com.victor.sync.ui.controller.AllocateController;
 import com.victor.sync.ui.controller.InboundController;
 import com.victor.sync.ui.controller.InventoryController;
+import com.victor.sync.ui.controller.MaterialsController;
 import com.victor.sync.ui.controller.MovementController;
 import com.victor.sync.ui.controller.OutboundController;
 import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
@@ -48,6 +49,9 @@ public class SyncItemViewModel extends BaseRecycleItemViewModel<SyncViewModel, S
         final SyncInfo syncInfo = entity.get();
 
         switch (syncInfo.getSyncText()) {
+            case "查询":
+                new MaterialsController().download(model, viewModel.getLifecycleProvider(), syncInfo, syncInfoListener);
+                break;
             case "入库":
                 new InboundController().download(activityLiveData, model, viewModel.getLifecycleProvider(), syncInfo, syncInfoListener);
                 break;

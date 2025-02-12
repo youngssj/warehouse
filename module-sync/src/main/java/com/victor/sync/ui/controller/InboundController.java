@@ -56,9 +56,9 @@ public class InboundController {
                             return;
                         }
 
-                        // 删除本地盘点数据
+                        // 删除本地入库数据
                         model._deleteInboundData();
-                        // 插入盘点单数组
+                        // 插入入库单数据
                         model._insertInboundData(data.toArray(new InboundData[data.size()]));
 
                         // 设置下载条数

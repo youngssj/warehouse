@@ -4,14 +4,13 @@ import android.app.Application;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.ObservableArrayList;
-import androidx.databinding.ObservableList;
 
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.http.ApiListDisposableObserver;
-import com.victor.materials.BR;
+import com.victor.base.utils.Constants;
 import com.victor.materials.R;
 import com.victor.materials.bean.MaterialsQueryConditionBean;
 import com.victor.materials.ui.viewmodel.itemviewmodel.MaterialsItemViewModel;
@@ -26,7 +25,6 @@ import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
-import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 public class MaterialsViewModel extends BaseOddViewModel<MaterialsItemViewModel> {
 
@@ -66,36 +64,63 @@ public class MaterialsViewModel extends BaseOddViewModel<MaterialsItemViewModel>
             mMorePageNumber = 1;
             observableList.clear();
         }
-        model.listMaterials(page, materialStatus, materialsQueryConditionBean.getMaterialName(), materialsQueryConditionBean.getRfidCode())
-                .compose(RxUtils.schedulersTransformer())
-                .compose(RxUtils.exceptionTransformer())
-                .subscribe(new ApiListDisposableObserver<List<MaterialsData>>() {
-                    @Override
-                    public void onResult(ListData<List<MaterialsData>> listData) {
-                        if (listData == null || listData.getTotal() == 0) {
-                            setNoDataVisibleObservable(View.VISIBLE);
-                        } else {
-                            setNoDataVisibleObservable(View.GONE);
-                            if (observableList.size() == listData.getTotal()) {
-                                // 数据全部返回了
+        if (Constants.CONFIG.IS_OFFLINE) {
+            model._listMaterials(page, materialStatus, materialsQueryConditionBean.getMaterialName(), materialsQueryConditionBean.getRfidCode())
+                    .compose(RxUtils.MaybeSchTransformer())
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .subscribe((Consumer<List<MaterialsData>>) materialsDatas -> {
+                        if (materialsDatas == null || materialsDatas.size() == 0) {
+                            if (page == 1) {
+                                setNoDataVisibleObservable(View.VISIBLE);
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
                                 canloadmore = false;
                                 ToastUtils.showShort(R.string.app_no_more_data_text);
+                            }
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
+                            for (MaterialsData materialsData : materialsDatas) {
+                                MaterialsItemViewModel itemViewModel = new MaterialsItemViewModel(MaterialsViewModel.this, materialsData);
+                                //双向绑定动态添加Item
+                                observableList.add(itemViewModel);
+                            }
+                        }
+
+                        uc.finishRefreshing.call();
+                        uc.finishLoadmore.call();
+                    });
+        } else {
+            model.listMaterials(page, materialStatus, materialsQueryConditionBean.getMaterialName(), materialsQueryConditionBean.getRfidCode())
+                    .compose(RxUtils.schedulersTransformer())
+                    .compose(RxUtils.exceptionTransformer())
+                    .subscribe(new ApiListDisposableObserver<List<MaterialsData>>() {
+                        @Override
+                        public void onResult(ListData<List<MaterialsData>> listData) {
+                            if (listData == null || listData.getTotal() == 0) {
+                                setNoDataVisibleObservable(View.VISIBLE);
                             } else {
-                                for (MaterialsData materialsData : listData.getList()) {
-                                    MaterialsItemViewModel itemViewModel = new MaterialsItemViewModel(MaterialsViewModel.this, materialsData);
-                                    // 双向绑定动态添加Item
-                                    observableList.add(itemViewModel);
+                                setNoDataVisibleObservable(View.GONE);
+                                if (observableList.size() == listData.getTotal()) {
+                                    // 数据全部返回了
+                                    canloadmore = false;
+                                    ToastUtils.showShort(R.string.app_no_more_data_text);
+                                } else {
+                                    for (MaterialsData materialsData : listData.getList()) {
+                                        MaterialsItemViewModel itemViewModel = new MaterialsItemViewModel(MaterialsViewModel.this, materialsData);
+                                        // 双向绑定动态添加Item
+                                        observableList.add(itemViewModel);
+                                    }
                                 }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onComplete() {
-                        uc.finishRefreshing.call();
-                        uc.finishLoadmore.call();
-                    }
-                });
+                        @Override
+                        public void onComplete() {
+                            uc.finishRefreshing.call();
+                            uc.finishLoadmore.call();
+                        }
+                    });
+        }
     }
 
     //订阅者

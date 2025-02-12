@@ -2,6 +2,7 @@ package com.victor.base.data.source;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
@@ -10,7 +11,9 @@ import com.victor.base.data.entity.InventoryData;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
+import io.reactivex.functions.Consumer;
 
 /**
  * 版权：heihei
@@ -94,6 +97,8 @@ public interface LocalDataSource {
     void _insertAllocateMaterial(AllocateData.AllocateMaterial... allocateMaterials);
     List<AllocateData> _selectFinishedAllocateByDate(String syncDate);
     void _deleteAllocateDataById(int allocateId);
+    void _deleteAllMaterials();
+    void _insertMaterialsData(MaterialsData... materialsDatas);
     /* ----------------同步数据------------- */
 
     /* ---------------本地接口，数据操作----------------- */
@@ -117,5 +122,7 @@ public interface LocalDataSource {
     Maybe<List<AllocateData>> _listAllocate(int page);
     AllocateData _selectOneAllocate(int allocateId);
     void _saveAllocateResult(AllocateData allocateData);
+    // 查询
+    Maybe<List<MaterialsData>> _listMaterials(int page, String materialStatus, String materialName, String rfidCode);
     /* ---------------本地接口，数据操作----------------- */
 }

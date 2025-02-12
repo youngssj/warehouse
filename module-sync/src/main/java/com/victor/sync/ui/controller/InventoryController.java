@@ -58,7 +58,7 @@ public class InventoryController {
 
                         // 删除本地盘点数据
                         model._deleteInventoryData();
-                        // 插入盘点单数组
+                        // 插入盘点单数据
                         model._insertInventoryData(data.toArray(new InventoryData[data.size()]));
 
                         // 设置下载条数

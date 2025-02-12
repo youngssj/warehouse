@@ -10,6 +10,7 @@ import com.victor.base.data.dao.InboundDataDao;
 import com.victor.base.data.dao.InboundElecMaterialDao;
 import com.victor.base.data.dao.InventoryDataDao;
 import com.victor.base.data.dao.InventoryElecMaterialDao;
+import com.victor.base.data.dao.MaterialsDataDao;
 import com.victor.base.data.dao.MovementDataDao;
 import com.victor.base.data.dao.MovementElecMaterialDao;
 import com.victor.base.data.dao.OutboundDataDao;
@@ -19,6 +20,7 @@ import com.victor.base.data.dao.UserTokenDao;
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
@@ -49,6 +51,7 @@ import me.goldze.mvvmhabit.utils.Utils;
         MovementData.MovementElecMaterial.class,
         AllocateData.class,
         AllocateData.AllocateMaterial.class,
+        MaterialsData.class,
 }, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase DB;  //创建单例
@@ -102,4 +105,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     // 调拨单详情
     public abstract AllocateMaterialDao allocateMaterialDao();
+
+    // 物资
+    public abstract MaterialsDataDao materialDataDao();
 }

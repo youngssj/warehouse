@@ -33,6 +33,8 @@ public interface HttpDataSource {
 
     Observable<ListResponse<List<MaterialsData>>> listMaterials(int pageNum, String materialStatus, String materialName, String rfidCode);
 
+    Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int pageNum);
+
     Observable<ListResponse<List<InventoryData>>> listInventory(int page);
 
     Observable<ListResponse<List<InventoryData>>> listAllInventory(int page);

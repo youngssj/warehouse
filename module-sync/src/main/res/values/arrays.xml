@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="sync_home">
+        <item>查询</item>
         <item>入库</item>
         <item>出库</item>
         <item>移库</item>

@@ -5,6 +5,7 @@ import com.victor.base.app.AppDatabase;
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.SyncInfo;
@@ -262,6 +263,20 @@ public class LocalDataSourceImpl implements LocalDataSource {
     }
 
     @Override
+    public Maybe<List<MaterialsData>> _listMaterials(int page, String materialStatus, String materialName, String rfidCode) {
+        if(materialStatus == null){
+            materialStatus = "";
+        }
+        if(materialName == null){
+            materialName = "";
+        }
+        if(rfidCode == null){
+            rfidCode = "";
+        }
+        return db.materialDataDao().getAll(10 * (page - 1), page * 10, materialStatus, materialName, rfidCode);
+    }
+
+    @Override
     public List<InboundData> _selectFinishedInboundByDate(String syncDate) {
         return db.inboundDataDao().getFinishedByDate(syncDate);
     }
@@ -351,5 +366,15 @@ public class LocalDataSourceImpl implements LocalDataSource {
     public void _deleteAllocateDataById(int allocateId) {
         db.allocateDataDao().deleteById(allocateId);
         db.allocateMaterialDao().deleteByAllocateId(allocateId);
+    }
+
+    @Override
+    public void _deleteAllMaterials() {
+        db.materialDataDao().deleteAll();
+    }
+
+    @Override
+    public void _insertMaterialsData(MaterialsData... materialsDatas) {
+        db.materialDataDao().insertAll(materialsDatas);
     }
 }

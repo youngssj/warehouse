@@ -57,9 +57,9 @@ public class AllocateController {
                             return;
                         }
 
-                        // 删除本地盘点数据
+                        // 删除本地调拨数据
                         model._deleteAllocateData();
-                        // 插入盘点单数组
+                        // 插入调拨单数据
                         model._insertAllocateData(data.toArray(new AllocateData[data.size()]));
 
                         // 设置下载条数

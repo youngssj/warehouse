@@ -57,9 +57,9 @@ public class MovementController {
                             return;
                         }
 
-                        // 删除本地盘点数据
+                        // 删除本地移库数据
                         model._deleteMovementData();
-                        // 插入盘点单数组
+                        // 插入移库单数据
                         model._insertMovementData(data.toArray(new MovementData[data.size()]));
 
                         // 设置下载条数

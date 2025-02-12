@@ -57,9 +57,9 @@ public class OutboundController {
                             return;
                         }
 
-                        // 删除本地盘点数据
+                        // 删除本地出库数据
                         model._deleteOutboundData();
-                        // 插入盘点单数组
+                        // 插入出库单数据
                         model._insertOutboundData(data.toArray(new OutboundData[data.size()]));
 
                         // 设置下载条数

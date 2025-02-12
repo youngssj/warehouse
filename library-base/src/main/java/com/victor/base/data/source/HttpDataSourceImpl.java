@@ -71,6 +71,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int pageNum) {
+        return apiService.listMaterials(pageNum, 1000000, null, null, null);
+    }
+
+    @Override
     public Observable<ListResponse<List<InventoryData>>> listInventory(int pageNum) {
         return apiService.listInventory(pageNum, 10);
     }

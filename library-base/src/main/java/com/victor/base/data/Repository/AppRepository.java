@@ -79,6 +79,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Observable<ListResponse<List<MaterialsData>>> listAllMaterials(int page) {
+        return mHttpDataSource.listAllMaterials(page);
+    }
+
+    @Override
     public Observable<ListResponse<List<InventoryData>>> listInventory(int page) {
         return mHttpDataSource.listInventory(page);
     }
@@ -392,6 +397,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Maybe<List<MaterialsData>> _listMaterials(int page, String materialStatus, String materialName, String rfidCode) {
+        return mLocalDataSource._listMaterials(page, materialStatus, materialName, rfidCode);
+    }
+
+    @Override
     public List<OutboundData> _selectFinishedOutboundByDate(String syncDate) {
         return mLocalDataSource._selectFinishedOutboundByDate(syncDate);
     }
@@ -449,5 +459,15 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public void _deleteAllocateDataById(int allocateId) {
         mLocalDataSource._deleteAllocateDataById(allocateId);
+    }
+
+    @Override
+    public void _deleteAllMaterials() {
+        mLocalDataSource._deleteAllMaterials();
+    }
+
+    @Override
+    public void _insertMaterialsData(MaterialsData... materialsDatas) {
+        mLocalDataSource._insertMaterialsData(materialsDatas);
     }
 }
