@@ -103,25 +103,28 @@
                 binding:onClickCommand="@{viewModel.loginOnClickCommand}" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tvAppNameEN"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_above="@id/llCenter"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="200mm"
-            android:text="@string/login_top_text_en"
-            android:textColor="@color/colorPrimary"
-            android:textSize="42mm" />
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvAppName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/tvAppNameEN"
-            android:layout_centerHorizontal="true"
-            android:text="@string/login_top_text"
-            android:textColor="@color/colorPrimary"
-            android:textSize="80mm" />
+            <TextView
+                android:id="@+id/tvAppName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_top_text"
+                android:textColor="@color/colorPrimary"
+                android:textSize="80mm" />
+
+            <TextView
+                android:id="@+id/tvAppNameEN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_top_text_en"
+                android:textColor="@color/colorPrimary"
+                android:textSize="42mm" />
+        </LinearLayout>
     </RelativeLayout>
 </layout>

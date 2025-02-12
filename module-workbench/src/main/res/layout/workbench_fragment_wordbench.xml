@@ -11,15 +11,23 @@
         <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:overScrollMode="never"
-        android:paddingStart="70mm"
-        android:paddingEnd="70mm"
-        android:scrollbars="none"
-        binding:itemBinding="@{viewModel.abilityItemBinding}"
-        binding:items="@{viewModel.abilityList}"
-        binding:layoutManager="@{LayoutManagers.grid(2)}" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="-90mm"
+            android:overScrollMode="never"
+            android:paddingStart="70mm"
+            android:paddingEnd="70mm"
+            android:scrollbars="none"
+            binding:itemBinding="@{viewModel.abilityItemBinding}"
+            binding:items="@{viewModel.abilityList}"
+            binding:layoutManager="@{LayoutManagers.grid(2)}" />
+    </LinearLayout>
 </layout>
