@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.hiu_931.Uhf931Utils;
 import com.hiultra.c72.BarCodeHelper;
 import com.hiultra.c72.UhfC72Utils;
 import com.hiultra.hiu_961.Uhf961Utils;
@@ -45,6 +46,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
 
 
     protected UhfC72Utils mUhfC72Utils;
+    protected Uhf931Utils mUhf931Utils;
     protected Uhf961Utils mUhf961Utils;
     protected BarCodeHelper mBarCodeHelper;
 
@@ -81,20 +83,45 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
             if (keyUpFlag && keyDown && System.currentTimeMillis() - startTime > 500) {
                 keyUpFlag = false;
                 startTime = System.currentTimeMillis();
-                if ((keyCode == KeyEvent.KEYCODE_F3 || keyCode == KeyEvent.KEYCODE_F4)) {
-                    if (mUhf961Utils == null)
-                        return;
-                    if (isReadFinish) {
-                        ToastUtils.showShort("已全部扫描完，请点击完成");
-                        return;
-                    }
-                    if (isSingle) {
-                        mUhf961Utils.readSingleTag(epcSet -> readUhfCallback(epcSet));
-                    } else {
-                        mUhf961Utils.startRead(epcSet -> readUhfCallback(epcSet));
-                    }
+
+                switch (keyCode) {
+                    case KeyEvent.KEYCODE_F3://C510x
+                    case KeyEvent.KEYCODE_F4://6100
+                    case KeyEvent.KEYCODE_F7://H3100
+                        switch (SystemUtil.getSystemModel()) {
+                            case Constants.DEVICE.K71V1_64_BSP:
+                                if (!isRead)
+                                    return;
+                                if (mUhf961Utils == null)
+                                    return;
+                                if (isReadFinish) {
+                                    ToastUtils.showShort("已全部扫描完，请点击完成");
+                                    return;
+                                }
+                                if (isSingle) {
+                                    mUhf961Utils.readSingleTag(epcSet -> readUhfCallback(epcSet));
+                                } else {
+                                    mUhf961Utils.startRead(epcSet -> readUhfCallback(epcSet));
+                                }
+                                break;
+                            case Constants.DEVICE.K62V1_3H:
+                                if (!isRead)
+                                    return;
+                                if (mUhf931Utils == null)
+                                    return;
+                                if (isReadFinish) {
+                                    ToastUtils.showShort("已全部扫描完，请点击完成");
+                                    return;
+                                }
+                                if (isSingle) {
+                                    mUhf931Utils.startSingleRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
+                                } else {
+                                    mUhf931Utils.startRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
+                                }
+                                break;
+                        }
+                        break;
                 }
-                return;
             } else if (keyDown) {
                 startTime = System.currentTimeMillis();
             } else {
@@ -124,6 +151,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                     case Constants.DEVICE.C725X:
                         if (mUhfC72Utils == null) {
                             mUhfC72Utils = new UhfC72Utils(this);
+                            mUhfC72Utils.initUHF(this);
                         }
                         mUhfC72Utils.setPower(Integer.parseInt((String) viewModel.power.get()));
                         break;
@@ -134,9 +162,15 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                         }
                         mUhf961Utils.setPower(Integer.parseInt((String) viewModel.power.get()));
                         break;
-
+                    case Constants.DEVICE.K62V1_3H:
+                        // 931
+                        if (mUhf931Utils == null) {
+                            mUhf931Utils = new Uhf931Utils(this);
+                            mUhf931Utils.initUHF(this);
+                        }
+                        mUhf931Utils.setPower(Integer.parseInt((String) viewModel.power.get()));
+                        break;
                 }
-
             });
         });
     }
@@ -173,21 +207,31 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                 if (isRead) {
                     mUhfC72Utils = new UhfC72Utils(this);
                     mUhfC72Utils.initUHF(this);
-//                    return;
+                    mBarCodeHelper = BarCodeHelper.getInstance(this);
+                    mBarCodeHelper.init();
                 }
-                mBarCodeHelper = BarCodeHelper.getInstance(this);
-                mBarCodeHelper.init();
                 break;
-
             case Constants.DEVICE.K71V1_64_BSP:
                 mUhf961Utils = new Uhf961Utils(BaseUhfActivity.this);
-                IntentFilter filter = new IntentFilter();
-                filter.addAction("android.rfid.FUN_KEY");
-                registerReceiver(keyReceiver, filter);
+                registReceiver();
 //                mUhfPdaUtils.initUHF();
                 break;
+            case Constants.DEVICE.K62V1_3H:
+                // 931
+                if (isRead) {
+                    mUhf931Utils = new Uhf931Utils(this);
+                    mUhf931Utils.initUHF(this);
+                    registReceiver();
+                }
+                break;
         }
+    }
 
+    private void registReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.rfid.FUN_KEY");
+        filter.addAction("android.intent.action.FUN_KEY");
+        registerReceiver(keyReceiver, filter);
     }
 
     @Override
@@ -202,7 +246,9 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                     mBarCodeHelper.closeScan();
                 break;
             case Constants.DEVICE.K71V1_64_BSP:
+            case Constants.DEVICE.K62V1_3H:
                 unregisterReceiver(keyReceiver);
+                break;
         }
     }
 
@@ -224,6 +270,12 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
             case Constants.DEVICE.K71V1_64_BSP:
                 if (mUhf961Utils != null) {
                     mUhf961Utils.closeUhf();
+                }
+                break;
+            case Constants.DEVICE.K62V1_3H:
+                // 931
+                if (mUhf931Utils != null) {
+                    mUhf931Utils.closeUhf();
                 }
                 break;
         }
@@ -280,7 +332,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                     if (mUhfC72Utils != null) {
                         if (isSingle) {
                             mUhfC72Utils.startSingleRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
-                        }else{
+                        } else {
                             mUhfC72Utils.startRead(BaseUhfActivity.this, epcData -> readUhfCallback(epcData));
                         }
                     }
@@ -291,8 +343,6 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
                         mBarCodeHelper.ScanBarcode(this::scanBarCodeCallback);
                 }
                 break;
-
-
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -300,7 +350,21 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
     public void showCustomDialog(String title, MaterialDialog.SingleButtonCallback callback) {
         showProgress();
         Observable.create((ObservableOnSubscribe<String>) emitter -> {
-                    emitter.onNext(String.valueOf(mUhfC72Utils.getPower()));
+                    switch (SystemUtil.getSystemModel()) {
+                        case Constants.DEVICE.C72_AND11:
+                        case Constants.DEVICE.C72_AND11_1:
+                        case Constants.DEVICE.C72:
+                        case Constants.DEVICE.C725X:
+                            emitter.onNext(String.valueOf(mUhfC72Utils.getPower()));
+                            break;
+                        case Constants.DEVICE.K71V1_64_BSP:
+//                            emitter.onNext(String.valueOf(mUhf961Utils.getPower()));
+                            break;
+                        case Constants.DEVICE.K62V1_3H:
+                            // 931
+                            emitter.onNext(String.valueOf(mUhf931Utils.getPower()));
+                            break;
+                    }
                 })
                 .compose(RxUtils.bindToLifecycle(viewModel.getLifecycleProvider()))
                 .compose(RxUtils.schedulersTransformer())

@@ -1,0 +1,22 @@
+apply from: "../module.build.gradle"
+android {
+    defaultConfig {
+        //如果是独立模块，则使用当前组件的包名
+        if (isBuildModule.toBoolean()) {
+            applicationId "com.victor.workbench"
+        }
+    }
+    //统一资源前缀，规范资源引用
+    resourcePrefix "workbench_"
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':library-base')
+    implementation files('libs\\reader(1).jar')
+    implementation files('libs\\ModuleAPI_J.jar')
+    implementation files('libs\\App_Demo_API.jar')
+    implementation files('libs\\DeviceAPIver20150204.jar')
+    implementation files('libs\\logutil-1.5.1.1.jar')
+    implementation files('libs\\UHF67_v3.6.jar')
+}

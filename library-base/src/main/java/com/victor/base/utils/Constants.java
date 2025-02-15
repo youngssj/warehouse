@@ -50,6 +50,7 @@ public class Constants {
         public static final String C72_AND11_1 = "Handheld";
         public static final String SU_PDA = "PDA";
         public static final String K71V1_64_BSP = "k71v1_64_bsp";
+        public static final String K62V1_3H = "k62v1_3h";
     }
 
     // 巡检、维修等任务单状态   0 录入 1 进行中 2 超期 3 已完成

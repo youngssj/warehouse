@@ -2,19 +2,16 @@ package com.hiultra.hiu_961;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 
-import com.handheld.uhfr.UHFRManager;
+import com.handheld961.uhfr.UHFRManager;
 import com.uhf.api.cls.Reader;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import cn.pda.serialport.Tools;
-import me.goldze.mvvmhabit.utils.KLog;
+import cn.pda961.serialport.Tools;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 /**

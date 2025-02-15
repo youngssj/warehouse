@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.example.hiu_931.SoundManager;
 import com.victor.base.config.ModuleLifecycleConfig;
 import com.victor.base.utils.SystemUtil;
 import com.victor.main.ui.activity.LoginActivity;
@@ -36,6 +37,7 @@ public class AppApplication extends BaseApplication {
         SystemUtil.getSystemModel();
         com.hiultra.c72.SoundUtil.initSoundPool(this);//Init sound pool
         com.hiultra.hiu_961.SoundUtil.initSoundPool(this);//Init sound pool
+        SoundManager.initSound(this);;//Init sound pool
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {

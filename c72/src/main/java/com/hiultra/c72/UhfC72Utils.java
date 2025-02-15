@@ -212,6 +212,7 @@ public class UhfC72Utils {
 
     @SuppressLint("StaticFieldLeak")
     public void setPower(int power) {
+        this.power = power;
         showProgress();
         executorService.submit(() -> {
             stopInventory();

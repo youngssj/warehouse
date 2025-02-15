@@ -11,9 +11,10 @@ android{
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':library-base')
     implementation files('libs\\jxl.jar')
-    implementation files('libs\\ModuleAPI_J.jar')
-    implementation files('libs\\uhfr_v1.8.jar')
+    compileOnly files('libs\\ModuleAPI_J.jar')
+//    implementation files('libs\\uhfr_v1.8.jar')
+    implementation files('libs\\uhfr_v1.8_961.jar')
 }
