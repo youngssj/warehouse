@@ -39,10 +39,10 @@ public interface HttpService {
      * @param params
      * @return
      */
-    @POST("/dev-api/mobile/login")
+    @POST("/mobile/login")
     Observable<BaseResponse<TokenBean>> login(@Body Map<String, String> params);
 
-    @GET("/dev-api/system/user/profile")
+    @GET("/system/user/profile")
     Observable<BaseResponse<UserInfoBean>> userInfo();
 
     /**
@@ -53,7 +53,7 @@ public interface HttpService {
      * @param rfidCode
      * @return
      */
-    @GET("/dev-api/mobile/storage/elecMaterial/list")
+    @GET("/mobile/storage/elecMaterial/list")
     Observable<ListResponse<List<MaterialsData>>> listMaterials(@Query("pageNum") int pageNum,
                                                                 @Query("pageSize") int pageSize,
                                                                 @Query("materialStatus") String materialStatus,
@@ -67,7 +67,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialCheckinfo/list")
+    @GET("/mobile/storage/ElecMaterialCheckinfo/list")
     Observable<ListResponse<List<InventoryData>>> listInventory(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -77,7 +77,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/list")
+    @GET("/mobile/storage/ElecMaterialIninfo/list")
     Observable<ListResponse<List<InboundData>>> listInbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -87,7 +87,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialOutinfo/list")
+    @GET("/mobile/storage/ElecMaterialOutinfo/list")
     Observable<ListResponse<List<OutboundData>>> listOutbound(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -97,7 +97,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/moveinfo/list")
+    @GET("/mobile/storage/moveinfo/list")
     Observable<ListResponse<List<MovementData>>> listMovement(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -107,7 +107,7 @@ public interface HttpService {
      * @param pageSize
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecExchangeInfo/list")
+    @GET("/mobile/storage/ElecExchangeInfo/list")
     Observable<ListResponse<List<AllocateData>>> listAllocate(@Query("pageNum") int pageNum, @Query("pageSize") int pageSize);
 
     /**
@@ -116,7 +116,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialCheckinfo/{dynamicPath}")
+    @GET("/mobile/storage/ElecMaterialCheckinfo/{dynamicPath}")
     Observable<BaseResponse<InventoryData>> selectByCheck(@Path("dynamicPath") int path);
 
     /**
@@ -125,7 +125,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
+    @GET("/mobile/storage/ElecMaterialIninfo/{dynamicPath}")
     Observable<BaseResponse<InboundData>> selectByInbound(@Path("dynamicPath") int path);
 
     /**
@@ -134,7 +134,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialOutinfo/{dynamicPath}")
+    @GET("/mobile/storage/ElecMaterialOutinfo/{dynamicPath}")
     Observable<BaseResponse<OutboundData>> selectByOutbound(@Path("dynamicPath") int path);
 
     /**
@@ -143,7 +143,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecMaterialMoveinfo/{dynamicPath}")
+    @GET("/mobile/storage/ElecMaterialMoveinfo/{dynamicPath}")
     Observable<BaseResponse<MovementData>> selectByMovement(@Path("dynamicPath") int path);
 
     /**
@@ -152,7 +152,7 @@ public interface HttpService {
      * @param path
      * @return
      */
-    @GET("/dev-api/mobile/storage/ElecExchangeInfo/{dynamicPath}")
+    @GET("/mobile/storage/ElecExchangeInfo/{dynamicPath}")
     Observable<BaseResponse<AllocateData>> selectByAllocate(@Path("dynamicPath") int path);
 
     /**
@@ -162,7 +162,7 @@ public interface HttpService {
      * @return
      */
     @FormUrlEncoded
-    @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
+    @POST("/mobile/storage/ElecMaterialCheckinfo/completeInfo")
     Observable<BaseResponse> saveCheckResult(@FieldMap Map<String, String> params);
 
     /**
@@ -171,7 +171,7 @@ public interface HttpService {
      * @param inventoryData
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialCheckinfo/completeInfo")
+    @POST("/mobile/storage/ElecMaterialCheckinfo/completeInfo")
     Observable<BaseResponse> saveCheckedResult(@Body InventoryData inventoryData);
 
     /**
@@ -180,7 +180,7 @@ public interface HttpService {
      * @param inboundData
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialIninfo/completeInfo")
+    @POST("/mobile/storage/ElecMaterialIninfo/completeInfo")
     Observable<BaseResponse> saveInboundResult(@Body InboundData inboundData);
 
     /**
@@ -189,7 +189,7 @@ public interface HttpService {
      * @param outboundDetail
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecMaterialOutinfo/completeInfo")
+    @POST("/mobile/storage/ElecMaterialOutinfo/completeInfo")
     Observable<BaseResponse> saveOutboundResult(@Body OutboundData outboundDetail);
 
     /**
@@ -198,7 +198,7 @@ public interface HttpService {
      * @param movementDetail
      * @return
      */
-    @POST("/dev-api/mobile/storage/moveinfo/completeMove")
+    @POST("/mobile/storage/moveinfo/completeMove")
     Observable<BaseResponse> saveMovementResult(@Body MovementData movementDetail);
 
     /**
@@ -207,6 +207,6 @@ public interface HttpService {
      * @param allocateData
      * @return
      */
-    @POST("/dev-api/mobile/storage/ElecExchangeInfo/completeExchange")
+    @POST("/mobile/storage/ElecExchangeInfo/completeExchange")
     Observable<BaseResponse> saveAllocateResult(@Body AllocateData allocateData);
 }
