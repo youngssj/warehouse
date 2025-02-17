@@ -68,7 +68,7 @@ public class MineViewModel extends BaseViewModel<AppRepository> {
                         StringBuilder sexSb = new StringBuilder("1".equals(userInfoBean.getSex()) ? "女" : "男");
                         sexSb.append(" ");
                         name.set(TextUtils.isEmpty(userInfoBean.getNickName()) ? userInfoBean.getUserName() : userInfoBean.getNickName());
-                        avatar.set("http://" + Constants.CONFIG.DEFAULT_IP + ":" + Constants.CONFIG.DEFAULT_PORT + "/dev-api" + userInfoBean.getAvatar());
+                        avatar.set("http://" + Constants.CONFIG.DEFAULT_IP + ":" + Constants.CONFIG.DEFAULT_PORT + userInfoBean.getAvatar());
                         phoneNumber.set(userInfoBean.getPhonenumber());
                         email.set(userInfoBean.getEmail());
 
