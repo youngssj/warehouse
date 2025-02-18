@@ -1,7 +1,6 @@
 package me.goldze.mvvmhabit.http;
 
 import io.reactivex.observers.DisposableObserver;
-import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.utils.KLog;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 import me.goldze.mvvmhabit.utils.Utils;
@@ -76,12 +75,6 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                 KLog.e("没有数据");
                 break;
             case CodeRule.CODE_510:
-                //无效的Token，提示跳入登录页
-                ToastUtils.showShort("token已过期，请重新登录");
-                //关闭所有页面
-                AppManager.getAppManager().finishAllActivity();
-                //跳入登录界面
-                //*****该类仅供参考，实际业务Code, 根据需求来定义，******//
                 break;
             case CodeRule.CODE_530:
                 ToastUtils.showShort("请先登录");

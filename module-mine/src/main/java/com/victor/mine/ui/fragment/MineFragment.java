@@ -15,6 +15,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.router.RouterFragmentPath;
+import com.victor.base.utils.Constants;
 import com.victor.mine.BR;
 import com.victor.mine.R;
 import com.victor.mine.databinding.MineFragmentMineBinding;
@@ -23,6 +24,7 @@ import com.victor.mine.ui.viewmodel.MineViewModel;
 import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.BaseFragment;
 import me.goldze.mvvmhabit.utils.MaterialDialogUtils;
+import me.goldze.mvvmhabit.utils.SPUtils;
 
 @Route(path = RouterFragmentPath.User.PAGER_MINE)
 public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineViewModel> {
@@ -47,7 +49,10 @@ public class MineFragment extends BaseFragment<MineFragmentMineBinding, MineView
         viewModel.uc.exitEvent.observe(getViewLifecycleOwner(), mineViewModel -> {
             MaterialDialogUtils.showBasicDialog(getContext(), getResources().getString(R.string.mine_exit_hint_text))
                     .onPositive((dialog, which) -> {
+                        //关闭所有页面
                         AppManager.getAppManager().finishAllActivity();
+                        SPUtils.getInstance().put(Constants.SP.TOKEN, "");
+                        //跳入登录界面
                         ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN).navigation();
                     })
                     .show();

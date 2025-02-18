@@ -2,17 +2,11 @@ package com.victor.base.data.http;
 
 import android.text.TextUtils;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.victor.base.router.RouterActivityPath;
-import com.victor.base.utils.Constants;
-
 import io.reactivex.observers.DisposableObserver;
-import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.http.BaseResponse;
 import me.goldze.mvvmhabit.http.NetworkUtil;
 import me.goldze.mvvmhabit.http.ResponseThrowable;
 import me.goldze.mvvmhabit.utils.KLog;
-import me.goldze.mvvmhabit.utils.SPUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 import me.goldze.mvvmhabit.utils.Utils;
 
@@ -56,12 +50,12 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
 
     @Override
     public void onNext(T o) {
-        if(o instanceof BaseResponse) {
+        if (o instanceof BaseResponse) {
             BaseResponse baseResponse = (BaseResponse) o;
             String msg = "";
-            if(TextUtils.isEmpty(baseResponse.getMsg())){
+            if (TextUtils.isEmpty(baseResponse.getMsg())) {
                 msg = "错误代码:" + baseResponse.getCode();
-            }else{
+            } else {
                 msg = baseResponse.getMsg();
             }
             switch (baseResponse.getCode()) {
@@ -105,13 +99,6 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     KLog.e("没有数据");
                     break;
                 case CodeRule.CODE_510:
-                    //无效的Token，提示跳入登录页
-                    ToastUtils.showShort("token已过期，请重新登录");
-                    //关闭所有页面
-                    AppManager.getAppManager().finishAllActivity();
-                    SPUtils.getInstance().put(Constants.SP.TOKEN, "");
-                    //跳入登录界面
-                    ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN).navigation();
                     break;
                 case CodeRule.CODE_530:
                     ToastUtils.showShort("请先登录");
