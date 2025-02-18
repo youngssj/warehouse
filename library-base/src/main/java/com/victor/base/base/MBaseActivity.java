@@ -7,12 +7,14 @@ import androidx.databinding.ViewDataBinding;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.base.utils.Constants;
 
 import me.goldze.mvvmhabit.base.AppStatusManager;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.base.ContainerActivity;
 import me.goldze.mvvmhabit.utils.KLog;
+import me.goldze.mvvmhabit.utils.SPUtils;
 
 public abstract class MBaseActivity<V extends ViewDataBinding, VM extends BaseViewModel> extends BaseActivity<V, VM> {
     @Override
@@ -32,6 +34,7 @@ public abstract class MBaseActivity<V extends ViewDataBinding, VM extends BaseVi
             if (!"LoginActivity".equals(getClass().getSimpleName())) {
                 KLog.d("getAppStatus::main");
                 AppStatusManager.getInstance().setAppStatus(AppStatusManager.AppStatusConstant.ACTION_BACK_TO_HOME);
+                SPUtils.getInstance().put(Constants.SP.TOKEN, "");
                 ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN)
                         .withInt(AppStatusManager.AppStatusConstant.KEY_HOME_ACTION, AppStatusManager.AppStatusConstant.ACTION_RESTART_APP)
                         .navigation();

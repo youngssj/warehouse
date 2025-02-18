@@ -11,12 +11,14 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.base.MBaseActivity;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.base.utils.Constants;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.ui.viewmodel.MainViewModel;
 
 import me.goldze.mvvmhabit.base.AppManager;
 import me.goldze.mvvmhabit.base.AppStatusManager;
+import me.goldze.mvvmhabit.utils.SPUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public abstract class MainActivity<V extends ViewDataBinding, VM extends MainViewModel> extends MBaseActivity<V, VM> {
@@ -35,6 +37,7 @@ public abstract class MainActivity<V extends ViewDataBinding, VM extends MainVie
     }
 
     public void restartApplication() {
+        SPUtils.getInstance().put(Constants.SP.TOKEN, "");
         ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN)
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK)
                 .navigation();

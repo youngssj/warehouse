@@ -11,11 +11,13 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.base.utils.Constants;
 import com.victor.sync.R;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
+import me.goldze.mvvmhabit.utils.SPUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class SyncViewModel extends BaseOddViewModel<SyncItemViewModel> {
@@ -77,6 +79,7 @@ public class SyncViewModel extends BaseOddViewModel<SyncItemViewModel> {
     });
 
     private void reloadLogin() {
+        SPUtils.getInstance().put(Constants.SP.TOKEN, "");
         ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN).navigation();
         finish();
     }
