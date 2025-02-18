@@ -96,6 +96,9 @@ public abstract class DownDisposableObserver<T> extends DisposableObserver<T> {
                 //请求失败，打印Message
 //                ToastUtils.showShort(baseResponse.getMsg());
                 break;
+            case CodeRule.CODE_401:
+                // 无效的Token
+                break;
             case CodeRule.CODE_500:
                 //服务器内部异常
 //                ToastUtils.showShort("错误代码:", baseResponse.getCode());
@@ -145,6 +148,7 @@ public abstract class DownDisposableObserver<T> extends DisposableObserver<T> {
         static final int CODE_300 = 300;
         //请求失败，打印Message
         static final int CODE_330 = 330;
+        static final int CODE_401 = 401;
         //服务器内部异常
         static final int CODE_500 = 500;
         //参数为空

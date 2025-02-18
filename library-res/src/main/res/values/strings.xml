@@ -3,6 +3,7 @@
     <string name="app_loading_text">加载中，请稍后...</string>
     <string name="app_no_data_text">没有数据啦~</string>
     <string name="app_no_more_data_text">不要拉了呀，到底了~</string>
+    <string name="app_token_invalid">Token已过期，请重新登录</string>
     <string name="login_top_text">智慧仓储系统</string>
     <string name="login_top_text_en">Intelligent storage system</string>
     <string name="login_button_text">登录</string>

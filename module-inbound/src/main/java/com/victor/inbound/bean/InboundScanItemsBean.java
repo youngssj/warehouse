@@ -1,11 +1,10 @@
-
 package com.victor.inbound.bean;
 
 import com.victor.base.data.entity.InboundData;
 
 import java.util.List;
 
-public class InboundScanRemoveItemsBean {
+public class InboundScanItemsBean {
 
     private int position;
 
@@ -25,5 +24,13 @@ public class InboundScanRemoveItemsBean {
 
     public void setElecMaterialList(List<InboundData.InboundElecMaterial> inboundElecMaterial) {
         this.inboundElecMaterial = inboundElecMaterial;
+    }
+
+    @Override
+    public String toString() {
+        return "InboundScanItemsBean{" +
+                "position=" + position +
+                ", elecMaterialList=" + inboundElecMaterial +
+                '}';
     }
 }

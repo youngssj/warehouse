@@ -47,4 +47,10 @@ public class LoginActivity extends MBaseActivity<MainActivityLoginBinding, Login
             });
         });
     }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        // 检查是否已登录
+        viewModel.checkLoginStatus();
+    }
 }

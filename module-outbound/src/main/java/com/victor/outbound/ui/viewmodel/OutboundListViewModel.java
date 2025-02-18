@@ -6,13 +6,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.http.ApiListDisposableObserver;
+import com.victor.base.event.Event;
+import com.victor.base.event.MessageEvent;
+import com.victor.base.event.MessageType;
 import com.victor.base.utils.Constants;
 import com.victor.outbound.R;
-import com.victor.outbound.bean.OutboundListRefreshBean;
 import com.victor.outbound.ui.viewmodel.itemviewmodel.OutboundItemViewModel;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 
@@ -108,11 +109,14 @@ public class OutboundListViewModel extends BaseOddViewModel<OutboundItemViewMode
     @Override
     public void registerRxBus() {
         super.registerRxBus();
-        mSubscriptionRefresh = RxBus.getDefault().toObservable(OutboundListRefreshBean.class)
-                .subscribe(new Consumer<OutboundListRefreshBean>() {
-                    @Override
-                    public void accept(OutboundListRefreshBean outboundListRefreshBean) throws Exception {
-                        uc.beginRefreshing.call();
+        mSubscriptionRefresh = RxBus.getDefault().toObservable(Event.class)
+                .subscribe(event -> {
+                    if (event instanceof MessageEvent) {
+                        switch (((MessageEvent<?>) event).getMessageType()) {
+                            case MessageType.EVENT_TYPE_OUTBOUND_LIST_REFRESH:
+                                uc.beginRefreshing.call();
+                                break;
+                        }
                     }
                 });
         RxSubscriptions.add(mSubscriptionRefresh);

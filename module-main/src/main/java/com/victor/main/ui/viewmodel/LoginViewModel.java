@@ -23,6 +23,7 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.binding.command.BindingConsumer;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.SPUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class LoginViewModel extends BaseViewModel<AppRepository> {
@@ -43,6 +44,19 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
         portObField.set(model._getPort());
         offlineField.set(model._getConfig());
         saveIpAndPort();
+    }
+
+    public void checkLoginStatus() {
+        String token = SPUtils.getInstance().getString("token");
+        if (!TextUtils.isEmpty(token)) {
+            // 跳转到主界面
+            if(offlineField.get()) {
+                ARouter.getInstance().build(RouterActivityPath.Main.PAGER_OFFLINE_MAIN).navigation();
+            }else{
+                ARouter.getInstance().build(RouterActivityPath.Main.PAGER_ONLINE_MAIN).navigation();
+            }
+            finish();
+        }
     }
 
     public class UIChangeObservable {

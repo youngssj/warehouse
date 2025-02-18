@@ -1,27 +1,23 @@
 package com.victor.inbound.ui.viewmodel;
 
 import android.app.Application;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.http.ApiDisposableObserver;
+import com.victor.base.event.MessageEvent;
+import com.victor.base.event.MessageType;
 import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
 import com.victor.inbound.R;
-import com.victor.inbound.bean.InboundListRefreshBean;
-import com.victor.inbound.bean.InboundScanAddItemsBean;
-import com.victor.inbound.bean.InboundScanRemoveItemsBean;
-import com.victor.inbound.bean.InboundScanUpdateItemsBean;
+import com.victor.inbound.bean.InboundScanItemsBean;
 import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Observable;
@@ -70,7 +66,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onNext(Boolean b) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
-                            RxBus.getDefault().post(new InboundListRefreshBean());
+                            RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_LIST_REFRESH, null));
                             finish();
                         }
 
@@ -95,7 +91,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                         public void onResult(Object o) {
                             btnVisiable.set(false);
                             ToastUtils.showShort(R.string.workbench_check_submit_success_text);
-                            RxBus.getDefault().post(new InboundListRefreshBean());
+                            RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_LIST_REFRESH, null));
                             finish();
                         }
 
@@ -160,10 +156,10 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
             entity.set(data);
             checkDataNum.set("0/" + data.getElecMaterialList().size());
             // 向fragment发送数据，刚进入只有待入库数据
-            InboundScanAddItemsBean inboundScanAddItemsBean = new InboundScanAddItemsBean();
-            inboundScanAddItemsBean.setPosition(0);
-            inboundScanAddItemsBean.setElecMaterialList(data.getElecMaterialList());
-            RxBus.getDefault().post(inboundScanAddItemsBean);
+            InboundScanItemsBean inboundScanItemsBean = new InboundScanItemsBean();
+            inboundScanItemsBean.setPosition(0);
+            inboundScanItemsBean.setElecMaterialList(data.getElecMaterialList());
+            RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_ADD_ITEM, inboundScanItemsBean));
         }
     }
 
@@ -184,28 +180,28 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
                     bean.setIsInMessage(getApplication().getResources().getString(R.string.workbench_inbound_success_text));
 
                     // 添加
-                    InboundScanAddItemsBean inboundScanAddItemsBean = new InboundScanAddItemsBean();
+                    InboundScanItemsBean inboundScanAddItemsBean = new InboundScanItemsBean();
                     inboundScanAddItemsBean.setPosition(1);
                     inboundScanAddItemsBean.setElecMaterialList(new ArrayList<>());
                     inboundScanAddItemsBean.getElecMaterialList().add(bean);
-                    RxBus.getDefault().post(inboundScanAddItemsBean);
+                    RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_ADD_ITEM, inboundScanAddItemsBean));
 
                     // 移除
-                    InboundScanRemoveItemsBean inboundScanRemoveItemsBean = new InboundScanRemoveItemsBean();
+                    InboundScanItemsBean inboundScanRemoveItemsBean = new InboundScanItemsBean();
                     inboundScanRemoveItemsBean.setPosition(0);
                     inboundScanRemoveItemsBean.setElecMaterialList(new ArrayList<>());
                     inboundScanRemoveItemsBean.getElecMaterialList().add(bean);
-                    RxBus.getDefault().post(inboundScanRemoveItemsBean);
+                    RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_REMOVE_ITEM, inboundScanRemoveItemsBean));
 
                     hasData = true;
                 }
             } else if (!rvSet.contains(bean)) {
                 // 更新列表未扫描到的条目为红色
-                InboundScanUpdateItemsBean inboundScanUpdateItemsBean = new InboundScanUpdateItemsBean();
+                InboundScanItemsBean inboundScanUpdateItemsBean = new InboundScanItemsBean();
                 inboundScanUpdateItemsBean.setPosition(0);
                 inboundScanUpdateItemsBean.setElecMaterialList(new ArrayList<>());
                 inboundScanUpdateItemsBean.getElecMaterialList().add(bean);
-                RxBus.getDefault().post(inboundScanUpdateItemsBean);
+                RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_UPDATE_ITEM, inboundScanUpdateItemsBean));
             }
         }
 

@@ -7,12 +7,13 @@ import androidx.annotation.NonNull;
 
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.ListData;
 import com.victor.base.data.http.ApiListDisposableObserver;
+import com.victor.base.event.Event;
+import com.victor.base.event.MessageEvent;
+import com.victor.base.event.MessageType;
 import com.victor.base.utils.Constants;
 import com.victor.inbound.R;
-import com.victor.inbound.bean.InboundListRefreshBean;
 import com.victor.inbound.ui.viewmodel.itemviewmodel.InboundItemViewModel;
 import com.victor.workbench.ui.base.BaseOddViewModel;
 
@@ -21,7 +22,6 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.bus.RxBus;
-import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 
@@ -101,28 +101,20 @@ public class InboundListViewModel extends BaseOddViewModel<InboundItemViewModel>
         }
     }
 
-    //订阅者
-    private Disposable mSubscriptionRefresh;
-
     //注册RxBus
     @Override
     public void registerRxBus() {
         super.registerRxBus();
-        mSubscriptionRefresh = RxBus.getDefault().toObservable(InboundListRefreshBean.class)
-                .subscribe(new Consumer<InboundListRefreshBean>() {
-                    @Override
-                    public void accept(InboundListRefreshBean inboundListRefreshBean) throws Exception {
-                        uc.beginRefreshing.call();
+        Disposable mSubscriptionRefresh = RxBus.getDefault().toObservable(Event.class)
+                .subscribe(event -> {
+                    if (event instanceof MessageEvent) {
+                        switch (((MessageEvent<?>) event).getMessageType()) {
+                            case MessageType.EVENT_TYPE_INBOUND_LIST_REFRESH:
+                                uc.beginRefreshing.call();
+                                break;
+                        }
                     }
                 });
-        RxSubscriptions.add(mSubscriptionRefresh);
-    }
-
-    //移除RxBus
-    @Override
-    public void removeRxBus() {
-        super.removeRxBus();
-        //将订阅者从管理站中移除
-        RxSubscriptions.remove(mSubscriptionRefresh);
+        addSubscribe(mSubscriptionRefresh);
     }
 }

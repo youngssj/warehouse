@@ -9,20 +9,19 @@ import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableList;
 
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.event.Event;
+import com.victor.base.event.MessageEvent;
+import com.victor.base.event.MessageType;
 import com.victor.outbound.BR;
 import com.victor.outbound.R;
-import com.victor.outbound.bean.OutboundScanAddItemsBean;
-import com.victor.outbound.bean.OutboundScanRemoveItemsBean;
-import com.victor.outbound.bean.OutboundScanUpdateItemsBean;
+import com.victor.outbound.bean.OutboundScanItemsBean;
 import com.victor.outbound.ui.viewmodel.itemviewmodel.OutboundScanItemViewModel;
 
 import java.util.Objects;
 
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 import me.goldze.mvvmhabit.bus.RxBus;
-import me.goldze.mvvmhabit.bus.RxSubscriptions;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.Utils;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
@@ -44,82 +43,63 @@ public class OutboundScanListViewModel extends BaseViewModel {
         super(application);
     }
 
-    //订阅者
-    private Disposable mSubscriptionAdd, mSubscriptionRemove, mSubscriptionUpdate;
-
     //注册RxBus
     @Override
     public void registerRxBus() {
         super.registerRxBus();
-        mSubscriptionAdd = RxBus.getDefault().toObservable(OutboundScanAddItemsBean.class)
-                .subscribe(new Consumer<OutboundScanAddItemsBean>() {
-                    @Override
-                    public void accept(OutboundScanAddItemsBean outboundScanItemsBean) throws Exception {
-                        if (outboundScanItemsBean != null && outboundScanItemsBean.getPosition() == position) {
-                            if (outboundScanItemsBean.getElecMaterialList() != null && outboundScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (OutboundData.OutboundElecMaterial bean : outboundScanItemsBean.getElecMaterialList()) {
-                                    outboundScanList.add(new OutboundScanItemViewModel(OutboundScanListViewModel.this, bean));
-                                }
-                            }
-                        }
-                        if (outboundScanList.size() > 0) {
-                            noDataVisibleObservable.set(View.GONE);
-                        } else {
-                            noDataVisibleObservable.set(View.VISIBLE);
-                        }
-                    }
-                });
-        //将订阅者加入管理站
-        mSubscriptionRemove = RxBus.getDefault().toObservable(OutboundScanRemoveItemsBean.class)
-                .subscribe(new Consumer<OutboundScanRemoveItemsBean>() {
-                    @Override
-                    public void accept(OutboundScanRemoveItemsBean outboundScanItemsBean) throws Exception {
-                        if (outboundScanItemsBean != null && outboundScanItemsBean.getPosition() == position) {
-                            if (outboundScanItemsBean.getElecMaterialList() != null && outboundScanItemsBean.getElecMaterialList().size() > 0) {
-                                for (OutboundData.OutboundElecMaterial bean : outboundScanItemsBean.getElecMaterialList()) {
-                                    outboundScanList.remove(new OutboundScanItemViewModel(OutboundScanListViewModel.this, bean));
-                                }
-                            }
-                        }
-                        if (outboundScanList.size() > 0) {
-                            noDataVisibleObservable.set(View.GONE);
-                        } else {
-                            noDataVisibleObservable.set(View.VISIBLE);
-                        }
-                    }
-                });
-        //将订阅者加入管理站
-        mSubscriptionUpdate = RxBus.getDefault().toObservable(OutboundScanUpdateItemsBean.class)
-                .subscribe(new Consumer<OutboundScanUpdateItemsBean>() {
-                    @Override
-                    public void accept(OutboundScanUpdateItemsBean outboundScanItemsBean) throws Exception {
-                        if (outboundScanItemsBean != null && outboundScanItemsBean.getPosition() == position) {
-                            for (OutboundData.OutboundElecMaterial bean : outboundScanItemsBean.getElecMaterialList()) {
-                                for (OutboundScanItemViewModel itemViewModel : outboundScanList) {
-                                    if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
-                                        itemViewModel.entity.get().setIsOut("0");
-                                        itemViewModel.entity.get().setIsOutMessage(getApplication().getResources().getString(R.string.workbench_outbound_failure_text));
-                                        itemViewModel.entity.get().setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
-                                        itemViewModel.entity.notifyChange();
+        Disposable mSubscription = RxBus.getDefault().toObservable(Event.class)
+                .subscribe(event -> {
+                    if (event instanceof MessageEvent) {
+                        switch (((MessageEvent<?>) event).getMessageType()) {
+                            case MessageType.EVENT_TYPE_OUTBOUND_SCAN_ADD_ITEM:
+                                OutboundScanItemsBean outboundScanAddItemsBean = ((MessageEvent<OutboundScanItemsBean>) event).getData();
+                                if (outboundScanAddItemsBean != null && outboundScanAddItemsBean.getPosition() == position) {
+                                    if (outboundScanAddItemsBean.getElecMaterialList() != null && outboundScanAddItemsBean.getElecMaterialList().size() > 0) {
+                                        for (OutboundData.OutboundElecMaterial bean : outboundScanAddItemsBean.getElecMaterialList()) {
+                                            outboundScanList.add(new OutboundScanItemViewModel(OutboundScanListViewModel.this, bean));
+                                        }
                                     }
                                 }
-                            }
+                                setNoDataVisibleObservable();
+                                break;
+                            case MessageType.EVENT_TYPE_OUTBOUND_SCAN_REMOVE_ITEM:
+                                OutboundScanItemsBean outboundScanRemoveItemsBean = ((MessageEvent<OutboundScanItemsBean>) event).getData();
+                                if (outboundScanRemoveItemsBean != null && outboundScanRemoveItemsBean.getPosition() == position) {
+                                    if (outboundScanRemoveItemsBean.getElecMaterialList() != null && outboundScanRemoveItemsBean.getElecMaterialList().size() > 0) {
+                                        for (OutboundData.OutboundElecMaterial bean : outboundScanRemoveItemsBean.getElecMaterialList()) {
+                                            outboundScanList.remove(new OutboundScanItemViewModel(OutboundScanListViewModel.this, bean));
+                                        }
+                                    }
+                                }
+                                setNoDataVisibleObservable();
+                                break;
+                            case MessageType.EVENT_TYPE_OUTBOUND_SCAN_UPDATE_ITEM:
+                                OutboundScanItemsBean outboundScanUpdateItemsBean = ((MessageEvent<OutboundScanItemsBean>) event).getData();
+                                if (outboundScanUpdateItemsBean != null && outboundScanUpdateItemsBean.getPosition() == position) {
+                                    for (OutboundData.OutboundElecMaterial bean : outboundScanUpdateItemsBean.getElecMaterialList()) {
+                                        for (OutboundScanItemViewModel itemViewModel : outboundScanList) {
+                                            if (Objects.requireNonNull(itemViewModel.entity.get()).getMaterialId() == bean.getMaterialId()) {
+                                                itemViewModel.entity.get().setIsOut("0");
+                                                itemViewModel.entity.get().setIsOutMessage(getApplication().getResources().getString(R.string.workbench_outbound_failure_text));
+                                                itemViewModel.entity.get().setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
+                                                itemViewModel.entity.notifyChange();
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
                         }
                     }
                 });
-        //将订阅者加入管理站
-        RxSubscriptions.add(mSubscriptionAdd);
-        RxSubscriptions.add(mSubscriptionRemove);
-        RxSubscriptions.add(mSubscriptionUpdate);
+        addSubscribe(mSubscription);
     }
 
-    //移除RxBus
-    @Override
-    public void removeRxBus() {
-        super.removeRxBus();
-        //将订阅者从管理站中移除
-        RxSubscriptions.remove(mSubscriptionAdd);
-        RxSubscriptions.remove(mSubscriptionRemove);
+    private void setNoDataVisibleObservable() {
+        if (outboundScanList.size() > 0) {
+            noDataVisibleObservable.set(View.GONE);
+        } else {
+            noDataVisibleObservable.set(View.VISIBLE);
+        }
     }
 
     public void setPosition(int position) {

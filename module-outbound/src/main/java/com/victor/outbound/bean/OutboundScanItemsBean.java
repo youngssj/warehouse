@@ -4,7 +4,7 @@ import com.victor.base.data.entity.OutboundData;
 
 import java.util.List;
 
-public class OutboundScanUpdateItemsBean {
+public class OutboundScanItemsBean {
 
     private int position;
 
@@ -28,7 +28,7 @@ public class OutboundScanUpdateItemsBean {
 
     @Override
     public String toString() {
-        return "OutboundScanAddItemsBean{" +
+        return "OutboundScanItemsBean{" +
                 "position=" + position +
                 ", elecMaterialList=" + elecMaterialList +
                 '}';

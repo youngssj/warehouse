@@ -9,6 +9,8 @@ import androidx.databinding.ObservableField;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.ApiDisposableObserver;
+import com.victor.base.event.MessageEvent;
+import com.victor.base.event.MessageType;
 import com.victor.base.utils.Constants;
 
 import me.goldze.mvvmhabit.base.BaseViewModel;
@@ -63,7 +65,7 @@ public class MineViewModel extends BaseViewModel<AppRepository> {
                     @Override
                     public void onResult(UserInfoBean userInfoBean) {
                         KLog.i(userInfoBean.toString());
-                        RxBus.getDefault().post(userInfoBean);
+                        RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_USER_MESSAGE, userInfoBean));
 
                         StringBuilder sexSb = new StringBuilder("1".equals(userInfoBean.getSex()) ? "女" : "男");
                         sexSb.append(" ");

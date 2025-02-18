@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.base.utils.Constants;
 
 import io.reactivex.observers.DisposableObserver;
 import me.goldze.mvvmhabit.base.AppManager;
@@ -11,6 +12,7 @@ import me.goldze.mvvmhabit.http.BaseResponse;
 import me.goldze.mvvmhabit.http.NetworkUtil;
 import me.goldze.mvvmhabit.http.ResponseThrowable;
 import me.goldze.mvvmhabit.utils.KLog;
+import me.goldze.mvvmhabit.utils.SPUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
 import me.goldze.mvvmhabit.utils.Utils;
 
@@ -87,6 +89,9 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     //请求失败，打印Message
                     ToastUtils.showShort(msg);
                     break;
+                case CodeRule.CODE_401:
+                    // 无效的Token
+                    break;
                 case CodeRule.CODE_500:
                     //服务器内部异常
                     ToastUtils.showShort(msg);
@@ -104,9 +109,9 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     ToastUtils.showShort("token已过期，请重新登录");
                     //关闭所有页面
                     AppManager.getAppManager().finishAllActivity();
+                    SPUtils.getInstance().put(Constants.SP.TOKEN, "");
                     //跳入登录界面
                     ARouter.getInstance().build(RouterActivityPath.Sign.PAGER_LOGIN).navigation();
-                    //*****该类仅供参考，实际业务Code, 根据需求来定义，******//
                     break;
                 case CodeRule.CODE_530:
                     ToastUtils.showShort("请先登录");
@@ -136,6 +141,7 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
         static final int CODE_300 = 300;
         //请求失败，打印Message
         static final int CODE_330 = 330;
+        static final int CODE_401 = 401;
         //服务器内部异常
         static final int CODE_500 = 500;
         //参数为空
