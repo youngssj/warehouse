@@ -1,6 +1,8 @@
 package com.victor.base.data.http;
 
 import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
@@ -8,6 +10,7 @@ import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 
@@ -209,4 +212,28 @@ public interface HttpService {
      */
     @POST("/mobile/storage/ElecExchangeInfo/completeExchange")
     Observable<BaseResponse> saveAllocateResult(@Body AllocateData allocateData);
+
+    /**
+     * 实时数据统计
+     *
+     * @return
+     */
+    @GET("/storage/homePage/dataStatistics")
+    Observable<StatisticsInfo> getStatisticsInfo();
+
+    /**
+     * 业务提醒
+     *
+     * @return
+     */
+    @GET("/storage/homePage/businessReminder")
+    Observable<List<BusinessReminder>> getBusinessReminder();
+
+    /**
+     * 业务提醒
+     *
+     * @return
+     */
+    @GET("/storage/homePage/illegalTakeout")
+    Observable<List<IllegalTakeout>> getIllegalTakeout();
 }

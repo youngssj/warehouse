@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
@@ -181,6 +184,21 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<BaseResponse> saveAllocateResult(AllocateData allocateData) {
         return mHttpDataSource.saveAllocateResult(allocateData);
+    }
+
+    @Override
+    public Observable<StatisticsInfo> getStatisticsInfo() {
+        return mHttpDataSource.getStatisticsInfo();
+    }
+
+    @Override
+    public Observable<List<BusinessReminder>> getBusinessReminder() {
+        return mHttpDataSource.getBusinessReminder();
+    }
+
+    @Override
+    public Observable<List<IllegalTakeout>> getIllegalTakeout() {
+        return mHttpDataSource.getIllegalTakeout();
     }
 
     @Override

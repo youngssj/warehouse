@@ -116,7 +116,6 @@ public class LoginViewModel extends BaseViewModel<AppRepository> {
                         dismissProgress();
                     }
                 });
-
     }
 
     public void saveIpAndPort() {

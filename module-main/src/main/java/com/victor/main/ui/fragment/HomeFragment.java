@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.github.mikephil.charting.charts.BarChart;
@@ -25,11 +26,13 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.Fill;
+import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.databinding.MainFragmentHomeBinding;
 import com.victor.main.ui.viewmodel.HomeViewModel;
+import com.victor.main.ui.viewmodel.LoginViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +49,12 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
     @Override
     public int initVariableId() {
         return BR.viewModel;
+    }
+
+    @Override
+    public HomeViewModel initViewModel() {
+        AppViewModelFactory factory = AppViewModelFactory.getInstance(getActivity().getApplication());
+        return new ViewModelProvider(this, factory).get(HomeViewModel.class);
     }
 
     @Override

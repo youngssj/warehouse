@@ -110,7 +110,10 @@ public abstract class ApiDisposableObserver<T> extends DisposableObserver<T> {
                     ToastUtils.showShort(msg);
                     break;
             }
+        }else{
+            onResult(o);
         }
+
 //        onComplete();
     }
 

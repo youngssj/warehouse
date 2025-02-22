@@ -2,11 +2,14 @@ package com.victor.base.data.source;
 
 import com.victor.base.app.Injection;
 import com.victor.base.data.entity.AllocateData;
+import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.HttpService;
@@ -171,5 +174,20 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse> saveAllocateResult(AllocateData allocateData) {
         return apiService.saveAllocateResult(allocateData);
+    }
+
+    @Override
+    public Observable<StatisticsInfo> getStatisticsInfo() {
+        return apiService.getStatisticsInfo();
+    }
+
+    @Override
+    public Observable<List<BusinessReminder>> getBusinessReminder() {
+        return apiService.getBusinessReminder();
+    }
+
+    @Override
+    public Observable<List<IllegalTakeout>> getIllegalTakeout() {
+        return apiService.getIllegalTakeout();
     }
 }

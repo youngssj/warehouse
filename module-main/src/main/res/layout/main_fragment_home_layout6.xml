@@ -64,8 +64,8 @@
             android:layout_gravity="center"
             android:overScrollMode="never"
             android:scrollbars="none"
-            binding:itemBinding="@{viewModel.inBoundListItemBinding}"
-            binding:items="@{viewModel.inBoundList}"
+            binding:itemBinding="@{viewModel.illegalTakeoutListItemBinding}"
+            binding:items="@{viewModel.illegalTakeoutList}"
             binding:layoutManager="@{LayoutManagers.linear()}" />
     </LinearLayout>
 </layout>

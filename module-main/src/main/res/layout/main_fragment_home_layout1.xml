@@ -42,28 +42,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
-                        android:textColor="@color/color_565656"
-                        android:textSize="36mm" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20mm"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_title1_content2_text"
-                        android:textColor="@color/color_565656"
-                        android:textSize="36mm" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.inNum}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -84,7 +63,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.locationTotalNum}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -105,7 +84,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.taskComplete}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -126,7 +105,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.willAudit}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -160,28 +139,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
-                        android:textColor="@color/color_565656"
-                        android:textSize="36mm" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20mm"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_title1_content7_text"
-                        android:textColor="@color/color_565656"
-                        android:textSize="36mm" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.outNum}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -202,7 +160,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.deviceNum}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -223,7 +181,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.deviceNum}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>
@@ -244,7 +202,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.statisticsInfo.test}"
+                        android:text="@{viewModel.statisticsInfo.audited}"
                         android:textColor="@color/color_565656"
                         android:textSize="36mm" />
                 </LinearLayout>

@@ -50,9 +50,11 @@ public abstract class ApiListDisposableObserver<T> extends DisposableObserver<T>
 
     @Override
     public void onNext(T o) {
-       if(o instanceof ListResponse){
+        if (o instanceof ListResponse) {
             ListResponse listResponse = (ListResponse) o;
-            onResult(new ListData<T>(listResponse.getTotal(), (T)listResponse.getRows()));
+            onResult(new ListData<T>(listResponse.getTotal(), (T) listResponse.getRows()));
+        } else {
+            onResult(new ListData<>(0, o));
         }
 //        onComplete();
     }

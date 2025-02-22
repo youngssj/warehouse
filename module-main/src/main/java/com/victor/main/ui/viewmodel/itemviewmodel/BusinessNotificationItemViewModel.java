@@ -11,13 +11,15 @@ import me.goldze.mvvmhabit.base.ItemViewModel;
  */
 public class BusinessNotificationItemViewModel extends ItemViewModel<HomeViewModel> {
 
+    public ObservableField<String> num = new ObservableField<>();
     public ObservableField<String> name = new ObservableField<>();
     public ObservableField<String> status = new ObservableField<>();
 
-    public BusinessNotificationItemViewModel(HomeViewModel homeViewModel, String name, String status) {
+    public BusinessNotificationItemViewModel(HomeViewModel homeViewModel, String num, String name, String status) {
         super(homeViewModel);
 
         this.name.set(name);
+        this.num.set(num);
         this.status.set(status);
     }
 }
