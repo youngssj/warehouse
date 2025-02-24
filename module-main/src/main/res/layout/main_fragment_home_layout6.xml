@@ -28,8 +28,8 @@
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@string/home_title1_content2_name_text"
+                android:layout_weight="1"
+                android:text="@string/home_title6_content1_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
 
@@ -37,23 +37,23 @@
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/home_title1_content2_status_text"
+                android:text="@string/home_title6_content2_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
 
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@string/home_title1_content5_time_text"
+                android:layout_weight="1"
+                android:text="@string/home_title6_content3_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
 
             <TextView
                 android:layout_width="0mm"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:text="@string/home_title1_content5_operator_text"
+                android:layout_weight="1"
+                android:text="@string/home_title6_content4_text"
                 android:textColor="@color/color_333333"
                 android:textSize="36mm" />
         </LinearLayout>
@@ -64,8 +64,8 @@
             android:layout_gravity="center"
             android:overScrollMode="never"
             android:scrollbars="none"
-            binding:itemBinding="@{viewModel.illegalTakeoutListItemBinding}"
-            binding:items="@{viewModel.illegalTakeoutList}"
+            binding:itemBinding="@{viewModel.deviceStatusListItemBinding}"
+            binding:items="@{viewModel.deviceStatusList}"
             binding:layoutManager="@{LayoutManagers.linear()}" />
     </LinearLayout>
 </layout>

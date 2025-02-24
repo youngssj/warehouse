@@ -2,10 +2,13 @@ package com.victor.base.data.source;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.DeviceData;
+import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
+import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.StatisticsInfo;
@@ -81,4 +84,10 @@ public interface HttpDataSource {
     Observable<List<BusinessReminder>> getBusinessReminder();
 
     Observable<List<IllegalTakeout>> getIllegalTakeout();
+
+    Observable<List<HomeTotalData>> getTotalData();
+
+    Observable<List<DeviceData>> getDeviceData();
+
+    Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics();
 }

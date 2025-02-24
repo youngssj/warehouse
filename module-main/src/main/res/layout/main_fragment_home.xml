@@ -20,8 +20,8 @@
             android:layout_marginStart="68mm"
             android:layout_marginTop="60mm"
             android:layout_marginEnd="68mm"
-            android:paddingBottom="40mm"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="40mm">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,8 +40,8 @@
                     <ImageView
                         android:layout_width="58mm"
                         android:layout_height="50mm"
-                        android:scaleType="centerInside"
-                        android:background="@mipmap/home_icon1" />
+                        android:background="@mipmap/home_icon1"
+                        android:scaleType="centerInside" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -76,8 +76,8 @@
                     <ImageView
                         android:layout_width="58mm"
                         android:layout_height="50mm"
-                        android:scaleType="centerInside"
-                        android:background="@mipmap/home_icon2" />
+                        android:background="@mipmap/home_icon2"
+                        android:scaleType="centerInside" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -114,10 +114,10 @@
                     android:paddingStart="48mm">
 
                     <ImageView
-                        android:layout_width="58mm"
-                        android:layout_height="50mm"
-                        android:scaleType="centerInside"
-                        android:background="@mipmap/home_icon3" />
+                        android:layout_width="66mm"
+                        android:layout_height="66mm"
+                        android:background="@mipmap/home_icon3"
+                        android:scaleType="centerInside" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -153,8 +153,8 @@
                     <ImageView
                         android:layout_width="58mm"
                         android:layout_height="50mm"
-                        android:scaleType="centerInside"
-                        android:background="@mipmap/home_icon4" />
+                        android:background="@mipmap/home_icon4"
+                        android:scaleType="centerInside" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="104mm"
-                    android:background="@color/color_FFAA00"
+                    android:background="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingStart="48mm">
@@ -190,7 +190,7 @@
                         android:layout_width="58mm"
                         android:layout_height="50mm"
                         android:scaleType="centerInside"
-                        android:src="@mipmap/home_icon3" />
+                        android:background="@mipmap/home_icon5" />
 
                     <TextView
                         android:layout_width="wrap_content"

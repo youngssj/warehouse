@@ -3,10 +3,13 @@ package com.victor.base.data.source;
 import com.victor.base.app.Injection;
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.DeviceData;
+import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
+import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.StatisticsInfo;
@@ -189,5 +192,20 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<List<IllegalTakeout>> getIllegalTakeout() {
         return apiService.getIllegalTakeout();
+    }
+
+    @Override
+    public Observable<List<HomeTotalData>> getTotalData() {
+        return apiService.getTotalData();
+    }
+
+    @Override
+    public Observable<List<DeviceData>> getDeviceData() {
+        return apiService.getDeviceData();
+    }
+
+    @Override
+    public Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics() {
+        return apiService.getMaterialsStatistics();
     }
 }

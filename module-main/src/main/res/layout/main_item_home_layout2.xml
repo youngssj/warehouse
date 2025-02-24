@@ -20,6 +20,14 @@
             android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="@{viewModel.num}"
+            android:textColor="@color/color_9C9C9C"
+            android:textSize="36mm" />
+
+        <TextView
+            android:layout_width="0mm"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@{viewModel.name}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />

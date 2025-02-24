@@ -2,13 +2,14 @@ package com.victor.base.data.http;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.DeviceData;
+import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
+import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.MovementData;
-import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
@@ -230,10 +231,34 @@ public interface HttpService {
     Observable<List<BusinessReminder>> getBusinessReminder();
 
     /**
-     * 业务提醒
+     * 违规带出
      *
      * @return
      */
     @GET("/storage/homePage/illegalTakeout")
     Observable<List<IllegalTakeout>> getIllegalTakeout();
+
+    /**
+     * 总体数据
+     *
+     * @return
+     */
+    @GET("/storage/homePage/totalData")
+    Observable<List<HomeTotalData>> getTotalData();
+
+    /**
+     * 设备统计
+     *
+     * @return
+     */
+    @GET("/storage/homePage/deviceData")
+    Observable<List<DeviceData>> getDeviceData();
+
+    /**
+     * 设备统计
+     *
+     * @return
+     */
+    @GET("/bas/basArea/queryStatisticsInfo")
+    Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics();
 }

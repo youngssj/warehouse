@@ -21,18 +21,18 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.Fill;
 import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.data.entity.HomeTotalData;
+import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.router.RouterFragmentPath;
 import com.victor.main.BR;
 import com.victor.main.R;
 import com.victor.main.databinding.MainFragmentHomeBinding;
 import com.victor.main.ui.viewmodel.HomeViewModel;
-import com.victor.main.ui.viewmodel.LoginViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +58,12 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
     }
 
     @Override
-    public void initData(Bundle savedInstanceState) {
-        super.initData(savedInstanceState);
+    public void initViewObservable() {
+        viewModel.uc.totalDataEvent.observe(this, this::setPieChart);
+        viewModel.uc.materialsStatisticsDataEvent.observe(this, this::setBarChart);
+    }
 
-        setPieChart();
-
+    private void setBarChart(MaterialsStatisticsData materialsStatisticsData) {
         BarChart barChart = binding.barChart.chart;
 
         barChart.setDescription(null);
@@ -82,7 +83,7 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
         xAxis.setValueFormatter(new IndexAxisValueFormatter() {
             @Override
             public String getFormattedValue(float index, AxisBase axis) {
-                return String.valueOf((int)index);
+                return materialsStatisticsData.getAreaArr().get((int) index);
             }
         });
 
@@ -92,7 +93,7 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
         leftAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
-                return String.valueOf((int)Math.abs(value));
+                return String.valueOf((int) Math.abs(value));
             }
         });
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
@@ -103,12 +104,11 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
         rightAxis.setEnabled(false);
 
         ArrayList<BarEntry> values = new ArrayList<>();
-        values.add(new BarEntry(0, 100));
-        values.add(new BarEntry(1, 100));
-        values.add(new BarEntry(2, 100));
-        values.add(new BarEntry(3, 100));
-        values.add(new BarEntry(4, 100));
-        values.add(new BarEntry(5, 100));
+        if (materialsStatisticsData != null && materialsStatisticsData.getAreaArr() != null) {
+            for (int i = 0; i < materialsStatisticsData.getAreaArr().size(); i++) {
+                values.add(new BarEntry(i, materialsStatisticsData.getAreaNum().get(i)));
+            }
+        }
 
         BarDataSet set = new BarDataSet(values, "");
         set.setDrawIcons(false);
@@ -126,9 +126,11 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
         data.setBarWidth(0.6f);
 
         barChart.setData(data);
+        barChart.notifyDataSetChanged();
+        barChart.invalidate();
     }
 
-    private void setPieChart() {
+    private void setPieChart(List<HomeTotalData> homeTotalDatas) {
         PieChart pieChart = binding.pieChart.chart;
 
         pieChart.setDescription(null);
@@ -142,20 +144,28 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
         pieChart.setEntryLabelTextSize(12f);
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(100, "物资总数"));
-        entries.add(new PieEntry(100, "库存总数"));
-        entries.add(new PieEntry(100, "已入库总数"));
-        entries.add(new PieEntry(100, "已出库总数"));
-        entries.add(new PieEntry(100, "已移库总数"));
+        ArrayList<Integer> colors = new ArrayList<>();
+        if (homeTotalDatas != null) {
+            for (HomeTotalData homeTotalData : homeTotalDatas) {
+                entries.add(new PieEntry(homeTotalData.getValue(), homeTotalData.getName()));
+//                if (homeTotalData.getItemStyle() != null && homeTotalData.getItemStyle().length() > 16) {
+//                    String colorStr = homeTotalData.getItemStyle().substring(9, 15);
+//                    try {
+//                        colors.add((int) Long.parseLong(colorStr, 16) | 0xFF000000);
+//                    } catch (NumberFormatException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+            }
+
+            colors.add(getResources().getColor(R.color.color_FF3366));
+            colors.add(getResources().getColor(R.color.color_9187FF));
+            colors.add(getResources().getColor(R.color.color_017BFF));
+            colors.add(getResources().getColor(R.color.color_15CBDF));
+            colors.add(getResources().getColor(R.color.color_DF15B7));
+        }
 
         PieDataSet dataSet = new PieDataSet(entries, "");
-
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(getResources().getColor(R.color.color_FF3366));
-        colors.add(getResources().getColor(R.color.color_9187FF));
-        colors.add(getResources().getColor(R.color.color_017BFF));
-        colors.add(getResources().getColor(R.color.color_15CBDF));
-        colors.add(getResources().getColor(R.color.color_DF15B7));
 
         dataSet.setColors(colors);
         dataSet.setSliceSpace(5f);
@@ -167,5 +177,7 @@ public class HomeFragment extends BaseFragment<MainFragmentHomeBinding, HomeView
         data.setValueTextSize(16f);
 
         pieChart.setData(data);
+        pieChart.notifyDataSetChanged();
+        pieChart.invalidate();
     }
 }

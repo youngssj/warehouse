@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.main.ui.viewmodel.itemviewmodel.InBoundItemViewModel" />
+            type="com.victor.main.ui.viewmodel.itemviewmodel.DeviceStatusItemViewModel" />
     </data>
 
     <LinearLayout
@@ -19,8 +19,8 @@
         <TextView
             android:layout_width="0mm"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@{viewModel.name}"
+            android:layout_weight="1"
+            android:text="@{viewModel.deviceCode}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
 
@@ -28,23 +28,23 @@
             android:layout_width="0mm"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@{viewModel.status}"
+            android:text="@{viewModel.deviceName}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
 
         <TextView
             android:layout_width="0mm"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@{viewModel.time}"
+            android:layout_weight="1"
+            android:text="@{viewModel.deviceTypeString}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
 
         <TextView
             android:layout_width="0mm"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="@{viewModel.operator}"
+            android:layout_weight="1"
+            android:text="@{viewModel.statusString}"
             android:textColor="@color/color_9C9C9C"
             android:textSize="36mm" />
     </LinearLayout>

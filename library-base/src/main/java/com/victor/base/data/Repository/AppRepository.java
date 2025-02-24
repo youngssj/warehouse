@@ -5,10 +5,13 @@ import androidx.annotation.VisibleForTesting;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.DeviceData;
+import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.entity.MaterialsData;
+import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.StatisticsInfo;
@@ -199,6 +202,21 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<List<IllegalTakeout>> getIllegalTakeout() {
         return mHttpDataSource.getIllegalTakeout();
+    }
+
+    @Override
+    public Observable<List<HomeTotalData>> getTotalData() {
+        return mHttpDataSource.getTotalData();
+    }
+
+    @Override
+    public Observable<List<DeviceData>> getDeviceData() {
+        return mHttpDataSource.getDeviceData();
+    }
+
+    @Override
+    public Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics() {
+        return mHttpDataSource.getMaterialsStatistics();
     }
 
     @Override
