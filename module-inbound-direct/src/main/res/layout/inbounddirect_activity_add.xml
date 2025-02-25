@@ -192,7 +192,21 @@
             android:layout_marginStart="32mm"
             android:layout_marginEnd="32mm"
             android:background="@color/color_A9A9A9" />
+
+        <TextView
+            android:id="@+id/tvNext"
+            android:layout_width="wrap_content"
+            android:layout_height="94mm"
+            android:layout_gravity="center"
+            android:layout_marginTop="90mm"
+            android:background="@drawable/selector_login_btn"
+            android:gravity="center"
+            android:paddingStart="120mm"
+            android:paddingEnd="120mm"
+            android:text="@string/workbench_inbound_add_next_text"
+            android:textColor="@color/white"
+            android:textSize="38mm"
+            android:textStyle="bold"
+            binding:onClickCommand="@{viewModel.nextClickCommand}" />
     </LinearLayout>
-
-
 </layout>

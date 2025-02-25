@@ -60,4 +60,8 @@ public class InboundAddViewModel extends BaseTitleViewModel<AppRepository> {
     public BindingCommand timeClickCommand = new BindingCommand(() -> {
         uc.timeClickEvent.setValue(null);
     });
+
+    public BindingCommand nextClickCommand = new BindingCommand(() -> {
+
+    });
 }
