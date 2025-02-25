@@ -11,10 +11,12 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.SyncInfo;
 import com.victor.base.data.entity.TokenBean;
@@ -229,6 +231,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     @Override
     public Observable<BaseResponse<List<DeptData>>> getDeptList() {
         return mHttpDataSource.getDeptList();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<MaterialBean>>> getMaterialListByRfids(RfidsBean rfidsBean) {
+        return mHttpDataSource.getMaterialListByRfids(rfidsBean);
     }
 
     @Override

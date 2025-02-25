@@ -8,10 +8,12 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserData;
@@ -279,4 +281,12 @@ public interface HttpService {
      */
     @GET("/system/dept/list")
     Observable<BaseResponse<List<DeptData>>> getDeptList();
+
+    /**
+     * 根据rfid获取物资详情
+     *
+     * @return
+     */
+    @POST("/mobile/storage/queryByrfids")
+    Observable<BaseResponse<List<MaterialBean>>> getMaterialListByRfids(@Body RfidsBean rfidsBean);
 }

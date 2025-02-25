@@ -8,10 +8,12 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserData;
@@ -22,6 +24,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import me.goldze.mvvmhabit.http.BaseResponse;
+import retrofit2.http.Body;
 
 /**
  * 版权：heihei
@@ -94,4 +97,5 @@ public interface HttpDataSource {
     Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics();
     Observable<ListResponse<List<UserData>>> getUserList();
     Observable<BaseResponse<List<DeptData>>> getDeptList();
+    Observable<BaseResponse<List<MaterialBean>>> getMaterialListByRfids(@Body RfidsBean rfidsBean);
 }

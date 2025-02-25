@@ -12,6 +12,8 @@ import androidx.databinding.ObservableList;
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.MaterialBean;
+import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.event.MessageEvent;
 import com.victor.base.event.MessageType;
@@ -19,11 +21,11 @@ import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
 import com.victor.inbounddirect.BR;
 import com.victor.inbounddirect.R;
-import com.victor.inbounddirect.bean.InboundScanItemsBean;
 import com.victor.inbounddirect.ui.viewmodel.itemviewmodel.InboundScanItemViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Observable;
@@ -34,7 +36,6 @@ import me.goldze.mvvmhabit.bus.RxBus;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.RxUtils;
 import me.goldze.mvvmhabit.utils.ToastUtils;
-import me.goldze.mvvmhabit.utils.Utils;
 import me.tatarka.bindingcollectionadapter2.ItemBinding;
 
 public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
@@ -47,7 +48,6 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     public ObservableInt noDataVisibleObservable = new ObservableInt(View.VISIBLE);
 
     public class UIChangeObservable {
-        public SingleLiveEvent<Boolean> scanFinishEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<InboundScanItemViewModel> showCustomEvent = new SingleLiveEvent<>();
     }
 
@@ -111,61 +111,43 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         }
     });
 
-    private void handleInboundData(InboundData data) {
-        if (data != null && data.getElecMaterialList().size() > 0) {
-            entity.set(data);
-            // 向fragment发送数据，刚进入只有待入库数据
-            InboundScanItemsBean inboundScanItemsBean = new InboundScanItemsBean();
-            inboundScanItemsBean.setPosition(0);
-            inboundScanItemsBean.setElecMaterialList(data.getElecMaterialList());
-            RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_ADD_ITEM, inboundScanItemsBean));
-        }
-    }
-
-    private Set<InboundData.InboundElecMaterial> rvSet = new HashSet<>();  //盘点到单子集合
+    private Set<String> rfidSet = new HashSet<>();  //盘点到单子集合
 
     public void updatePDItemModel(Set<String> sets) {
-        btnVisiable.set(true);
-        boolean hasData = false;
-        for (InboundData.InboundElecMaterial bean : entity.get().getElecMaterialList()) {
-            if (sets.contains(bean.getRfidCode())) {
-                sets.remove(bean.getRfidCode());
-
-                if (!rvSet.contains(bean)) {
-                    rvSet.add(bean);  //防止添加的数据重复
-
-                    bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
-                    bean.setIsIn(1);
-                    bean.setIsInMessage(getApplication().getResources().getString(R.string.workbench_inbound_success_text));
-
-                    // 添加
-                    InboundScanItemsBean inboundScanAddItemsBean = new InboundScanItemsBean();
-                    inboundScanAddItemsBean.setPosition(1);
-                    inboundScanAddItemsBean.setElecMaterialList(new ArrayList<>());
-                    inboundScanAddItemsBean.getElecMaterialList().add(bean);
-                    RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_ADD_ITEM, inboundScanAddItemsBean));
-
-                    // 移除
-                    InboundScanItemsBean inboundScanRemoveItemsBean = new InboundScanItemsBean();
-                    inboundScanRemoveItemsBean.setPosition(0);
-                    inboundScanRemoveItemsBean.setElecMaterialList(new ArrayList<>());
-                    inboundScanRemoveItemsBean.getElecMaterialList().add(bean);
-                    RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_REMOVE_ITEM, inboundScanRemoveItemsBean));
-
-                    hasData = true;
-                }
-            } else if (!rvSet.contains(bean)) {
-                // 更新列表未扫描到的条目为红色
-                InboundScanItemsBean inboundScanUpdateItemsBean = new InboundScanItemsBean();
-                inboundScanUpdateItemsBean.setPosition(0);
-                inboundScanUpdateItemsBean.setElecMaterialList(new ArrayList<>());
-                inboundScanUpdateItemsBean.getElecMaterialList().add(bean);
-                RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_SCAN_UPDATE_ITEM, inboundScanUpdateItemsBean));
+        List<String> rfidList = new ArrayList<>();
+        for (String rfid : sets) {
+            if (!rfidSet.contains(rfid)) {
+                rfidList.add(rfid);
             }
         }
+        rfidSet.addAll(rfidList);
+        RfidsBean rfidsBean = new RfidsBean();
+        rfidsBean.setRfidCodes(rfidList);
+        model.getMaterialListByRfids(rfidsBean)
+                .compose(RxUtils.schedulersTransformer())
+                .compose(RxUtils.exceptionTransformer())
+                .subscribe(new ApiDisposableObserver<List<MaterialBean>>() {
+                    @Override
+                    public void onResult(List<MaterialBean> materialsDatas) {
+                        for (MaterialBean materialBean : materialsDatas) {
+                            inboundScanList.add(new InboundScanItemViewModel(InboundScanViewModel.this, materialBean));
+                        }
+                        setNoDataVisibleObservable();
+                    }
 
-        if (entity.get().getElecMaterialList().size() == rvSet.size()) {
-            uc.scanFinishEvent.setValue(true);
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void setNoDataVisibleObservable() {
+        if (inboundScanList.size() > 0) {
+            noDataVisibleObservable.set(View.GONE);
+            btnVisiable.set(true);
+        } else {
+            noDataVisibleObservable.set(View.VISIBLE);
         }
     }
 }

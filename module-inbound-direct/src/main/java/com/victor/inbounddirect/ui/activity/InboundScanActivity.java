@@ -11,10 +11,12 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.inbounddirect.BR;
 import com.victor.inbounddirect.R;
 import com.victor.inbounddirect.databinding.InbounddirectScanActivityBinding;
+import com.victor.inbounddirect.databinding.InbounddirectScanDetailBinding;
 import com.victor.inbounddirect.ui.viewmodel.InboundScanViewModel;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
@@ -88,15 +90,11 @@ public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivi
     @Override
     public void initViewObservable() {
         super.initViewObservable();
-        viewModel.uc.scanFinishEvent.observe(this, aBoolean -> {
-            setReadFinish(aBoolean);
-        });
         viewModel.uc.showCustomEvent.observe(this, inboundScanItemViewModel -> {
-//            InboundScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.inbound_scan_detail, null, false);
-//            binding.setViewModel(inboundScanItemViewModel);
-//            InboundData.InboundElecMaterial dataListBean = inboundScanItemViewModel.entity.get();
-//            showCustomDialog(getResources().getString(R.string.workbench_inbound_detail_text), binding, (dialog, which) -> {
-//            });
+            InbounddirectScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(InboundScanActivity.this), R.layout.inbounddirect_scan_detail, null, false);
+            binding.setViewModel(inboundScanItemViewModel);
+            showCustomDialog(getResources().getString(R.string.workbench_inbound_detail_text), binding, (dialog, which) -> {
+            });
         });
     }
 }

@@ -30,8 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_F8F9F9"
-            android:orientation="vertical"
-            android:visibility="@{viewModel.noDataVisibleObservable == View.GONE ? View.VISIBLE : View.GONE}">
+            android:orientation="vertical">
 
             <com.lihang.ShadowLayout
                 android:layout_width="match_parent"

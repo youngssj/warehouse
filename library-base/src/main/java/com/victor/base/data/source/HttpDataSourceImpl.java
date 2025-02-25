@@ -9,10 +9,12 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
+import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
 import com.victor.base.data.entity.UserData;
@@ -219,5 +221,10 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse<List<DeptData>>> getDeptList() {
         return apiService.getDeptList();
+    }
+
+    @Override
+    public Observable<BaseResponse<List<MaterialBean>>> getMaterialListByRfids(RfidsBean rfidsBean) {
+        return apiService.getMaterialListByRfids(rfidsBean);
     }
 }
