@@ -1,0 +1,90 @@
+<resources>
+    <!-- 日历 -->
+    <declare-styleable name="calendar_DayPickerView">
+        <attr name="calendar_colorYearMonthText" format="color"/>           <!-- 头部年份月份字体颜色 -->
+        <attr name="calendar_colorWeekText" format="color"/>                <!-- 头部星期几字体颜色 -->
+
+        <attr name="calendar_colorCurrentDay" format="color"/>               <!-- 今天字体颜色 -->
+        <attr name="calendar_colorRoundDay" format="color"/>                 <!-- 今天字体下小圆圈颜色 -->
+        <attr name="calendar_colorSelectedDayBackground" format="color"/>    <!-- 被选中的日期背景颜色 -->
+        <attr name="calendar_colorSelectedDayText" format="color"/>          <!-- 被选中的日期字体颜色 -->
+        <attr name="calendar_colorPreviousDayText" format="color"/>          <!-- 已过去的日期字体颜色 -->
+        <attr name="calendar_colorNormalDayText" format="color"/>           <!-- 正常日期颜色 -->
+        <attr name="calendar_colorBusyDaysBg" format="color"/>              <!-- 被占用的日期背景颜色 -->
+        <attr name="calendar_colorBusyDaysText" format="color"/>            <!-- 被占用的日期字体颜色 -->
+        <attr name="calendar_textSizeYearMonth" format="dimension"/>        <!-- 头部年份月份字体大小 -->
+        <attr name="calendar_textSizeWeek" format="dimension"/>             <!-- 头部星期几字体大小 -->
+        <attr name="calendar_colorTagText" format="color"/>                  <!-- 底部文字字体颜色 -->
+        <attr name="calendar_textSizeDay" format="dimension"/>               <!-- 正常日期字体大小 -->
+        <attr name="calendar_textSizeTag" format="dimension"/>               <!-- 标签字体大小 -->
+        <attr name="calendar_headerMonthHeight" format="dimension"/>        <!-- 头部高度 -->
+        <attr name="calendar_selectedDayRadius" format="dimension"/>        <!-- 日期半径 -->
+        <attr name="calendar_calendarHeight" format="dimension"/>           <!-- 行高 -->
+        <attr name="calendar_enablePreviousDay" format="boolean"/>          <!-- 已过去的日期是否能被操作 -->
+        <attr name="calendar_displayTag" format="boolean"/>                  <!--是否显示标签-->
+
+        <!--<attr name="drawRoundRect" format="boolean" />-->
+        <!--<attr name="leastsSeleDaysNum" format="integer" />-->
+        <!--<attr name="mostSeleDaysNum" format="integer" />-->
+        <!--        <attr name="type" format="enum">
+                    <enum name="multiChoice" value="0" />
+                    <enum name="range" value="1" />
+                    <enum name="onlyRead" value="2" />
+                </attr>-->
+        <!--        <attr name="firstMonth" format="enum">
+                    <enum name="january" value="0" />
+                    <enum name="february" value="1" />
+                    <enum name="march" value="2" />
+                    <enum name="april" value="3" />
+                    <enum name="may" value="4" />
+                    <enum name="june" value="5" />
+                    <enum name="july" value="6" />
+                    <enum name="august" value="7" />
+                    <enum name="september" value="8" />
+                    <enum name="october" value="9" />
+                    <enum name="november" value="10" />
+                    <enum name="december" value="11" />
+                </attr>
+                <attr name="lastMonth" format="enum">
+                    <enum name="january" value="0" />
+                    <enum name="february" value="1" />
+                    <enum name="march" value="2" />
+                    <enum name="april" value="3" />
+                    <enum name="may" value="4" />
+                    <enum name="june" value="5" />
+                    <enum name="july" value="6" />
+                    <enum name="august" value="7" />
+                    <enum name="september" value="8" />
+                    <enum name="october" value="9" />
+                    <enum name="november" value="10" />
+                    <enum name="december" value="11" />
+                </attr>-->
+    </declare-styleable>
+
+
+    <color name="calendar_selected_day_background">#0000FF</color>
+    <color name="calendar_years_text">#8f8f8f</color>
+    <color name="calendar_week_day">#4e4e4e</color>
+    <color name="calendar_to_day">#0000FF</color>
+    <color name="calendar_normal_day">#191919</color>
+    <color name="calendar_bottom_normal_day">#131313</color>
+    <color name="calendar_formerly_day">#cccccc</color>
+
+    <!-- 日历定义的一些尺寸 -->
+    <dimen name="calendar_text_size_day">15sp</dimen>
+    <dimen name="calendar_text_size_tag">12sp</dimen>
+    <dimen name="calendar_text_size_month">15sp</dimen>
+    <dimen name="calendar_text_size_day_name">14sp</dimen>
+    <dimen name="calendar_header_month_height">55dip</dimen>
+    <dimen name="calendar_selected_day_radius">16dip</dimen>
+    <dimen name="calendar_calendar_height">320dip</dimen>
+
+    <string name="calendar_app_name">Calendar</string>
+    <!--translatable不用翻译成其它语种的语言了-->
+    <string name="calendar_sans_serif" translatable="false">sans-serif</string>
+
+    <style name="CalendarBottomPopAnim" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/calendar_trans_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/calendar_trans_bottom_out</item>
+    </style>
+</resources>

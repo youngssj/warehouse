@@ -16,6 +16,7 @@ import com.example.hiu_931.Uhf931Utils;
 import com.hiultra.c72.BarCodeHelper;
 import com.hiultra.c72.UhfC72Utils;
 import com.hiultra.hiu_961.Uhf961Utils;
+import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.base.MBaseActivity;
 import com.victor.base.utils.Constants;
 import com.victor.base.utils.SystemUtil;
@@ -177,7 +178,7 @@ public abstract class BaseUhfActivity<V extends ViewDataBinding, VM extends Base
 
     @Override
     public int initContentView(Bundle savedInstanceState) {
-        return R.layout.workbench_view_top_title;
+        return R.layout.base_view_top_title;
     }
 
 

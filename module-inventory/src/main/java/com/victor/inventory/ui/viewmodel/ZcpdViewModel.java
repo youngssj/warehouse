@@ -8,6 +8,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableList;
 
+import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InventoryData;
 import com.victor.base.data.http.ApiDisposableObserver;
@@ -18,7 +19,6 @@ import com.victor.inventory.R;
 import com.victor.inventory.bean.InventoryListRefreshBean;
 import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpItemViewModel;
 import com.victor.inventory.ui.viewmodel.itemviewmodel.ZcpdVpRvItemViewModel;
-import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -111,7 +111,7 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
 
         if (Constants.CONFIG.IS_OFFLINE) {
             Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-                    model._saveInventoryResult(inventoryData);
+                        model._saveInventoryResult(inventoryData);
                         emitter.onNext(true);
                     })
                     .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))

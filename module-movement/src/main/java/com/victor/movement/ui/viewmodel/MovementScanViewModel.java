@@ -5,8 +5,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
@@ -16,11 +16,9 @@ import com.victor.movement.bean.MovementListRefreshBean;
 import com.victor.movement.bean.MovementScanAddItemsBean;
 import com.victor.movement.bean.MovementScanRemoveItemsBean;
 import com.victor.movement.bean.MovementScanUpdateItemsBean;
-import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Observable;

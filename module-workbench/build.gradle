@@ -22,6 +22,7 @@ dependencies {
     api project(':pda')
     api project(':hiu_961')
     api project(':hiu_931')
+    api project(':library-calendar')
 
     api rootProject.ext.dependencies["refreshlayout"]
     api rootProject.ext.dependencies["ShadowLayout"]

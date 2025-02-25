@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="calendar_days_warning">可选择的最小天数不能小于最大天数</string>
+    <string name="calendar_compare_warning">被比较的日期不能是null</string>
+    <string name="calendar_tag">标签</string>
+    <string name="calendar_select_time">选择时间</string>
+    <string name="calendar_select">选择日期</string>
+    <string name="calendar_next">下一步</string>
+    <string name="calendar_hour">时</string>
+    <string name="calendar_minute">分</string>
+    <string name="calendar_second">秒</string>
+</resources>

@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.http.ApiDisposableObserver;
@@ -14,7 +15,6 @@ import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
 import com.victor.outbound.R;
 import com.victor.outbound.bean.OutboundScanItemsBean;
-import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -10,17 +10,15 @@ import com.victor.allocate.bean.AllocateListRefreshBean;
 import com.victor.allocate.bean.AllocateScanAddItemsBean;
 import com.victor.allocate.bean.AllocateScanRemoveItemsBean;
 import com.victor.allocate.bean.AllocateScanUpdateItemsBean;
+import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.AllocateData;
-import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
-import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import io.reactivex.Observable;

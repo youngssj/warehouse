@@ -14,7 +14,6 @@ import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
 import com.victor.inbounddirect.R;
 import com.victor.inbounddirect.bean.InboundScanItemsBean;
-import com.victor.workbench.ui.base.BaseTitleViewModel;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -19,7 +19,7 @@
 
         <include
             android:id="@+id/title"
-            layout="@layout/workbench_view_top_title"
+            layout="@layout/base_view_top_title"
             binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
 
         <cn.bingoogolapple.refreshlayout.BGARefreshLayout

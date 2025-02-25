@@ -81,4 +81,6 @@ dependencies {
     api rootProject.ext.dependencies["daimajia"]
     api rootProject.ext.dependencies["EasyPopup"]
     api rootProject.ext.dependencies["SwipeRecyclerView"]
+    api rootProject.ext.dependencies["wheelview"]
+    api rootProject.ext.dependencies["PickerView"]
 }

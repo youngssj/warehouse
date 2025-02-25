@@ -1,4 +1,4 @@
-package com.victor.workbench.ui.base;
+package com.victor.base.base;
 
 import android.app.Application;
 import android.view.View;

@@ -137,6 +137,8 @@
     <string name="workbench_inbound_add_user_hint_text">请选择入库人</string>
     <string name="workbench_inbound_add_time_text">计划入库日期</string>
     <string name="workbench_inbound_add_time_hint_text">请选择计划入库日期</string>
+    <string name="workbench_inbound_add_remark_text">备注</string>
+    <string name="workbench_inbound_add_remark_hint_text">请输入备注内容</string>
     <!--  出库  -->
     <string name="workbench_outbound_list_title_text">出库单</string>
     <string name="workbench_outbound_title_text">物资出库</string>

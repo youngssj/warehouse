@@ -2,6 +2,7 @@ package com.victor.base.utils;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +26,84 @@ public class DateUtil {
     public static final String HOUR = "HH";
     public static final String ALL = YEAR_MONTH_DAY + " " + HOUR_MINUTE_SECOND;
     public static final String FILEPATTERN = "yyyyMMddHHmmssSSS";
+    static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    public static Date getDate(String dateStr, String format) {
+        Date parse = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(format);
+            parse = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parse;
+    }
+
+    public static String getDateStr() {
+        Date dt = new Date();
+        String sDateTime = sdf.format(dt);
+        return sDateTime;
+    }
+
+    public final static String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public final static String shortFormat = "yyyyMMdd";
+    public final static String longFormat = "yyyyMMddHHmmss";
+
+    public final static String webFormat = "yyyy-MM-dd";
+
+    public final static String timeFormat = "HHmmss";
+
+    public final static String monthFormat = "yyyyMM";
+
+    public final static String chineseDtFormat = "yyyy年MM月dd日";
+
+
+    public final static String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+
+    public final static String YYYY_MM_DD_HH = "yyyy-MM-dd HH";
+
+    public final static String YYYY_MM_DD_HH_MM_SS_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
+
+    //日期格式转换，返回日期类型
+    public static Date formatDate(Date date, String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        String dateString = formatter.format(date);
+        ParsePosition pos = new ParsePosition(0);
+        Date newDate = formatter.parse(dateString, pos);
+        return newDate;
+    }
+
+    public static String formatDate(String dateStr, String orgFormat, String srcFormat) {
+        SimpleDateFormat formatter1 = new SimpleDateFormat(orgFormat);
+        SimpleDateFormat formatter2 = new SimpleDateFormat(srcFormat);
+        try {
+            Date parse = formatter1.parse(dateStr);
+            return formatter2.format(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    //日期格式转换，返回String
+    public static String format(Date date, String format) {
+        if (date == null) {
+            return null;
+        }
+
+        return new SimpleDateFormat(format).format(date);
+    }
+
+    public static String formatByLong(long date, String format) {
+        return new SimpleDateFormat(format).format(new Date(date));
+    }
+
+    public static String formatShortFormat(Date date) {
+        if (date == null) {
+            return null;
+        }
+        return new SimpleDateFormat(shortFormat).format(date);
+    }
 
 
     //1.  Calendar 转化 String

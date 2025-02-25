@@ -8,6 +8,14 @@ package com.victor.base.router;
 
 public class RouterActivityPath {
     /**
+     * 基础组件
+     */
+    public static class Base {
+        private static final String Base = "/base";
+        /*日期界面*/
+        public static final String PAGER_BASE_CALENDAR = Base +"/calendar";
+    }
+    /**
      * 主业务组件
      */
     public static class Main {

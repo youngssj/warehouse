@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.workbench.ui.base.BaseTitleViewModel" />
+            type="com.victor.base.base.BaseTitleViewModel" />
 
     </data>
 
