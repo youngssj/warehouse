@@ -1,0 +1,135 @@
+package com.victor.inventorydirect.ui.viewmodel;
+
+import android.app.Application;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+
+import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.ListData;
+import com.victor.base.data.http.ApiListDisposableObserver;
+import com.victor.base.utils.Constants;
+import com.victor.inventorydirect.R;
+import com.victor.inventorydirect.bean.InventoryListRefreshBean;
+import com.victor.inventorydirect.ui.viewmodel.itemviewmodel.PdOddItemViewModel;
+import com.victor.workbench.ui.base.BaseOddViewModel;
+
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import me.goldze.mvvmhabit.bus.RxBus;
+import me.goldze.mvvmhabit.bus.RxSubscriptions;
+import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtils;
+
+/**
+ * 版权：heihei
+ *
+ * @author JiangFB
+ * 版本：1.0
+ * 创建日期：2020/9/17
+ * 邮箱：jxfengmtx@gmail.com
+ */
+public class PdOddViewModel extends BaseOddViewModel<PdOddItemViewModel> {
+
+    public PdOddViewModel(@NonNull Application application, AppRepository model) {
+        super(application, model);
+        uc.beginRefreshing.call();
+    }
+
+    @Override
+    protected int initItemLayout() {
+        return R.layout.inventorydirect_item_pd_odd;
+    }
+
+    public void loadData(int page) {
+        if (page == 1) {
+            mMorePageNumber = 1;
+            observableList.clear();
+        }
+        if (Constants.CONFIG.IS_OFFLINE)
+            model._listInventory(page)
+                    .compose(RxUtils.MaybeSchTransformer())
+                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+                    .subscribe((Consumer<List<InventoryData>>) takeStockDatas -> {
+                        if (takeStockDatas == null || takeStockDatas.size() == 0) {
+                            if (page == 1) {
+                                setNoDataVisibleObservable(View.VISIBLE);
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
+                                canloadmore = false;
+                                ToastUtils.showShort(R.string.app_no_more_data_text);
+                            }
+                        } else {
+                            setNoDataVisibleObservable(View.GONE);
+                            for (InventoryData takeStockData : takeStockDatas) {
+                                PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, takeStockData);
+                                //双向绑定动态添加Item
+                                observableList.add(itemViewModel);
+                            }
+                        }
+
+                        uc.finishRefreshing.call();
+                        uc.finishLoadmore.call();
+                    });
+        else {
+            model.listInventory(page)
+                    .compose(RxUtils.schedulersTransformer())
+                    .compose(RxUtils.exceptionTransformer())
+                    .subscribe(new ApiListDisposableObserver<List<InventoryData>>() {
+                        @Override
+                        public void onResult(ListData<List<InventoryData>> listData) {
+                            if (listData == null || listData.getTotal() == 0) {
+                                setNoDataVisibleObservable(View.VISIBLE);
+                            } else {
+                                setNoDataVisibleObservable(View.GONE);
+                                if (observableList.size() == listData.getTotal()) {
+                                    // 数据全部返回了
+                                    canloadmore = false;
+                                    ToastUtils.showShort(R.string.app_no_more_data_text);
+                                } else {
+                                    for (InventoryData takeStockData : listData.getList()) {
+                                        PdOddItemViewModel itemViewModel = new PdOddItemViewModel(PdOddViewModel.this, takeStockData);
+                                        //双向绑定动态添加Item
+                                        observableList.add(itemViewModel);
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            uc.finishRefreshing.call();
+                            uc.finishLoadmore.call();
+                        }
+                    });
+        }
+    }
+
+    //订阅者
+    private Disposable mSubscriptionRefresh;
+
+    //注册RxBus
+    @Override
+    public void registerRxBus() {
+        super.registerRxBus();
+        mSubscriptionRefresh = RxBus.getDefault().toObservable(InventoryListRefreshBean.class)
+                .subscribe(new Consumer<InventoryListRefreshBean>() {
+                    @Override
+                    public void accept(InventoryListRefreshBean inventoryListRefreshBean) throws Exception {
+                        uc.beginRefreshing.call();
+                    }
+                });
+        RxSubscriptions.add(mSubscriptionRefresh);
+    }
+
+    //移除RxBus
+    @Override
+    public void removeRxBus() {
+        super.removeRxBus();
+        //将订阅者从管理站中移除
+        RxSubscriptions.remove(mSubscriptionRefresh);
+    }
+}

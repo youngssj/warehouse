@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/tools"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    app:ignore="NamespaceTypo">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.victor.inventorydirect.ui.viewmodel.itemviewmodel.PdOddItemViewModel" />
+    </data>
+
+    <com.lihang.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34mm"
+        android:layout_marginEnd="34mm"
+        android:layout_marginTop="20mm"
+        binding:hl_cornerRadius="8mm"
+        binding:hl_shadowColor="@color/color_797979"
+        binding:hl_shadowLimit="6mm">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="30mm"
+            binding:onClickCommand="@{viewModel.itemClick}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="16mm">
+
+                <ImageView
+                    android:layout_width="34mm"
+                    android:layout_height="34mm"
+                    android:layout_marginEnd="12mm"
+                    android:src="@mipmap/ic_pd_odd" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_check_list_content_title1_text"
+                    android:textColor="@color/color_797979"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.entity.batchNumber}"
+                    android:textColor="@color/color_797979"
+                    android:textSize="38mm" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="16mm">
+
+                <ImageView
+                    android:layout_width="34mm"
+                    android:layout_height="34mm"
+                    android:layout_marginEnd="12mm"
+                    android:src="@mipmap/ic_pd_theme" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_check_list_content_title2_text"
+                    android:textColor="@color/color_797979"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.entity.checkTheme}"
+                    android:textColor="@color/color_797979"
+                    android:textSize="38mm"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="16mm">
+
+                <ImageView
+                    android:layout_width="34mm"
+                    android:layout_height="34mm"
+                    android:layout_marginEnd="12mm"
+                    android:src="@mipmap/ic_pd_date" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/workbench_check_list_content_title3_text"
+                    android:textColor="@color/color_797979"
+                    android:textSize="38mm" />
+
+                <TextView
+                    android:layout_width="0mm"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.entity.planCheckDate}"
+                    android:textColor="@color/color_797979"
+                    android:textSize="38mm" />
+
+                <ImageView
+                    android:layout_width="46mm"
+                    android:layout_height="46mm"
+                    android:src="@mipmap/ic_click_right" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.lihang.ShadowLayout>
+</layout>
