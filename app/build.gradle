@@ -144,7 +144,8 @@ dependencies {
         implementation project(':module-sync')
 //        implementation project(':module-inbound')
         implementation project(':module-inbound-direct')
-        implementation project(':module-outbound')
+//        implementation project(':module-outbound')
+        implementation project(':module-outbound-direct')
         implementation project(':module-movement')
         implementation project(':module-allocate')
     }

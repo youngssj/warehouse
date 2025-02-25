@@ -41,6 +41,7 @@
 -keep class com.victor.inbound.InboundModuleInit { *; }
 -keep class com.victor.inbounddirect.InboundModuleInit { *; }
 -keep class com.victor.outbound.OutboundModuleInit { *; }
+-keep class com.victor.outbounddirect.OutboundModuleInit { *; }
 -keep class com.victor.movement.MovementModuleInit { *; }
 -keep class com.victor.allocate.AllocateModuleInit { *; }
 -keep class com.victor.mine.MineModuleInit { *; }

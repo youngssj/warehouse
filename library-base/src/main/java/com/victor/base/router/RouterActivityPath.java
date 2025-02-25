@@ -79,6 +79,7 @@ public class RouterActivityPath {
         public static final String PAGER_OUTBOUND_LIST = Outbound + "/Outbound_List";
         /*物资出库*/
         public static final String PAGER_OUTBOUND_SCAN = Outbound + "/Outbound_Scan";
+        public static final String PAGER_OUTBOUND_ADD = Outbound + "/Outbound_Add";
     }
 
     public static class Movement {

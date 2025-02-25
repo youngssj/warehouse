@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.victor.outbounddirect.ui.viewmodel.OutboundAddViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title"
+            layout="@layout/base_view_top_title"
+            app:baseTitleViewModel="@{viewModel}" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginTop="32mm"
+            android:layout_marginEnd="32mm"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvThemeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/text_star"
+                android:drawablePadding="8mm"
+                android:text="@string/workbench_outbound_add_theme_text"
+                android:textColor="@color/color_565656"
+                android:textSize="36mm" />
+
+            <EditText
+                android:id="@+id/etTheme"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="end|center_vertical"
+                android:hint="@string/workbench_outbound_add_theme_hint_text"
+                android:inputType="text"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:paddingStart="32mm"
+                android:text="@={viewModel.outTheme}"
+                android:textColor="@color/color_565656"
+                android:textColorHint="@color/color_A9A9A9"
+                android:textCursorDrawable="@drawable/shape_edittext_cursor"
+                android:textSize="36mm" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:background="@color/color_A9A9A9" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvUserTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/text_star"
+                android:drawablePadding="8mm"
+                android:text="@string/workbench_outbound_add_user_text"
+                android:textColor="@color/color_565656"
+                android:textSize="36mm" />
+
+            <TextView
+                android:id="@+id/tvUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="end|center_vertical"
+                android:hint="@string/workbench_outbound_add_user_hint_text"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="32mm"
+                android:text="@={viewModel.currentUser.userName}"
+                android:textColor="@color/color_565656"
+                android:textColorHint="@color/color_A9A9A9"
+                android:textCursorDrawable="@drawable/shape_edittext_cursor"
+                android:textSize="36mm"
+                binding:onClickCommand="@{viewModel.userClickCommand}" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:background="@color/color_A9A9A9"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTimeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@mipmap/text_star"
+                android:drawablePadding="8mm"
+                android:text="@string/workbench_outbound_add_time_text"
+                android:textColor="@color/color_565656"
+                android:textSize="36mm" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="end|center_vertical"
+                android:hint="@string/workbench_outbound_add_time_hint_text"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingStart="32mm"
+                android:text="@={viewModel.planOutDate}"
+                android:textColor="@color/color_565656"
+                android:textColorHint="@color/color_A9A9A9"
+                android:textCursorDrawable="@drawable/shape_edittext_cursor"
+                android:textSize="36mm"
+                binding:onClickCommand="@{viewModel.timeClickCommand}" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:background="@color/color_A9A9A9" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="110mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRemarkTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26mm"
+                android:text="@string/workbench_outbound_add_remark_text"
+                android:textColor="@color/color_565656"
+                android:textSize="36mm" />
+
+            <EditText
+                android:id="@+id/etRemark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:gravity="end|center_vertical"
+                android:hint="@string/workbench_outbound_add_remark_hint_text"
+                android:inputType="text"
+                android:maxLength="50"
+                android:maxLines="1"
+                android:paddingStart="32mm"
+                android:text="@={viewModel.remark}"
+                android:textColor="@color/color_565656"
+                android:textColorHint="@color/color_A9A9A9"
+                android:textCursorDrawable="@drawable/shape_edittext_cursor"
+                android:textSize="36mm" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1mm"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:background="@color/color_A9A9A9" />
+
+        <TextView
+            android:id="@+id/tvNext"
+            android:layout_width="wrap_content"
+            android:layout_height="94mm"
+            android:layout_gravity="center"
+            android:layout_marginTop="90mm"
+            android:background="@drawable/selector_login_btn"
+            android:gravity="center"
+            android:paddingStart="120mm"
+            android:paddingEnd="120mm"
+            android:text="@string/workbench_outbound_add_next_text"
+            android:textColor="@color/white"
+            android:textSize="38mm"
+            android:textStyle="bold"
+            binding:onClickCommand="@{viewModel.nextClickCommand}" />
+    </LinearLayout>
+</layout>
