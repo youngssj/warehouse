@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.inbound.ui.viewmodel.itemviewmodel.InboundItemViewModel" />
+            type="com.victor.inbounddirect.ui.viewmodel.itemviewmodel.InboundItemViewModel" />
     </data>
 
     <com.lihang.ShadowLayout

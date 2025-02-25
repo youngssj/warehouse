@@ -38,7 +38,8 @@
 -keep class com.victor.workbench.WorkBenchModuleInit { *; }
 -keep class com.victor.inventory.InventoryModuleInit { *; }
 -keep class com.victor.materials.MaterialsModuleInit { *; }
--keep class com.victor.allocate.InboundModuleInit { *; }
+-keep class com.victor.inbound.InboundModuleInit { *; }
+-keep class com.victor.inbounddirect.InboundModuleInit { *; }
 -keep class com.victor.outbound.OutboundModuleInit { *; }
 -keep class com.victor.movement.MovementModuleInit { *; }
 -keep class com.victor.allocate.AllocateModuleInit { *; }

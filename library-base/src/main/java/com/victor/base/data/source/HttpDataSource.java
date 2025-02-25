@@ -2,6 +2,7 @@ package com.victor.base.data.source;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.DeptData;
 import com.victor.base.data.entity.DeviceData;
 import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
@@ -13,6 +14,7 @@ import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.entity.UserData;
 import com.victor.base.data.entity.UserInfoBean;
 import com.victor.base.data.http.ListResponse;
 
@@ -90,4 +92,6 @@ public interface HttpDataSource {
     Observable<List<DeviceData>> getDeviceData();
 
     Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics();
+    Observable<ListResponse<List<UserData>>> getUserList();
+    Observable<BaseResponse<List<DeptData>>> getDeptList();
 }

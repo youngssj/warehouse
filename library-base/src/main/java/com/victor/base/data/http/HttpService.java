@@ -2,6 +2,7 @@ package com.victor.base.data.http;
 
 import com.victor.base.data.entity.AllocateData;
 import com.victor.base.data.entity.BusinessReminder;
+import com.victor.base.data.entity.DeptData;
 import com.victor.base.data.entity.DeviceData;
 import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
@@ -13,6 +14,7 @@ import com.victor.base.data.entity.MovementData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.StatisticsInfo;
 import com.victor.base.data.entity.TokenBean;
+import com.victor.base.data.entity.UserData;
 import com.victor.base.data.entity.UserInfoBean;
 
 import java.util.List;
@@ -261,4 +263,20 @@ public interface HttpService {
      */
     @GET("/bas/basArea/queryStatisticsInfo")
     Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics();
+
+    /**
+     * 用户列表
+     *
+     * @return
+     */
+    @GET("/system/user/list")
+    Observable<ListResponse<List<UserData>>> getUserList();
+
+    /**
+     * 用户列表
+     *
+     * @return
+     */
+    @GET("/system/dept/list")
+    Observable<BaseResponse<List<DeptData>>> getDeptList();
 }

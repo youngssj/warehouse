@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.victor.inbound.ui.viewmodel.InboundScanListViewModel" />
+            type="com.victor.inbounddirect.ui.viewmodel.InboundScanListViewModel" />
 
         <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
 

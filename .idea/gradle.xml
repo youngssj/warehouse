@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/library-res" />
             <option value="$PROJECT_DIR$/module-allocate" />
             <option value="$PROJECT_DIR$/module-inbound" />
+            <option value="$PROJECT_DIR$/module-inbound-direct" />
             <option value="$PROJECT_DIR$/module-inventory" />
             <option value="$PROJECT_DIR$/module-main" />
             <option value="$PROJECT_DIR$/module-materials" />

@@ -79,4 +79,6 @@ dependencies {
     api rootProject.ext.dependencies["AndroidAutoSize"]
     api rootProject.ext.dependencies["arouter-api"]
     api rootProject.ext.dependencies["daimajia"]
+    api rootProject.ext.dependencies["EasyPopup"]
+    api rootProject.ext.dependencies["SwipeRecyclerView"]
 }

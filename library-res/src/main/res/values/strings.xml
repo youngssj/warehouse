@@ -4,6 +4,8 @@
     <string name="app_no_data_text">没有数据啦~</string>
     <string name="app_no_more_data_text">不要拉了呀，到底了~</string>
     <string name="app_token_invalid">Token已过期，请重新登录</string>
+    <string name="app_confirm">确定</string>
+    <string name="app_cancel">取消</string>
     <string name="login_top_text">智慧仓储系统</string>
     <string name="login_top_text_en">Intelligent storage system</string>
     <string name="login_button_text">登录</string>
@@ -128,6 +130,13 @@
     <string name="workbench_inbound_scan_list_title2">结果：</string>
     <string name="workbench_inbound_success_text">已入库</string>
     <string name="workbench_inbound_failure_text">未入库</string>
+    <string name="workbench_inbound_add_text">添加入库</string>
+    <string name="workbench_inbound_add_theme_text">入库主题</string>
+    <string name="workbench_inbound_add_theme_hint_text">请输入入库主题</string>
+    <string name="workbench_inbound_add_user_text">入库人</string>
+    <string name="workbench_inbound_add_user_hint_text">请选择入库人</string>
+    <string name="workbench_inbound_add_time_text">计划入库日期</string>
+    <string name="workbench_inbound_add_time_hint_text">请选择计划入库日期</string>
     <!--  出库  -->
     <string name="workbench_outbound_list_title_text">出库单</string>
     <string name="workbench_outbound_title_text">物资出库</string>

@@ -1,1 +1,11 @@
-<resources></resources>
+<resources>
+    <style name="BottomPopAnim" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/trans_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/trans_bottom_out</item>
+    </style>
+
+    <style name="CenterPopAnim" parent="@android:style/Animation.Activity">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+</resources>

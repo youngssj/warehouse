@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llContentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F2F2F2"
+    android:orientation="vertical"
+    android:paddingBottom="10dp">
+
+    <com.victor.base.widget.EmptyRecyclerView
+        android:id="@+id/rcItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/tvCancle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/selector_pop_single_btn"
+        android:gravity="center"
+        android:text="@string/app_cancel"
+        android:textColor="@color/color_333333"
+        android:textSize="18sp" />
+</LinearLayout>
