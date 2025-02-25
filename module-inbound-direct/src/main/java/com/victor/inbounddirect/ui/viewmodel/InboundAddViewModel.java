@@ -1,6 +1,7 @@
 package com.victor.inbounddirect.ui.viewmodel;
 
 import android.app.Application;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
@@ -12,12 +13,14 @@ import com.victor.base.data.entity.ListData;
 import com.victor.base.data.entity.UserData;
 import com.victor.base.data.http.ApiListDisposableObserver;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.inbounddirect.R;
 
 import java.util.List;
 
 import me.goldze.mvvmhabit.binding.command.BindingCommand;
 import me.goldze.mvvmhabit.bus.event.SingleLiveEvent;
 import me.goldze.mvvmhabit.utils.RxUtils;
+import me.goldze.mvvmhabit.utils.ToastUtils;
 
 public class InboundAddViewModel extends BaseTitleViewModel<AppRepository> {
 
@@ -62,6 +65,22 @@ public class InboundAddViewModel extends BaseTitleViewModel<AppRepository> {
     });
 
     public BindingCommand nextClickCommand = new BindingCommand(() -> {
-
+        if (TextUtils.isEmpty(inTheme.get())) {
+            ToastUtils.showShort(R.string.workbench_inbound_add_theme_hint_text);
+            return;
+        }
+        if (TextUtils.isEmpty(planInDate.get())) {
+            ToastUtils.showShort(R.string.workbench_inbound_add_time_hint_text);
+            return;
+        }
+        if (TextUtils.isEmpty(remark.get())) {
+            ToastUtils.showShort(R.string.workbench_inbound_add_remark_hint_text);
+            return;
+        }
+        ARouter.getInstance().build(RouterActivityPath.Inbound.PAGER_INBOUND_SCAN)
+                .withString("inTheme", inTheme.get())
+                .withString("planInDate", planInDate.get())
+                .withString("remark", remark.get())
+                .navigation();
     });
 }

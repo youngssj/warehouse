@@ -6,9 +6,14 @@
 
         <variable
             name="viewModel"
-            type="com.victor.inbound.ui.viewmodel.InboundScanViewModel" />
+            type="com.victor.inbounddirect.ui.viewmodel.InboundScanViewModel" />
 
         <import type="android.view.View" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LayoutManagers" />
+
+        <import type="me.goldze.mvvmhabit.binding.viewadapter.recyclerview.LineManagers" />
+
     </data>
 
     <LinearLayout
@@ -102,7 +107,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
-                        android:padding="16mm">
+                        android:paddingStart="16mm"
+                        android:paddingEnd="16mm"
+                        android:paddingBottom="16mm">
 
                         <ImageView
                             android:layout_width="34mm"
@@ -118,38 +125,10 @@
                             android:textSize="38mm" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0mm"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.entity.remark}"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingStart="16mm">
-
-                        <ImageView
-                            android:layout_width="34mm"
-                            android:layout_height="34mm"
-                            android:layout_marginEnd="12mm"
-                            android:src="@mipmap/ic_pd_data" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/workbench_inbound_scan_content_title1_text"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20mm"
                             android:layout_weight="1"
-                            android:text="@{viewModel.checkDataNum}"
+                            android:text="@{viewModel.entity.remark}"
                             android:textColor="@color/color_797979"
                             android:textSize="38mm" />
 
@@ -182,32 +161,37 @@
                 binding:hl_shadowColor="@color/color_797979"
                 binding:hl_shadowLimit="6mm">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    android:visibility="@{viewModel.noDataVisibleObservable == View.GONE ? View.VISIBLE : View.GONE}"
+                    binding:itemBinding="@{viewModel.inboundScanItemBinding}"
+                    binding:items="@{viewModel.inboundScanList}"
+                    binding:layoutManager="@{LayoutManagers.linear()}"
+                    binding:lineManager="@{LineManagers.horizontal()}" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingBottom="12mm">
+                    android:visibility="@{viewModel.noDataVisibleObservable}">
 
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/tabLayout"
+                    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/color_F8F9F9"
-                        binding:tabGravity="fill"
-                        binding:tabIndicatorColor="@color/colorPrimary"
-                        binding:tabSelectedTextColor="@color/colorPrimary"
-                        binding:tabTextColor="@color/color_797979" />
+                        android:src="@mipmap/bga_refresh_mt_change_to_release_refresh_04" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="2mm"
-                        android:background="@color/color_F2F2F2" />
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/mViewPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10mm"
+                        android:text="@string/workbench_inbound_add_scan_hint_text"
+                        android:textColor="@color/color_9C9C9C"
+                        android:textSize="36mm" />
                 </LinearLayout>
             </com.lihang.ShadowLayout>
         </LinearLayout>

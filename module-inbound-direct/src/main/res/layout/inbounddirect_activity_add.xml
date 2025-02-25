@@ -71,7 +71,8 @@
             android:layout_marginStart="32mm"
             android:layout_marginEnd="32mm"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/tvUserTitle"
@@ -91,9 +92,9 @@
                 android:gravity="end|center_vertical"
                 android:hint="@string/workbench_inbound_add_user_hint_text"
                 android:inputType="text"
-                android:text="@={viewModel.currentUser.userName}"
                 android:maxLines="1"
                 android:paddingStart="32mm"
+                android:text="@={viewModel.currentUser.userName}"
                 android:textColor="@color/color_565656"
                 android:textColorHint="@color/color_A9A9A9"
                 android:textCursorDrawable="@drawable/shape_edittext_cursor"
@@ -106,7 +107,8 @@
             android:layout_height="1mm"
             android:layout_marginStart="32mm"
             android:layout_marginEnd="32mm"
-            android:background="@color/color_A9A9A9" />
+            android:background="@color/color_A9A9A9"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -135,8 +137,8 @@
                 android:hint="@string/workbench_inbound_add_time_hint_text"
                 android:inputType="text"
                 android:maxLines="1"
-                android:text="@={viewModel.planInDate}"
                 android:paddingStart="32mm"
+                android:text="@={viewModel.planInDate}"
                 android:textColor="@color/color_565656"
                 android:textColorHint="@color/color_A9A9A9"
                 android:textCursorDrawable="@drawable/shape_edittext_cursor"

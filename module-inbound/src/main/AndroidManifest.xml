@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.victor.inbounddirect">
+    package="com.victor.inbound">
 
     <application>
         <activity
-            android:name="com.victor.inbounddirect.ui.activity.InboundListActivity"
+            android:name="com.victor.inbound.ui.activity.InboundListActivity"
             android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name="com.victor.inbounddirect.ui.activity.InboundScanActivity"
+            android:name="com.victor.inbound.ui.activity.InboundScanActivity"
             android:configChanges="screenLayout|screenSize|smallestScreenSize|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
