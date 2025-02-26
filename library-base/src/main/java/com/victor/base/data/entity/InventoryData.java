@@ -70,8 +70,8 @@ public class InventoryData {
         private String warehouseName; // 存放地点
         private String whAreaName; // 库区
         private String whLocationName; // 库位
-        private int checkResult; // 盘点结果 1正常（已盘点） 2亏
-        private transient String checkResultMessage; // 盘点结果 1正常（已盘点） 2亏
+        private int checkResult; // 盘点结果 1正常（已盘点） 2亏 3盈
+        private transient String checkResultMessage; // 盘点结果 1正常（已盘点） 2亏 3盈
         private String positionNo;
         private String checkDate;
 

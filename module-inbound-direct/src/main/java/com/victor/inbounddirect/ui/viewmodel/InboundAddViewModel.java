@@ -69,14 +69,15 @@ public class InboundAddViewModel extends BaseTitleViewModel<AppRepository> {
             ToastUtils.showShort(R.string.workbench_inbound_add_theme_hint_text);
             return;
         }
-        if (TextUtils.isEmpty(planInDate.get())) {
-            ToastUtils.showShort(R.string.workbench_inbound_add_time_hint_text);
-            return;
-        }
+//        if (TextUtils.isEmpty(planInDate.get())) {
+//            ToastUtils.showShort(R.string.workbench_inbound_add_time_hint_text);
+//            return;
+//        }
         ARouter.getInstance().build(RouterActivityPath.Inbound.PAGER_INBOUND_SCAN)
                 .withString("inTheme", inTheme.get())
                 .withString("planInDate", planInDate.get())
                 .withString("remark", remark.get())
                 .navigation();
+        finish();
     });
 }

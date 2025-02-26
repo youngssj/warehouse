@@ -19,6 +19,7 @@ import com.victor.inbounddirect.databinding.InbounddirectScanDetailBinding;
 import com.victor.inbounddirect.ui.viewmodel.InboundScanViewModel;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,7 +70,9 @@ public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivi
         viewModel.setTitleText(getResources().getString(R.string.workbench_inbound_title_text));
         setRead(true);
 
-        viewModel.entity.set(new InboundData());
+        InboundData inboundData = new InboundData();
+        inboundData.setElecMaterialList(new ArrayList<>());
+        viewModel.entity.set(inboundData);
         viewModel.entity.get().setInTheme(inTheme);
         viewModel.entity.get().setPlanInDate(planInDate);
         viewModel.entity.get().setRemark(remark);

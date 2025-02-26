@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.MaterialBean;
 import com.victor.inbounddirect.ui.viewmodel.InboundScanViewModel;
 
 import java.util.Objects;
@@ -15,13 +14,13 @@ import me.goldze.mvvmhabit.binding.command.BindingCommand;
 
 public class InboundScanItemViewModel extends ItemViewModel<InboundScanViewModel> {
 
-    public ObservableField<MaterialBean> entity = new ObservableField<>();
+    public ObservableField<InboundData.InboundElecMaterial> entity = new ObservableField<>();
 
     public BindingCommand itemClick = new BindingCommand(() -> {
         viewModel.uc.showCustomEvent.setValue(this);
     });
 
-    public InboundScanItemViewModel(@NonNull InboundScanViewModel viewModel, MaterialBean bean) {
+    public InboundScanItemViewModel(@NonNull InboundScanViewModel viewModel, InboundData.InboundElecMaterial bean) {
         super(viewModel);
         this.entity.set(bean);
     }

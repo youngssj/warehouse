@@ -69,14 +69,15 @@ public class OutboundAddViewModel extends BaseTitleViewModel<AppRepository> {
             ToastUtils.showShort(R.string.workbench_outbound_add_theme_hint_text);
             return;
         }
-        if (TextUtils.isEmpty(planOutDate.get())) {
-            ToastUtils.showShort(R.string.workbench_outbound_add_time_hint_text);
-            return;
-        }
+//        if (TextUtils.isEmpty(planOutDate.get())) {
+//            ToastUtils.showShort(R.string.workbench_outbound_add_time_hint_text);
+//            return;
+//        }
         ARouter.getInstance().build(RouterActivityPath.Outbound.PAGER_OUTBOUND_SCAN)
                 .withString("outTheme", outTheme.get())
                 .withString("planOutDate", planOutDate.get())
                 .withString("remark", remark.get())
                 .navigation();
+        finish();
     });
 }

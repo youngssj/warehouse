@@ -8,7 +8,6 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
-import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
@@ -97,5 +96,6 @@ public interface HttpDataSource {
     Observable<BaseResponse<MaterialsStatisticsData>> getMaterialsStatistics();
     Observable<ListResponse<List<UserData>>> getUserList();
     Observable<BaseResponse<List<DeptData>>> getDeptList();
-    Observable<BaseResponse<List<MaterialBean>>> getMaterialListByRfids(@Body RfidsBean rfidsBean);
+    Observable<BaseResponse<List<InboundData.InboundElecMaterial>>> getInMaterialListByRfids(@Body RfidsBean rfidsBean);
+    Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(@Body RfidsBean rfidsBean);
 }

@@ -12,7 +12,6 @@ import androidx.databinding.ObservableList;
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.OutboundData;
-import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.event.MessageEvent;
@@ -123,16 +122,20 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         rfidSet.addAll(rfidList);
         RfidsBean rfidsBean = new RfidsBean();
         rfidsBean.setRfidCodes(rfidList);
-        model.getMaterialListByRfids(rfidsBean)
+        model.getOutMaterialListByRfids(rfidsBean)
                 .compose(RxUtils.schedulersTransformer())
                 .compose(RxUtils.exceptionTransformer())
-                .subscribe(new ApiDisposableObserver<List<MaterialBean>>() {
+                .subscribe(new ApiDisposableObserver<List<OutboundData.OutboundElecMaterial>>() {
                     @Override
-                    public void onResult(List<MaterialBean> materialsDatas) {
-                        for (MaterialBean materialBean : materialsDatas) {
-                            outboundScanList.add(new OutboundScanItemViewModel(OutboundScanViewModel.this, materialBean));
+                    public void onResult(List<OutboundData.OutboundElecMaterial> materialsDatas) {
+                        if (materialsDatas != null && materialsDatas.size() > 0) {
+                            OutboundData outboundData = entity.get();
+                            outboundData.getElecMaterialList().addAll(materialsDatas);
+                            for (OutboundData.OutboundElecMaterial materialBean : materialsDatas) {
+                                outboundScanList.add(new OutboundScanItemViewModel(OutboundScanViewModel.this, materialBean));
+                            }
+                            setNoDataVisibleObservable();
                         }
-                        setNoDataVisibleObservable();
                     }
 
                     @Override

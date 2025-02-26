@@ -39,6 +39,7 @@ public class ZcpdVpItemViewModel extends ItemViewModel<ZcpdViewModel> {
                 }
                 break;
             case 1:
+            case 3:
             default:
                 break;
         }

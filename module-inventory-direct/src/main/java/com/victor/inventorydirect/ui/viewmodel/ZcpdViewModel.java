@@ -56,11 +56,12 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
     private Set<ZcpdVpRvItemViewModel> rvSet = new HashSet<>();  //盘点到单子集合
 
 
-    private final int TAB_NUM = 3;
+    private final int TAB_NUM = 4;
     private int pagerIndex = 0;
     private ObservableList<ZcpdVpRvItemViewModel> mPddList; // 盘点到
     private List<String> mPyListId = new ArrayList<>();
     private ObservableList<ZcpdVpRvItemViewModel> mWpddList; // 未盘点到
+    private ObservableList<ZcpdVpRvItemViewModel> mPyList; // 未盘点到
     private ObservableList<ZcpdVpRvItemViewModel> mPdAllList; // 全部
 
     public class UIChangeObservable {
@@ -90,6 +91,9 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
                 break;
             case 2:
                 title = getApplication().getResources().getString(R.string.workbench_check_tab3_text);
+                break;
+            case 3:
+                title = getApplication().getResources().getString(R.string.workbench_check_tab4_text);
                 break;
 
         }
@@ -237,20 +241,35 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         mPdAllList = items.get(0).observableList;
         mPddList = items.get(1).observableList;
         mWpddList = items.get(2).observableList;
+        mPyList = items.get(3).observableList;
         for (ZcpdVpRvItemViewModel viewModel : mPdAllList) {
             InventoryData.InventoryElecMaterial bean = viewModel.entity.get();
-            if (sets.contains(bean.getRfidCode())) {
+            if (bean.getCheckResult() == 3) {
+                // 盘盈不处理
+                sets.remove(bean.getRfidCode());
+            } else if (sets.contains(bean.getRfidCode())) {
                 bean.setBgColor(Utils.getContext().getDrawable(R.color.color_6684FF));
                 bean.setCheckResult(1);
                 bean.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_success_text));
                 sets.remove(bean.getRfidCode());
                 rvSet.add(viewModel);  //防止添加的数据重复
-            } else {
+            } else if (bean.getCheckResult() != 1) {
                 bean.setCheckResult(2);
                 bean.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_failure_text));
                 bean.setBgColor(Utils.getContext().getDrawable(R.color.color_fc6666));
             }
             viewModel.entity.notifyChange();
+        }
+
+        // sets剩下的数据为盘盈
+        for (String rfid : sets) {
+            InventoryData.InventoryElecMaterial inventoryElecMaterial = new InventoryData.InventoryElecMaterial();
+            inventoryElecMaterial.setRfidCode(rfid);
+            inventoryElecMaterial.setBgColor(Utils.getContext().getDrawable(R.color.color_FFAA00));
+            inventoryElecMaterial.setCheckResult(3);
+            inventoryElecMaterial.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_profit_text));
+            mPdAllList.add(new ZcpdVpRvItemViewModel(this, entity.get().getBatchNumber(), inventoryElecMaterial));
+            mPyList.add(new ZcpdVpRvItemViewModel(this, entity.get().getBatchNumber(), inventoryElecMaterial));
         }
 
         KLog.i("sets:" + rvSet.size() + "--pddList:" + mPddList.size() + "--wpddList:" + mWpddList.size());

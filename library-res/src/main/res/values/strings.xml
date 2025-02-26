@@ -71,9 +71,11 @@
     <string name="workbench_check_tab1_text">全部</string>
     <string name="workbench_check_tab2_text">盘点到</string>
     <string name="workbench_check_tab3_text">未盘点到</string>
+    <string name="workbench_check_tab4_text">盘盈</string>
     <string name="workbench_check_submit_success_text">提交成功</string>
     <string name="workbench_check_success_text">已盘点</string>
     <string name="workbench_check_failure_text">未盘点</string>
+    <string name="workbench_check_profit_text">盘盈</string>
     <string name="workbench_check_no_this_data_text">无此资产</string>
     <string name="workbench_check_result_title1_text">资产编码：</string>
     <string name="workbench_check_result_title2_text">资产名称：</string>

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.outbounddirect.BR;
@@ -19,6 +20,7 @@ import com.victor.outbounddirect.databinding.OutbounddirectScanDetailBinding;
 import com.victor.outbounddirect.ui.viewmodel.OutboundScanViewModel;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -69,7 +71,9 @@ public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActi
         viewModel.setTitleText(getResources().getString(R.string.workbench_outbound_title_text));
         setRead(true);
 
-        viewModel.entity.set(new OutboundData());
+        OutboundData outboundData = new OutboundData();
+        outboundData.setElecMaterialList(new ArrayList<>());
+        viewModel.entity.set(outboundData);
         viewModel.entity.get().setOutTheme(outTheme);
         viewModel.entity.get().setPlanOutDate(planOutDate);
         viewModel.entity.get().setRemark(remark);
