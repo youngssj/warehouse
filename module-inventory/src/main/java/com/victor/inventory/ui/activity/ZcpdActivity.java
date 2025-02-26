@@ -55,19 +55,8 @@ public class ZcpdActivity extends BaseUhfActivity<InventoryActivityZcpdBinding, 
 
     @Override
     protected void scanBarCodeCallback(String barCode) {
-        Set set = new HashSet();
-        ObservableList<ZcpdVpRvItemViewModel> allList = viewModel.items.get(0).observableList;
-        for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : allList) {
-            InventoryData.InventoryElecMaterial dataListBean = zcpdVpRvItemViewModel.entity.get();
-            if (barCode.equals(dataListBean.getMaterialCode())) {
-                set.add(dataListBean.getRfidCode());
-                break;
-            }
-        }
-        if (set.size() == 0) {
-            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
-            return;
-        }
+        Set<String> set = new HashSet<>();
+        set.add(barCode);
         viewModel.updatePDItemModel(set);
     }
 

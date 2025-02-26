@@ -22,8 +22,6 @@ import com.victor.workbench.ui.base.BaseUhfActivity;
 import java.util.HashSet;
 import java.util.Set;
 
-import me.goldze.mvvmhabit.utils.ToastUtils;
-
 @Route(path = RouterActivityPath.Outbound.PAGER_OUTBOUND_SCAN)
 public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActivityBinding, OutboundScanViewModel> {
 
@@ -41,17 +39,8 @@ public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActi
 
     @Override
     protected void scanBarCodeCallback(String barCode) {
-        Set set = new HashSet();
-        for (OutboundData.OutboundElecMaterial dataListBean : viewModel.entity.get().getElecMaterialList()) {
-            if (barCode.equals(dataListBean.getMaterialCode())) {
-                set.add(dataListBean.getRfidCode());
-                break;
-            }
-        }
-        if (set.size() == 0) {
-            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
-            return;
-        }
+        Set<String> set = new HashSet<>();
+        set.add(barCode);
         viewModel.updatePDItemModel(set);
     }
 

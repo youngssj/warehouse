@@ -45,7 +45,9 @@ public class MaterialsQueryActivity extends BaseUhfActivity<MaterialsActivityQue
 
     @Override
     protected void scanBarCodeCallback(String barCode) {
-
+        if (barCode != null) {
+            viewModel.updateRfid(barCode);
+        }
     }
 
     @Override

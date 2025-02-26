@@ -48,17 +48,8 @@ public class AllocateScanActivity extends BaseUhfActivity<AllocateScanActivityBi
 
     @Override
     protected void scanBarCodeCallback(String barCode) {
-        Set set = new HashSet();
-        for (AllocateData.AllocateMaterial dataListBean : viewModel.entity.get().getMaterials()) {
-            if (barCode.equals(dataListBean.getMaterialCode())) {
-                set.add(dataListBean.getRfidCode());
-                break;
-            }
-        }
-        if (set.size() == 0) {
-            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
-            return;
-        }
+        Set<String> set = new HashSet<>();
+        set.add(barCode);
         viewModel.updatePDItemModel(set);
     }
 

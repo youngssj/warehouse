@@ -11,7 +11,6 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.data.entity.InboundData;
-import com.victor.base.data.entity.MaterialBean;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.inbounddirect.BR;
 import com.victor.inbounddirect.R;
@@ -22,8 +21,6 @@ import com.victor.workbench.ui.base.BaseUhfActivity;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import me.goldze.mvvmhabit.utils.ToastUtils;
 
 @Route(path = RouterActivityPath.Inbound.PAGER_INBOUND_SCAN)
 public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivityBinding, InboundScanViewModel> {
@@ -42,17 +39,8 @@ public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivi
 
     @Override
     protected void scanBarCodeCallback(String barCode) {
-        Set set = new HashSet();
-        for (InboundData.InboundElecMaterial dataListBean : viewModel.entity.get().getElecMaterialList()) {
-            if (barCode.equals(dataListBean.getMaterialCode())) {
-                set.add(dataListBean.getRfidCode());
-                break;
-            }
-        }
-        if (set.size() == 0) {
-            ToastUtils.showShort(R.string.workbench_check_no_this_data_text);
-            return;
-        }
+        Set<String> set = new HashSet<>();
+        set.add(barCode);
         viewModel.updatePDItemModel(set);
     }
 
