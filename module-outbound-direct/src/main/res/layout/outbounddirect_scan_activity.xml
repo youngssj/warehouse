@@ -68,66 +68,10 @@
                             android:textSize="38mm" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{viewModel.entity.outTheme}"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="16mm">
-
-                        <ImageView
-                            android:layout_width="34mm"
-                            android:layout_height="34mm"
-                            android:layout_marginEnd="12mm"
-                            android:src="@mipmap/ic_pd_date" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/workbench_outbound_list_content_title3_text"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{viewModel.entity.planOutDate}"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:paddingStart="16mm"
-                        android:paddingEnd="16mm"
-                        android:paddingBottom="16mm">
-
-                        <ImageView
-                            android:layout_width="34mm"
-                            android:layout_height="34mm"
-                            android:layout_marginEnd="12mm"
-                            android:src="@mipmap/ic_pd_remark" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/workbench_check_content_title3_text"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-
-                        <TextView
                             android:layout_width="0mm"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@{viewModel.entity.remark}"
+                            android:text="@{viewModel.category.categoryName}"
                             android:textColor="@color/color_797979"
                             android:textSize="38mm" />
 

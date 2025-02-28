@@ -7,7 +7,7 @@ import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 
 import com.victor.base.base.BaseTitleViewModel;
-import com.victor.base.data.entity.InboundCategory;
+import com.victor.base.data.entity.OperateCategory;
 import com.victor.inbounddirect.BR;
 import com.victor.inbounddirect.R;
 import com.victor.inbounddirect.ui.viewmodel.itemviewmodel.InboundCategoryItemViewModel;
@@ -22,11 +22,11 @@ public class InboundCategoryViewModel extends BaseTitleViewModel {
     public InboundCategoryViewModel(@NonNull Application application) {
         super(application);
 
-        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new InboundCategory("1", "采购入库")));
-        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new InboundCategory("2", "生产入库")));
-        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new InboundCategory("3", "退料入库")));
-        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new InboundCategory("4", "退货入库")));
-        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new InboundCategory("5", "回货入库")));
-        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new InboundCategory("6", "其他入库")));
+        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new OperateCategory("1", "采购入库")));
+        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new OperateCategory("2", "生产入库")));
+        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new OperateCategory("3", "退料入库")));
+        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new OperateCategory("4", "退货入库")));
+        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new OperateCategory("5", "回货入库")));
+        inboundCategoryList.add(new InboundCategoryItemViewModel(this, new OperateCategory("6", "其他入库")));
     }
 }

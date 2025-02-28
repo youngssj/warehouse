@@ -15,7 +15,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.app.AppRequestCode;
 import com.victor.base.app.AppViewModelFactory;
-import com.victor.base.data.entity.InboundCategory;
+import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.LocationBean;
 import com.victor.base.router.RouterActivityPath;
@@ -34,7 +34,7 @@ import java.util.Set;
 public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivityBinding, InboundScanViewModel> {
 
     @Autowired(name = "category")
-    InboundCategory category;
+    OperateCategory category;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {

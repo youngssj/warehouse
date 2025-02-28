@@ -3,7 +3,7 @@ package com.victor.base.data.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class InboundCategory implements Parcelable {
+public class OperateCategory implements Parcelable {
 
     private String categoryId;
     private String categoryName;
@@ -19,28 +19,28 @@ public class InboundCategory implements Parcelable {
         dest.writeString(this.categoryName);
     }
 
-    public InboundCategory() {
+    public OperateCategory() {
     }
 
-    public InboundCategory(String categoryId, String categoryName) {
+    public OperateCategory(String categoryId, String categoryName) {
         this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 
-    protected InboundCategory(Parcel in) {
+    protected OperateCategory(Parcel in) {
         this.categoryId = in.readString();
         this.categoryName = in.readString();
     }
 
-    public static final Parcelable.Creator<InboundCategory> CREATOR = new Parcelable.Creator<InboundCategory>() {
+    public static final Parcelable.Creator<OperateCategory> CREATOR = new Parcelable.Creator<OperateCategory>() {
         @Override
-        public InboundCategory createFromParcel(Parcel source) {
-            return new InboundCategory(source);
+        public OperateCategory createFromParcel(Parcel source) {
+            return new OperateCategory(source);
         }
 
         @Override
-        public InboundCategory[] newArray(int size) {
-            return new InboundCategory[size];
+        public OperateCategory[] newArray(int size) {
+            return new OperateCategory[size];
         }
     };
 

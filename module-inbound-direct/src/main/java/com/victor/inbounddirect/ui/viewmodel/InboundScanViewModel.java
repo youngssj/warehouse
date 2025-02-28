@@ -11,7 +11,7 @@ import androidx.databinding.ObservableList;
 
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.InboundCategory;
+import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.LocationBean;
 import com.victor.base.data.entity.RfidsBean;
@@ -39,7 +39,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
 public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public ObservableField<InboundData> entity = new ObservableField<>();
-    public ObservableField<InboundCategory> category = new ObservableField<>();
+    public ObservableField<OperateCategory> category = new ObservableField<>();
     public ObservableField<LocationBean> location = new ObservableField<>();
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 

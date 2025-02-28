@@ -35,6 +35,16 @@ public class OutboundData {
     private int finished;
     private String checkDate;
 
+    public String getOutCategory() {
+        return outCategory;
+    }
+
+    public void setOutCategory(String outCategory) {
+        this.outCategory = outCategory;
+    }
+
+    private String outCategory;
+
     public List<OutboundElecMaterial> getElecMaterialList() {
         return elecMaterialList;
     }

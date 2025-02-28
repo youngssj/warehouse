@@ -11,6 +11,7 @@ import androidx.databinding.ObservableList;
 
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.http.ApiDisposableObserver;
@@ -40,6 +41,7 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
 public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public ObservableField<OutboundData> entity = new ObservableField<>();
+    public ObservableField<OperateCategory> category = new ObservableField<>();
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
     public ObservableList<OutboundScanItemViewModel> outboundScanList = new ObservableArrayList<>();

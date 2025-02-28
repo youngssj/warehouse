@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.outbounddirect.BR;
@@ -27,12 +28,8 @@ import java.util.Set;
 @Route(path = RouterActivityPath.Outbound.PAGER_OUTBOUND_SCAN)
 public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActivityBinding, OutboundScanViewModel> {
 
-    @Autowired(name = "outTheme")
-    String outTheme;
-    @Autowired(name = "planOutDate")
-    String planOutDate;
-    @Autowired(name = "remark")
-    String remark;
+    @Autowired(name = "category")
+    OperateCategory category;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
@@ -73,10 +70,11 @@ public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActi
 
         OutboundData outboundData = new OutboundData();
         outboundData.setElecMaterialList(new ArrayList<>());
+        if (category != null) {
+            outboundData.setOutCategory(category.getCategoryId());
+            viewModel.category.set(category);
+        }
         viewModel.entity.set(outboundData);
-        viewModel.entity.get().setOutTheme(outTheme);
-        viewModel.entity.get().setPlanOutDate(planOutDate);
-        viewModel.entity.get().setRemark(remark);
     }
 
     @Override

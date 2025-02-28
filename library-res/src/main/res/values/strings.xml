@@ -154,7 +154,7 @@
     <string name="workbench_outbound_tab1_text">待出库</string>
     <string name="workbench_outbound_tab2_text">出库完成</string>
     <string name="workbench_outbound_list_content_title1_text">出库单号：</string>
-    <string name="workbench_outbound_list_content_title2_text">出库主题：</string>
+    <string name="workbench_outbound_list_content_title2_text">出库类型：</string>
     <string name="workbench_outbound_list_content_title3_text">出库时间：</string>
     <string name="workbench_outbound_scan_content_title1_text">出库数据：</string>
     <string name="workbench_outbound_scan_finish_text">出库完成</string>
