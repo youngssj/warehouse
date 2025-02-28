@@ -11,7 +11,9 @@ import androidx.databinding.ObservableList;
 
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
+import com.victor.base.data.entity.InboundCategory;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.LocationBean;
 import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.event.MessageEvent;
@@ -37,13 +39,20 @@ import me.tatarka.bindingcollectionadapter2.ItemBinding;
 public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public ObservableField<InboundData> entity = new ObservableField<>();
+    public ObservableField<InboundCategory> category = new ObservableField<>();
+    public ObservableField<LocationBean> location = new ObservableField<>();
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
     public ObservableList<InboundScanItemViewModel> inboundScanList = new ObservableArrayList<>();
     public ItemBinding<InboundScanItemViewModel> inboundScanItemBinding = ItemBinding.of(BR.viewModel, R.layout.inbounddirect_item_scan);
     public ObservableInt noDataVisibleObservable = new ObservableInt(View.VISIBLE);
 
+    public void setLocation(LocationBean locationBean) {
+        location.set(locationBean);
+    }
+
     public class UIChangeObservable {
+        public SingleLiveEvent<String> selectLocationEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<InboundScanItemViewModel> showCustomEvent = new SingleLiveEvent<>();
     }
 
@@ -53,10 +62,26 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         super(application, model);
     }
 
+    public BindingCommand selectLocationClickCommand = new BindingCommand(() -> {
+        uc.selectLocationEvent.setValue(null);
+    });
+
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
+        if (location.get() == null) {
+            ToastUtils.showShort(R.string.workbench_inbound_scan_location_hint_text);
+            return;
+        }
         InboundData inboundData = entity.get();
         inboundData.setFinished(1);
         inboundData.setCheckDate(DateUtil.getNowTime());
+        List<InboundData.InboundElecMaterial> elecMaterialList = inboundData.getElecMaterialList();
+        if (elecMaterialList != null) {
+            for (InboundData.InboundElecMaterial inboundElecMaterial : elecMaterialList) {
+                inboundElecMaterial.setWhAreaId(location.get().getWhAreaId());
+                inboundElecMaterial.setWhLocationId(location.get().getWhLocationId());
+                inboundElecMaterial.setWarehouseId(location.get().getWarehouseId());
+            }
+        }
 
         if (Constants.CONFIG.IS_OFFLINE) {
 //            Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
@@ -85,25 +110,22 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 //                        }
 //                    });
         } else {
-            model.saveInboundResult(inboundData)
-                    .compose(RxUtils.schedulersTransformer())
-                    .compose(RxUtils.exceptionTransformer())
-                    .doOnSubscribe(disposable -> {
-                        showProgress();
-                    }).subscribe(new ApiDisposableObserver() {
-                        @Override
-                        public void onResult(Object o) {
-                            btnVisiable.set(false);
-                            ToastUtils.showShort(R.string.workbench_check_submit_success_text);
-                            RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_LIST_REFRESH, null));
-                            finish();
-                        }
+            model.saveInboundResult(inboundData).compose(RxUtils.schedulersTransformer()).compose(RxUtils.exceptionTransformer()).doOnSubscribe(disposable -> {
+                showProgress();
+            }).subscribe(new ApiDisposableObserver() {
+                @Override
+                public void onResult(Object o) {
+                    btnVisiable.set(false);
+                    ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+                    RxBus.getDefault().post(new MessageEvent<>(MessageType.EVENT_TYPE_INBOUND_LIST_REFRESH, null));
+                    finish();
+                }
 
-                        @Override
-                        public void onComplete() {
-                            dismissProgress();
-                        }
-                    });
+                @Override
+                public void onComplete() {
+                    dismissProgress();
+                }
+            });
         }
     });
 
@@ -119,27 +141,24 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
         rfidSet.addAll(rfidList);
         RfidsBean rfidsBean = new RfidsBean();
         rfidsBean.setRfidCodes(rfidList);
-        model.getInMaterialListByRfids(rfidsBean)
-                .compose(RxUtils.schedulersTransformer())
-                .compose(RxUtils.exceptionTransformer())
-                .subscribe(new ApiDisposableObserver<List<InboundData.InboundElecMaterial>>() {
-                    @Override
-                    public void onResult(List<InboundData.InboundElecMaterial> materialsDatas) {
-                        if (materialsDatas != null && materialsDatas.size() > 0) {
-                            InboundData inboundData = entity.get();
-                            inboundData.getElecMaterialList().addAll(materialsDatas);
-                            for (InboundData.InboundElecMaterial materialBean : materialsDatas) {
-                                inboundScanList.add(new InboundScanItemViewModel(InboundScanViewModel.this, materialBean));
-                            }
-                            setNoDataVisibleObservable();
-                        }
+        model.getInMaterialListByRfids(rfidsBean).compose(RxUtils.schedulersTransformer()).compose(RxUtils.exceptionTransformer()).subscribe(new ApiDisposableObserver<List<InboundData.InboundElecMaterial>>() {
+            @Override
+            public void onResult(List<InboundData.InboundElecMaterial> materialsDatas) {
+                if (materialsDatas != null && materialsDatas.size() > 0) {
+                    InboundData inboundData = entity.get();
+                    inboundData.getElecMaterialList().addAll(materialsDatas);
+                    for (InboundData.InboundElecMaterial materialBean : materialsDatas) {
+                        inboundScanList.add(new InboundScanItemViewModel(InboundScanViewModel.this, materialBean));
                     }
+                    setNoDataVisibleObservable();
+                }
+            }
 
-                    @Override
-                    public void onComplete() {
+            @Override
+            public void onComplete() {
 
-                    }
-                });
+            }
+        });
     }
 
     private void setNoDataVisibleObservable() {

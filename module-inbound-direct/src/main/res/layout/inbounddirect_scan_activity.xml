@@ -64,41 +64,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/workbench_inbound_list_content_title2_text"
-                            android:textColor="@color/color_797979"
+                            android:textColor="@color/color_565656"
                             android:textSize="38mm" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{viewModel.entity.inTheme}"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:padding="16mm">
-
-                        <ImageView
-                            android:layout_width="34mm"
-                            android:layout_height="34mm"
-                            android:layout_marginEnd="12mm"
-                            android:src="@mipmap/ic_pd_date" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/workbench_inbound_list_content_title3_text"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{viewModel.entity.planInDate}"
-                            android:textColor="@color/color_797979"
+                            android:text="@{viewModel.category.categoryName}"
+                            android:textColor="@color/color_565656"
                             android:textSize="38mm" />
                     </LinearLayout>
 
@@ -120,42 +93,32 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/workbench_check_content_title3_text"
-                            android:textColor="@color/color_797979"
+                            android:textColor="@color/color_565656"
                             android:textSize="38mm" />
 
                         <TextView
                             android:layout_width="0mm"
-                            android:layout_height="wrap_content"
+                            android:layout_height="80mm"
                             android:layout_weight="1"
-                            android:text="@{viewModel.entity.remark}"
-                            android:textColor="@color/color_797979"
-                            android:textSize="38mm" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/workbench_btn_ok_selector"
-                            android:enabled="@{viewModel.btnVisiable}"
-                            android:gravity="center"
-                            android:paddingStart="60mm"
-                            android:paddingTop="18mm"
-                            android:paddingEnd="60mm"
-                            android:paddingBottom="18mm"
-                            android:text="@string/workbench_inbound_scan_finish_text"
-                            android:textColor="@color/white"
+                            android:gravity="center_vertical"
+                            android:hint="@string/workbench_inbound_scan_location2_hint_text"
+                            android:text="@{viewModel.location.whLocationName}"
+                            android:textColor="@color/color_565656"
+                            android:textColorHint="@color/color_9C9C9C"
                             android:textSize="38mm"
-                            binding:onClickCommand="@{viewModel.pdFinishClickCommand}" />
+                            binding:onClickCommand="@{viewModel.selectLocationClickCommand}" />
                     </LinearLayout>
                 </LinearLayout>
             </com.lihang.ShadowLayout>
 
             <com.lihang.ShadowLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_marginStart="20mm"
                 android:layout_marginTop="20mm"
                 android:layout_marginEnd="20mm"
                 android:layout_marginBottom="20mm"
+                android:layout_weight="1"
                 binding:hl_cornerRadius="8mm"
                 binding:hl_shadowColor="@color/color_797979"
                 binding:hl_shadowLimit="6mm">
@@ -193,6 +156,21 @@
                         android:textSize="36mm" />
                 </LinearLayout>
             </com.lihang.ShadowLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_finish_btn"
+                android:enabled="@{viewModel.btnVisiable}"
+                android:gravity="center"
+                android:paddingStart="60mm"
+                android:paddingTop="32mm"
+                android:paddingEnd="60mm"
+                android:paddingBottom="32mm"
+                android:text="@string/workbench_inbound_scan_finish_text"
+                android:textColor="@color/white"
+                android:textSize="38mm"
+                binding:onClickCommand="@{viewModel.pdFinishClickCommand}" />
         </LinearLayout>
     </LinearLayout>
 </layout>

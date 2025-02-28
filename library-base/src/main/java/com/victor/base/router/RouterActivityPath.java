@@ -49,6 +49,7 @@ public class RouterActivityPath {
         /*工作*/
         public static final String PAGER_WorkBench_CHECK_LIST = WorkBench + "/WorkBenchCheckList";
         public static final String PAGER_WorkBench_CHECK = WorkBench + "/WorkBenchCheck";
+        public static final String PAGER_SCAN_LOCATION = WorkBench + "/WorkBenchScanLocation";
     }
 
     public static class Inventory {
@@ -71,6 +72,7 @@ public class RouterActivityPath {
         /*物资入库*/
         public static final String PAGER_INBOUND_SCAN = Inbound + "/Inbound_Scan";
         public static final String PAGER_INBOUND_ADD = Inbound + "/Inbound_Add";
+        public static final String PAGER_INBOUND_CATEGORY = Inbound + "/Inbound_Category";
     }
 
     public static class Outbound {

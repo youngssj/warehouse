@@ -9,6 +9,7 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.LocationBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
@@ -235,5 +236,10 @@ public class HttpDataSourceImpl implements HttpDataSource {
     @Override
     public Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(RfidsBean rfidsBean) {
         return apiService.getOutMaterialListByRfids(rfidsBean);
+    }
+
+    @Override
+    public Observable<BaseResponse<LocationBean>> getLocationByRfids(String code) {
+        return apiService.getLocationByRfids(code);
     }
 }

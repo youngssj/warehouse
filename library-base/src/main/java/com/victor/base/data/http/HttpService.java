@@ -8,6 +8,7 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.LocationBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
@@ -304,4 +305,12 @@ public interface HttpService {
      */
     @POST("/mobile/storage/queryByrfids")
     Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(@Body RfidsBean rfidsBean);
+
+    /**
+     * 根据rfid获取库位详情
+     *
+     * @return
+     */
+    @GET("/mobile/storage/BasLocation/queryBycode")
+    Observable<BaseResponse<LocationBean>> getLocationByRfids(@Query("code") String code);
 }

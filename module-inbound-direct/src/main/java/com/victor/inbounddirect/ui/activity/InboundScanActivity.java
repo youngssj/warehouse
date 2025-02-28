@@ -1,16 +1,23 @@
 package com.victor.inbounddirect.ui.activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.victor.base.app.AppRequestCode;
 import com.victor.base.app.AppViewModelFactory;
+import com.victor.base.data.entity.InboundCategory;
 import com.victor.base.data.entity.InboundData;
+import com.victor.base.data.entity.LocationBean;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.inbounddirect.BR;
 import com.victor.inbounddirect.R;
@@ -26,12 +33,8 @@ import java.util.Set;
 @Route(path = RouterActivityPath.Inbound.PAGER_INBOUND_SCAN)
 public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivityBinding, InboundScanViewModel> {
 
-    @Autowired(name = "inTheme")
-    String inTheme;
-    @Autowired(name = "planInDate")
-    String planInDate;
-    @Autowired(name = "remark")
-    String remark;
+    @Autowired(name = "category")
+    InboundCategory category;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
@@ -72,10 +75,22 @@ public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivi
 
         InboundData inboundData = new InboundData();
         inboundData.setElecMaterialList(new ArrayList<>());
+        if (category != null) {
+            inboundData.setInCategory(category.getCategoryId());
+            viewModel.category.set(category);
+        }
         viewModel.entity.set(inboundData);
-        viewModel.entity.get().setInTheme(inTheme);
-        viewModel.entity.get().setPlanInDate(planInDate);
-        viewModel.entity.get().setRemark(remark);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppRequestCode.REQUEST_CODE_SCAN_LOCATION && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                LocationBean locationBean = (LocationBean) data.getParcelableExtra("locationBean");
+                viewModel.setLocation(locationBean);
+            }
+        }
     }
 
     @Override
@@ -86,6 +101,10 @@ public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivi
             binding.setViewModel(inboundScanItemViewModel);
             showCustomDialog(getResources().getString(R.string.workbench_inbound_detail_text), binding, (dialog, which) -> {
             });
+        });
+        viewModel.uc.selectLocationEvent.observe(this, inboundScanItemViewModel -> {
+            ARouter.getInstance().build(RouterActivityPath.WorkBench.PAGER_SCAN_LOCATION)
+                    .navigation(this, AppRequestCode.REQUEST_CODE_SCAN_LOCATION);
         });
     }
 }

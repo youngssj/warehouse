@@ -79,7 +79,6 @@ public class InboundAddActivity extends MBaseActivity<InbounddirectActivityAddBi
                 Calendar calendar = (Calendar) data.getSerializableExtra("calendarDay");
                 if (calendar != null) {
                     // 如果是卸车，校验装车时间
-                    Date time = calendar.getTime();
                     String dateFormat = DateUtil.webFormat;
                     viewModel.planInDate.set(DateUtil.format(calendar.getTime(), dateFormat));
                 }

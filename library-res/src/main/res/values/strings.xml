@@ -52,6 +52,7 @@
     <string name="workbench_title4_text">移库管理</string>
     <string name="workbench_title5_text">调拨管理</string>
     <string name="workbench_title6_text">盘点管理</string>
+    <string name="workbench_location_scan_text">库位扫描</string>
     <!--  盘点  -->
     <string name="workbench_check_power_text">功率</string>
     <string name="workbench_check_power_title_text">设置功率</string>
@@ -64,7 +65,7 @@
     <string name="workbench_check_title_text">资产盘点</string>
     <string name="workbench_check_content_title1_text">盘点主题：</string>
     <string name="workbench_check_content_title2_text">盘点时间：</string>
-    <string name="workbench_check_content_title3_text">备注信息：</string>
+    <string name="workbench_check_content_title3_text">库位信息：</string>
     <string name="workbench_check_content_title4_text">盘点数据：</string>
     <string name="workbench_check_detail_text">盘点详情</string>
     <string name="workbench_check_finish_text">盘点完成</string>
@@ -112,10 +113,11 @@
     <string name="workbench_inbound_tab1_text">待入库</string>
     <string name="workbench_inbound_tab2_text">入库完成</string>
     <string name="workbench_inbound_list_content_title1_text">入库单号：</string>
-    <string name="workbench_inbound_list_content_title2_text">入库主题：</string>
+    <string name="workbench_inbound_list_content_title2_text">入库类型：</string>
     <string name="workbench_inbound_list_content_title3_text">入库时间：</string>
     <string name="workbench_inbound_scan_content_title1_text">入库数据：</string>
     <string name="workbench_inbound_scan_finish_text">入库完成</string>
+    <string name="workbench_inbound_scan_location_text">选择库位</string>
     <string name="workbench_inbound_detail_text">入库详情</string>
     <string name="workbench_inbound_detail_title1">物资编码：</string>
     <string name="workbench_inbound_detail_title2">物资名称：</string>
@@ -133,6 +135,7 @@
     <string name="workbench_inbound_success_text">已入库</string>
     <string name="workbench_inbound_failure_text">未入库</string>
     <string name="workbench_inbound_add_text">添加入库</string>
+    <string name="workbench_inbound_type_text">选择入库类型</string>
     <string name="workbench_inbound_add_theme_text">入库主题</string>
     <string name="workbench_inbound_add_theme_hint_text">请输入入库主题</string>
     <string name="workbench_inbound_add_user_text">入库人</string>
@@ -142,7 +145,9 @@
     <string name="workbench_inbound_add_remark_text">备注</string>
     <string name="workbench_inbound_add_remark_hint_text">请输入备注内容</string>
     <string name="workbench_inbound_add_next_text">下一步</string>
-    <string name="workbench_inbound_add_scan_hint_text">请按动手柄开始扫描</string>
+    <string name="workbench_inbound_add_scan_hint_text">请按动手柄或扫码按钮开始扫描</string>
+    <string name="workbench_inbound_scan_location_hint_text">请扫描库位标签</string>
+    <string name="workbench_inbound_scan_location2_hint_text">请点击扫描库位标签</string>
     <!--  出库  -->
     <string name="workbench_outbound_list_title_text">出库单</string>
     <string name="workbench_outbound_title_text">物资出库</string>

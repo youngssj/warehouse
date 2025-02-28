@@ -34,6 +34,15 @@ public class InboundData {
     private List<InboundElecMaterial> elecMaterialList;
     private int finished;
     private String checkDate;
+    private String inCategory;
+
+    public String getInCategory() {
+        return inCategory;
+    }
+
+    public void setInCategory(String inCategory) {
+        this.inCategory = inCategory;
+    }
 
     public int getFinished() {
         return finished;
@@ -88,6 +97,33 @@ public class InboundData {
         public transient Drawable bgColor;
         @Ignore
         public transient Drawable textColor;
+        private String warehouseId;
+        private String whLocationId;
+        private String whAreaId;
+
+        public String getWarehouseId() {
+            return warehouseId;
+        }
+
+        public void setWarehouseId(String warehouseId) {
+            this.warehouseId = warehouseId;
+        }
+
+        public String getWhLocationId() {
+            return whLocationId;
+        }
+
+        public void setWhLocationId(String whLocationId) {
+            this.whLocationId = whLocationId;
+        }
+
+        public String getWhAreaId() {
+            return whAreaId;
+        }
+
+        public void setWhAreaId(String whAreaId) {
+            this.whAreaId = whAreaId;
+        }
 
         public String getMaterialCode() {
             return materialCode;

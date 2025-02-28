@@ -8,6 +8,7 @@ import com.victor.base.data.entity.HomeTotalData;
 import com.victor.base.data.entity.IllegalTakeout;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.LocationBean;
 import com.victor.base.data.entity.MaterialsData;
 import com.victor.base.data.entity.MaterialsStatisticsData;
 import com.victor.base.data.entity.MovementData;
@@ -24,6 +25,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import me.goldze.mvvmhabit.http.BaseResponse;
 import retrofit2.http.Body;
+import retrofit2.http.Query;
 
 /**
  * 版权：heihei
@@ -99,4 +101,5 @@ public interface HttpDataSource {
     Observable<BaseResponse<List<InboundData.InboundElecMaterial>>> getInMaterialListByRfids(@Body RfidsBean rfidsBean);
     Observable<BaseResponse<List<InventoryData.InventoryElecMaterial>>> getInventoryMaterialListByRfids(@Body RfidsBean rfidsBean);
     Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(@Body RfidsBean rfidsBean);
+    Observable<BaseResponse<LocationBean>> getLocationByRfids(@Query("code") String code);
 }
