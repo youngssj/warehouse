@@ -228,6 +228,11 @@ public class HttpDataSourceImpl implements HttpDataSource {
     }
 
     @Override
+    public Observable<BaseResponse<List<InventoryData.InventoryElecMaterial>>> getInventoryMaterialListByRfids(RfidsBean rfidsBean) {
+        return apiService.getInventoryMaterialListByRfids(rfidsBean);
+    }
+
+    @Override
     public Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(RfidsBean rfidsBean) {
         return apiService.getOutMaterialListByRfids(rfidsBean);
     }

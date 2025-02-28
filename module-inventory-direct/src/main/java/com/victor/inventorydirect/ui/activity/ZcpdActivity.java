@@ -93,9 +93,6 @@ public class ZcpdActivity extends BaseUhfActivity<InventorydirectActivityZcpdBin
         viewModel.uc.pageSelectEvent.observe(this, pageIndex -> {
             binding.tabs.getTabAt(pageIndex).select();
         });
-        viewModel.uc.scanFinishEvent.observe(this, aBoolean -> {
-            setReadFinish(aBoolean);
-        });
 
         viewModel.uc.showCustomEvent.observe(this, vpRvItemViewModel -> {
             InventorydirectViewZcpdDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.inventorydirect_view_zcpd_detail, null, false);

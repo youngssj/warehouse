@@ -11,6 +11,7 @@ import androidx.databinding.ObservableList;
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InventoryData;
+import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
@@ -65,7 +66,6 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
     private ObservableList<ZcpdVpRvItemViewModel> mPdAllList; // 全部
 
     public class UIChangeObservable {
-        public SingleLiveEvent<Boolean> scanFinishEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<String> itemClickEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<Integer> pageSelectEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<ZcpdVpRvItemViewModel> showCustomEvent = new SingleLiveEvent<>();
@@ -103,42 +103,42 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
         InventoryData inventoryData = entity.get();
 
-        List<InventoryData.InventoryElecMaterial> inventoryElecMaterialS = new ArrayList<>();
+        List<InventoryData.InventoryElecMaterial> inventoryElecMaterials = new ArrayList<>();
         for (ZcpdVpRvItemViewModel zcpdVpRvItemViewModel : items.get(0).observableList) {
             InventoryData.InventoryElecMaterial inventoryElecMaterial = zcpdVpRvItemViewModel.entity.get();
-            inventoryElecMaterialS.add(inventoryElecMaterial);
+            inventoryElecMaterials.add(inventoryElecMaterial);
         }
 
-        inventoryData.setElecMaterialList(inventoryElecMaterialS);
+        inventoryData.setElecMaterialList(inventoryElecMaterials);
         inventoryData.setFinished(1);
         inventoryData.setCheckDate(DateUtil.getNowTime());
 
         if (Constants.CONFIG.IS_OFFLINE) {
-            Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
-                        model._saveInventoryResult(inventoryData);
-                        emitter.onNext(true);
-                    })
-                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
-                    .compose(RxUtils.schedulersTransformer())
-                    .subscribe(new DefaultObserver<Boolean>() {
-                        @Override
-                        public void onNext(Boolean b) {
-                            btnVisiable.set(false);
-                            ToastUtils.showShort(R.string.workbench_check_submit_success_text);
-                            RxBus.getDefault().post(new InventoryListRefreshBean());
-                            finish();
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-                    });
+//            Observable.create((ObservableOnSubscribe<Boolean>) emitter -> {
+//                        model._saveInventoryResult(inventoryData);
+//                        emitter.onNext(true);
+//                    })
+//                    .compose(RxUtils.bindToLifecycle(getLifecycleProvider()))
+//                    .compose(RxUtils.schedulersTransformer())
+//                    .subscribe(new DefaultObserver<Boolean>() {
+//                        @Override
+//                        public void onNext(Boolean b) {
+//                            btnVisiable.set(false);
+//                            ToastUtils.showShort(R.string.workbench_check_submit_success_text);
+//                            RxBus.getDefault().post(new InventoryListRefreshBean());
+//                            finish();
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onComplete() {
+//
+//                        }
+//                    });
         } else {
             model.saveCheckedResult(inventoryData)
                     .compose(RxUtils.schedulersTransformer())
@@ -236,6 +236,8 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         }
     }
 
+    private Set<String> rfidSet = new HashSet<>();  //盘点到单子集合
+
     public void updatePDItemModel(Set<String> sets) {
         btnVisiable.set(true);
         mPdAllList = items.get(0).observableList;
@@ -262,15 +264,37 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         }
 
         // sets剩下的数据为盘盈
+        List<String> rfidList = new ArrayList<>();
         for (String rfid : sets) {
-            InventoryData.InventoryElecMaterial inventoryElecMaterial = new InventoryData.InventoryElecMaterial();
-            inventoryElecMaterial.setRfidCode(rfid);
-            inventoryElecMaterial.setBgColor(Utils.getContext().getDrawable(R.color.color_FFAA00));
-            inventoryElecMaterial.setCheckResult(3);
-            inventoryElecMaterial.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_profit_text));
-            mPdAllList.add(new ZcpdVpRvItemViewModel(this, entity.get().getBatchNumber(), inventoryElecMaterial));
-            mPyList.add(new ZcpdVpRvItemViewModel(this, entity.get().getBatchNumber(), inventoryElecMaterial));
+            if (!rfidSet.contains(rfid)) {
+                rfidList.add(rfid);
+            }
         }
+        rfidSet.addAll(rfidList);
+        RfidsBean rfidsBean = new RfidsBean();
+        rfidsBean.setRfidCodes(rfidList);
+        model.getInventoryMaterialListByRfids(rfidsBean)
+                .compose(RxUtils.schedulersTransformer())
+                .compose(RxUtils.exceptionTransformer())
+                .subscribe(new ApiDisposableObserver<List<InventoryData.InventoryElecMaterial>>() {
+                    @Override
+                    public void onResult(List<InventoryData.InventoryElecMaterial> materialsDatas) {
+                        if (materialsDatas != null && materialsDatas.size() > 0) {
+                            for (InventoryData.InventoryElecMaterial inventoryElecMaterial : materialsDatas) {
+                                inventoryElecMaterial.setBgColor(Utils.getContext().getDrawable(R.color.color_FFAA00));
+                                inventoryElecMaterial.setCheckResult(3);
+                                inventoryElecMaterial.setCheckResultMessage(getApplication().getResources().getString(R.string.workbench_check_profit_text));
+                                mPdAllList.add(new ZcpdVpRvItemViewModel(ZcpdViewModel.this, entity.get().getBatchNumber(), inventoryElecMaterial));
+                                mPyList.add(new ZcpdVpRvItemViewModel(ZcpdViewModel.this, entity.get().getBatchNumber(), inventoryElecMaterial));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
         KLog.i("sets:" + rvSet.size() + "--pddList:" + mPddList.size() + "--wpddList:" + mWpddList.size());
         if (rvSet.size() != 0)
@@ -287,10 +311,6 @@ public class ZcpdViewModel extends BaseTitleViewModel<AppRepository> {
         setBgColor();
 
         checkDataNum.set(mPddList.size() + "/" + entity.get().getElecMaterialList().size());
-
-        if (mPddList.size() == entity.get().getElecMaterialList().size() + mPyListId.size() && mWpddList.size() == 0) {  //全部盘点完成，盘点到的数据=已盘点+盘盈
-            uc.scanFinishEvent.setValue(true);
-        }
     }
 
     private void setBgColor() {

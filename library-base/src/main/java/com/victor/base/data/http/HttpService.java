@@ -295,5 +295,13 @@ public interface HttpService {
      * @return
      */
     @POST("/mobile/storage/queryByrfids")
+    Observable<BaseResponse<List<InventoryData.InventoryElecMaterial>>> getInventoryMaterialListByRfids(@Body RfidsBean rfidsBean);
+
+    /**
+     * 根据rfid获取物资详情
+     *
+     * @return
+     */
+    @POST("/mobile/storage/queryByrfids")
     Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(@Body RfidsBean rfidsBean);
 }

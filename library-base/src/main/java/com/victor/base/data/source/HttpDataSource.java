@@ -97,5 +97,6 @@ public interface HttpDataSource {
     Observable<ListResponse<List<UserData>>> getUserList();
     Observable<BaseResponse<List<DeptData>>> getDeptList();
     Observable<BaseResponse<List<InboundData.InboundElecMaterial>>> getInMaterialListByRfids(@Body RfidsBean rfidsBean);
+    Observable<BaseResponse<List<InventoryData.InventoryElecMaterial>>> getInventoryMaterialListByRfids(@Body RfidsBean rfidsBean);
     Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(@Body RfidsBean rfidsBean);
 }

@@ -238,6 +238,11 @@ public class AppRepository extends BaseModel implements HttpDataSource, LocalDat
     }
 
     @Override
+    public Observable<BaseResponse<List<InventoryData.InventoryElecMaterial>>> getInventoryMaterialListByRfids(RfidsBean rfidsBean) {
+        return mHttpDataSource.getInventoryMaterialListByRfids(rfidsBean);
+    }
+
+    @Override
     public Observable<BaseResponse<List<OutboundData.OutboundElecMaterial>>> getOutMaterialListByRfids(RfidsBean rfidsBean) {
         return mHttpDataSource.getOutMaterialListByRfids(rfidsBean);
     }
