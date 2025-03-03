@@ -106,7 +106,12 @@ public class InboundScanActivity extends BaseUhfActivity<InbounddirectScanActivi
                 items.add(operateCategory.getCategoryName());
             }
 
-            new PopUtils().showBottomPops(this, items, "", binding.rootView, binding.rootView, new PopUtils.OnPopItemClickListener() {
+            String defaultItem = "";
+            OperateCategory operateCategory = viewModel.category.get();
+            if (operateCategory != null) {
+                defaultItem = operateCategory.getCategoryName();
+            }
+            new PopUtils().showBottomPops(this, items, defaultItem, binding.rootView, binding.rootView, new PopUtils.OnPopItemClickListener() {
                 @Override
                 public boolean onItemClick(String item, int position) {
                     OperateCategory operateCategory = operateCategories.get(position);
