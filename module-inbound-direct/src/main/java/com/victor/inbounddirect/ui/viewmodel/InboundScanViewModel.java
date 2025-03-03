@@ -11,9 +11,9 @@ import androidx.databinding.ObservableList;
 
 import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
-import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.LocationBean;
+import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.RfidsBean;
 import com.victor.base.data.http.ApiDisposableObserver;
 import com.victor.base.event.MessageEvent;
@@ -40,6 +40,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public ObservableField<InboundData> entity = new ObservableField<>();
     public ObservableField<OperateCategory> category = new ObservableField<>();
+    private List<OperateCategory> operateCategories = new ArrayList<>();
     public ObservableField<LocationBean> location = new ObservableField<>();
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
@@ -53,6 +54,7 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public class UIChangeObservable {
         public SingleLiveEvent<String> selectLocationEvent = new SingleLiveEvent<>();
+        public SingleLiveEvent<List<OperateCategory>> selectCategoryEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<InboundScanItemViewModel> showCustomEvent = new SingleLiveEvent<>();
     }
 
@@ -60,13 +62,28 @@ public class InboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public InboundScanViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
+
+        operateCategories.add(new OperateCategory("1", "采购入库"));
+        operateCategories.add(new OperateCategory("2", "生产入库"));
+        operateCategories.add(new OperateCategory("3", "退料入库"));
+        operateCategories.add(new OperateCategory("4", "退货入库"));
+        operateCategories.add(new OperateCategory("5", "回货入库"));
+        operateCategories.add(new OperateCategory("6", "其他入库"));
     }
 
     public BindingCommand selectLocationClickCommand = new BindingCommand(() -> {
         uc.selectLocationEvent.setValue(null);
     });
 
+    public BindingCommand selectTypeClickCommand = new BindingCommand(() -> {
+        uc.selectCategoryEvent.setValue(operateCategories);
+    });
+
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
+        if (category.get() == null) {
+            ToastUtils.showShort(R.string.workbench_inbound_select_type_hint_text);
+            return;
+        }
         if (location.get() == null) {
             ToastUtils.showShort(R.string.workbench_inbound_scan_location_hint_text);
             return;

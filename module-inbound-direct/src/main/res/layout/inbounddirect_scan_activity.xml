@@ -27,6 +27,7 @@
             binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
 
         <LinearLayout
+            android:id="@+id/rootView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/color_F8F9F9"
@@ -68,11 +69,19 @@
                             android:textSize="38mm" />
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="0mm"
+                            android:layout_height="90mm"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_input_radius"
+                            android:gravity="center_vertical"
+                            android:hint="@string/workbench_inbound_select_type2_hint_text"
+                            android:paddingStart="32mm"
+                            android:paddingEnd="32mm"
                             android:text="@{viewModel.category.categoryName}"
                             android:textColor="@color/color_565656"
-                            android:textSize="38mm" />
+                            android:textColorHint="@color/color_9C9C9C"
+                            android:textSize="38mm"
+                            binding:onClickCommand="@{viewModel.selectTypeClickCommand}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -101,7 +110,6 @@
                             android:layout_height="90mm"
                             android:layout_weight="1"
                             android:background="@drawable/shape_input_radius"
-                            android:foreground="?android:attr/selectableItemBackgroundBorderless"
                             android:gravity="center_vertical"
                             android:hint="@string/workbench_inbound_scan_location2_hint_text"
                             android:paddingStart="32mm"
@@ -117,7 +125,7 @@
 
             <com.lihang.ShadowLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="0mm"
                 android:layout_marginStart="20mm"
                 android:layout_marginTop="20mm"
                 android:layout_marginEnd="20mm"

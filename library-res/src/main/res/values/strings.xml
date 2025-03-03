@@ -148,6 +148,8 @@
     <string name="workbench_inbound_add_scan_hint_text">请按动手柄或扫码按钮开始扫描</string>
     <string name="workbench_inbound_scan_location_hint_text">请扫描库位标签</string>
     <string name="workbench_inbound_scan_location2_hint_text">请点击扫描库位标签</string>
+    <string name="workbench_inbound_select_type_hint_text">请选择入库类型</string>
+    <string name="workbench_inbound_select_type2_hint_text">请点击选择入库类型</string>
     <!--  出库  -->
     <string name="workbench_outbound_list_title_text">出库单</string>
     <string name="workbench_outbound_title_text">物资出库</string>
@@ -185,6 +187,8 @@
     <string name="workbench_outbound_add_remark_hint_text">请输入备注内容</string>
     <string name="workbench_outbound_add_next_text">下一步</string>
     <string name="workbench_outbound_add_scan_hint_text">请按动手柄开始扫描</string>
+    <string name="workbench_outbound_select_type_hint_text">请选择出库类型</string>
+    <string name="workbench_outbound_select_type2_hint_text">请点击选择出库类型</string>
     <!--  移库  -->
     <string name="workbench_movement_list_title_text">移库单</string>
     <string name="workbench_movement_title_text">物资移库</string>

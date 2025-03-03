@@ -42,6 +42,7 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public ObservableField<OutboundData> entity = new ObservableField<>();
     public ObservableField<OperateCategory> category = new ObservableField<>();
+    public List<OperateCategory> operateCategories = new ArrayList<>();
     public ObservableField<Boolean> btnVisiable = new ObservableField<>(false);
 
     public ObservableList<OutboundScanItemViewModel> outboundScanList = new ObservableArrayList<>();
@@ -49,6 +50,7 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
     public ObservableInt noDataVisibleObservable = new ObservableInt(View.VISIBLE);
 
     public class UIChangeObservable {
+        public SingleLiveEvent<List<OperateCategory>> selectCategoryEvent = new SingleLiveEvent<>();
         public SingleLiveEvent<OutboundScanItemViewModel> showCustomEvent = new SingleLiveEvent<>();
     }
 
@@ -56,9 +58,23 @@ public class OutboundScanViewModel extends BaseTitleViewModel<AppRepository> {
 
     public OutboundScanViewModel(@NonNull Application application, AppRepository model) {
         super(application, model);
+
+        operateCategories.add(new OperateCategory("1", "领料出库"));
+        operateCategories.add(new OperateCategory("2", "销售出库"));
+        operateCategories.add(new OperateCategory("3", "调拨出库"));
+        operateCategories.add(new OperateCategory("4", "其他出库"));
     }
 
+    public BindingCommand selectTypeClickCommand = new BindingCommand(() -> {
+        uc.selectCategoryEvent.setValue(operateCategories);
+    });
+
     public BindingCommand pdFinishClickCommand = new BindingCommand(() -> {
+        if (category.get() == null) {
+            ToastUtils.showShort(R.string.workbench_outbound_select_type_hint_text);
+            return;
+        }
+
         OutboundData outboundData = entity.get();
         outboundData.setFinished(1);
         outboundData.setCheckDate(DateUtil.getNowTime());

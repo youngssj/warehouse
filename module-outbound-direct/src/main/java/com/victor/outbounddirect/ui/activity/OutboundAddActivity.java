@@ -22,8 +22,10 @@ import com.victor.outbounddirect.R;
 import com.victor.outbounddirect.databinding.OutbounddirectActivityAddBinding;
 import com.victor.outbounddirect.ui.viewmodel.OutboundAddViewModel;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Route(path = RouterActivityPath.Outbound.PAGER_OUTBOUND_ADD)
 public class OutboundAddActivity extends MBaseActivity<OutbounddirectActivityAddBinding, OutboundAddViewModel> {
@@ -56,10 +58,14 @@ public class OutboundAddActivity extends MBaseActivity<OutbounddirectActivityAdd
     public void initViewObservable() {
         super.initViewObservable();
         viewModel.uc.uesrClickEvent.observe(this, userDatas -> {
-            new PopUtils().showBottomPops(this, userDatas, "", binding.rootView, binding.rootView, new PopUtils.OnPopItemClickListener() {
+            List<String> items = new ArrayList<>();
+            for (UserData userData : userDatas) {
+                items.add(userData.getUserName());
+            }
+            new PopUtils().showBottomPops(this, items, "", binding.rootView, binding.rootView, new PopUtils.OnPopItemClickListener() {
                 @Override
-                public boolean onItemClick(UserData item, int position) {
-                    viewModel.currentUser.set(item);
+                public boolean onItemClick(String item, int position) {
+                    viewModel.currentUser.set(userDatas.get(position));
                     return true;
                 }
             });

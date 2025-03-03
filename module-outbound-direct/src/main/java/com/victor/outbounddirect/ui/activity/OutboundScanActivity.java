@@ -7,13 +7,12 @@ import android.view.View;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
-import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.entity.OperateCategory;
 import com.victor.base.data.entity.OutboundData;
 import com.victor.base.router.RouterActivityPath;
+import com.victor.base.utils.PopUtils;
 import com.victor.outbounddirect.BR;
 import com.victor.outbounddirect.R;
 import com.victor.outbounddirect.databinding.OutbounddirectScanActivityBinding;
@@ -23,13 +22,11 @@ import com.victor.workbench.ui.base.BaseUhfActivity;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Route(path = RouterActivityPath.Outbound.PAGER_OUTBOUND_SCAN)
 public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActivityBinding, OutboundScanViewModel> {
-
-    @Autowired(name = "category")
-    OperateCategory category;
 
     @Override
     protected void readUhfCallback(Set<String> epcSet) {
@@ -70,16 +67,28 @@ public class OutboundScanActivity extends BaseUhfActivity<OutbounddirectScanActi
 
         OutboundData outboundData = new OutboundData();
         outboundData.setElecMaterialList(new ArrayList<>());
-        if (category != null) {
-            outboundData.setOutCategory(category.getCategoryId());
-            viewModel.category.set(category);
-        }
         viewModel.entity.set(outboundData);
     }
 
     @Override
     public void initViewObservable() {
         super.initViewObservable();
+        viewModel.uc.selectCategoryEvent.observe(this, operateCategories -> {
+            List<String> items = new ArrayList<>();
+            for (OperateCategory operateCategory : operateCategories) {
+                items.add(operateCategory.getCategoryName());
+            }
+
+            new PopUtils().showBottomPops(this, items, "", binding.rootView, binding.rootView, new PopUtils.OnPopItemClickListener() {
+                @Override
+                public boolean onItemClick(String item, int position) {
+                    OperateCategory operateCategory = operateCategories.get(position);
+                    viewModel.category.set(operateCategory);
+                    viewModel.entity.get().setOutCategory(operateCategory.getCategoryId());
+                    return true;
+                }
+            });
+        });
         viewModel.uc.showCustomEvent.observe(this, outboundScanItemViewModel -> {
             OutbounddirectScanDetailBinding binding = DataBindingUtil.inflate(LayoutInflater.from(OutboundScanActivity.this), R.layout.outbounddirect_scan_detail, null, false);
             binding.setViewModel(outboundScanItemViewModel);

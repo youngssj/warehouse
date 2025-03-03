@@ -2,7 +2,6 @@ package com.victor.base.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.victor.base.R;
-import com.victor.base.data.entity.UserData;
 import com.victor.base.widget.EmptyRecyclerView;
 import com.victor.base.widget.y_recycleradapter.GeneralRecyclerViewHolder;
 import com.victor.base.widget.y_recycleradapter.Y_ItemEntityList;
@@ -27,7 +25,7 @@ public class PopUtils {
     EasyPopup mTopPop;
     EasyPopup mBottomPop;
 
-//    public void showTopPops(Activity activity, List<String> items, String defaultItem, View rootView, ViewGroup dimView, OnPopItemClickListener onPopItemClickListener) {
+    //    public void showTopPops(Activity activity, List<String> items, String defaultItem, View rootView, ViewGroup dimView, OnPopItemClickListener onPopItemClickListener) {
 //        if (items == null || items.size() == 0) {
 //            return;
 //        }
@@ -81,11 +79,11 @@ public class PopUtils {
 //        mTopPop.showAsDropDown(rootView);
 //    }
 //
-    public void showBottomPops(Activity activity, List<UserData> items, String defaultItem, View rootView, ViewGroup dimView, OnPopItemClickListener onPopItemClickListener) {
+    public void showBottomPops(Activity activity, List<String> items, String defaultItem, View rootView, ViewGroup dimView, OnPopItemClickListener onPopItemClickListener) {
         showBottomPops(activity, items, defaultItem, rootView, dimView, null, onPopItemClickListener);
     }
 
-    public void showBottomPops(Activity activity, List<UserData> items, String defaultItem, View rootView, ViewGroup dimView, View topView, OnPopItemClickListener onPopItemClickListener) {
+    public void showBottomPops(Activity activity, List<String> items, String defaultItem, View rootView, ViewGroup dimView, View topView, OnPopItemClickListener onPopItemClickListener) {
         if (items == null || items.size() == 0) {
             return;
         }
@@ -121,11 +119,11 @@ public class PopUtils {
                 .addOnBind(R.layout.item_pop, new Y_OnBind() {
                     @Override
                     public void onBindChildViewData(GeneralRecyclerViewHolder holder, Object itemData, int position, List<Object> payloads) {
-                        UserData userData = (UserData) itemData;
+                        String item = (String) itemData;
                         TextView tvItem = holder.getChildView(R.id.tvItem);
                         View line = holder.getChildView(R.id.line);
-                        tvItem.setText(userData.getUserName());
-                        if (defaultItem != null && defaultItem.equals(userData.getUserName())) {
+                        tvItem.setText(item);
+                        if (defaultItem != null && defaultItem.equals(item)) {
                             tvItem.setTextColor(activity.getColor(R.color.colorPrimary));
                         } else {
                             tvItem.setTextColor(activity.getColor(R.color.color_333333));
@@ -145,11 +143,11 @@ public class PopUtils {
                             @Override
                             public void onClick(View view) {
                                 if (onPopItemClickListener != null) {
-                                    boolean dismiss = onPopItemClickListener.onItemClick(userData, position);
+                                    boolean dismiss = onPopItemClickListener.onItemClick(item, position);
                                     if (dismiss && mBottomPop.isShowing()) {
                                         mBottomPop.dismiss();
                                     }
-                                }else if (mBottomPop.isShowing()) {
+                                } else if (mBottomPop.isShowing()) {
                                     mBottomPop.dismiss();
                                 }
                             }
@@ -171,7 +169,8 @@ public class PopUtils {
         });
         mBottomPop.showAtLocation(rootView, Gravity.BOTTOM, 0, 0);
     }
-//
+
+    //
 //    public void showOnlyItemsBottomPops(Activity activity, List<String> items, String defaultItem, View rootView, ViewGroup dimView, View topView, OnPopItemClickListener onPopItemClickListener) {
 //        if (items == null || items.size() == 0) {
 //            return;
@@ -299,7 +298,7 @@ public class PopUtils {
 //    }
 //
     public interface OnPopItemClickListener {
-        boolean onItemClick(UserData item, int position);
+        boolean onItemClick(String item, int position);
     }
 //
 //    public void showPhotoPop(Activity activity, String photoUrl) {
@@ -333,13 +332,13 @@ public class PopUtils {
 //        mPhotoPop.showAtLocation(activity.findViewById(android.R.id.content), Gravity.CENTER, 0, 0);
 //    }
 
-    public void dismiss(){
-        if(mTopPop != null){
+    public void dismiss() {
+        if (mTopPop != null) {
             if (mTopPop.isShowing()) {
                 mTopPop.dismiss();
             }
         }
-        if(mBottomPop != null){
+        if (mBottomPop != null) {
             if (mBottomPop.isShowing()) {
                 mBottomPop.dismiss();
             }

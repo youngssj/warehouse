@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke
-        android:width="2mm"
-        android:color="@color/color_A9A9A9" />
-    <corners android:radius="10mm" />
-</shape>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:colorControlHighlight"> <!-- 波纹颜色 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/white"/>
+            <stroke
+                android:width="2mm"
+                android:color="@color/color_e6e6e6" />
+            <corners android:radius="10mm" />
+        </shape>
+    </item>
+</ripple>
