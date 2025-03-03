@@ -98,10 +98,14 @@
 
                         <TextView
                             android:layout_width="0mm"
-                            android:layout_height="80mm"
+                            android:layout_height="90mm"
                             android:layout_weight="1"
+                            android:background="@drawable/shape_input_radius"
+                            android:foreground="?android:attr/selectableItemBackgroundBorderless"
                             android:gravity="center_vertical"
                             android:hint="@string/workbench_inbound_scan_location2_hint_text"
+                            android:paddingStart="32mm"
+                            android:paddingEnd="32mm"
                             android:text="@{viewModel.location.whLocationName}"
                             android:textColor="@color/color_565656"
                             android:textColorHint="@color/color_9C9C9C"
@@ -160,6 +164,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32mm"
+                android:layout_marginEnd="32mm"
+                android:layout_marginBottom="32mm"
                 android:background="@drawable/selector_finish_btn"
                 android:enabled="@{viewModel.btnVisiable}"
                 android:gravity="center"

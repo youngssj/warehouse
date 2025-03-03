@@ -7,6 +7,8 @@
         <variable
             name="viewModel"
             type="com.victor.workbench.ui.viewmodel.ScanLocationViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -19,11 +21,94 @@
             layout="@layout/base_view_top_title"
             binding:baseTitleViewModel="@{viewModel.mBaseTitleViewModel}" />
 
+        <com.lihang.ShadowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20mm"
+            android:layout_marginTop="20mm"
+            android:layout_marginEnd="20mm"
+            android:visibility="@{viewModel.location == null?View.GONE:View.VISIBLE}"
+            binding:hl_cornerRadius="8mm"
+            binding:hl_shadowColor="@color/color_797979"
+            binding:hl_shadowLimit="6mm">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="32mm"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/workbench_inbound_detail_title5"
+                        android:textColor="@color/color_565656"
+                        android:textSize="38mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.location.warehouseName}"
+                        android:textColor="@color/color_565656"
+                        android:textSize="38mm" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20mm"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/workbench_inbound_detail_title6"
+                        android:textColor="@color/color_565656"
+                        android:textSize="38mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.location.whAreaName}"
+                        android:textColor="@color/color_565656"
+                        android:textSize="38mm" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20mm"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/workbench_inbound_detail_title7"
+                        android:textColor="@color/color_565656"
+                        android:textSize="38mm" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.location.whLocationName}"
+                        android:textColor="@color/color_565656"
+                        android:textSize="38mm" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.lihang.ShadowLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0mm"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="@{viewModel.location == null?View.VISIBLE:View.INVISIBLE}">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -38,5 +123,23 @@
                 android:textColor="@color/color_9C9C9C"
                 android:textSize="36mm" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32mm"
+            android:layout_marginEnd="32mm"
+            android:layout_marginBottom="32mm"
+            android:background="@drawable/selector_finish_btn"
+            android:enabled="@{viewModel.btnVisiable}"
+            android:gravity="center"
+            android:paddingStart="60mm"
+            android:paddingTop="32mm"
+            android:paddingEnd="60mm"
+            android:paddingBottom="32mm"
+            android:text="@string/app_confirm"
+            android:textColor="@color/white"
+            android:textSize="38mm"
+            binding:onClickCommand="@{viewModel.confirmClickCommand}" />
     </LinearLayout>
 </layout>
