@@ -1,11 +1,11 @@
-package com.victor.inbounddirect.ui.viewmodel.itemviewmodel;
+package com.victor.inbound.ui.viewmodel.itemviewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableField;
 
 import com.victor.base.data.entity.InboundData;
-import com.victor.inbounddirect.ui.viewmodel.InboundScanListViewModel;
+import com.victor.inbound.ui.viewmodel.InboundScanListViewModel;
 
 import java.util.Objects;
 

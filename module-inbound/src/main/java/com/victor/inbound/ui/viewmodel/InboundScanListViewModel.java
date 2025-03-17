@@ -1,4 +1,4 @@
-package com.victor.inbounddirect.ui.viewmodel;
+package com.victor.inbound.ui.viewmodel;
 
 import android.app.Application;
 import android.view.View;
@@ -12,10 +12,10 @@ import com.victor.base.data.entity.InboundData;
 import com.victor.base.event.Event;
 import com.victor.base.event.MessageEvent;
 import com.victor.base.event.MessageType;
-import com.victor.inbounddirect.BR;
-import com.victor.inbounddirect.R;
-import com.victor.inbounddirect.bean.InboundScanItemsBean;
-import com.victor.inbounddirect.ui.viewmodel.itemviewmodel.InboundScanItemViewModel;
+import com.victor.inbound.BR;
+import com.victor.inbound.R;
+import com.victor.inbound.bean.InboundScanItemsBean;
+import com.victor.inbound.ui.viewmodel.itemviewmodel.InboundScanItemViewModel;
 
 import java.util.Objects;
 

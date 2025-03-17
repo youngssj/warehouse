@@ -1,4 +1,4 @@
-package com.victor.inbounddirect.bean;
+package com.victor.inbound.bean;
 
 import com.victor.base.data.entity.InboundData;
 

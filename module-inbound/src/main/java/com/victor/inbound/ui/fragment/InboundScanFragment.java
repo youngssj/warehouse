@@ -1,4 +1,4 @@
-package com.victor.inbounddirect.ui.fragment;
+package com.victor.inbound.ui.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,11 +11,11 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.router.RouterFragmentPath;
-import com.victor.inbounddirect.BR;
-import com.victor.inbounddirect.R;
-import com.victor.inbounddirect.databinding.InboundScanDetailBinding;
-import com.victor.inbounddirect.databinding.InboundScanFragmentBinding;
-import com.victor.inbounddirect.ui.viewmodel.InboundScanListViewModel;
+import com.victor.inbound.BR;
+import com.victor.inbound.R;
+import com.victor.inbound.databinding.InboundScanDetailBinding;
+import com.victor.inbound.databinding.InboundScanFragmentBinding;
+import com.victor.inbound.ui.viewmodel.InboundScanListViewModel;
 
 import me.goldze.mvvmhabit.base.BaseFragment;
 

@@ -1,4 +1,4 @@
-package com.victor.inbounddirect;
+package com.victor.inbound;
 
 import android.app.Application;
 

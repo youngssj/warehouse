@@ -1,4 +1,4 @@
-package com.victor.inbounddirect.ui.activity;
+package com.victor.inbound.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -17,10 +17,10 @@ import com.victor.base.base.VPFragmentAdapter;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.router.RouterActivityPath;
 import com.victor.base.router.RouterFragmentPath;
-import com.victor.inbounddirect.BR;
-import com.victor.inbounddirect.R;
-import com.victor.inbounddirect.databinding.InboundScanActivityBinding;
-import com.victor.inbounddirect.ui.viewmodel.InboundScanViewModel;
+import com.victor.inbound.BR;
+import com.victor.inbound.R;
+import com.victor.inbound.ui.viewmodel.InboundScanViewModel;
+import com.victor.inbound.databinding.InboundScanActivityBinding;
 import com.victor.workbench.ui.base.BaseUhfActivity;
 
 import java.util.ArrayList;

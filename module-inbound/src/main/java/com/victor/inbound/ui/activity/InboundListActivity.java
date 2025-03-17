@@ -1,4 +1,4 @@
-package com.victor.inbounddirect.ui.activity;
+package com.victor.inbound.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +11,10 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.victor.base.app.AppViewModelFactory;
 import com.victor.base.base.MBaseActivity;
 import com.victor.base.router.RouterActivityPath;
-import com.victor.inbounddirect.BR;
-import com.victor.inbounddirect.R;
-import com.victor.inbounddirect.databinding.InboundListActivityBinding;
-import com.victor.inbounddirect.ui.viewmodel.InboundListViewModel;
+import com.victor.inbound.BR;
+import com.victor.inbound.ui.viewmodel.InboundListViewModel;
+import com.victor.inbound.R;
+import com.victor.inbound.databinding.InboundListActivityBinding;
 
 @Route(path = RouterActivityPath.Inbound.PAGER_INBOUND_LIST)
 public class InboundListActivity extends MBaseActivity<InboundListActivityBinding, InboundListViewModel> {

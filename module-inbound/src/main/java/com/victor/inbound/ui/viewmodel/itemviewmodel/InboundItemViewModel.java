@@ -1,11 +1,11 @@
-package com.victor.inbounddirect.ui.viewmodel.itemviewmodel;
+package com.victor.inbound.ui.viewmodel.itemviewmodel;
 
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.router.RouterActivityPath;
-import com.victor.inbounddirect.ui.viewmodel.InboundListViewModel;
+import com.victor.inbound.ui.viewmodel.InboundListViewModel;
 import com.victor.workbench.ui.base.BaseRecycleItemViewModel;
 
 public class InboundItemViewModel extends BaseRecycleItemViewModel<InboundListViewModel, InboundData> {

@@ -1,10 +1,11 @@
-package com.victor.inbounddirect.ui.viewmodel;
+package com.victor.inbound.ui.viewmodel;
 
 import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 
+import com.victor.base.base.BaseTitleViewModel;
 import com.victor.base.data.Repository.AppRepository;
 import com.victor.base.data.entity.InboundData;
 import com.victor.base.data.http.ApiDisposableObserver;
@@ -12,8 +13,8 @@ import com.victor.base.event.MessageEvent;
 import com.victor.base.event.MessageType;
 import com.victor.base.utils.Constants;
 import com.victor.base.utils.DateUtil;
-import com.victor.inbounddirect.R;
-import com.victor.inbounddirect.bean.InboundScanItemsBean;
+import com.victor.inbound.R;
+import com.victor.inbound.bean.InboundScanItemsBean;
 
 import java.util.ArrayList;
 import java.util.HashSet;
