@@ -34,6 +34,24 @@ public class OutboundData {
     private List<OutboundElecMaterial> elecMaterialList;
     private int finished;
     private String checkDate;
+    private String outCategory;
+    private Long bussJindieId;
+
+    public String getOutCategory() {
+        return outCategory;
+    }
+
+    public void setOutCategory(String outCategory) {
+        this.outCategory = outCategory;
+    }
+
+    public Long getBussJindieId() {
+        return bussJindieId;
+    }
+
+    public void setBussJindieId(Long bussJindieId) {
+        this.bussJindieId = bussJindieId;
+    }
 
     public List<OutboundElecMaterial> getElecMaterialList() {
         return elecMaterialList;

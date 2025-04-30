@@ -34,6 +34,24 @@ public class InboundData {
     private List<InboundElecMaterial> elecMaterialList;
     private int finished;
     private String checkDate;
+    private String inCategory;
+    private Long bussJindieId;
+
+    public Long getBussJindieId() {
+        return bussJindieId;
+    }
+
+    public void setBussJindieId(Long bussJindieId) {
+        this.bussJindieId = bussJindieId;
+    }
+
+    public String getInCategory() {
+        return inCategory;
+    }
+
+    public void setInCategory(String inCategory) {
+        this.inCategory = inCategory;
+    }
 
     public int getFinished() {
         return finished;
