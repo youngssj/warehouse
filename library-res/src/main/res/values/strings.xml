@@ -52,6 +52,8 @@
     <string name="workbench_title4_text">移库管理</string>
     <string name="workbench_title5_text">调拨管理</string>
     <string name="workbench_title6_text">盘点管理</string>
+    <string name="workbench_title7_text">采购入库单</string>
+    <string name="workbench_title8_text">生产领料单</string>
     <!--  盘点  -->
     <string name="workbench_check_power_text">功率</string>
     <string name="workbench_check_power_title_text">设置功率</string>

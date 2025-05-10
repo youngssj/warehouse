@@ -14,6 +14,7 @@ public class ModuleLifecycleReflexs {
     private static final String InventoryInit = "com.victor.inventory.InventoryModuleInit";
     private static final String MaterialsInit = "com.victor.materials.MaterialsModuleInit";
     private static final String InboundInit = "com.victor.inbound.InboundModuleInit";
+    private static final String PurchaseInboundInit = "com.victor.purchaseinbound.InboundModuleInit";
     private static final String InboundDirectInit = "com.victor.inbounddirect.InboundModuleInit";
     private static final String OutboundInit = "com.victor.outbound.OutboundModuleInit";
     private static final String MovementInit = "com.victor.movement.MovementModuleInit";
@@ -21,5 +22,5 @@ public class ModuleLifecycleReflexs {
     private static final String MineInit = "com.victor.mine.MineModuleInit";
     private static final String SyncInit = "com.victor.sync.SyncModuleInit";
     public static String[] initModuleNames = {BaseInit, MainInit, WorkBenchInit, InventoryInit,
-            MaterialsInit, InboundInit, InboundDirectInit, OutboundInit, MovementInit, AllocateInit, MineInit, SyncInit};
+            MaterialsInit, InboundInit, PurchaseInboundInit, InboundDirectInit, OutboundInit, MovementInit, AllocateInit, MineInit, SyncInit};
 }

@@ -55,6 +55,12 @@ public class RouterFragmentPath {
         public static final String PAGER_INBOUND_SCAN = Inbound + "/Inbound_scan";
     }
 
+    public static class PurchaseInbound {
+        private static final String PurchaseInbound = "/PurchaseInbound";
+        /*工作*/
+        public static final String PAGER_INBOUND_SCAN = PurchaseInbound + "/Inbound_scan";
+    }
+
     public static class Outbound {
         private static final String Outbound = "/Outbound";
         /*工作*/

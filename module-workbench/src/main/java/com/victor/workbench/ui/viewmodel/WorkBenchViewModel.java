@@ -25,23 +25,29 @@ public class WorkBenchViewModel extends BaseViewModel {
     public WorkBenchViewModel(@NonNull Application application) {
         super(application);
 
+//        abilityList.add(new AbilityItemViewModel(this,
+//                getApplication().getString(R.string.workbench_title1_text),
+//                R.mipmap.workbench_icon1, R.drawable.selector_workbench_ability_background1));
+//        abilityList.add(new AbilityItemViewModel(this,
+//                getApplication().getString(R.string.workbench_title2_text),
+//                R.mipmap.workbench_icon2, R.drawable.selector_workbench_ability_background2));
+//        abilityList.add(new AbilityItemViewModel(this,
+//                getApplication().getString(R.string.workbench_title3_text),
+//                R.mipmap.workbench_icon3, R.drawable.selector_workbench_ability_background3));
+//        abilityList.add(new AbilityItemViewModel(this,
+//                getApplication().getString(R.string.workbench_title4_text),
+//                R.mipmap.workbench_icon4, R.drawable.selector_workbench_ability_background4));
+//        abilityList.add(new AbilityItemViewModel(this,
+//                getApplication().getString(R.string.workbench_title5_text),
+//                R.mipmap.workbench_icon5, R.drawable.selector_workbench_ability_background5));
+//        abilityList.add(new AbilityItemViewModel(this,
+//                getApplication().getString(R.string.workbench_title6_text),
+//                R.mipmap.workbench_icon6, R.drawable.selector_workbench_ability_background6));
         abilityList.add(new AbilityItemViewModel(this,
-                getApplication().getString(R.string.workbench_title1_text),
-                R.mipmap.workbench_icon1, R.drawable.selector_workbench_ability_background1));
+                getApplication().getString(R.string.workbench_title7_text),
+                R.mipmap.workbench_icon6, R.drawable.selector_workbench_ability_background6));
         abilityList.add(new AbilityItemViewModel(this,
-                getApplication().getString(R.string.workbench_title2_text),
-                R.mipmap.workbench_icon2, R.drawable.selector_workbench_ability_background2));
-        abilityList.add(new AbilityItemViewModel(this,
-                getApplication().getString(R.string.workbench_title3_text),
-                R.mipmap.workbench_icon3, R.drawable.selector_workbench_ability_background3));
-        abilityList.add(new AbilityItemViewModel(this,
-                getApplication().getString(R.string.workbench_title4_text),
-                R.mipmap.workbench_icon4, R.drawable.selector_workbench_ability_background4));
-        abilityList.add(new AbilityItemViewModel(this,
-                getApplication().getString(R.string.workbench_title5_text),
-                R.mipmap.workbench_icon5, R.drawable.selector_workbench_ability_background5));
-        abilityList.add(new AbilityItemViewModel(this,
-                getApplication().getString(R.string.workbench_title6_text),
+                getApplication().getString(R.string.workbench_title8_text),
                 R.mipmap.workbench_icon6, R.drawable.selector_workbench_ability_background6));
     }
 }

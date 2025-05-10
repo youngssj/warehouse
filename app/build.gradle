@@ -143,6 +143,7 @@ dependencies {
         implementation project(':module-mine')
         implementation project(':module-sync')
         implementation project(':module-inbound')
+        implementation project(':module-purchase-inbound')
         implementation project(':module-outbound')
         implementation project(':module-movement')
         implementation project(':module-allocate')

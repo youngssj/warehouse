@@ -37,6 +37,10 @@ public class AbilityItemViewModel extends ItemViewModel<WorkBenchViewModel> {
                 ARouter.getInstance().build(RouterActivityPath.Allocate.PAGER_ALLOCATE_LIST).navigation();
             } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title6_text).equals(name.get())) {
                 ARouter.getInstance().build(RouterActivityPath.Inventory.PAGER_INVENTORY_CHECK_LIST).navigation();
+            } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title7_text).equals(name.get())) {
+                ARouter.getInstance().build(RouterActivityPath.PurchaseInbound.PAGER_INBOUND_LIST).navigation();
+            } else if (viewModel.getApplication().getResources().getString(R.string.workbench_title8_text).equals(name.get())) {
+                ARouter.getInstance().build(RouterActivityPath.Inventory.PAGER_INVENTORY_CHECK_LIST).navigation();
             }
         }
     });
